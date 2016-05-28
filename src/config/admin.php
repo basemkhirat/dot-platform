@@ -105,8 +105,8 @@ return [
         'PluginMakeCommand',
         'PluginMigrationCommand',
         'PluginMigrateCommand',
-        //'ModuleMigrationCommand',
-        //'ModuleMigrateCommand',
+        'ModuleMigrationCommand',
+        'ModuleMigrateCommand',
     ]
 
 ];
