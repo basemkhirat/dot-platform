@@ -1,2 +1,4 @@
 .idea/
 /vendor
+.gitattributes
+.DS_Store

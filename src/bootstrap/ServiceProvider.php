@@ -2,12 +2,14 @@
 
 namespace Dot\Platform;
 
+use Illuminate\Support\Facades\Config;
+use \Loader;
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class AdminServiceProvider
  */
-class AdminServiceProvider extends ServiceProvider
+class CmsServiceProvider extends ServiceProvider
 {
 
     /**
