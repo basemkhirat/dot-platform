@@ -5,11 +5,11 @@
 .file_manager_close{
 
     right: unset !important;
-    left: 23px !important;
+    left: 47px !important;
 }
 
 .file_manager_content {
-    float: none;
+    float: right;
 
 }
 
