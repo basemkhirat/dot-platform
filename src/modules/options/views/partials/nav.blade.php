@@ -1,0 +1,25 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+
+    <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
+        <h2>
+            <?php echo trans("options::options.options"); ?>
+        </h2>
+        <ol class="breadcrumb ">
+            <li>
+                <a href="<?php echo URL::to(ADMIN . "/options"); ?>"><?php echo trans("options::options.options"); ?></a>
+            </li>
+            <li class="active">
+                <strong><?php echo trans("options::options." . $option_page); ?></strong>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <ul class="nav nav-tabs option-tabs">
+            <li <?php if ($option_page == "main") { ?>class="active"<?php } ?>><a href="<?php echo route("admin.options.show"); ?>"><i class="fa fa-sliders"></i> <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.main") ?></span></a></li>
+            <li <?php if ($option_page == "seo") { ?>class="active"<?php } ?>><a  href="<?php echo route("admin.options.seo"); ?>"><i class="fa fa-line-chart"></i> <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.seo") ?></span></a></li>
+            <li <?php if ($option_page == "media") { ?>class="active"<?php } ?>><a  href="<?php echo route("admin.options.media"); ?>"><i class="fa fa-camera"></i> <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.media") ?></span></a></li>
+            <li <?php if ($option_page == "social") { ?>class="active"<?php } ?>><a  href="<?php echo route("admin.options.social"); ?>"><i class="fa fa-globe"></i>  <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.social") ?></span></a></li>
+        </ul>
+    </div>
+</div>

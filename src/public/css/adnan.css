@@ -1,0 +1,86 @@
+
+.pagination > li > a, .pagination > li > span {
+
+    float: right;
+
+}
+
+.pagination {
+
+    margin: 0;
+}
+
+.table{
+    font-size: 15px !important;
+}
+
+/*.faa-tada{
+    margin-left:5px !important;
+    margin-right: 0 !important;
+}*/
+
+.datepicker.dropdown-menu{
+    z-index: 9999 !important;
+}
+.datetimepicker{
+    direction: rtl !important;
+    width: 200px !important;
+    z-index: 9999 !important;
+}
+
+#toast-container > .toast::before{
+    padding-right: initial !important;
+}
+.toast-top-right {
+    left: 12px !important;
+    right: inherit !important;
+}
+
+
+.tag-list li {
+    float: right;
+}
+
+.close-tag{
+    padding: 0 5px 0 0 !important;
+    cursor: pointer;
+}
+
+.legendLabel {
+    padding-right: 5px !important;
+}
+
+.select2-container-multi .select2-choices li {
+    float: right !important;
+}
+.select2-container-multi .select2-choices .select2-search-choice {
+    padding: 3px 18px 3px 5px !important;
+    margin: 3px 5px 3px 0 !important;
+}
+
+.check-link{
+    right: 10px !important;
+    left: inherit !important;
+}
+.delete-related-post{
+    left: 10px !important;
+    right: inherit !important;
+}
+
+#small-chat{
+    left: 20px !important;
+    right: inherit;
+    z-index: 9999;
+}
+
+/*.small-chat-box{
+    left: 75px !important;
+    right: inherit;
+    z-index: 9999;
+    width: 300px;
+    height: 340px;
+}*/
+
+.open-small-chat{
+    padding: 12px 8px !important;
+}

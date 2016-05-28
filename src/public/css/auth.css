@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 26, 2015, 11:55:42 AM
+    Author     : basem
+*/
+
+
+@font-face {
+    font-family: "font towl";
+    src: url("fonts/twol/ge_ss_two_light.ttf") format("truetype"), url("fonts/twol/ge_ss_two_light.otf") format("opentype");
+}
+body {
+    font: 15px "font towl",Arial,Helvetica,sans-serif !important;
+}
+
+
+.remember_text {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.middle-box h1 {
+  font-size: 44px;
+  letter-spacing: -3px;
+}
