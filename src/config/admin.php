@@ -99,13 +99,14 @@ return [
      */
 
     "commands" => [
+        'DotInstallCommand',
         'DotAutoloadCommand',
         'DotMigrateCommand',
-        'ModuleMigrationCommand',
-        'ModuleMigrateCommand',
         'PluginMakeCommand',
         'PluginMigrationCommand',
-        'PluginMigrateCommand'
+        'PluginMigrateCommand',
+        //'ModuleMigrationCommand',
+        //'ModuleMigrateCommand',
     ]
 
 ];
