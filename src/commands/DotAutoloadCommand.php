@@ -33,7 +33,7 @@ class DotAutoloadCommand extends Command
 
         foreach ((array)Config::get("admin.modules") as $module) {
 
-            $module_path = get_module_path($module);
+            $module_path = Dot\Platform\get_module_path($module);
 
             if ($module_path == "") {
                 continue;
