@@ -2,8 +2,8 @@
 
 namespace Dot\Platform;
 
-use Illuminate\Support\Facades\Config;
 use \Loader;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -34,7 +34,6 @@ class CmsServiceProvider extends ServiceProvider
     public function __construct($app)
     {
 
-
         if(Config::get("app.key") == ""){
             return false;
         }
@@ -43,9 +42,7 @@ class CmsServiceProvider extends ServiceProvider
 
     }
 
-    /**
-     * @param \Illuminate\Routing\Router $router
-     */
+
     function boot(\Illuminate\Routing\Router $router)
     {
 
@@ -53,9 +50,8 @@ class CmsServiceProvider extends ServiceProvider
             return false;
         }
 
-
         // Extend Auth class
-        Config::set("auth.providers.users.model", User::class);
+        Config::set("auth.providers.users.model", \User::class);
 
         $this->router = $router;
 
@@ -72,23 +68,23 @@ class CmsServiceProvider extends ServiceProvider
     {
 
         $this->app->bind('module', function () {
-            return new \Dot\Module;
+            return new DotModule;
         });
 
         $this->app->bind('widget', function () {
-            return new \Dot\Widget;
+            return new DotWidget;
         });
 
         $this->app->bind('navigation', function () {
-            return new \Dot\Navigation;
+            return new DotNavigation;
         });
 
         $this->app->bind('sitemap', function () {
-            return new \Dot\Sitemap;
+            return new DotSitemap;
         });
 
         $this->app->bind('schedule', function () {
-            return new \Dot\Schedule;
+            return new DotSchedule;
         });
 
     }
@@ -284,7 +280,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected function getModules()
     {
-        return Module::all();
+        return app("module")->all();
 
     }
 }

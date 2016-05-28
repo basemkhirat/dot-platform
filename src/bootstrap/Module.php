@@ -1,11 +1,13 @@
 <?php
 
-namespace Dot;
+namespace Dot\Platform;
+
 
 /**
- * Class Module
+ * Class DotModule
+ * @package Dot\Platform
  */
-class Module
+class DotModule
 {
 
     /**
@@ -13,16 +15,28 @@ class Module
      */
     public $pathes = [];
 
+    /**
+     * @var array
+     */
     public $modules = [];
 
 
+    /**
+     * @var \Illuminate\Foundation\Application|mixed
+     */
     protected $config;
 
+    /**
+     * DotModule constructor.
+     */
     function __construct()
     {
         $this->config = app("config");
     }
 
+    /**
+     * @return array
+     */
     public function all(){
 
         foreach ((array)$this->config->get("admin.modules") as $module) {

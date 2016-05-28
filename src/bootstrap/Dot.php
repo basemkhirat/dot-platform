@@ -1,6 +1,6 @@
 <?php
 
-namespace Dot;
+namespace Dot\Platform;
 
 use \Illuminate\Foundation\Application as Laravel;
 

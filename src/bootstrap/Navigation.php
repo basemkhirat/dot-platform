@@ -1,15 +1,17 @@
 <?php
 
-namespace Dot;
+namespace Dot\Platform;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Event;
 
+
 /**
- * Class Menu
+ * Class DotNavigation
+ * @package Dot\Platform
  */
-class Navigation {
+class DotNavigation {
 
     /**
      * @var

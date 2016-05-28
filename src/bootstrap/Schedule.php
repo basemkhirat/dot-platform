@@ -1,13 +1,20 @@
 <?php
 
-namespace Dot;
+namespace Dot\Platform;
 
 use Illuminate\Console\Scheduling\Schedule as Schedular;
 
 
-class Schedule
+/**
+ * Class DotSchedule
+ * @package Dot\Platform
+ */
+class DotSchedule
 {
 
+    /**
+     * @param bool $callback
+     */
     public static function run($callback = false)
     {
 

@@ -1,11 +1,13 @@
 <?php
 
-namespace Dot;
+namespace Dot\Platform;
+
 
 /**
- * Class Sitemap
+ * Class DotSitemap
+ * @package Dot\Platform
  */
-class Sitemap
+class DotSitemap
 {
 
     /**

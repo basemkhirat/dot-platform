@@ -1,13 +1,15 @@
 <?php
 
-namespace Dot;
+namespace Dot\Platform;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Collection;
 
+
 /**
- * Class Widget
+ * Class DotWidget
+ * @package Dot\Platform
  */
-class Widget
+class DotWidget
 {
 
     /**
