@@ -14,8 +14,11 @@ class MakeUsersTable extends Migration
      */
     public function up()
     {
+
         // delete original users table
-        Schema::drop('users');
+        if (Schema::hasTable("users")) {
+            Schema::drop('users');
+        }
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');

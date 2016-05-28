@@ -91,6 +91,12 @@ class DotInstallCommand extends Command
             $server_messages[] = "Cache path $cache_path is writable.";
         }
 
+        if (!is_writable($cache_path2 = $this->root . "/bootstrap/cache/services.php")) {
+            $server_errors[] = "Cache path $cache_path2 is not writable";
+        } else {
+            $server_messages[] = "Cache path $cache_path2 is writable.";
+        }
+
         if (!is_writable($uploads_path = $this->root . "/public/uploads")) {
             $server_errors[] = "Uploads path $uploads_path is not writable.";
         } else {
