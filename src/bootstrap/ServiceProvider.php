@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\ServiceProvider;
+namespace Dot\Platform;
 
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Class AdminServiceProvider
