@@ -17,14 +17,17 @@ return [
      */
 
     'locales' => [
+
         'ar' => [
             "title" => "العربية",
             "direction" => "rtl"
         ],
+
         'en' => [
             "title" => "English",
             "direction" => "ltr"
         ]
+
     ],
 
     /**
