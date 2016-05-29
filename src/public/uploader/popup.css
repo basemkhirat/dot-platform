@@ -148,14 +148,16 @@ div[data-size="free"] {
     height: 91%;
 
 }
+
 .file_manager_header {
     border-bottom: 1px solid #eee;
     height: 50px;
-    width: 96%;
+    width: 93%;
     position: fixed;
-    background: #fff;
+    background: transparent;
     z-index: 999;
 }
+
 .file_manager_tabs {
     position: relative;
     top: 10px;
