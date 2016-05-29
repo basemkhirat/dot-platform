@@ -582,7 +582,7 @@ div[data-size="free"] {
     width: 172px;
 }
 .dz-thumbnail > img {
-    max-height: 120px;
+    max-height: 90px;
     opacity: 0.6;
 }
 
