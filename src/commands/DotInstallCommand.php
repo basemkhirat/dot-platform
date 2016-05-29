@@ -54,20 +54,22 @@ class DotInstallCommand extends Command
         $server_messages = [];
 
         // check php version
+        $minimum_php = '5.5.9';
 
-        $php_version = phpversion();
-        $laravel_version = app()->version();
-
-        if ($php_version < "5.5.9") {
-            $server_errors[] = "Please update your php to 5.5.9. Current is " . $php_version;
-        } else {
-            $server_messages[] = "PHP version: " . $php_version . ".";
+        if (version_compare(PHP_VERSION, $minimum_php, '>=')) {
+            $server_messages[] = "<strong>PHP</strong> version: " . PHP_VERSION . ".";
+        }else{
+            $server_errors[] = "Please update your php to $minimum_php current is " . PHP_VERSION . ".";
         }
 
-        if ($laravel_version < "5.0") {
-            $server_errors[] = "You must have laravel 5.0 or higher." . " Current is " . $laravel_version;
-        } else {
+        // check laravel version
+        $minimum_laravel = '5.0';
+        $laravel_version = app()->version();
+
+        if (version_compare($laravel_version, $minimum_laravel, '>=')) {
             $server_messages[] = "Laravel version: " . $laravel_version . ".";
+        }else{
+            $server_errors[] = "You must have laravel $minimum_laravel or higher." . " Current is " . $laravel_version;
         }
 
         // check mcrypt is installed
