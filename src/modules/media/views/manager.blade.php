@@ -344,12 +344,17 @@
 
                                 <button class="btn btn-icon btn-danger btn-flat disabled"
                                         data-loading-text="<?php echo trans("media::media.deleting"); ?>" type="button"
-                                        id="delete_selected_media" data-message="<?php echo trans("media::media.confirm_delete_files"); ?>"><i class="fa fa-trash"></i></button>
+                                        id="delete_selected_media" data-message="<?php echo trans("media::media.confirm_delete_files"); ?>">
+                                    <i class="fa fa-trash"></i>
+                                    <?php echo trans("media::media.delete"); ?>
+                                </button>
 
                                 <button class="btn btn-icon btn-primary btn-flat disabled"
                                         data-loading-text="<?php echo trans("media::media.please_wait"); ?>"
                                         type="button"
-                                        id="select_media"><i class="fa fa-check-square-o"></i></button>
+                                        id="select_media"><i class="fa fa-check-square-o"></i>
+                                    <?php echo trans("media::media.select_media"); ?>
+                                </button>
 
                             </div>
                         </div>
@@ -361,7 +366,6 @@
                             <input type="hidden" class="media-grid-type" value="all"/>
 
                             <div class="media-grid pull-left col-lg-10 col-md-9 col-sm-9 col-xs-12 text-center"></div>
-
                             <div class="media-form-wrapper pull-right col-lg-2 col-md-3 col-sm-3 hidden-xs">
                                 <br/>
                                 <!-- Extra small tabs -->
@@ -388,12 +392,12 @@
                                        id="download_media">
                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                     </a>
-                                    <?php if (User::access("media.watermarking") or User::access("media.cropping")) { ?>
+                                    <?php /* if (User::access("media.watermarking") or User::access("media.cropping")) { ?>
                                         <a class="btn btn-success btn-flat" href="javascript:void(0)"
                                            data-loading-text="<?php echo trans("media::media.please_wait") ?>"
                                            target="_blank"
                                            id="set_media"><?php echo trans("media::media.settings") ?></a>
-                                    <?php } ?>
+                                    <?php } */ ?>
                                     <a class="btn btn-danger btn-flat" href="javascript:void(0)"
                                        data-loading-text="<?php echo trans("media::media.deleting") ?>"
                                        data-message="<?php echo trans("media::media.confirm_delete_file"); ?>"
