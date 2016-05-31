@@ -118,6 +118,10 @@
                     </div>
 
 
+
+                    <?php echo Widget::render("users.form.featured", $user); ?>
+
+
                 </div> <!-- / .panel-body -->
             </div>
         </div>

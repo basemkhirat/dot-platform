@@ -1,6 +1,7 @@
 <?php
 
 namespace Dot\Platform;
+
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Collection;
 
@@ -27,10 +28,10 @@ class DotWidget
      * @return array
      * get ordered widgets of a given sidebar
      */
-    public static function get($sidebar)
+    public static function get($sidebar, $args)
     {
 
-        Event::fire($sidebar . ".widget");
+        Event::fire($sidebar . ".widget", $args);
 
         $return = [];
         foreach (self::$widgets as $widget) {
@@ -53,12 +54,17 @@ class DotWidget
      */
     public static function render($sidebar)
     {
-        $widgets = self::get($sidebar);
+
+        $args = func_get_args();
+        $args = array_splice($args, 1);
+
+        $widgets = self::get($sidebar, $args);
 
         $output_html = "";
 
-        foreach($widgets as $widget){
-            $output_html .= $widget->output;
+        foreach ($widgets as $widget) {
+            array_unshift($args, $widget);
+            $output_html .= call_user_func_array($widget->output, $args);
         }
 
         return $output_html;
@@ -94,16 +100,6 @@ class DotWidget
                 self::$widget->output = "";
 
                 if (is_callable($callback)) {
-
-                    $out = $callback(self::$widget);
-
-                    if($callback(self::$widget)){
-                        self::$widget->output = $callback(self::$widget);
-                    }else{
-                        $callback(self::$widget);
-                    }
-
-                } else {
                     self::$widget->output = $callback;
                 }
 

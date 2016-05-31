@@ -73,7 +73,22 @@ class UsersController extends BackendController
 
         if (Request::isMethod("post")) {
 
-            $user = new User(Request::all());
+            $user = new User();
+
+            $user->username = Request::get("username");
+            $user->password = Request::get("password");
+            $user->email = Request::get("email");
+            $user->first_name = Request::get("first_name");
+            $user->last_name = Request::get("last_name");
+            $user->about = Request::get("about");
+            $user->role_id = Request::get("role_id", 0);
+            $user->photo_id = Request::get("photo_id", 0);
+            $user->lang = Request::get("lang");
+            $user->status = Request::get("status", 0);
+            $user->facebook = Request::get("facebook");
+            $user->twitter = Request::get("twitter");
+            $user->linked_in = Request::get("linked_in");
+            $user->google_plus = Request::get("google_plus");
 
             if (!$user->validate()) {
                 return Redirect::back()->withErrors($user->errors())->withInput(Request::all());
@@ -108,7 +123,21 @@ class UsersController extends BackendController
 
         if (Request::isMethod("post")) {
 
-            $user->fill(Request::all());
+            $user->username = Request::get("username");
+            $user->password = Request::get("password");
+            $user->email = Request::get("email");
+            $user->first_name = Request::get("first_name");
+            $user->last_name = Request::get("last_name");
+            $user->about = Request::get("about");
+            $user->role_id = Request::get("role_id", 0);
+            $user->photo_id = Request::get("photo_id", 0);
+            $user->lang = Request::get("lang");
+            $user->status = Request::get("status", 0);
+            $user->facebook = Request::get("facebook");
+            $user->twitter = Request::get("twitter");
+            $user->linked_in = Request::get("linked_in");
+            $user->google_plus = Request::get("google_plus");
+
 
             if (!$user->validate()) {
                 return Redirect::route("admin.users.edit", array("id" => $user_id))->with("message", trans("users::users.user_updated"));

@@ -34,7 +34,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $table = 'users';
 
-    protected $fillable = array();
 
     protected $guarded = array('id', "repassword", "permission");
 

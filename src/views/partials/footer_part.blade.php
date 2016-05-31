@@ -129,14 +129,14 @@
                 buttons: {
                     success: {
                         label: "<?php echo trans("admin::common.yes"); ?>",
-                        className: "btn-success",
+                        className: "btn-primary",
                         callback: function () {
                             location.href = $this.attr('href');
                         }
                     },
                     danger: {
                         label: "<?php echo trans("admin::common.cancel"); ?>",
-                        className: "btn-primary",
+                        className: "btn-default",
                         callback: function () {
                         }
                     },
