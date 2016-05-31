@@ -15,7 +15,9 @@ class GuestMiddleware
 
         if (Auth::guard($guard)->check()) {
 
-            return Redirect::route('admin.users.show');
+            $redirect_path = Config::get("admin.default_path");
+
+            return redirect(ADMIN . "/" . trim($redirect_path));
         }
 
         return $next($request);

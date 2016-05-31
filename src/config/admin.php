@@ -11,6 +11,14 @@ return [
     'prefix' => env("ADMIN_PREFIX", "backend"),
 
     /**
+     * | Default URI after user authentication
+     * | without admin prefix
+     * | @var string
+     */
+
+    'default_path' => "users",
+
+    /**
      * | All system Locales
      * |
      * | @var array
