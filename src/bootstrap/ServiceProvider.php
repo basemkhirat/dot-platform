@@ -75,6 +75,10 @@ class CmsServiceProvider extends ServiceProvider
             return new DotWidget;
         });
 
+        $this->app->bind('action', function () {
+            return new DotAction;
+        });
+
         $this->app->bind('navigation', function () {
             return new DotNavigation;
         });

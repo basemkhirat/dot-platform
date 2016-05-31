@@ -77,6 +77,7 @@ class UsersController extends BackendController
 
             $user->username = Request::get("username");
             $user->password = Request::get("password");
+           // $user->repassword = Request::get("repassword");
             $user->email = Request::get("email");
             $user->first_name = Request::get("first_name");
             $user->last_name = Request::get("last_name");
@@ -94,11 +95,14 @@ class UsersController extends BackendController
                 return Redirect::back()->withErrors($user->errors())->withInput(Request::all());
             }
 
-            $user->save();
+            // fire create user event
+            //if(Event::fire("user.creating", $user, )){
+                $user->save();
+            //    Event::fire("user.created", $user);
+            //}
 
             return Redirect::route("admin.users.edit", array("id" => $user->id))
                 ->with("message", trans("users::users.user_created"));
-
 
         }
 
@@ -125,6 +129,7 @@ class UsersController extends BackendController
 
             $user->username = Request::get("username");
             $user->password = Request::get("password");
+            $user->repassword = Request::get("repassword");
             $user->email = Request::get("email");
             $user->first_name = Request::get("first_name");
             $user->last_name = Request::get("last_name");

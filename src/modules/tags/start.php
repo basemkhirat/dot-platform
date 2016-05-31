@@ -1,6 +1,11 @@
 <?php
 
 
+
+Event::listen("user.creating", function($user){
+    dd($user);
+});
+
 /*
  * Validate unique tag
  */

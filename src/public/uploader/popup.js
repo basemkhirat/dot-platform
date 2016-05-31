@@ -919,7 +919,7 @@ $(function () {
             $('.media-grid').html(data);
             $('a[href="#library-area"]').tab('show');
 
-            if ($(".no-media").length > 0) {
+            if (data == "") {
                 alert_box(base.attr("data-empty-text"));
             }
             $(".media_loader").hide();

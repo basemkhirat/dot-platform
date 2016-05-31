@@ -20,7 +20,7 @@ a {
 
 .chosen-container{
     margin: 0 0 4px 0px;
-    width:100% !;
+
 
 }
 
@@ -449,6 +449,11 @@ select {
     top: 5px;
     position: relative;
 }
+
+.well {
+
+    background-color: #f3f3f3;
+   }
 
 
 /*

@@ -32,6 +32,21 @@ class Widget extends Facade
 
 }
 
+class Action extends Facade
+{
+
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return 'action';
+    }
+
+}
+
 class Navigation extends Facade
 {
 

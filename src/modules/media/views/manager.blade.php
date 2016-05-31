@@ -340,27 +340,34 @@
 
                             <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs"></div>
 
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 pull-right text-center">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 pull-right text-right">
 
                                 <button class="btn btn-icon btn-danger btn-flat disabled"
                                         data-loading-text="<?php echo trans("media::media.deleting"); ?>" type="button"
                                         id="delete_selected_media" data-message="<?php echo trans("media::media.confirm_delete_files"); ?>">
                                     <i class="fa fa-trash"></i>
+                                        <span class="hidden-xs">
                                     <?php echo trans("media::media.delete"); ?>
+                                            </span>
                                 </button>
 
                                 <button class="btn btn-icon btn-primary btn-flat disabled"
                                         data-loading-text="<?php echo trans("media::media.please_wait"); ?>"
                                         type="button"
                                         id="select_media"><i class="fa fa-check-square-o"></i>
-                                    <?php echo trans("media::media.select_media"); ?>
+
+                                    <span class="hidden-xs">
+                                         <?php echo trans("media::media.select_media"); ?>
+                                    </span>
+
+
                                 </button>
 
                             </div>
                         </div>
 
 
-                        <div class="media-grid-wrapper row">
+                        <div class="media-grid-wrapper">
 
                             <input type="hidden" class="media-grid-page" value="1"/>
                             <input type="hidden" class="media-grid-type" value="all"/>

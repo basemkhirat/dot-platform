@@ -150,19 +150,20 @@ div[data-size="free"] {
 }
 
 .file_manager_header {
-    border-bottom: 1px solid #eee;
     height: 50px;
-    width: 93%;
+    width: 96%;
     position: fixed;
-    background: transparent;
+    background: #fff;
     z-index: 999;
+    border-bottom: 1px solid #eee;
 }
 
 .file_manager_tabs {
     position: relative;
-    top: 10px;
+    top: 11px;
     width: 100%;
     margin-left: 70px;
+    border: none;
 }
 .file_manager_content {
     display: block;
@@ -240,7 +241,7 @@ div[data-size="free"] {
     padding: 0;
     height: 100%;
     position: relative;
-    top: 50px;
+    top: 55px;
     padding: 0 27px;
     padding-bottom: 20px;
 }
@@ -253,7 +254,7 @@ div[data-size="free"] {
     position: fixed;
     z-index: 20;
     border: 1px solid #ddd;
-    border-top: none;
+    border-top: 1px solid #ddd;
     left: 2%;
 }
 .dz-preview {
@@ -266,6 +267,7 @@ div[data-size="free"] {
     position: relative;
     vertical-align: top;
     width: 148px;
+
 }
 .dz-preview.active {
     border: 3px solid #1e8cbe;
@@ -279,6 +281,10 @@ div[data-size="free"] {
 }
 .modal-dialog {
     z-index: 2147483647;
+}
+
+.file_manager_tabs > li.active{
+    top: -1px;
 }
 
 .right-mark {
@@ -350,7 +356,7 @@ div[data-size="free"] {
 }
 #upload-area {
     padding: 7% 0;
-    margin-top: 60px;
+    margin-top: 52px;
 }
 
 .upload-area-list {
@@ -624,20 +630,8 @@ div[data-size="free"] {
     color: #fff;
     text-decoration: none;
 }
-.dz-thumbnail-wrapper {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: #f2f2f2 none repeat scroll 0 0;
-    border-color: #ddd;
-    border-image: none;
-    border-style: solid none;
-    border-width: 1px medium;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
+
+
 .dz-nopreview {
     color: #888;
     font-size: 11px;
@@ -706,7 +700,7 @@ div[data-size="free"] {
 }
 
 .media-wrapper{
-    width: 95%;
+    width: 100%;
     float: right;
 }
 
@@ -718,12 +712,13 @@ div#galleries-area {
 
 
 .media-form-wrapper{
-    position: fixed;
-    right: 38px;
+    position: fixed !important;
+    right: 2%;
+    top:6%;
     height: 100%;
     background: #f3f3f3;
     margin-top: 64px;
-    border: 1px solid #eee;
+    border-left: 1px solid #ddd;
 }
 
 .gallery_details_panel {
@@ -752,6 +747,23 @@ div#galleries-area {
 .media-form-wrapper{
     padding: 15px 15px;
 }
+
+
+
+
+
+
+
+.file_manager_content   .tab-content{
+    padding: 0;
+    position: relative;
+    top: -2px;
+}
+
+
+
+
+
 
 /*
 XS
@@ -863,10 +875,6 @@ LG
 
     .media-form-wrapper{
         width:25% !important;
-    }
-
-    .media-grid{
-        width: 73% !important;
     }
 
     .gallery_details_panel{

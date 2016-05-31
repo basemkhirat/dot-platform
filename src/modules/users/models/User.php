@@ -34,13 +34,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $table = 'users';
 
-
     protected $guarded = array('id', "repassword", "permission");
 
     protected $hidden = array();
 
     protected $appends = [];
-
 
     protected $methods = [];
 
@@ -54,6 +52,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $v->sometimes("repassword", "required", function ($input) {
             return $input->password != "";
         });
+
+        return $v;
 
     }
 
