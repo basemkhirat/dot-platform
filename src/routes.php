@@ -5,6 +5,9 @@ Route::group(["middleware" => ["web"]], function ($route) {
 });
 
 Route::group(["prefix" => ADMIN, "middleware" => ["web", "auth"]], function ($route) {
-    $route->any('/', ['uses' => 'UsersController@index', 'as' => 'admin']);
     $route->any('sidebar', "SidebarController@index");
+    $route->any('/',["as" => "admin", "uses" => function(){
+        $redirect_path = Config::get("admin.default_path");
+        return redirect(ADMIN . "/" . trim($redirect_path));
+    }]);
 });

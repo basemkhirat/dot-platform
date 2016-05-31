@@ -16,7 +16,7 @@ return [
      * | @var string
      */
 
-    'default_path' => "users",
+    'default_path' => env("DEFAULT_PATH", "users"),
 
     /**
      * | All system Locales
