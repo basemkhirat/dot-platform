@@ -129,12 +129,12 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-link"></i>
                                             </span>
-                                            <input style="text-align:left; direction: ltr" name="link" value=""
+                                            <input style="text-align:left; direction: ltr" required="required" type="url" name="link" value=""
                                                    class="form-control"
                                                    placeholder="https://"/>
                                         </div>
 
-                                        <button data-required-text="<?php echo trans("media::media.required_link"); ?>" data-fail-text="<?php echo trans("media::media.invalid_link"); ?>" type="submit" data-loading-text="<?php echo trans("media::media.grabbing"); ?>" class="btn btn-primary btn-flat btn-download col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right">
+                                        <button data-required-text="<?php echo trans("media::media.required_link"); ?>" data-fail-text="<?php echo trans("media::media.invalid_link"); ?>" type="submit" data-loading-text="<i class='fa fa-spinner fa-spin'><i>" class="btn btn-primary btn-flat btn-download col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right">
                                             <i class="fa fa-download" aria-hidden="true"></i>
                                         </button>
 
