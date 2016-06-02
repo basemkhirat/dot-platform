@@ -156,6 +156,7 @@ div[data-size="free"] {
     background: #fff;
     z-index: 999;
     border-bottom: 1px solid #eee;
+    box-shadow: 0 0px 2px #ccc;
 }
 
 .file_manager_tabs {
@@ -247,7 +248,7 @@ div[data-size="free"] {
 }
 .search_bar {
     background: #f3f3f3 none repeat scroll 0 0;
-    /* box-shadow: 0 1px 1px #c8c8c8; */
+    box-shadow: 0 1px 3px #D8D8D8;
     height: 48px;
     padding: 6px 0;
     width: 96%;
@@ -439,7 +440,7 @@ div[data-size="free"] {
     font-weight: bold;
 }
 #galleries-sidebar {
-    margin-top: 50px;
+    margin-top: 54px;
 }
 .gallery_search_box{
     position: relative;
@@ -749,20 +750,18 @@ div#galleries-area {
 }
 
 
-
-
-
-
-
 .file_manager_content   .tab-content{
     padding: 0;
     position: relative;
     top: -2px;
 }
 
+.file_manager_tabs li a{
+    margin-top: 1px;
+}
 
 
-
+/* Media queries */
 
 
 /*
@@ -783,18 +782,9 @@ XS
         width: 100%;
     }
 
-    .file_manager_tabs {
-        margin: 0 auto;
-    }
-
-
     .media-form-wrapper{
         display: none;
     }
-
-
-
-
 }
 
 /*

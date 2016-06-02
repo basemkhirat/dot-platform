@@ -316,7 +316,7 @@
                         <a href="#" media-type="image"><i class="fa fa-picture-o"></i></a>
                         <a href="#" media-type="audio"><i class="fa fa-music"></i></a>
                         <a href="#" media-type="video"><i class="fa fa-film"></i></a>
-                        <a href="#" media-type="pdf"><i class="fa fa-file-text"></i></a>
+                        <a href="#" media-type="application"><i class="fa fa-file-text"></i></a>
                     </div>
                     <div class="media-wrapper" style="margin:0; padding: 0">
                         <div class="search_bar">

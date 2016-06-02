@@ -1,13 +1,12 @@
 <?php
 
 
-
-Navigation::menu("sidebar", function($menu) {
+Navigation::menu("sidebar", function ($menu) {
 
     if (User::access('users')) {
         $menu->item('users', trans("admin::common.users"), "javascript:void(0)")
-                ->order(16)
-                ->icon("fa-users");
+            ->order(16)
+            ->icon("fa-users");
 
         $menu->item('users.all', trans("admin::common.users"), route("admin.users.show"));
     }
@@ -28,8 +27,20 @@ Widget::sidebar("dashboard.middle", function ($widget) {
 });
 
 
+/*
+Action::listen("dddd", function ($user) {
+    return "g";
+}, 1);
+
+Action::listen("dddd", function ($user, $fields) {
+    return $fields;
+}, 1);
 
 
+Action::listen("dddd", function ($user) {
+    return view("users::widgets.users", ["users" => []]);
+});
+*/
 
 
-include __DIR__ ."/routes.php";
+include __DIR__ . "/routes.php";

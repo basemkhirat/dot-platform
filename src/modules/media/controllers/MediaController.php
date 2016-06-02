@@ -366,10 +366,10 @@ class MediaController extends BackendController
         $query = Media::orderBy("updated_at", "DESC");
 
         if ($type != "all") {
-            if ($type == "pdf" or $type == "swf") {
-                $query->where("path", "LIKE", "%" . $type . "%");
+            if ($type == "application") {
+                $query->whereIn("type", ["text", "application"]);
             } else {
-                $query->where("type", "=", $type);
+                $query->where("type", $type);
             }
         }
 

@@ -17,6 +17,19 @@ class UsersController extends BackendController
      */
     public function index()
     {
+
+        /*
+        $outputs = Action::fire("dddd", [Auth::user(), "Sdfdd"]);
+
+       foreach($outputs as  $output){
+           echo $output;
+       }
+        */
+
+        //dd ($output);
+       // die();
+
+
         if (Request::isMethod("post")) {
             if (Request::has("action")) {
                 switch (Request::get("action")) {

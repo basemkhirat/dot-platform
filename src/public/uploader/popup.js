@@ -107,12 +107,14 @@ $(function () {
             $(".media_loader").hide();
             $(".loaded").text("");
             $('#progress .progress-bar').css('width', '0%');
+
+            activate_media_type("all");
+            $('a[href="#library-area"]').tab('show');
         },
 
         done: function (e, data) {
 
             if (data.result.error !== undefined) {
-
                 $('#progress .progress-bar').css('width', '0%');
                 $(".loaded").text("");
                 $(".media_loader").hide();
@@ -123,12 +125,9 @@ $(function () {
                     + data.result.error
                     + '</div>'
                 );
-
             }
 
             $.each(data.result.files, function (index, file) {
-                activate_media_type("all");
-                $('a[href="#library-area"]').tab('show');
                 $('.current-uploading-file').text(file.name);
             });
         },
@@ -144,6 +143,7 @@ $(function () {
             }
 
             $(".media_loader").hide();
+
         }
     }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
 
@@ -1145,8 +1145,8 @@ $(".filter-bar a").click(function () {
 
     var media_type = base.attr("media-type");
 
-    activate_media_type(media_type)
 
+    activate_media_type(media_type)
 
     return false;
 });
