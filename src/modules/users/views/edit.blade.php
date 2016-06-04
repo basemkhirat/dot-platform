@@ -19,8 +19,6 @@
             <a href="<?php echo route("admin.users.create"); ?>" class="btn btn-primary btn-labeled btn-main">
                 <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("users::users.add_new") ?>
             </a>
-
-
         <?php } ?>
     </div>
 </div>
@@ -226,10 +224,7 @@
 
 @stop
 
-
 @section("header")
-
-
 @stop
 
 @section("footer")
@@ -237,28 +232,17 @@
 <script>
     $(document).ready(function () {
 
-        //$("select").chosen();
+        $("select").chosen();
 
         $("#change_photo").filemanager({
-
             types: "png|jpg|jpeg|gif|bmp|image",
-
             done: function (result, base) {
-
-                console.log(result);
-
-
                 if (result.length) {
                     var file = result[0];
-                    $("#user_photo_id").val(file.media_id);
-                    $("#user_photo").attr("src", file.media_thumbnail);
+                    $("#user_photo_id").val(file.id);
+                    $("#user_photo").attr("src", file.thumbnail);
                 }
             },
-
-            galleries: function (result) {
-                console.log(result);
-            },
-
             error: function (media_path) {
                 alert(media_path + " <?php echo trans("users::users.is_not_an_image") ?>");
             }

@@ -29,6 +29,7 @@ li.media_row {
     width: 31px;
     position: absolute;
     z-index: 20;
+    left:0;
 }
 .galleries-create {
     border-radius: 0;
@@ -696,7 +697,6 @@ div[data-size="free"] {
     float: left;
     position: fixed;
     background: #f3f3f3;
-    height: 78%;
     margin-top: 48px !important;
 }
 
@@ -720,6 +720,8 @@ div#galleries-area {
     background: #f3f3f3;
     margin-top: 64px;
     border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    height: auto;
 }
 
 .gallery_details_panel {

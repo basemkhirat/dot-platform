@@ -14,19 +14,66 @@ To be able to run Dotcms you have to meet the following requirements:
 - MySql 5.5
 
 
-### Install Dotcms:
+### Installing DotCms:
+
+It's very easy, you can choose one of three installation methods:
+
+
+#####1) Installation as a project (recommended):
 
 	composer create-project dot/cms --prefer-dist your-project-name
 
 After you have a fresh installation, you will not be able to proceed beyond this point until the installation directory has been removed. This is a security feature.
 
+#####2) Installation as a laravel package:
+
+First, you must have a laravel 5 project you can install dot/platform package
+
+	composer require dot/platform
+
+Then add service provider in app config
+
+	Dot\Platform\CmsServiceProvider::class
+
+Then Run this artisan command to install
+
+	php artisan dot:install
+
+
+#####3) Clone the repo:
+
+	git clone https://bitbucket.org/basemkhirat/devcms.git folder-name
+
+Then,
+	
+	composer install
+
+
 Enjoy :)
 
-You can now login on /backend/auth/login with your username and password asked during the install command. After you've logged in you'll be able to access the administration panel on the /backend URI.
+You can now login /backend with your username and password asked during the install command. After you've logged in you'll be able to access the administration panel on the /backend URI.
 
 Also you can change admin url prefix from admin config:
 
-	'prefix' => 'backend'
+	<?php
+
+	return [
+
+    	/**
+     	* | Admin prefix (the admin url segment)
+     	* |
+     	* | @var string
+     	*/
+
+    	'prefix' => env("ADMIN_PREFIX", "backend"),
+
+    	/**
+     	* | Default URI after user authentication
+     	* | without admin prefix
+     	* | @var string
+     	*/
+
+    	'default_path' => env("DEFAULT_PATH", "users"),
 
 
 ### Plugin structure:
@@ -62,6 +109,9 @@ You can access plugin config item value using:
 	config("module_name.config_key");
 
 #####Plugin permissions:
+
+	<?php
+	
     /**
      * | Plugin permissions
      * | A list of plugin permissions
@@ -73,6 +123,9 @@ You can access plugin config item value using:
     ],
 
 #####Plugin service providers:
+
+	<?php
+	
     /**
      * | Plugin Service providers
      * |
@@ -84,6 +137,9 @@ You can access plugin config item value using:
     ],
 
 #####Plugin aliases:
+
+	<?php
+	
     /**
      * | Plugin aliases
      * |
@@ -95,6 +151,9 @@ You can access plugin config item value using:
     ],
     
 #####Plugin middlewares:
+
+	<?php 
+	
     /**
      * | Plugin HTTP middleware stack.
      * | Located in plugin middlewares folder
@@ -109,6 +168,8 @@ You can access plugin config item value using:
 
 #####Plugin routed middlewares:
 
+	<?php
+
     /**
      * | Plugin routed middleware.
      * | Located in plugin middlewares folder
@@ -122,6 +183,8 @@ You can access plugin config item value using:
     ],
     
 #####Plugin commands:
+
+	<?php
 
     /**
      * | Admin commands
@@ -150,7 +213,7 @@ You can access plugin config item value using:
 
 	/**
 	 * Class Product
- 	 */
+	 */
 	class Product extends Model
 	{
 
@@ -183,6 +246,13 @@ You can access plugin config item value using:
     /**
      * @var array
      */
+    protected $rules = [
+		'title' => 'required'
+    ];
+
+    /**
+     * @var array
+     */
     protected $creatingRules = [
 		'title' => 'required'
     ];
@@ -199,7 +269,9 @@ You can access plugin config item value using:
     
   
 ###### Custom plugin model validation:
-  
+
+	<?php
+	
      /**
      * @param $v
      * @return mixed
@@ -248,6 +320,7 @@ You can access plugin config item value using:
     
 ###### Saving a model:
 
+	 <?php
 
      $product = new Product();
 
@@ -268,7 +341,7 @@ You can access plugin config item value using:
 You can create a new plugin migration file using
 
 	php artisan plugin:migration {migration_file_name} {module_name}
-	
+
 And run plugin migration
 
 	php artisan plugin:migrate {module_name}
@@ -312,6 +385,8 @@ Some extra keys are created to translate module name, permissions, attributes an
 
 ###Routes file:
 
+	<?php
+	
 	Route::group([
     	"prefix" => ADMIN,
     	"middleware" => ["web", "auth"],
@@ -339,6 +414,8 @@ ___
 ### Creating items in sidebar menu:
 
 
+	<?php
+	
 	Navigation::menu("sidebar", function ($menu) {
     	$menu->item('products', trans("tweets::tweets.tweets"), URL::to(ADMIN . '/tweets'))
     	->icon("fa-twitter")	// optional
@@ -354,6 +431,8 @@ ___
 ### Creating some schedule tasks:
 
 
+	<?php
+	
 	Schedule::run(function($schedule){
    	 	$schedule->call(function(){
         	sleep(7);
@@ -397,11 +476,9 @@ There area some widgets listeners in dashboard
 	});
 
 
-
-
 ### Adding links to sitemap:
 
-	Widget::set("sitemap", function($sitemap){
+	Sitemap::set("sitemap", function($sitemap){
 		$sitemap->url(url("/"))
 		->date(time())
 		->priority("0.9")

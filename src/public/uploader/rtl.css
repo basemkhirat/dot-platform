@@ -50,6 +50,8 @@
 
 .galleries-home{
     border-radius: 0 4px 4px 0;
+    right: 0;
+    left:unset
 }
 
 .media-form-wrapper{

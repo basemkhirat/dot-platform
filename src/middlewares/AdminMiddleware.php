@@ -9,17 +9,21 @@ class AdminMiddleware
             Config::set($option->name, $option->value);
         }
 
-        // set the time zone;
+        // setting the time zone;
         date_default_timezone_set(Config::get("app.timezone"));
 
-        if (Session::has('locale')) {
-            App::setLocale(Session::get('locale'));
-        } else {
-            App::setLocale(Config::get('app.locale'));
+        // setting default locale
+        try {
+            if (Session::has('locale')) {
+                App::setLocale(Session::get('locale'));
+            } else {
+                App::setLocale(Config::get('app.locale'));
+            }
+            define("LANG", App::getLocale());
+            define("DIRECTION", Config::get("admin.locales")[LANG]["direction"]);
+        } catch (Exception $error) {
+            abort(500, "System locales is not configured successfully");
         }
-
-        define("LANG", App::getLocale());
-        define("DIRECTION", Config::get("admin.locales")[LANG]["direction"]);
 
         // getting site status
         if (!$request->is(ADMIN . '/*')) {

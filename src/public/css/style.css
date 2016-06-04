@@ -79,8 +79,8 @@ h5 {
   margin-right: 40px;
 }
 .navbar-top-links li a {
-  padding: 20px 10px;
   min-height: 50px;
+  padding: 17px 11px;
 }
 .dropdown-menu {
   border: medium none;
@@ -134,7 +134,7 @@ h5 {
 }
 .navbar-top-links .dropdown-alerts {
   margin-left: 0px;
-  margin-top: -5px;
+  margin-top: -10px;
   border-radius: 0 0 3px 3px;
 }
 .navbar-top-links .dropdown-user {
@@ -3175,7 +3175,7 @@ body.body-small .footer.fixed {
 .nav-tabs > li > a {
   color: #A7B1C2;
   font-weight: 600;
-  padding: 10px 20px 10px 25px;
+  padding: 10px 16px;
 }
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {

@@ -456,6 +456,10 @@ select {
    }
 
 
+.navbar-right{
+    float: right;
+}
+
 /*
 XS
 */

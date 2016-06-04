@@ -510,7 +510,7 @@
                                 <button class="btn btn-icon btn-primary btn-flat"
                                         data-loading-text="<?php echo trans("media::media.please_wait"); ?>"
                                         type="button"
-                                        id="select_gallery"><i class="fa fa-check-square-o"></i></button>
+                                        class="select_gallery"><i class="fa fa-check-square-o"></i></button>
                             </div>
 
                         </form>
@@ -619,7 +619,7 @@
                                 <button class="btn btn-primary btn-flat gallery-select pull-right"
                                         data-loading-text="<?php echo trans("media::media.please_wait"); ?>"
                                         type="button"
-                                        id="select_gallery"><i class="fa fa-check-square-o"></i></button>
+                                        class="select_gallery"><i class="fa fa-check-square-o"></i></button>
 
                                 <div class="btn-group pull-right gallery_btns">
 
@@ -675,7 +675,7 @@
                         <div class="col-md-2 col-xs-2 col-sm-2 pull-left text-left">
                             <button class="btn btn-primary btn-flat"
                                     data-loading-text="<?php echo trans("media::media.please_wait"); ?>" type="button"
-                                    id="select_gallery"><?php echo trans("media::media.select_media"); ?></button>
+                                    class="select_gallery"><?php echo trans("media::media.select_media"); ?></button>
                         </div>
                     </div>
 
