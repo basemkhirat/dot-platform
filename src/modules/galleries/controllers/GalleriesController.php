@@ -45,6 +45,9 @@ class GalleriesController extends BackendController
             $gallery->author = Request::get("author");
             $gallery->user_id = Auth::user()->id;
 
+            // fire gallery saving action
+            Action::fire("gallery.saving", $gallery);
+
             if (!$gallery->validate()) {
                 return Redirect::back()->withErrors($gallery->errors());
             }
@@ -52,6 +55,9 @@ class GalleriesController extends BackendController
             $gallery->save();
 
             $gallery->files()->sync((array)Request::get("media_id"));
+
+            // fire gallery saved action
+            Action::fire("gallery.saved", $gallery);
 
             return Redirect::route("admin.galleries.edit", array("id" => $gallery->id))->with("message", trans("galleries::galleries.events.created"));
         }
@@ -70,6 +76,9 @@ class GalleriesController extends BackendController
             $gallery->name = Request::get("name");
             $gallery->author = Request::get("author");
 
+            // fire gallery saving action
+            Action::fire("gallery.saving", $gallery);
+
             if (!$gallery->validate()) {
                 return Redirect::back()->withErrors($gallery->errors());
             }
@@ -77,6 +86,9 @@ class GalleriesController extends BackendController
             $gallery->save();
 
             $gallery->files()->sync((array)Request::get("media_id"));
+
+            // fire gallery saved action
+            Action::fire("gallery.saved", $gallery);
 
             return Redirect::route("admin.galleries.edit", array("id" => $gallery->id))->with("message", trans("galleries::galleries.events.updated"));
 
@@ -175,7 +187,7 @@ class GalleriesController extends BackendController
                       <?php } ?>
                       <?php } ?>
                       <?php }else{ ?>
-                      <img class="img-rounded" src="<?php echo assets("default/post.png"); ?>" />
+                      <img class="img-rounded" src="<?php echo assets("admin::default/post.png"); ?>" />
                       <?php } ?>
 
                       </div>
@@ -295,8 +307,15 @@ class GalleriesController extends BackendController
 
         foreach ($ids as $ID) {
             $gallery = Gallery::findOrFail($ID);
+
+            // fire gallery deleting action
+            Action::fire("gallery.deleting", $gallery);
+
             $gallery->files()->detach();
             $gallery->delete();
+
+            // fire gallery deleted action
+            Action::fire("gallery.deleted", $gallery);
         }
         return Redirect::back()->with("message", trans("galleries::galleries.events.deleted"));
     }

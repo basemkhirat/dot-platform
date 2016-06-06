@@ -8,31 +8,31 @@
     <?php /*
         <link href="https://necolas.github.io/normalize.css/3.0.2/normalize.css" rel="stylesheet" />
         */ ?>
-    <link href="<?php echo assets() ?>/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/css/font-awesome-animation.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/css/animate.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/css/style.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/font-awesome-animation.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/animate.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/style.css" rel="stylesheet">
 
-    <link href="<?php echo assets() ?>/uploader/popup.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo assets("admin::") ?>/uploader/popup.css" rel="stylesheet" type="text/css">
 
-    <script src="<?php echo assets() ?>/js/jquery-2.1.1.js"></script>
-    <link href="<?php echo assets() ?>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/css/plugins/switchery/switchery.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/css/plugins/chosen/chosen.css" rel="stylesheet">
-    <link href="<?php echo assets() ?>/css/master.css" rel="stylesheet">
+    <script src="<?php echo assets("admin::") ?>/js/jquery-2.1.1.js"></script>
+    <link href="<?php echo assets("admin::") ?>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/master.css" rel="stylesheet">
 
     <?php if (DIRECTION == "rtl") { ?>
-        <link href="<?php echo assets() ?>/css/rtl.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/uploader/rtl.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo assets("admin::") ?>/css/rtl.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/uploader/rtl.css" rel="stylesheet" type="text/css">
     <?php } ?>
 
     @yield("header")
 
     <?php /*
-        <link href="<?php echo assets() ?>/css/adnan.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/adnan.css" rel="stylesheet">
        */ ?>
 
 

@@ -38,6 +38,24 @@ trait ModelTraits
      * @var array
      */
     protected $searchable = [];
+
+    /**
+     * @var array
+     */
+    protected $sluggable = [];
+
+
+    /**
+     * @var array
+     */
+    private $pendingMessages = [];
+
+
+    /**
+     * @var array
+     */
+    private $pendingAttributes = [];
+
     /**
      * @var array
      */
@@ -79,26 +97,6 @@ trait ModelTraits
                 $i++;
             }
         });
-    }
-
-    /**
-     *
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        /* static::creating(function($model) {
-          return $model->validate();
-          }); */
-
-        //static::saving(function($model) {
-        //return $model->validate();
-        //});
-
-        /* static::updating(function($model) {
-          return $model->validate();
-          }); */
     }
 
     /**
@@ -157,7 +155,6 @@ trait ModelTraits
             }
         }
 
-
         return parent::save($options);
     }
 
@@ -181,12 +178,56 @@ trait ModelTraits
     }
 
 
+    /**
+     * @return array
+     */
+    protected function setValidationMessages()
+    {
+        return (array)trans('admin::validation');
+    }
+
+    /**
+     * @return array
+     */
+    protected function setValidationAttributes()
+    {
+        return (array)trans($this->module . '::' . $this->module . ".attributes");
+    }
+
+
+    /**
+     * @param bool $callback
+     */
     public static function validating($callback = false)
     {
         if (is_callable($callback)) {
             Event::listen(get_called_class() . ".validating", $callback);
         }
     }
+
+
+    /**
+     * @param array $rules
+     * @param array $messages
+     * @param array $attributes
+     * @return bool
+     */
+    public function rules($rules = [], $messages = [], $attributes = [])
+    {
+
+        if(count($rules) == 0){
+            return false;
+        }
+
+        foreach ($rules as $input => $rule) {
+            $this->creatingRules[$input] = $rule;
+            $this->updatingRules[$input] = $rule;
+        }
+
+        $this->pendingMessages = array_merge($this->pendingMessages, $messages);
+        $this->pendingAttributes = array_merge($this->pendingAttributes, $attributes);
+    }
+
 
     /**
      * Validates current attributes against rules
@@ -196,7 +237,6 @@ trait ModelTraits
         if ($this->exists) {
 
             //update
-
             $rules = array();
             foreach ($this->updatingRules as $input => $rule) {
                 foreach ($this->attributes as $field => $attribute) {
@@ -212,19 +252,19 @@ trait ModelTraits
                     $rule = str_replace("[" . $field . "]", $this->attributes[$field], $rule);
                     $rules[$input] = $rule;
                 }
-
-                // dd($this->attributes);
             }
         } else {
             $rules = $this->creatingRules;
         }
 
-        $v = $this->validator->make($this->params, $rules);
-        $v->setCustomMessages((array)trans('admin::validation'));
-        $v->setAttributeNames((array)trans($this->module . '::' . $this->module . ".attributes"));
+        $messages = array_merge((array)trans('admin::validation'), $this->setValidationMessages());
+        $messages = array_merge($messages, $this->pendingMessages);
+        $attributes = $this->setValidationAttributes();
+        $attributes = array_merge($attributes, $this->pendingAttributes);
+
+        $v = $this->validator->make($this->params, $rules, $messages, $attributes);
 
         // getting custom validation
-
         if (method_exists($this, 'setValidation')) {
             $this->setValidation($v);
         }
@@ -248,13 +288,6 @@ trait ModelTraits
         $this->setErrors($v->messages());
         return false;
     }
-
-//    public function save(array $options = []){
-//
-//        parent::save($options);
-//
-//
-//    }
 
     /**
      * Set error message bag
@@ -373,20 +406,6 @@ trait ModelTraits
 
 
         return $template;
-    }
-
-    /**
-     * @return int
-     */
-    public
-    function scopeSequence()
-    {
-
-        $seq = DB::connection("mongodb")->getCollection('sequences')->findAndModify(
-            array('_id' => $this->table), array('$inc' => array('seq' => 1)), null, array('new' => true, 'upsert' => true)
-        );
-
-        return (int)$seq['seq'];
     }
 
 }

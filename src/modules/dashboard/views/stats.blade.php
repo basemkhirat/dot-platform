@@ -113,8 +113,8 @@ foreach (Request::except('per_page', 'page') as $key => $value) {
 </div>
 
 @section('footer')
-<link href="<?php echo assets() ?>/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-<script src="<?php echo assets() ?>/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<link href="<?php echo assets("admin::") ?>/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+<script src="<?php echo assets("admin::") ?>/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 <script>
 $(document).ready(function () {

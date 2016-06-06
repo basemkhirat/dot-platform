@@ -203,8 +203,8 @@
 
 
 @section('footer')
-<script src="<?php echo assets() ?>/js/plugins/nestable/jquery.mjs.nestedSortable.js"></script>
-<script src="<?php echo assets() ?>/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/nestable/jquery.mjs.nestedSortable.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/validate/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function () {
     $("#edit-form").validate({

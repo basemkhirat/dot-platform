@@ -103,7 +103,7 @@
                             <?php echo trans("categories::categories.change_image"); ?>
                         </a>
                         <a class="post-image-preview" href="javascript:void(0)">
-                            <img width="100%" height="130px" class="post-image" src="<?php if ($category and @ $category->image->id != "") { ?> <?php echo thumbnail(@$category->image->path); ?> <?php } else { ?> <?php echo assets("default/post.png"); ?><?php } ?>">
+                            <img width="100%" height="130px" class="post-image" src="<?php if ($category and @ $category->image->id != "") { ?> <?php echo thumbnail(@$category->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/post.png"); ?><?php } ?>">
                         </a>
                     </div>
                 </div>

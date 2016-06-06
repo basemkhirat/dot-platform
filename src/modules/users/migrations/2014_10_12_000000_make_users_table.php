@@ -33,6 +33,7 @@ class MakeUsersTable extends Migration
             $table->integer('role_id')->index();
             $table->integer('last_login')->index();
             $table->integer('status')->index();
+            $table->integer('backend')->index();
             $table->integer('root')->index();
             $table->integer('photo_id')->index();
             $table->string('lang', 5)->index();
@@ -44,7 +45,6 @@ class MakeUsersTable extends Migration
         });
 
         // create administrator user
-
         $user = new User();
         $user->username = "admin";
         $user->password = "admin";
@@ -54,6 +54,7 @@ class MakeUsersTable extends Migration
         $user->lang = App::getLocale();
         $user->status = 1;
         $user->role_id = 1;
+        $user->backend = 1;
         $user->root = 1;
         $user->save();
 

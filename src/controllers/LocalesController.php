@@ -6,12 +6,6 @@
 class LocalesController extends BackendController
 {
 
-    /**
-     * @var array
-     */
-    public $data = [];
-
-
     function index($lang)
     {
 
@@ -22,6 +16,5 @@ class LocalesController extends BackendController
         return Redirect::back();
 
     }
-
 
 }

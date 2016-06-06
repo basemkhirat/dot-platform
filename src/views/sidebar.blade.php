@@ -53,7 +53,7 @@
     @stop
 
     @section('footer')
-    <script src="<?php echo assets() ?>/js/plugins/nestable/jquery.mjs.nestedSortable.js"></script>
+    <script src="<?php echo assets("admin::") ?>/js/plugins/nestable/jquery.mjs.nestedSortable.js"></script>
 
     <script>
         $(document).ready(function () {

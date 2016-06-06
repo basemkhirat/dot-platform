@@ -42,13 +42,19 @@ function plugins_path($path = "")
  */
 function assets($path = "")
 {
-    $prefix = "admin";
+    $prefix = "";
+
     if (strstr($path, "::")) {
         list($namespace, $path) = explode("::", $path);
-        if ($namespace != "admin") {
+
+        if ($namespace == "admin") {
+            $prefix = "admin";
+        } else {
             $prefix = Module::path($namespace);
         }
+
     }
+
     return asset($prefix . "/" . $path);
 }
 
@@ -70,11 +76,19 @@ function uploads_path($file = "")
     return public_path(UPLOADS . "/" . $file);
 }
 
+/**
+ * @param $title
+ * @param string $separator
+ * @return mixed
+ */
 function str_slug_utf8($title, $separator = '-')
 {
     return Str::slug_utf8($title, $separator);
 }
 
+/**
+ * @return mixed
+ */
 function get_locales()
 {
     return Config::get("admin.locales");
@@ -223,4 +237,19 @@ function arabic_date($target_date = '', $type = '')
 function denied()
 {
     return "Permission denied";
+}
+
+
+/**
+ * Detect migration class name from timestamped file name
+ * @param $file
+ * @return string
+ */
+function get_migration_class($file)
+{
+    $file_name = rtrim(basename($file), ".php");
+    $name_parts = explode("_", $file_name);
+    $pure_name = array_slice($name_parts, 4);
+    $name = join("_", $pure_name);
+    return strtoupper(camel_case($name));
 }

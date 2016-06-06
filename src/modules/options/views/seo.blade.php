@@ -57,7 +57,7 @@
                                     <div class="row">
                                         <div class="col-md-3 text-center">
                                             <input id="site_logo_path" type="hidden" value="<?php if (Config::get("site_logo") != "") { ?><?php echo Config::get("site_logo"); ?><?php } ?>" id="user_photo_id" name="site_logo" />
-                                            <img id="site_logo" style="border: 1px solid #ccc; width: 100%;" src="<?php if (Config::get("site_logo") != "") { ?> <?php echo thumbnail(Config::get("site_logo")); ?> <?php } else { ?> <?php echo assets("images/user.png"); ?><?php } ?>" />
+                                            <img id="site_logo" style="border: 1px solid #ccc; width: 100%;" src="<?php if (Config::get("site_logo") != "") { ?> <?php echo thumbnail(Config::get("site_logo")); ?> <?php } else { ?> <?php echo assets("admin::images/user.png"); ?><?php } ?>" />
                                         </div>
                                         <div class="col-md-9">
                                             <div class="form-group">
@@ -175,15 +175,17 @@
                                         <div class="form-group">
                                             <label for="sitemap_path"><?php echo trans("options::options.attributes.sitemap_path") ?></label>
                                             <div class="input-group" style="direction: rtl;">
-                                                <input name="sitemap_path" type="text" value="<?php echo @Request::old("sitemap_path", Config::get("sitemap_path")); ?>" class="form-control text-left ltr" id="sitemap_path" placeholder="<?php echo trans("options::options.attributes.sitemap_path") ?>">
+                                                <input name="sitemap_path" type="text" value="<?php echo @Request::old("sitemap_path", Config::get("sitemap_path")); ?>" class="form-control" id="sitemap_path" style="direction: ltr; text-align: left" placeholder="<?php echo trans("options::options.attributes.sitemap_path") ?>">
                                                 <span class="input-group-addon">/public/</span>
                                             </div>
                                         </div>
 
+                                        <?php /*
                                         <div class="form-group">
                                             <label for="sitemap_limit"><?php echo trans("options::options.attributes.sitemap_limit") ?></label>
                                             <input name="sitemap_limit" type="number" value="<?php echo @Request::old("sitemap_limit", Config::get("sitemap_limit")); ?>" class="form-control" id="sitemap_limit" placeholder="<?php echo trans("options::options.attributes.sitemap_limit") ?>">
                                         </div>
+                                        */ ?>
 
                                 </fieldset>
                             </div>
@@ -210,12 +212,14 @@
 </div>
 </form>
 @section("header")
-<link href="<?php echo assets("tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
-<link href="<?php echo assets("tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit")?>/jquery.tagit.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit")?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 @stop
 
 @section("footer")
-<script src="<?php echo assets("tagit") ?>/tag-it.js"></script>
+
+
+<script src="<?php echo assets("admin::tagit")?>/tag-it.js"></script>
 
 <script>
     $(document).ready(function () {

@@ -24,14 +24,16 @@ class AuthController extends BackendController {
                 $userdata = array(
                     'username' => Request::get('username'),
                     'password' => Request::get('password'),
-                    "status" => 1
+                    'backend' => 1,
+                    'status' => 1
                 );
 
                 if (Auth::attempt($userdata, Request::get("remember"))) {
 
-                    // fire login event
-                    Event::fire("auth.login", Auth::user());
+                    // fire login action
+                    Action::fire("auth.login", Auth::user());
 
+                    // Redirection
                     if (Request::has("url")) {
                         Session::forget('url');
                         return Redirect::to(Request::get("url"));
@@ -57,8 +59,8 @@ class AuthController extends BackendController {
 
         Auth::logout();
 
-        // fire logout event
-        Event::fire("auth.logout", $user);
+        // fire logout action
+        Action::fire("auth.logout", $user);
 
         return Redirect::route("admin.auth.login");
     }
@@ -106,8 +108,8 @@ class AuthController extends BackendController {
                                 "code" => $code
                     ));
 
-                    // fire forget event
-                    Event::fire("auth.forget", $user);
+                    // fire forget action
+                    Action::fire("auth.forget", $user);
 
                     return Redirect::back()
                                     ->withErrors(array("email_sent" => trans("auth::auth.password_reset_link_sent")))
@@ -169,8 +171,8 @@ class AuthController extends BackendController {
                             "password" => Hash::make(Request::get("password"))
                 ));
 
-                // fire reset password event
-                Event::fire("auth.reset", $user);
+                // fire reset password action
+                Action::fire("auth.reset", $user);
 
                 return Redirect::to(ADMIN."/auth/reset/" . $code . "/1");
             }

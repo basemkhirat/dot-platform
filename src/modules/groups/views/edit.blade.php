@@ -138,12 +138,12 @@
 </form>
 @section("header")
 @parent
-<link href="<?php echo assets("tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
-<link href="<?php echo assets("tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit")?>/jquery.tagit.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit")?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 @stop
 @section("footer")
 @parent
-<script type="text/javascript" src="<?php echo assets("tagit") ?>/tag-it.js"></script>
+<script type="text/javascript" src="<?php echo assets("admin::tagit")?>/tag-it.js"></script>
 <script>
     $(document).ready(function () {
 

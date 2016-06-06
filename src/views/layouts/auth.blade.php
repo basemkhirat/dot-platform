@@ -8,17 +8,17 @@
 
         <title><?php echo Config::get("site_title"); ?> - CMS</title>
 
-        <link href="<?php echo assets() ?>/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-        <link href="<?php echo assets() ?>/css/animate.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/css/style.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/animate.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/style.css" rel="stylesheet">
 
-        <link href="<?php echo assets() ?>/css/plugins/switchery/switchery.css" rel="stylesheet">
-        <script src="<?php echo assets() ?>/js/plugins/switchery/switchery.js"></script>
+        <link href="<?php echo assets("admin::") ?>/css/plugins/switchery/switchery.css" rel="stylesheet">
+        <script src="<?php echo assets("admin::") ?>/js/plugins/switchery/switchery.js"></script>
 
-        <link href="<?php echo assets() ?>/css/auth.css" rel="stylesheet" />
+        <link href="<?php echo assets("admin::") ?>/css/auth.css" rel="stylesheet" />
         
     </head>
 
@@ -47,9 +47,9 @@
                     </div>
                     <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
     
-                    <a href="<?php echo assets() ?>/#"><small>Forgot password?</small></a>
+                    <a href="<?php echo assets("admin::") ?>/#"><small>Forgot password?</small></a>
                     <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                    <a class="btn btn-sm btn-white btn-block" href="<?php echo assets() ?>/register.html">Create an account</a>
+                    <a class="btn btn-sm btn-white btn-block" href="<?php echo assets("admin::") ?>/register.html">Create an account</a>
                 </form>
                 -->
 
@@ -59,8 +59,8 @@
         </div>
 
         <!-- Mainly scripts -->
-        <script src="<?php echo assets() ?>/js/jquery-2.1.1.js"></script>
-        <script src="<?php echo assets() ?>/js/bootstrap.min.js"></script>
+        <script src="<?php echo assets("admin::") ?>/js/jquery-2.1.1.js"></script>
+        <script src="<?php echo assets("admin::") ?>/js/bootstrap.min.js"></script>
 
     </body>
 

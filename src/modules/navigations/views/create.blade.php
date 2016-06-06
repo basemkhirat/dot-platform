@@ -51,7 +51,7 @@
 
     </div>
 </div> <!-- / #content-wrapper -->
-<script src="<?php echo assets() ?>/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/validate/jquery.validate.min.js"></script>
 
 <script>
 

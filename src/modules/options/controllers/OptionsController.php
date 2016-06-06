@@ -1,14 +1,20 @@
 <?php
 
-class OptionsController extends BackendController {
+class OptionsController extends BackendController
+{
 
     protected $data = [];
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
+        $this->data["all_plugins"] = $plugins = Plugin::all();
+        $this->data["active_plugins"] = $active_plugins = Plugin::installed();
+        $this->data["available_plugins_count"] = count($plugins) - count($active_plugins);
     }
 
-    function index() {
+    function index()
+    {
 
         if (Request::isMethod("post")) {
 
@@ -23,13 +29,14 @@ class OptionsController extends BackendController {
             Option::store($options);
 
             return Redirect::back()
-                            ->with("message", trans("options::options.events.saved"));
+                ->with("message", trans("options::options.events.saved"));
         }
         $this->data["option_page"] = "main";
         return View::make("options::show", $this->data);
     }
 
-    function seo() {
+    function seo()
+    {
 
         if (Request::isMethod("post")) {
 
@@ -55,13 +62,14 @@ class OptionsController extends BackendController {
             Option::store($options);
 
             return Redirect::back()
-                            ->with("message", trans("options::options.events.saved"));
+                ->with("message", trans("options::options.events.saved"));
         }
         $this->data["option_page"] = "seo";
         return View::make("options::seo", $this->data);
     }
 
-    function social() {
+    function social()
+    {
 
         if (Request::isMethod("post")) {
 
@@ -70,29 +78,78 @@ class OptionsController extends BackendController {
             Cache::forget("breaking_tweets");
 
             return Redirect::back()
-                            ->with("message", trans("options::options.events.saved"));
+                ->with("message", trans("options::options.events.saved"));
         }
         $this->data["option_page"] = "social";
         return View::make("options::social", $this->data);
     }
 
-    function modules() {
+    function plugins()
+    {
 
         if (Request::isMethod("post")) {
 
-            Option::store(Request::all());
+            $active_plugins = array_keys(Request::get("plugins", []));
+
+            Storage::put("plugins", json_encode($active_plugins));
 
             return Redirect::back()
-                            ->with("message", trans("options::options.events.saved"));
+                ->with("message", trans("options::options.events.saved"));
         }
-        $this->data["option_page"] = "modules";
-        return View::make("options::modules", $this->data);
+
+        $this->data["option_page"] = "plugins";
+
+        return View::make("options::plugins", $this->data);
     }
 
-    function media() {
+    function plugin($name, $status)
+    {
 
-        //dd(Config::get("media"));
+        $path = PLUGINS_PATH . "/" . $name;
 
+        $plugin = Plugin::get($name);
+
+        $installed_plugins = Plugin::installedPaths();
+
+        if ($status == 1) {
+
+            $installed_plugins[] = $name;
+
+            // installing
+            $plugin->install();
+
+            $message = trans("options::options.events.installed");
+
+        } else {
+
+            if (($key = array_search($name, $installed_plugins)) !== false) {
+                unset($installed_plugins[$key]);
+            }
+
+            // uninstalling
+            $plugin->uninstall();
+
+            $message = trans("options::options.events.uninstalled");
+        }
+
+        foreach ($installed_plugins as $key => $plugin) {
+            if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/plugin.php")) {
+                unset($installed_plugins[$key]);
+            }
+        }
+
+        Option::store([
+            "plugins" => json_encode(array_unique(array_values($installed_plugins)))
+        ]);
+
+        return Redirect::back()
+            ->with("message", $message);
+
+    }
+
+
+    function media()
+    {
         if (Request::isMethod("post")) {
 
             $options = Request::all();
@@ -106,7 +163,7 @@ class OptionsController extends BackendController {
             Option::store($options, "media");
 
             return Redirect::back()
-                            ->with("message", trans("options::options.events.saved"));
+                ->with("message", trans("options::options.events.saved"));
         }
         $this->data["option_page"] = "media";
         return View::make("options::media", $this->data);

@@ -99,7 +99,7 @@
                             <?php echo trans("pages::pages.change_image"); ?>
                         </a>
                         <a class="post-image-preview" href="javascript:void(0)">
-                            <img width="100%" height="130px" class="post-image" src="<?php if ($page and @ $page->image) { ?> <?php echo thumbnail(@$page->image->path); ?> <?php } else { ?> <?php echo assets("default/post.png"); ?><?php } ?>">
+                            <img width="100%" height="130px" class="post-image" src="<?php if ($page and @ $page->image) { ?> <?php echo thumbnail(@$page->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/post.png"); ?><?php } ?>">
                         </a>
                     </div>
                 </div>
@@ -132,13 +132,13 @@
 </form>
 @section("header")
 @parent
-<link href="<?php echo assets("tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
-<link href="<?php echo assets("tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit")?>/jquery.tagit.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit")?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 @stop
 @section("footer")
 @parent
-<script type="text/javascript" src="<?php echo assets("tagit") ?>/tag-it.js"></script>
-<script type="text/javascript" src="<?php echo assets('ckeditor/ckeditor.js') ?>"></script>
+<script type="text/javascript" src="<?php echo assets("admin::tagit")?>/tag-it.js"></script>
+<script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js') ?>"></script>
 <script>
     var baseURL = '{!! URL::to("/".ADMIN) !!}/';
     var postURL = '{!! URL::to(' / details / ') !!}/{!!$page->slug!!}';

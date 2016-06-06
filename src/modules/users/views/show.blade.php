@@ -98,7 +98,7 @@
     </form>
 
     <form action="" method="post" class="action_form">
-        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5> <?php echo trans("users::users.users") ?> </h5>
@@ -154,11 +154,12 @@
                                 <th><?php echo trans("users::users.email"); ?></th>
                                 <th><?php echo trans("users::users.created"); ?></th>
                                 <th><?php echo trans("users::users.role"); ?></th>
+
                                 <th><?php echo trans("users::users.actions") ?></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($users as $user) { ?>
+                            <?php $i = 0; foreach ($users as $user) { ?>
                                 <tr>
 
                                     <?php if (User::access("users.delete")) { ?>
@@ -173,7 +174,7 @@
                                             <img class="img-rounded" style="width:50px"
                                                  src="<?php echo thumbnail($user->photo->media_path) ?>"/>
                                         <?php } else { ?>
-                                            <img class="img-rounded" src="<?php echo assets("images/user.png"); ?>"/>
+                                            <img class="img-rounded" src="<?php echo assets("admin::images/user.png"); ?>"/>
                                         <?php } ?>
                                     </td>
 
@@ -239,7 +240,7 @@
 
                                     </td>
                                 </tr>
-                            <?php } ?>
+                            <?php $i++; } ?>
 
                             </tbody>
                         </table>

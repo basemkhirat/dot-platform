@@ -10,6 +10,8 @@ Route::group(array(
         $route->any('/modules', array("as" => "admin.options.modules", "uses" => "OptionsController@modules"));
         $route->any('/media', array("as" => "admin.options.media", "uses" => "OptionsController@media"));
         $route->any('/social', array("as" => "admin.options.social", "uses" => "OptionsController@social"));
+        $route->any('/plugins', array("as" => "admin.options.plugins", "uses" => "OptionsController@plugins"));
+        $route->any('/plugins/activation/{name}/{status}', array("as" => "admin.plugins.activation", "uses" => "OptionsController@plugin"));
     });
 });
 

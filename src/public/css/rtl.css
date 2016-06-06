@@ -191,6 +191,23 @@ select::-ms-expand {
 }
 
 
+#side-menu > li.active{
+    border-left: none;
+    border-right: 4px solid #19aa8d;
+}
+
+
+.switch-row label{
+    width: 60%; !important;
+    float: right;
+}
+
+.switch-row div{
+    width: 35% !important;
+    text-align: left;
+    float: left;
+}
+
 /*
 XS
 */

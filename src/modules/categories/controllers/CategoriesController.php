@@ -43,11 +43,17 @@ class CategoriesController extends BackendController {
             $category->image_id = Request::get('image_id');
             $category->parent = Request::get('parent');
 
+            // fire category saving action
+            Action::fire("category.saving", $category);
+
             if (!$category->validate()) {
                 return Redirect::back()->withErrors($category->errors())->withInput(Request::all());
             }
 
             $category->save();
+
+            // fire category saved action
+            Action::fire("category.saved", $category);
 
             return Redirect::route("admin.categories.edit", array("id" => $category->id))
                             ->with("message", trans("categories::categories.events.created"));
@@ -69,11 +75,18 @@ class CategoriesController extends BackendController {
             $category->image_id = Request::get('image_id');
             $category->parent = Request::get('parent');
 
+            // fire category saving action
+            Action::fire("category.saving", $category);
+
             if (!$category->validate()) {
                 return Redirect::back()->withErrors($category->errors())->withInput(Request::all());
             }
 
             $category->save();
+
+            // fire category saved action
+            Action::fire("category.saved", $category);
+
             return Redirect::route("admin.categories.edit", array("id" => $id))->with("message", trans("categories::categories.events.updated"));
         }
 
@@ -88,7 +101,15 @@ class CategoriesController extends BackendController {
         }
         foreach ($ids as $ID) {
             $category = Category::findOrFail($ID);
+
+            // fire category deleting action
+            Action::fire("category.deleting", $category);
+
             $category->delete();
+
+            // fire category deleted action
+            Action::fire("category.deleted", $category);
+
         }
         return Redirect::back()->with("message", trans("categories::categories.events.deleted"));
     }

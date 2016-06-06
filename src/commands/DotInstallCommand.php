@@ -57,7 +57,7 @@ class DotInstallCommand extends Command
         $minimum_php = '5.5.9';
 
         if (version_compare(PHP_VERSION, $minimum_php, '>=')) {
-            $server_messages[] = "<strong>PHP</strong> version: " . PHP_VERSION . ".";
+            $server_messages[] = "PHP version: " . PHP_VERSION . ".";
         }else{
             $server_errors[] = "Please update your php to $minimum_php current is " . PHP_VERSION . ".";
         }

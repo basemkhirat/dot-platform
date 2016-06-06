@@ -1,5 +1,5 @@
-<script src="<?php echo assets() ?>/js/jquery-ui-1.10.4.min.js"></script>
-<script src="<?php echo assets() ?>/js/bootbox.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/jquery-ui-1.10.4.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/bootbox.min.js"></script>
 
 <script>
 
@@ -48,41 +48,39 @@
 
 </script>
 <!-- Mainly scripts -->
-<script src="<?php echo assets() ?>/js/bootstrap.min.js"></script>
-<script src="<?php echo assets() ?>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="<?php echo assets() ?>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/bootstrap.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<script src="<?php echo assets() ?>/js/plugins/switchery/switchery.js"></script>
-<script src="<?php echo assets() ?>/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="<?php echo assets() ?>/js/jquery.cookie.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/switchery/switchery.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/jquery.cookie.js"></script>
 
 
 <!-- Peity -->
-<script src="<?php echo assets() ?>/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/peity/jquery.peity.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="<?php echo assets() ?>/js/inspinia.js"></script>
-<script src="<?php echo assets() ?>/js/plugins/pace/pace.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/inspinia.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/pace/pace.min.js"></script>
 
 <!-- iCheck -->
-<script src="<?php echo assets() ?>/js/plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/iCheck/icheck.min.js"></script>
 
 <!-- Peity -->
-<script src="<?php echo assets() ?>/js/demo/peity-demo.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/demo/peity-demo.js"></script>
 
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="<?php echo assets() ?>/uploader/jquery.ui.widget.js"></script>
+<script src="<?php echo assets("admin::") ?>/uploader/jquery.ui.widget.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="<?php echo assets() ?>/uploader/jquery.iframe-transport.js"></script>
+<script src="<?php echo assets("admin::") ?>/uploader/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
-<script src="<?php echo assets() ?>/uploader/jquery.fileupload.js"></script>
+<script src="<?php echo assets("admin::") ?>/uploader/jquery.fileupload.js"></script>
 
-<script src="<?php echo assets() ?>/js/brain-socket.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/uploader/popup.js"></script>
 
-<script src="<?php echo assets() ?>/uploader/popup.js"></script>
-
-<script type="text/javascript" src="<?php echo assets('js/plugins/moment/moment.min.js') ?>"></script>
-<script type="text/javascript" src="<?php echo assets('js/plugins/toastr/toastr.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo assets('admin::js/plugins/moment/moment.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo assets('admin::js/plugins/toastr/toastr.min.js') ?>"></script>
 
 <script>
 

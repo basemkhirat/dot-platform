@@ -113,11 +113,18 @@ return [
         'DotInstallCommand',
         'DotAutoloadCommand',
         'DotMigrateCommand',
+        'ModuleMigrationCommand',
+        'ModuleMigrateCommand',
         'PluginMakeCommand',
         'PluginMigrationCommand',
         'PluginMigrateCommand',
-        'ModuleMigrationCommand',
-        'ModuleMigrateCommand',
+        'PluginMigrateUpCommand',
+        'PluginMigrateDownCommand',
+        'pluginInstallCommand',
+        'PluginUninstallCommand',
+        'PluginListCommand',
+        'PluginPublishCommand',
+        'PluginUpdateCommand'
     ]
 
 ];

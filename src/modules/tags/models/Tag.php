@@ -17,11 +17,11 @@ class Tag extends Model
     ];
 
     protected $creatingRules = [
-        "name" => "required|tag_clean|tag_min:2|tag_max:50||tag_unique:name"
+        "name" => "required"
     ];
 
     protected $updatingRules = [
-        "name" => "required|tag_clean|tag_min:2|tag_max:50|tag_unique:name,[id],id"
+        "name" => "required"
     ];
 
     function setValidation($v)

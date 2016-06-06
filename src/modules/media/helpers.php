@@ -85,7 +85,7 @@ if (!function_exists("thumbnail")) {
         }
 
         if (File::exists(public_path("admin/files/" . strtolower($ext) . ".png"))) {
-            return assets("files/" . strtolower($ext) . ".png");
+            return assets("admin::files/" . strtolower($ext) . ".png");
         } else {
             return assets($default);
         }

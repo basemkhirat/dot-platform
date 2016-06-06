@@ -18,18 +18,6 @@ class UsersController extends BackendController
     public function index()
     {
 
-        /*
-        $outputs = Action::fire("dddd", [Auth::user(), "Sdfdd"]);
-
-       foreach($outputs as  $output){
-           echo $output;
-       }
-        */
-
-        //dd ($output);
-       // die();
-
-
         if (Request::isMethod("post")) {
             if (Request::has("action")) {
                 switch (Request::get("action")) {
@@ -69,7 +57,23 @@ class UsersController extends BackendController
             $query->where("role_id", Request::get("role_id"));
         }
 
-        $this->data["users"] = $query->paginate($per_page);
+        $this->data["users"] = $users = $query->paginate($per_page);
+
+        /*
+        $customFields = [];
+        foreach($users as $user){
+            $fields = Action::fire("user.table.fields", $user);
+            if(count($fields)){
+                foreach($fields as $field){
+                    $customFields[] = $field;
+                }
+
+            }
+        }
+
+        $this->data["customFields"] = $customFields;
+        */
+
         $this->data["roles"] = Role::all();
 
         return View::make("users::show", $this->data);
@@ -90,7 +94,7 @@ class UsersController extends BackendController
 
             $user->username = Request::get("username");
             $user->password = Request::get("password");
-           // $user->repassword = Request::get("repassword");
+            $user->repassword = Request::get("repassword");
             $user->email = Request::get("email");
             $user->first_name = Request::get("first_name");
             $user->last_name = Request::get("last_name");
@@ -103,19 +107,22 @@ class UsersController extends BackendController
             $user->twitter = Request::get("twitter");
             $user->linked_in = Request::get("linked_in");
             $user->google_plus = Request::get("google_plus");
+            $user->backend = 1;
+
+            // Fire user creating action
+            Action::fire("user.saving", $user);
 
             if (!$user->validate()) {
                 return Redirect::back()->withErrors($user->errors())->withInput(Request::all());
             }
 
-            // fire create user event
-            //if(Event::fire("user.creating", $user, )){
-                $user->save();
-            //    Event::fire("user.created", $user);
-            //}
+            $user->save();
+
+            // Fire user created action
+            Action::fire("user.saved", $user);
 
             return Redirect::route("admin.users.edit", array("id" => $user->id))
-                ->with("message", trans("users::users.user_created"));
+                ->with("message", trans("users::users.events.created"));
 
         }
 
@@ -156,15 +163,20 @@ class UsersController extends BackendController
             $user->linked_in = Request::get("linked_in");
             $user->google_plus = Request::get("google_plus");
 
+            // Fire user creating action
+            Action::fire("user.saving", $user);
 
             if (!$user->validate()) {
-                return Redirect::route("admin.users.edit", array("id" => $user_id))->with("message", trans("users::users.user_updated"));
+                return Redirect::back()->withErrors($user->errors())->withInput(Request::all());
             }
 
             $user->save();
 
-            return Redirect::back()->withErrors($user->errors())->withInput(Request::all());
+            // Fire user updated action
+            Action::fire("user.saved", $user);
 
+            return Redirect::route("admin.users.edit", array("id" => $user->id))
+                ->with("message", trans("users::users.events.updated"));
 
         }
 
@@ -197,9 +209,16 @@ class UsersController extends BackendController
 
         foreach ($ids as $ID) {
             $user = User::findOrFail($ID);
+
+            // Fire user deleting action
+            Action::fire("user.deleting", $user);
+
             $user->delete();
+
+            // Fire user deleted action
+            Action::fire("user.deleted", $user);
         }
-        return Redirect::back()->with("message", trans("users::users.user_deleted"));
+        return Redirect::back()->with("message", trans("users::users.events.deleted"));
     }
 
 }

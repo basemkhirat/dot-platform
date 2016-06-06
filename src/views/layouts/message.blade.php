@@ -8,12 +8,12 @@
 
         <title><?php echo Config::get("site_title"); ?> - CMS</title>
 
-        <link href="<?php echo assets() ?>/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-        <link href="<?php echo assets() ?>/css/animate.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/css/style.css" rel="stylesheet">
-        <link href="<?php echo assets() ?>/css/auth.css" rel="stylesheet" />
+        <link href="<?php echo assets("admin::") ?>/css/animate.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/style.css" rel="stylesheet">
+        <link href="<?php echo assets("admin::") ?>/css/auth.css" rel="stylesheet" />
 
     </head>
 
@@ -22,8 +22,8 @@
         @yield("content")
 
         <!-- Mainly scripts -->
-        <script src="<?php echo assets() ?>/js/jquery-2.1.1.js"></script>
-        <script src="<?php echo assets() ?>/js/bootstrap.min.js"></script>
+        <script src="<?php echo assets("admin::") ?>/js/jquery-2.1.1.js"></script>
+        <script src="<?php echo assets("admin::") ?>/js/bootstrap.min.js"></script>
 
     </body>
 

@@ -37,9 +37,6 @@ return [
     "of" => "of",
     "activated" => "Activated",
     "deactivated" => "Deactivated",
-    "user_created" => "User created successfully",
-    "user_updated" => "User updated successfully",
-    "user_deleted" => "User deleted successfully",
     "bulk_actions" => "Bulk actions",
     "edit" => "Edit user",
     "facebook" => "Facebook",
@@ -62,17 +59,12 @@ return [
     'deactivated' => 'Deactivated',
     'activated' => 'Activated',
 
-    'frontend_users' => "",
-    'backend_users' => 'أعضاء لوحة التحكم',
-
-
     "module" => "Users",
     "permissions" => [
         "create" => "Create users",
         "edit" => "Edit users",
         "delete" => "Delete users"
     ],
-
 
     "attributes" => [
         "username" => "username",
@@ -82,5 +74,11 @@ return [
         "first_name" => "name",
         'created_at' => 'created at',
     ],
+
+    "events" => [
+        "created" => "User created successfully",
+        "updated" => "User updated successfully",
+        "deleted" => "User deleted successfully",
+    ]
 
 ];

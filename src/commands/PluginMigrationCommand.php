@@ -22,7 +22,7 @@ class PluginMigrationCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new migration file';
+    protected $description = 'Create a plugin migration file';
 
 
     /**

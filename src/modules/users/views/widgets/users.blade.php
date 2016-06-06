@@ -37,7 +37,7 @@
                                     <img src="<?php echo thumbnail($user->media_path); ?>" alt=""
                                          style="width:26px;height:26px;" class="rounded">
                                 <?php } else { ?>
-                                    <img src="<?php echo assets("images/user.png"); ?>" alt=""
+                                    <img src="<?php echo assets("admin::images/user.png"); ?>" alt=""
                                          style="width:26px;height:26px;" class="rounded">
                                 <?php } ?>
                             </td>

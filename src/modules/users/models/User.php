@@ -38,10 +38,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $hidden = array();
 
-    protected $appends = [];
-
-    protected $methods = [];
-
     function setUpdateValidation($v)
     {
 
@@ -64,6 +60,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         } else {
             unset($this->attributes["password"]);
         }
+    }
+
+    function setRepasswordAttribute($password)
+    {
+        unset($this->attributes["repassword"]);
     }
 
     public function permissions()
@@ -106,9 +107,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getPhotoUrlAttribute()
     {
         if (Auth::user()->photo) {
-            return thumbnail(Auth::user()->photo->media_path, "thumbnail", "images/author.png");
+            return thumbnail(Auth::user()->photo->media_path, "thumbnail", "admin::images/author.png");
         } else {
-            return assets("images/author.png");
+            return assets("admin::images/author.png");
         }
     }
 

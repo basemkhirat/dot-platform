@@ -460,6 +460,26 @@ select {
     float: right;
 }
 
+.close{
+    line-height: 16px;
+}
+
+.forign-box{
+    direction: ltr;
+    text-align: left;
+}
+
+.switch-row label{
+    width: 60%; !important;
+    float: left;
+}
+
+.switch-row div{
+    width: 35% !important;
+    text-align: right;
+    float: right;
+}
+
 /*
 XS
 */

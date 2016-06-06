@@ -3,6 +3,8 @@
 namespace Dot\Platform;
 
 use \Loader;
+use \DB;
+use \Module;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +28,13 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected $modules = [];
 
+    /**
+     * Options list.
+     *
+     * @var array
+     */
+    protected $options = [];
+
 
     /**
      * AdminServiceProvider constructor.
@@ -34,7 +43,7 @@ class CmsServiceProvider extends ServiceProvider
     public function __construct($app)
     {
 
-        if(Config::get("app.key") == ""){
+        if (Config::get("app.key") == "") {
             return false;
         }
         $this->app = $app;
@@ -46,7 +55,7 @@ class CmsServiceProvider extends ServiceProvider
     function boot(\Illuminate\Routing\Router $router)
     {
 
-        if(Config::get("app.key") == ""){
+        if (Config::get("app.key") == "") {
             return false;
         }
 
@@ -101,7 +110,7 @@ class CmsServiceProvider extends ServiceProvider
     public function register()
     {
 
-        if(Config::get("app.key") == ""){
+        if (Config::get("app.key") == "") {
             return false;
         }
 
@@ -109,6 +118,11 @@ class CmsServiceProvider extends ServiceProvider
         define("ADMIN_PATH", dirname(dirname(__FILE__)));
         define("MODULES_PATH", ADMIN_PATH . "/modules");
         define("PLUGINS_PATH", ROOT_PATH . "/plugins");
+
+        // get DB options
+        foreach (DB::table("options")->get() as $option) {
+            Config::set($option->name, $option->value);
+        }
 
         // Binging dot classes
         $this->bindDotClasses();
@@ -183,7 +197,7 @@ class CmsServiceProvider extends ServiceProvider
         Loader::register($cached);
 
         // loading admin bootstrap file
-        include ADMIN_PATH . '/start.php';
+        require_once(ADMIN_PATH . '/start.php');
     }
 
     /**
@@ -222,7 +236,7 @@ class CmsServiceProvider extends ServiceProvider
         // publishing admin public files
         $this->publishes([
             ADMIN_PATH . '/public/' => public_path('admin'),
-        ], "public");
+        ], "dot_public");
 
         // Publishing admin config files
         $this->publishes([
@@ -259,20 +273,29 @@ class CmsServiceProvider extends ServiceProvider
         // Publishing module public assets
         if (file_exists($module_path . '/public/')) {
             $this->publishes([
-                $module_path . '/public/' => public_path('admin/' . $module),
-            ], "public");
+                $module_path . '/public/' => public_path(Module::path($module)),
+            ], "$module.public");
         }
 
         // Publishing module config
         if (file_exists($module_path . '/config/')) {
             $this->publishes([
                 $module_path . '/config/' => config_path(),
-            ], "dot_config");
+            ], "$module.config");
         }
 
         // including module bootstrap file
-        if (file_exists($bootstrap = $module_path . '/start.php')) {
-            include $bootstrap;
+        if (file_exists($bootstrap = $module_path . '/plugin.php')) {
+
+            require_once($bootstrap);
+
+            $class = ucfirst($module . "Provider");
+
+            if (class_exists($class)) {
+                $plugin = new $class();
+                $plugin->boot();
+            }
+
         }
 
 
@@ -284,7 +307,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected function getModules()
     {
-        return app("module")->all();
+        return Module::components();
 
     }
 }

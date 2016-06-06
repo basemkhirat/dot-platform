@@ -1,6 +1,5 @@
 @extends("admin::layouts.master")
 
-
 @section("breadcrumb")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
@@ -41,7 +40,7 @@
 <?php } ?>
 
 <form action="" method="post">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
@@ -75,16 +74,16 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 text-center" >
+                        <div class="col-lg-3 col-md-3 text-center">
 
                             <div class="row">
 
-                                <input type="hidden" value="<?php if ($user and  $user->photo) {
+                                <input type="hidden" value="<?php if ($user and $user->photo) {
                                     echo $user->photo->media_id;
                                 } ?>" id="user_photo_id" name="photo_id"/>
 
                                 <img class="col-lg-12" id="user_photo" style="width: 100%"
-                                     src="<?php if ($user and $user->photo) { ?> <?php echo thumbnail($user->photo->media_path); ?> <?php } else { ?> <?php echo assets("images/user.png"); ?><?php } ?>"/>
+                                     src="<?php if ($user and $user->photo) { ?> <?php echo thumbnail($user->photo->media_path); ?> <?php } else { ?> <?php echo assets("admin::images/user.png"); ?><?php } ?>"/>
 
                                 <a href="javascript:void(0)" id="change_photo"
                                    class="col-lg-12 "><?php echo trans("users::users.change") ?></a>
@@ -112,15 +111,12 @@
                     <div class="form-group">
                         <textarea name="about" class="markdown form-control"
                                   placeholder="<?php echo trans("users::users.about_me") ?>"
-                                  rows="10"><?php echo @Request::old("about", $user->about); ?></textarea>
+                                  rows="7"><?php echo @Request::old("about", $user->about); ?></textarea>
                     </div>
 
+                    <?php Action::render("user.form.featured", $user); ?>
 
-
-                    <?php echo Widget::render("users.form.featured", $user); ?>
-
-
-                </div> <!-- / .panel-body -->
+                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -163,11 +159,12 @@
                                 <?php } ?>
                             </select>
                         </div>
-                    </div> <!-- / .panel-body -->
+                    </div>
+
+                    <?php Action::render("user.form.side", $user); ?>
+
                 </div>
-
             </div>
-
 
             <div class="panel panel-default">
 
@@ -200,7 +197,6 @@
                                class="form-control input-lg"
                                placeholder="<?php echo trans("users::users.linkedin") ?>"/>
                     </div>
-
                 </div>
 
             </div>
@@ -217,7 +213,6 @@
     </div>
 
 </form>
-
 
 </div>
 </div>

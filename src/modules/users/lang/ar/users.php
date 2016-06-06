@@ -7,7 +7,6 @@ return [
     "edit" => "تحرير عضو",
     "search_users" => "البحث فى الأعضاء",
     "per_page" => "عرض بكل صفحة",
-    "bulk_actions" => "Bulk actions",
     "delete" => "حذف",
     "apply" => "حفظ",
     "photo" => "صورة",
@@ -35,9 +34,6 @@ return [
     "of" => "من",
     "activated" => "مفعل",
     "deactivated" => "غير مفعل",
-    "user_created" => "تم إضافة العضو بنجاح",
-    "user_updated" => "تم تعديل العضو بنجاح",
-    "user_deleted" => "تم حذف العضو بنجاح",
     "bulk_actions" => "اختر أمر",
 
     "facebook" => "فيس بوك",
@@ -57,9 +53,6 @@ return [
     'deactivated' => 'غير مفعل',
     'activated' => 'مفعل',
 
-    'frontend_users' => "",
-    'backend_users' => 'أعضاء لوحة التحكم',
-
     "no_records" => "لا يوجد أعضاء",
 
     "permissions" => [
@@ -73,7 +66,13 @@ return [
         "password" => "كلمة المرور",
         "repassword" => "تأكيد كلمة المرور",
         "email" => "البريد الالكترونى",
-        "first_name" => "إسم المستخدم",
+        "first_name" => "الإسم",
         'created_at' => 'تاريخ الإنشاء',
     ],
+
+    "events" => [
+        "created" => "تم إضافة العضو بنجاح",
+        "updated" => "تم تعديل العضو بنجاح",
+        "deleted" => "تم حذف العضو بنجاح",
+    ]
 ];

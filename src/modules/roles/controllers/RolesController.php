@@ -1,6 +1,7 @@
 <?php
 
-class RolesController extends BackendController {
+class RolesController extends BackendController
+{
 
     public $data = array();
 
@@ -14,7 +15,8 @@ class RolesController extends BackendController {
         }
     }
 
-    public function index() {
+    public function index()
+    {
 
         if (Request::isMethod("post")) {
             if (Request::has("action")) {
@@ -37,17 +39,13 @@ class RolesController extends BackendController {
             $this->data["per_page"] = $per_page = 20;
         }
 
-
         $this->data["roles"] = $query->paginate($per_page);
-
-
-       // dd($this->data["roles"]);
-
 
         return View::make("roles::show", $this->data);
     }
 
-    public function create() {
+    public function create()
+    {
 
         if (Request::isMethod("post")) {
 
@@ -55,7 +53,10 @@ class RolesController extends BackendController {
 
             $role->name = Request::get("name");
 
-            if(!$role->validate()){
+            // fire saving action
+            Action::fire("role.saving", $role);
+
+            if (!$role->validate()) {
                 return Redirect::back()->withErrors($role->errors())->withInput(Request::all());
             }
 
@@ -63,17 +64,19 @@ class RolesController extends BackendController {
 
             $role->savePermissions();
 
+            // fire saved action
+            Action::fire("role.saved", $role);
+
             return Redirect::route("admin.roles.edit", array("id" => $role->id))->with("message", trans("roles::roles.role_created"));
         }
 
-
         $this->data["role"] = false;
-        $this->data["modules"] = Config::get("admin.modules");
-
+        $this->data["modules"] = array_merge(Module::all(), Plugin::installed());
         return View::make("roles::edit", $this->data);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
         $role = Role::findOrFail($id);
 
@@ -81,7 +84,10 @@ class RolesController extends BackendController {
 
             $role->name = Request::get("name");
 
-            if(!$role->validate()){
+            // fire saving action
+            Action::fire("role.saving", $role);
+
+            if (!$role->validate()) {
                 return Redirect::back()->withErrors($role->errors())->withInput(Request::all());
             }
 
@@ -89,13 +95,16 @@ class RolesController extends BackendController {
 
             $role->savePermissions();
 
+            // fire saved action
+            Action::fire("role.saved", $role);
+
             return Redirect::back()->with("message", trans("roles::roles.role_updated"));
         }
 
         $this->data["role"] = $role;
         $this->data["role_permissions"] = $role->permissions->lists("permission")->toArray();
 
-        $this->data["modules"] = Config::get("admin.modules");
+        $this->data["modules"] = array_merge(Module::all(), Plugin::installed());
 
         return View::make("roles::edit", $this->data);
     }
@@ -109,8 +118,15 @@ class RolesController extends BackendController {
         }
 
         foreach ($ids as $ID) {
-            $user = Role::findOrFail($ID);
-            $user->delete();
+            $role = Role::findOrFail($ID);
+
+            // fire deleting action
+            Action::fire("role.saving", $role);
+
+            $role->delete();
+
+            // fire deleted action
+            Action::fire("role.deleted", $role);
         }
         return Redirect::back()->with("message", trans("roles::roles.role_deleted"));
     }

@@ -54,7 +54,7 @@
 @section("footer")
 @parent
 
-<script src="<?php echo assets() ?>/js/plugins/chartJs/Chart.min.js"></script>
+<script src="<?php echo assets("admin::") ?>/js/plugins/chartJs/Chart.min.js"></script>
 
 <script>
     $(document).ready(function () {

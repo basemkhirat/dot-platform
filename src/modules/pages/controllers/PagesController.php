@@ -1,14 +1,17 @@
 <?php
 
-class PagesController extends BackendController {
+class PagesController extends BackendController
+{
 
     protected $data = [];
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function index() {
+    function index()
+    {
         if (Request::isMethod("post")) {
             if (Request::has("action")) {
                 switch (Request::get("action")) {
@@ -29,13 +32,13 @@ class PagesController extends BackendController {
         $query = Page::with('image', 'user', 'tags')->orderBy($this->data["sort"], $this->data["order"]);
 
         if (Request::has("tag_id")) {
-            $query->whereHas("tags", function($query) {
+            $query->whereHas("tags", function ($query) {
                 $query->where("tags.tag_id", Request::get("tag_id"));
             });
         }
 
         if (Request::has("user_id")) {
-            $query->whereHas("user", function($query) {
+            $query->whereHas("user", function ($query) {
                 $query->where("users.id", Request::get("user_id"));
             });
         }
@@ -50,7 +53,8 @@ class PagesController extends BackendController {
         return View::make("pages::show", $this->data);
     }
 
-    public function create() {
+    public function create()
+    {
         $page = new Page();
         if (Request::isMethod("post")) {
 
@@ -61,6 +65,9 @@ class PagesController extends BackendController {
             $page->user_id = Auth::user()->id;
             $page->status = Request::get("status", 0);
 
+            // fire page saving action
+            Action::fire("page.saving", $page);
+
             if (!$page->validate()) {
                 return Redirect::back()->withErrors($page->errors())->withInput(Request::all());
             }
@@ -69,8 +76,11 @@ class PagesController extends BackendController {
 
             $page->syncTags(Request::get("tags"));
 
+            // fire  saved action
+            Action::fire("page.saved", $page);
+
             return Redirect::route("admin.pages.edit", array("id" => $page->id))
-                            ->with("message", trans("pages::pages.events.created"));
+                ->with("message", trans("pages::pages.events.created"));
         }
 
 
@@ -80,7 +90,8 @@ class PagesController extends BackendController {
         return View::make("pages::edit", $this->data);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
         $page = Page::findOrFail($id);
 
@@ -92,12 +103,18 @@ class PagesController extends BackendController {
             $page->image_id = Request::get('image_id');
             $page->status = Request::get("status", 0);
 
+            // fire page saving action
+            Action::fire("page.saving", $page);
+
             if (!$page->validate()) {
                 return Redirect::back()->withErrors($page->errors())->withInput(Request::all());
             }
 
             $page->save();
             $page->syncTags(Request::get("tags"));
+
+            // fire page saved action
+            Action::fire("page.saved", $page);
 
             return Redirect::route("admin.pages.edit", array("id" => $id))->with("message", trans("pages::pages.events.updated"));
         }
@@ -110,7 +127,8 @@ class PagesController extends BackendController {
         return View::make("pages::edit", $this->data);
     }
 
-    public function delete() {
+    public function delete()
+    {
         $ids = Request::get("id");
         if (!is_array($ids)) {
             $ids = array($ids);
@@ -118,21 +136,35 @@ class PagesController extends BackendController {
         foreach ($ids as $ID) {
             $page = Page::findOrFail($ID);
 
+            // fire page deleting action
+            Action::fire("page.deleting", $page);
+
             $page->tags()->detach();
             $page->delete();
+
+            // fire page deleted action
+            Action::fire("page.deleted", $page);
         }
         return Redirect::back()->with("message", trans("pages::pages.events.deleted"));
     }
 
-    public function status($status) {
+    public function status($status)
+    {
         $ids = Request::get("id");
         if (!is_array($ids)) {
             $ids = array($ids);
         }
         foreach ($ids as $id) {
             $page = Page::findOrFail($id);
+
+            // fire page saving action
+            Action::fire("page.saving", $page);
+
             $page->status = $status;
             $page->save();
+
+            // fire page saved action
+            Action::fire("page.saved", $page);
         }
 
         if ($status) {

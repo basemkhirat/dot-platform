@@ -27,7 +27,7 @@ class PluginMakeCommand extends Command
     /**
      * @var string
      */
-    protected $description = 'make a module';
+    protected $description = 'make a plugin';
     /**
      * @var array
      */
@@ -128,26 +128,24 @@ class PluginMakeCommand extends Command
     protected function refresh()
     {
 
-        $this->call("dot:autoload");
-        $this->call("vendor:publish");
         $this->call("clear-compiled");
         $this->call("optimize", ['--force' => true]);
-
     }
 
 
     protected function createPlainPlugin()
     {
 
-        if (File::makeDirectory($this->path, $this->permission, true, true)) {
-
-            // start
-            $start_content = file_get_contents(templates_path("plain/start.tpl"));
-            $this->write($this->path . "/start.php", $start_content);
-
+        if (file_exists($this->path . "/plugin.php")) {
+            return $this->error("Plugin '" . $this->module . "' is already exists");
         }
 
-        $this->info("Module '" . $this->module . "' has been created successfully");
+        if (File::makeDirectory($this->path, $this->permission, true, true)) {
+            $start_content = file_get_contents(templates_path("plain/plugin.tpl"));
+            $start_content = $this->replace($start_content);
+            $this->write($this->path . "/plugin.php", $start_content);
+        }
+
         $this->refresh();
     }
 
@@ -155,59 +153,59 @@ class PluginMakeCommand extends Command
     protected function createResourcesPlugin()
     {
 
-        if (File::makeDirectory($this->path, $this->permission, true, true)) {
-
-            // start
-            $start_content = file_get_contents(templates_path("resources/start.tpl"));
-            $start_content = $this->replace($start_content);
-            $this->write($this->path . "/start.php", $start_content);
-
-            // routes
-            $routes_content = file_get_contents(templates_path("resources/routes.tpl"));
-            $routes_content = $this->replace($routes_content);
-            $this->write($this->path . "/routes.php", $routes_content);
-
-            // config
-            File::makeDirectory($this->path . "/config", $this->permission, true, true);
-            $config_content = file_get_contents(templates_path("resources/config.tpl"));
-            $this->write($this->path . "/config/".$this->module.".php", $config_content);
-
-            // controller
-            File::makeDirectory($this->path . "/controllers", $this->permission, true, true);
-            $controller_content = file_get_contents(templates_path("resources/controller.tpl"));
-            $controller_content = $this->replace($controller_content);
-            $this->write($this->path . "/controllers/" . ucfirst($this->module) . "Controller.php", $controller_content);
-
-
-            if ($this->model) {
-                // model
-                File::makeDirectory($this->path . "/models", $this->permission, true, true);
-                $model_content = file_get_contents(templates_path("resources/model.tpl"));
-                $model_content = $this->replace($model_content);
-                $this->write($this->path . "/models/" . ucfirst($this->module) . ".php", $model_content);
-            }
-
-            // lang
-            $lang_content = file_get_contents(templates_path("resources/lang.tpl"));
-            foreach (Config::get("admin.locales") as $code => $lang) {
-                File::makeDirectory($this->path . "/lang/" . $code, $this->permission, true, true);
-                $lang_content = $this->replace($lang_content);
-                $this->write($this->path . "/lang/" . $code . "/" . $this->module . ".php", $lang_content);
-            }
-
-            // view
-            File::makeDirectory($this->path . "/views", $this->permission, true, true);
-            $view_content = file_get_contents(templates_path("resources/view.tpl"));
-            $view_content = $this->replace($view_content);
-            $this->write($this->path . "/views/" . $this->module . ".blade.php", $view_content);
+        if (file_exists($this->path . "/plugin.php")) {
+            return $this->error("Plugin '" . $this->module . "' is already exists");
         }
+
+        File::makeDirectory($this->path, $this->permission, true, true);
+
+        // start
+        $start_content = file_get_contents(templates_path("resources/plugin.tpl"));
+        $start_content = $this->replace($start_content);
+        $this->write($this->path . "/plugin.php", $start_content);
+
+        // routes
+        $routes_content = file_get_contents(templates_path("resources/routes.tpl"));
+        $routes_content = $this->replace($routes_content);
+        $this->write($this->path . "/routes.php", $routes_content);
+
+        // config
+        File::makeDirectory($this->path . "/config", $this->permission, true, true);
+        $config_content = file_get_contents(templates_path("resources/config.tpl"));
+        $this->write($this->path . "/config/" . $this->module . ".php", $config_content);
+
+        // controller
+        File::makeDirectory($this->path . "/controllers", $this->permission, true, true);
+        $controller_content = file_get_contents(templates_path("resources/controller.tpl"));
+        $controller_content = $this->replace($controller_content);
+        $this->write($this->path . "/controllers/" . ucfirst($this->module) . "Controller.php", $controller_content);
+
+
+        if ($this->model) {
+            // model
+            File::makeDirectory($this->path . "/models", $this->permission, true, true);
+            $model_content = file_get_contents(templates_path("resources/model.tpl"));
+            $model_content = $this->replace($model_content);
+            $this->write($this->path . "/models/" . ucfirst($this->module) . ".php", $model_content);
+        }
+
+        // lang
+        $lang_content = file_get_contents(templates_path("resources/lang.tpl"));
+        foreach (Config::get("admin.locales") as $code => $lang) {
+            File::makeDirectory($this->path . "/lang/" . $code, $this->permission, true, true);
+            $lang_content = $this->replace($lang_content);
+            $this->write($this->path . "/lang/" . $code . "/" . $this->module . ".php", $lang_content);
+        }
+
+        // view
+        File::makeDirectory($this->path . "/views", $this->permission, true, true);
+        $view_content = file_get_contents(templates_path("resources/view.tpl"));
+        $view_content = $this->replace($view_content);
+        $this->write($this->path . "/views/" . $this->module . ".blade.php", $view_content);
 
 
         if ($this->table) {
             $this->call("plugin:migration", ['name' => "create_" . $this->table . "_table", 'plugin' => $this->module, '--create' => $this->table]);
-            if ($this->confirm("Are you want to migrate " . $this->table . "?", false)) {
-                $this->call("plugin:migrate", ['plugin' => $this->module]);
-            }
         }
 
         $this->info("Module '" . $this->module . "' has been created successfully");
@@ -271,15 +269,13 @@ class PluginMakeCommand extends Command
         }
 
 
+        $this->keys = array(
+            "module" => $name,
+        );
+
         if ($this->option("plain")) {
             return $this->createPlainPlugin();
         }
-
-
-        $this->keys = array(
-            "module" => $name,
-
-        );
 
         $this->model = false;
         $this->table = false;
@@ -770,14 +766,11 @@ class PluginMakeCommand extends Command
         $vars["stylesheets"] = $this->stylesheets;
         $vars["codes"] = $this->codes;
 
-
         foreach ($vars as $name => $value) {
             $this->keys[$name] = $value;
         }
 
-
         if ($this->option("crud")) { // replacement tags from crud options only
-
 
             foreach ($this->options as $name => $value) {
                 if (is_bool($value)) {
@@ -785,7 +778,6 @@ class PluginMakeCommand extends Command
                 }
                 $this->keys["options." . $name] = $value;
             }
-
 
             $this->options->categories_or_status = false;
             if ($this->required("categories") or $this->options->status) {

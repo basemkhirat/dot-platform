@@ -11,16 +11,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 	<!-- Open Sans font from Google CDN -->
-	<link href="<?php echo assets(); ?>/stylesheets/css244d.css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
+	<link href="<?php echo assets("admin::"); ?>/stylesheets/css244d.css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
 
 	<!-- Pixel Admin's stylesheets -->
-	<link href="<?php echo assets(); ?>/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo assets(); ?>/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo assets(); ?>/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo assets(); ?>/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo assets("admin::"); ?>/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo assets("admin::"); ?>/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo assets("admin::"); ?>/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo assets("admin::"); ?>/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
 
 	<!--[if lt IE 9]>
-		<script src="<?php echo assets(); ?>/javascripts/ie.min.js"></script>
+		<script src="<?php echo assets("admin::"); ?>/javascripts/ie.min.js"></script>
 	<![endif]-->
 
 </head>
@@ -39,7 +39,7 @@
 
 	<div class="header">
 		<a href="index.html" class="logo">
-			<div class="demo-logo"><img src="<?php echo assets(); ?>/demo/logo-big.png" alt="" style="margin-top: -4px;"></div>&nbsp;
+			<div class="demo-logo"><img src="<?php echo assets("admin::"); ?>/demo/logo-big.png" alt="" style="margin-top: -4px;"></div>&nbsp;
 			<strong>Pixel</strong>Admin
 		</a> <!-- / .logo -->
 	</div> <!-- / .header -->
@@ -56,7 +56,7 @@
 
 <!-- Get jQuery from Google CDN -->
 <!--[if !IE]> -->
-	<script type="text/javascript"> window.jQuery || document.write('<script src="<?php echo assets(); ?>/javascripts/jquery.min.js">'+"<"+"/script>"); </script>
+	<script type="text/javascript"> window.jQuery || document.write('<script src="<?php echo assets("admin::"); ?>/javascripts/jquery.min.js">'+"<"+"/script>"); </script>
 <!-- <![endif]-->
 <!--[if lte IE 9]>
 	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
@@ -64,8 +64,8 @@
 
 
 <!-- Pixel Admin's javascripts -->
-<script src="<?php echo assets(); ?>/javascripts/bootstrap.min.js"></script>
-<script src="<?php echo assets(); ?>/javascripts/pixel-admin.min.js"></script>
+<script src="<?php echo assets("admin::"); ?>/javascripts/bootstrap.min.js"></script>
+<script src="<?php echo assets("admin::"); ?>/javascripts/pixel-admin.min.js"></script>
 
 <script type="text/javascript">
 	init.push(function () {

@@ -31,7 +31,7 @@
 @include("admin::partials.messages")
 
 <form action="" method="post">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
@@ -45,35 +45,36 @@
                     </div>
 
                     <?php foreach ($modules as $module) {
-                        $permissions = Config::get("$module.permissions");
+                        $permissions = Config::get("$module->path.permissions", []);
                         ?>
 
-                        <?php if ($permissions != NULL) { ?>
+                        <?php if (count($permissions)) { ?>
                             <div class="panel panel-default">
 
                                 <div class="panel-heading">
                                     <a class="accordion-toggle text-navy" data-toggle="collapse"
-                                       href="#collapse-<?php echo $module; ?>">
-                                        <strong><?php echo ucfirst(trans(trans("$module::$module.module"))); ?></strong>
+                                       href="#collapse-<?php echo $module->path; ?>">
+                                        <strong><?php echo ucfirst($module->name); ?></strong>
                                     </a>
                                 </div>
 
-                                <div id="collapse-<?php echo $module; ?>" class="panel-collapse in">
+                                <div id="collapse-<?php echo $module->path; ?>" class="panel-collapse in">
                                     <div class="panel-body">
                                         <?php foreach ($permissions as $slug) { ?>
                                             <label class="checkbox">
-                                                <input <?php if ($role and in_array($module . "." . $slug, $role_permissions)) { ?> checked="checked" <?php } ?>
+                                                <input <?php if ($role and in_array($module->path . "." . $slug, $role_permissions)) { ?> checked="checked" <?php } ?>
                                                     type="checkbox" name="permissions[]"
-                                                    value="<?php echo $module . "." . $slug; ?>"
+                                                    value="<?php echo $module->path . "." . $slug; ?>"
                                                     class="switcher permission-switcher switcher-sm">
                                             <span style="margin: 0 10px 10px;">
-                                                <?php echo ucfirst(trans($module . "::" . $module . ".permissions." . $slug)); ?>
+                                                <?php echo ucfirst(trans($module->path . "::" . $module->path . ".permissions." . $slug)); ?>
                                             </span>
                                             </label>
                                         <?php } ?>
                                     </div>
                                 </div>
                             </div>
+
                         <?php } ?>
                     <?php } ?>
 

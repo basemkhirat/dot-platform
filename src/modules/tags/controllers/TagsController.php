@@ -44,11 +44,17 @@ class TagsController extends BackendController
 
             $tag->name = Request::get("name");
 
+            // fire saving tag
+            Action::fire("tag.saving", $tag);
+
             if (!$tag->validate()) {
                 return Redirect::back()->withErrors($tag->errors())->withInput(Request::all());
             }
 
             $tag->save();
+
+            // fire saved action
+            Action::fire("tag.saved", $tag);
 
             return Redirect::route("admin.tags.edit", array("id" => $tag->id))
                 ->with("message", trans("tags::tags.events.created"));
@@ -67,11 +73,17 @@ class TagsController extends BackendController
 
             $tag->name = Request::get("name");
 
+            // fire saving action
+            Action::fire("tag.saving", $tag);
+
             if (!$tag->validate()) {
                 return Redirect::back()->withErrors($tag->errors())->withInput(Request::all());
             }
 
             $tag->save();
+
+            // fire saved action
+            Action::fire("tag.saved", $tag);
 
             return Redirect::route("admin.tags.edit", array("id" => $id))->with("message", trans("tags::tags.events.updated"));
         }
@@ -89,7 +101,14 @@ class TagsController extends BackendController
         }
         foreach ($ids as $ID) {
             $tag = Tag::findOrFail((int)$ID);
+
+            // fire deleting action
+            Action::fire("tag.deleting", $tag);
+
             $tag->delete();
+
+            // fire deleted action
+            Action::fire("tag.deleted", $tag);
         }
         return Redirect::back()->with("message", trans("tags::tags.events.deleted"));
     }

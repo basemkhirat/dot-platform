@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Console\Command;
-use Illuminate\Container\Container;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
@@ -21,33 +20,27 @@ class PluginMigrateCommand extends Command
     protected $description = "Migrate plugin migration files";
 
 
-    public function __construct(Container $app)
+    public function __construct()
     {
         parent::__construct();
-        $this->app = $app;
     }
 
     /**
      *
      */
-    public function fire(Container $app)
+    public function fire()
     {
-
-        $migrator = $this->app->make('migrator');
-
 
         $plugin = trim($this->input->getArgument('plugin'));
 
-        $path = PLUGINS_PATH . "/" . $this->input->getArgument('plugin') . "/migrations";
+        $path = PLUGINS_PATH . "/" . trim($plugin) . "/migrations";
 
         if (!file_exists($path)) {
-          //  return $this->error("No migrations files found");
+            return $this->error("Directory not found " . $path);
         }
 
-        $this->call('migrate', [
-            '--path' => str_replace(ROOT_PATH . "/", "", $path)
-        ]);
-
+        $this->call("plugin:migrate:down", ["plugin" => $plugin]);
+        $this->call("plugin:migrate:up", ["plugin" => $plugin]);
     }
 
     /**
@@ -55,8 +48,7 @@ class PluginMigrateCommand extends Command
      *
      * @return array
      */
-    protected
-    function getArguments()
+    protected function getArguments()
     {
         return [
             ['plugin', InputArgument::REQUIRED, 'The name of the plugin']

@@ -4,10 +4,6 @@ class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
-        // getting all database options
-        foreach (Option::all() as $option) {
-            Config::set($option->name, $option->value);
-        }
 
         // setting the time zone;
         date_default_timezone_set(Config::get("app.timezone"));

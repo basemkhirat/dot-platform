@@ -7,10 +7,11 @@ return [
     'options' => 'Options',
 
     'main' => 'Main settings',
-    'seo' => 'SEO settings',
+    'seo' => 'SEO',
     'modules' => 'Modules',
     'social' => 'Social pages',
-    'media' => 'Media settings',
+    'media' => 'Media',
+    'plugins' => 'Plugins',
     'change_logo' => 'Change site logo',
     'chane_logo_help' => 'appears when sharing',
     'amazon_integration' => 'Amazon integration',
@@ -21,11 +22,11 @@ return [
     'update_sitemap' => 'Update',
     'updating_sitemap' => 'Updating',
     'not_writable' => 'is not writable',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'install' => 'Install',
+    'uninstall' => 'Uninstall',
+    'sure_uninstall_plugin' => 'Are you sure to uninstall :name plugin ?',
+    'sure_install_plugin' => 'Are you sure to install :name plugin ?',
+    'no_plugins' => 'No Plugins found',
     '' => '',
     'attributes' => [
         'site_name' => 'Site name',
@@ -81,5 +82,7 @@ return [
     ],
     "events" => [
         'saved' => 'Options saved successfully',
+        'installed' => "Plugin installed successfully",
+        'uninstalled' => "Plugin uninstalled successfully"
     ]
 ];

@@ -1,7 +1,7 @@
 <div class="cinema"></div>
 
-<link rel="stylesheet" href="<?php echo assets("uploader/cropper.css") ?>" type="text/css"/>
-<script src="<?php echo assets("uploader/cropper.js") ?>"></script>
+<link rel="stylesheet" href="<?php echo assets("admin::uploader/cropper.css") ?>" type="text/css"/>
+<script src="<?php echo assets("admin::uploader/cropper.js") ?>"></script>
 
 <div class="file_manager">
 
@@ -64,7 +64,7 @@
     </span>
 
     </div>
-    <link rel="stylesheet" href="<?php echo assets() ?>/uploader/jquery.fileupload.css"/>
+    <link rel="stylesheet" href="<?php echo assets("admin::") ?>/uploader/jquery.fileupload.css"/>
 
     <div class="file_manager_content">
         <div class="tab-content" style="padding:0">
