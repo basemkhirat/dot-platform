@@ -51,7 +51,7 @@ class DotModule
         if ($this->config->has("plugins")) {
             $plugins = json_decode($this->config->get("plugins"));
             foreach ($plugins as $plugin) {
-                $this->modules[$plugin] = MODULES_PATH . "/" . $plugin;
+                $this->modules[$plugin] = PLUGINS_PATH . "/" . $plugin;
                 $this->paths[$plugin] = "plugins/". $plugin;
             }
         }
