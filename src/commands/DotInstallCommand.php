@@ -44,11 +44,15 @@ class DotInstallCommand extends Command
         File::makeDirectory($this->root . "/plugins", 0775, true, true);
         File::makeDirectory(public_path("uploads"), 0777, true, true);
         File::makeDirectory(public_path("sitemaps"), 0777, true, true);
+        File::makeDirectory(public_path("modules"), 0777, true, true);
+        File::makeDirectory(public_path("plugins"), 0777, true, true);
 
         $this->setPermission($this->root . "/storage", 0777);
         $this->setPermission($this->root . "/bootstrap/cache", 0777);
         $this->setPermission(public_path("uploads"), 0777);
         $this->setPermission(public_path("sitemaps"), 0777);
+        $this->setPermission(public_path("plugins"), 0777);
+        $this->setPermission(public_path("modules"), 0777);
 
         $server_errors = [];
         $server_messages = [];
