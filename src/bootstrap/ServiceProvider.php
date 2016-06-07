@@ -2,8 +2,10 @@
 
 namespace Dot\Platform;
 
+use Illuminate\Support\Facades\Schema;
 use \Loader;
 use \DB;
+use Mockery\CountValidator\Exception;
 use \Module;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -119,9 +121,10 @@ class CmsServiceProvider extends ServiceProvider
         define("MODULES_PATH", ADMIN_PATH . "/modules");
         define("PLUGINS_PATH", ROOT_PATH . "/plugins");
 
-        // get DB options
-        foreach (DB::table("options")->get() as $option) {
-            Config::set($option->name, $option->value);
+        if (Schema::hasTable("options")) {
+            foreach (DB::table("options")->get() as $option) {
+                Config::set($option->name, $option->value);
+            }
         }
 
         // Binging dot classes
