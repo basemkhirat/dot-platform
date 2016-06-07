@@ -102,51 +102,63 @@ class OptionsController extends BackendController
         return View::make("options::plugins", $this->data);
     }
 
-    function plugin($name, $status)
+    function plugin($name, $status, $step = 1)
     {
 
-        $path = PLUGINS_PATH . "/" . $name;
+        if ($step == 1) {
 
-        $plugin = Plugin::get($name);
+            $path = PLUGINS_PATH . "/" . $name;
 
-        $installed_plugins = Plugin::installedPaths();
+            $plugin = Plugin::get($name);
 
-        if ($status == 1) {
+            $installed_plugins = Plugin::installedPaths();
 
-            $installed_plugins[] = $name;
+            if ($status == 1) {
 
-            // installing
-            $plugin->install();
+                $installed_plugins[] = $name;
 
-            $message = trans("options::options.events.installed");
+            } else {
 
-        } else {
-
-            if (($key = array_search($name, $installed_plugins)) !== false) {
-                unset($installed_plugins[$key]);
+                if (($key = array_search($name, $installed_plugins)) !== false) {
+                    unset($installed_plugins[$key]);
+                }
             }
 
-            // uninstalling
-            $plugin->uninstall();
-
-            $message = trans("options::options.events.uninstalled");
-        }
-
-        foreach ($installed_plugins as $key => $plugin) {
-            if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/plugin.php")) {
-                unset($installed_plugins[$key]);
+            foreach ($installed_plugins as $key => $plugin) {
+                if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/plugin.php")) {
+                    unset($installed_plugins[$key]);
+                }
             }
+
+            Option::store([
+                "plugins" => json_encode(array_unique(array_values($installed_plugins)))
+            ]);
+
+            return Redirect::route("admin.plugins.activation", ["name" => $plugin, "status" => $status, "step" => 2]);
+
+
+        } elseif ($step == 2) {
+
+            $plugin = Plugin::get($name);
+
+            if ($status == 1) {
+                // installing
+                $plugin->install();
+
+                $message = trans("options::options.events.installed");
+
+            } else {
+                // uninstalling
+                $plugin->uninstall();
+
+                $message = trans("options::options.events.uninstalled");
+            }
+
+            return Redirect::back()
+                ->with("message", $message);
         }
-
-        Option::store([
-            "plugins" => json_encode(array_unique(array_values($installed_plugins)))
-        ]);
-
-        return Redirect::back()
-            ->with("message", $message);
 
     }
-
 
     function media()
     {

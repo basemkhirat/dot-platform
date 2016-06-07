@@ -236,12 +236,12 @@ class CmsServiceProvider extends ServiceProvider
         // publishing admin public files
         $this->publishes([
             ADMIN_PATH . '/public/' => public_path('admin'),
-        ], "dot_public");
+        ], "admin.public");
 
         // Publishing admin config files
         $this->publishes([
             ADMIN_PATH . '/config/' => config_path()
-        ], "dot_config");
+        ], "admin.config");
 
     }
 
