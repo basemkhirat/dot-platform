@@ -63,7 +63,7 @@
 
                 <div class="panel">
                     <div class="panel-body">
-                        <div class="container">
+                        <div>
                             <i class="fa fa-puzzle-piece"></i> &nbsp; <?php echo trans("options::options.no_plugins"); ?>
                         </div>
                     </div>
