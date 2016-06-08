@@ -208,6 +208,14 @@ select::-ms-expand {
     float: left;
 }
 
+.tree-views {
+    padding-right: 0px
+}
+
+.expand {
+    float:right
+}
+
 /*
 XS
 */
