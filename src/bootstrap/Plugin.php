@@ -43,9 +43,19 @@ class Plugin
             "plugin" => $plugin
         ]);
 
+        Artisan::call("module:migrate:up", [
+            "module" => $plugin
+        ]);
+
         Artisan::call("plugin:publish", [
             "plugin" => $plugin
         ]);
+
+        Artisan::call("module:publish", [
+            "module" => $plugin
+        ]);
+
+
 
     }
 
@@ -60,6 +70,10 @@ class Plugin
 
         Artisan::call("plugin:migrate:down", [
             "plugin" => $plugin
+        ]);
+
+        Artisan::call("module:migrate:down", [
+            "module" => $plugin
         ]);
     }
 

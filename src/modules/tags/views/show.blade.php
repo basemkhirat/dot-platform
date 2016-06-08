@@ -141,7 +141,7 @@
                                     </td>
 
                                     <td>
-                                        <small><?php echo $tag->created_at; ?></small>
+                                        <small><?php echo $tag->created_at->render(); ?></small>
                                     </td>
 
                                     <td class="center">

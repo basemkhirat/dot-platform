@@ -53,7 +53,8 @@ return [
         "categories",
         "galleries",
         "tags",
-        "pages"
+        "pages",
+        "posts"
     ],
 
     /**
@@ -110,11 +111,21 @@ return [
      */
 
     "commands" => [
+
+        // Dot commands
         'DotInstallCommand',
         'DotAutoloadCommand',
         'DotMigrateCommand',
+
+        // Modules commands
         'ModuleMigrationCommand',
         'ModuleMigrateCommand',
+        'ModuleMigrateUpCommand',
+        'ModuleMigrateDownCommand',
+        'ModuleInstallCommand',
+        'ModulePublishCommand',
+
+        // Plugins commands
         'PluginMakeCommand',
         'PluginMigrationCommand',
         'PluginMigrateCommand',
@@ -125,6 +136,7 @@ return [
         'PluginListCommand',
         'PluginPublishCommand',
         'PluginUpdateCommand'
+
     ]
 
 ];

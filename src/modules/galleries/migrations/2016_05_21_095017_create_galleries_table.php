@@ -11,19 +11,18 @@ class CreateGalleriesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable("galleries")) {
 
-            Schema::create('galleries', function ($table) {
+        Schema::create('galleries', function ($table) {
 
-                $table->increments('id');
-                $table->string("name")->index();
-                $table->string("slug")->index();
-                $table->string("author")->index();
-                $table->timestamps();
-                $table->integer("user_id")->index();
+            $table->increments('id');
+            $table->string("name")->index();
+            $table->string("slug")->index();
+            $table->string("author")->index();
+            $table->timestamps();
+            $table->integer("user_id")->index();
 
-            });
-        }
+        });
+
     }
 
     /**

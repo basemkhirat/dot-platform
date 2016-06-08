@@ -10,7 +10,7 @@ $id = isset($id) ? $id : "post-content";
         &nbsp;{!!Lang::get('admin::editor.add_media')!!}</a>
 
 </div>
-<textarea name="<?php echo $name; ?>" id="<?php echo $id; ?>"><?php echo $value; ?></textarea>
+<textarea style="display: none" name="<?php echo $name; ?>" id="<?php echo $id; ?>"><?php echo $value; ?></textarea>
 
 
 <?php /*

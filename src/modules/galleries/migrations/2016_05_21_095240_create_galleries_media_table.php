@@ -11,16 +11,14 @@ class CreateGalleriesMediaTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable("galleries_media")) {
 
-            Schema::create('galleries_media', function ($table) {
+        Schema::create('galleries_media', function ($table) {
 
-                $table->integer("gallery_id")->index();
-                $table->integer("media_id")->index();
-                $table->integer("order")->index();
+            $table->integer("gallery_id")->index();
+            $table->integer("media_id")->index();
+            $table->integer("order")->index();
 
-            });
-        }
+        });
     }
 
     /**

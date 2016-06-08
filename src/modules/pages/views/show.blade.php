@@ -147,7 +147,7 @@
 
                                     </td>
                                     <td>
-                                        <small><?php echo $page->created_at; ?></small>
+                                        <small><?php echo $page->created_at->render(); ?></small>
                                     </td>
                                     <td>
                                         <a href="?user_id=<?php echo @$page->user->id; ?>" class="text-navy">

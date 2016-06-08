@@ -6,7 +6,7 @@ class Category extends Model {
     protected $table = 'categories';
     protected $primaryKey = 'id';
     protected $parentKey = 'parent';
-    public $timestamps = false;
+
     protected $fillable = array('*');
     protected $guarded = array('id');
     protected $visible = array();

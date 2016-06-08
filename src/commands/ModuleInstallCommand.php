@@ -6,18 +6,18 @@ use Symfony\Component\Console\Input\InputArgument;
 /**
  * Class MigrateCommand
  */
-class ModuleMigrateCommand extends Command
+class ModuleInstallCommand extends Command
 {
 
     /**
      * @var string
      */
-    protected $name = 'module:migrate';
+    protected $name = 'module:install';
 
     /**
      * @var string
      */
-    protected $description = "Migrate module migration files";
+    protected $description = "Install a module";
 
 
     public function __construct()
@@ -33,14 +33,16 @@ class ModuleMigrateCommand extends Command
 
         $module = trim($this->input->getArgument('module'));
 
-        $path = MODULES_PATH . "/" . trim($module) . "/migrations";
+        $path = MODULES_PATH . "/" . trim($module) . "/plugin.php";
 
         if (!file_exists($path)) {
-            return $this->error("Directory not found " . $path);
+            return $this->error("Module $module not found");
         }
 
-        $this->call("module:migrate:down", ["module" => $module]);
-        $this->call("module:migrate:up", ["module" => $module]);
+        Module::get($module)->install();
+
+        $this->info("Module $module is installed successfully");
+
     }
 
     /**

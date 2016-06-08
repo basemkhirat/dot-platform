@@ -26,7 +26,7 @@ return [
     'sure_uninstall_plugin' => 'إلغاء تثبيت :name ؟',
     'sure_install_plugin' => 'تثبيت :name ؟',
     'no_plugins' => 'لا توجد إضافات',
-    '' => '',
+    'file_not_supported' => 'ملف غير مسموح به',
     '' => '',
     '' => '',
     '' => '',

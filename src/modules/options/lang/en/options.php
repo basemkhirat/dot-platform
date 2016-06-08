@@ -27,7 +27,7 @@ return [
     'sure_uninstall_plugin' => 'Are you sure to uninstall :name plugin ?',
     'sure_install_plugin' => 'Are you sure to install :name plugin ?',
     'no_plugins' => 'No Plugins found',
-    '' => '',
+    'file_not_supported' => 'File is not allowed',
     'attributes' => [
         'site_name' => 'Site name',
         'site_slogan' => 'Site slogan',

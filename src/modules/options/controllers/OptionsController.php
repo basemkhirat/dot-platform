@@ -18,7 +18,7 @@ class OptionsController extends BackendController
 
         if (Request::isMethod("post")) {
 
-            $options = Request::all();
+            $options = Request::except("_token");
 
             $options["site_status"] = Request::get("site_status", 0);
 
@@ -47,7 +47,7 @@ class OptionsController extends BackendController
                 //Sitemap::refresh();
             }
 
-            $options = Request::all();
+            $options = Request::except("_token");
 
             $options["sitemap_status"] = Request::get("sitemap_status", 0);
             $options["sitemap_xml_status"] = Request::get("sitemap_xml_status", 0);
@@ -73,7 +73,7 @@ class OptionsController extends BackendController
 
         if (Request::isMethod("post")) {
 
-            Option::store(Request::all());
+            Option::store(Request::except("_token"));
 
             Cache::forget("breaking_tweets");
 
@@ -164,7 +164,7 @@ class OptionsController extends BackendController
     {
         if (Request::isMethod("post")) {
 
-            $options = Request::all();
+            $options = Request::except("_token");
 
             $options["media_thumbnails"] = Request::get("media_thumbnails", 0);
             $options["media_cropping"] = Request::get("media_cropping", 0);

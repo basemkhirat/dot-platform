@@ -12,14 +12,10 @@ class CreateRolePermissions extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable("roles_permissions")) {
-
-            Schema::create("roles_permissions", function ($table) {
-                $table->integer('role_id')->index();
-                $table->string('permission')->index();
-            });
-
-        }
+        Schema::create("roles_permissions", function ($table) {
+            $table->integer('role_id')->index();
+            $table->string('permission')->index();
+        });
     }
 
     /**

@@ -18,12 +18,12 @@ return [
     'apply' => 'apply',
     'page' => 'Page',
     'of' => 'of',
-    'order' => 'order',
+    'order' => 'Order',
     'sort_by' => 'Sort by',
     'asc' => 'Ascending',
     'desc' => 'Descending',
-    'actions' => 'actions',
-    'filter' => 'filter',
+    'actions' => 'Actions',
+    'filter' => 'Filter',
     'language' => 'Language',
     'parent_category' => 'main category',
     'show_children' => 'Show sub categories',
@@ -31,18 +31,17 @@ return [
     'change_image' => 'change image',
     'add_image' => 'Add image',
     'not_allowed_file' => 'not an allowed file type',
-    
-    
-    
+
     'attributes' => [
         
         'category_category_name' => 'category_category_name',
-        'name' => 'name',
+        'name' => 'Name',
         'slug' => 'slug',
         'parent' => 'parent',
         
         
     ],
+
     "events" => [
         'created' => 'Category created successfully',
         'updated' => 'Category updated successfully',

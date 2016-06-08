@@ -143,7 +143,7 @@
                 }
             },
             error: function (media_path) {
-                alert("<?php echo trans("categories::categories.not_allowed_file") ?>");
+                alert_box("<?php echo trans("categories::categories.not_allowed_file") ?>");
             }
         });
     });

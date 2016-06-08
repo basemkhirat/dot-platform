@@ -200,7 +200,7 @@
                                     </td>
                                     <td>
                                         <small>
-                                            <?php echo $user->created_at; ?>
+                                            <?php echo $user->created_at->render(); ?>
                                         </small>
                                     </td>
 

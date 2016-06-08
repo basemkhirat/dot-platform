@@ -94,6 +94,7 @@ function get_locales()
     return Config::get("admin.locales");
 }
 
+
 /**
  * Since Post Date
  *

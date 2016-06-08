@@ -116,11 +116,9 @@ class DotInstallCommand extends Command
             $server_messages[] = "Sitemaps path $sitemaps_path is writable.";
         }
 
-
         foreach ($server_messages as $message) {
             $this->info($message);
         }
-
 
         if (count($server_errors)) {
             foreach ($server_errors as $error) {

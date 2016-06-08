@@ -54,7 +54,7 @@ return [
         'category' => 'category',
         "type" => "Type",
         'category_category_id' => 'category_category_id',
-        'name' => 'name',
+        'name' => 'Name',
         'category_id' => 'category_id',
         'mongo_id' => 'mongo_id',
         'count' => 'Count',

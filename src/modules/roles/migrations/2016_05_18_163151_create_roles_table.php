@@ -13,19 +13,16 @@ class CreateRolesTable extends Migration
     public function up()
     {
 
-        if (!Schema::hasTable("roles")) {
+        Schema::create("roles", function ($table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
 
-            Schema::create("roles", function ($table) {
-                $table->increments('id');
-                $table->string('name')->unique();
-            });
+        // create superadmin role
+        $role = new Role();
+        $role->name = "superadmin";
+        $role->save();
 
-            // create superadmin role
-            $role = new Role();
-            $role->name = "superadmin";
-            $role->save();
-
-        }
     }
 
     /**

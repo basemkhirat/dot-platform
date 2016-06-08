@@ -85,7 +85,7 @@
                                     </legend>
                                     <div style="margin:5px 0">
                                         <?php echo trans("options::options.attributes.sitemap_last_update"); ?>
-                                        <i id="sitemap_last_update"><?php echo date(Config("date_format"), Config::get("sitemap_last_update")); ?></i>
+                                        <i id="sitemap_last_update"><?php echo time_ago(Config::get("sitemap_last_update")); ?></i>
                                     </div>
                                     <br/>
                                     <div style="clear:both"></div>
@@ -279,7 +279,7 @@
                 }
             },
             error: function (media_path) {
-                alert(media_path + " <?php echo trans("options::options.file_not_supported") ?>");
+                alert_box(media_path + " <?php echo trans("options::options.file_not_supported") ?>");
             }
         });
 

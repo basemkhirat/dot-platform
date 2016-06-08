@@ -24,7 +24,7 @@ class AdminMiddleware
         // getting site status
         if (!$request->is(ADMIN . '/*')) {
             if (!Config::get("site_status")) {
-                return view("admin::errors.offline");
+                return response(Config::get("offline_message"));
             }
         }
 

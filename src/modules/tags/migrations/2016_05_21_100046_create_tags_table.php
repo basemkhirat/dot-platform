@@ -11,17 +11,14 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable("tags")) {
+        Schema::create('tags', function ($table) {
 
-            Schema::create('tags', function ($table) {
+            $table->increments('id');
+            $table->string("name")->index();
+            $table->string("slug")->index();
+            $table->timestamps();
 
-                $table->increments('id');
-                $table->string("name")->index();
-                $table->string("slug")->index();
-                $table->timestamps();
-
-            });
-        }
+        });
     }
 
     /**

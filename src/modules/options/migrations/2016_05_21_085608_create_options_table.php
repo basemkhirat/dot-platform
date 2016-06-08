@@ -22,7 +22,7 @@ class CreateOptionsTable extends Migration
         "site_author" => "dotcms",
         "offline_message" => "",
         "app.timezone" => "Etc/GMT",
-        "date_format" => "Y-m-d H:i A",
+        "date_format" => "relative",
         "site_logo" => "",
         "media.allowed_file_types" => "jpg,png,jpeg,gif,zip,doc,rar,pdf",
         "media.max_file_size" => "23444344",
@@ -57,6 +57,7 @@ class CreateOptionsTable extends Migration
         "linkedin_page" => "",
         "soundcloud_page" => "",
         "sidebar" => "",
+
     ];
 
     /**
@@ -66,16 +67,14 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable("options")) {
-            Schema::create("options", function ($table) {
-                $table->increments('id');
-                $table->string('name')->index();
-                $table->text("value");
-            });
 
-            $this->saveOptions();
+        Schema::create("options", function ($table) {
+            $table->increments('id');
+            $table->string('name')->index();
+            $table->text("value");
+        });
 
-        }
+        $this->saveOptions();
 
 
     }

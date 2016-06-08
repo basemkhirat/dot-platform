@@ -33,7 +33,7 @@ class PagesController extends BackendController
 
         if (Request::has("tag_id")) {
             $query->whereHas("tags", function ($query) {
-                $query->where("tags.tag_id", Request::get("tag_id"));
+                $query->where("tags.id", Request::get("tag_id"));
             });
         }
 

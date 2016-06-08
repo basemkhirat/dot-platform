@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTagsTable extends Migration
+class CreatePostsTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class CreatePagesTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create("pages_tags", function ($table) {
-            $table->integer('page_id')->index();
+        Schema::create("posts_tags", function ($table) {
+            $table->integer('post_id')->index();
             $table->integer('tag_id')->index();
         });
 
@@ -26,6 +26,6 @@ class CreatePagesTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pages_tags');
+        Schema::drop('posts_tags');
     }
 }
