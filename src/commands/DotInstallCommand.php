@@ -41,18 +41,17 @@ class DotInstallCommand extends Command
     public function fire()
     {
 
+        File::makeDirectory(public_path("admin"), 0775, true, true);
         File::makeDirectory($this->root . "/plugins", 0775, true, true);
         File::makeDirectory(public_path("uploads"), 0777, true, true);
         File::makeDirectory(public_path("sitemaps"), 0777, true, true);
-        File::makeDirectory(public_path("modules"), 0777, true, true);
-        File::makeDirectory(public_path("plugins"), 0777, true, true);
+        File::makeDirectory(public_path("modules"), 0775, true, true);
+        File::makeDirectory(public_path("plugins"), 0775, true, true);
 
         $this->setPermission($this->root . "/storage", 0777);
         $this->setPermission($this->root . "/bootstrap/cache", 0777);
         $this->setPermission(public_path("uploads"), 0777);
         $this->setPermission(public_path("sitemaps"), 0777);
-        $this->setPermission(public_path("plugins"), 0777);
-        $this->setPermission(public_path("modules"), 0777);
 
         $server_errors = [];
         $server_messages = [];
@@ -127,7 +126,6 @@ class DotInstallCommand extends Command
             $this->error("Please fix these error(s) before install.");
             return false;
         }
-
 
         $this->info("Installing migration files");
 

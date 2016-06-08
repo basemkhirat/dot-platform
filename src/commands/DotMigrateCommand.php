@@ -27,34 +27,78 @@ class DotMigrateCommand extends Command
     public function fire(Container $app)
     {
 
-        $this->info("- Admin");
-        $this->call('migrate', [
-            '--quiet' => true,
-            '--ansi' => true
-        ]);
+          $admin_migration = glob(ADMIN_PATH . "/migrations/*.php");
+
+          if(count($admin_migration)){
+
+              $this->line("- Admin migrations");
+
+              // Admin
+              foreach ($admin_migration as $file) {
+
+                  $class = get_migration_class($file);
+
+                  if (!class_exists($class)) {
+                      require_once($file);
+                  }
+
+                  if (class_exists($class)) {
+
+                      $instance = new $class();
+
+                      try {
+                          if (method_exists($instance, "down")) {
+                              $instance->up();
+                          }
+                      } catch (Exception $error) {
+
+                      }
+
+                      $this->info("Migrated down: ". basename($file));
+
+                      try {
+                          if (method_exists($instance, "up")) {
+                              $instance->up();
+                          }
+                      } catch (Exception $error) {
+
+                      }
+
+                      $this->info("Migrated up: ". basename($file));
+
+                  }
+              }
+        }
 
         $this->info("\n");
 
+        foreach (Module::all() as $module) {
 
-        foreach (Module::all() as $module => $module_path) {
+            if (file_exists(MODULES_PATH . "/" . $module->path . "/migrations")) {
 
-            $path = str_replace(ROOT_PATH . "/", "", $module_path . "/migrations");
+                $this->line("- " . ucfirst($module->path) . " Module");
 
-            if (File::exists($path)) {
-
-                $this->info("- " . $module);
-
-                $this->call('migrate', [
-                    '--path' => $path,
-                    '--quiet' => true
-                ]);
+                $this->call("module:migrate:down", ["module" => $module->path]);
+                $this->call("module:migrate:up", ["module" => $module->path]);
 
                 $this->info("\n");
             }
 
         }
 
-        $this->info("Done.");
+        foreach (Plugin::installed() as $plugin) {
+
+            if (file_exists(PLUGINS_PATH . "/" . $plugin->path . "/migrations")) {
+
+                $this->line("- " . ucfirst($plugin->path) . " Plugin");
+
+                $this->call("plugin:migrate:down", ["plugin" => $plugin->path]);
+                $this->call("plugin:migrate:up", ["plugin" => $plugin->path]);
+
+                $this->info("\n");
+
+            }
+        }
 
 
     }
