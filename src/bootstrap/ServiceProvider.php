@@ -73,6 +73,7 @@ class CmsServiceProvider extends ServiceProvider
         foreach ($this->modules as $module => $module_path) {
             $this->loadModule($module, $module_path);
         }
+
     }
 
     function bindDotClasses()
@@ -224,7 +225,7 @@ class CmsServiceProvider extends ServiceProvider
             //$this->kernel->pushMiddleware($middleware);
         }
 
-        foreach ((array)Config::get("admin.routed_middlewares") as $alias => $middleware) {
+        foreach ((array)Config::get("admin.route_middlewares") as $alias => $middleware) {
             $this->router->middleware($alias, $middleware);
         }
 
@@ -260,7 +261,7 @@ class CmsServiceProvider extends ServiceProvider
             $this->kernel->pushMiddleware($middleware);
         }
 
-        foreach ((array)Config::get($module . ".routed_middlewares") as $alias => $middleware) {
+        foreach ((array)Config::get($module . ".route_middlewares") as $alias => $middleware) {
             $this->router->middleware($alias, $middleware);
         }
 
@@ -271,7 +272,6 @@ class CmsServiceProvider extends ServiceProvider
         // loading module views and translations
         $this->loadViewsFrom($module_path . '/views', $module);
         $this->loadTranslationsFrom($module_path . '/lang', $module);
-
 
         // Publishing module public assets
         if (file_exists($module_path . '/public/')) {

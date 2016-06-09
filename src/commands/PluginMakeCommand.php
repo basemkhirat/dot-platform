@@ -146,6 +146,7 @@ class PluginMakeCommand extends Command
             $this->write($this->path . "/plugin.php", $start_content);
         }
 
+        $this->info("Plugin '" . $this->module . "' is created successfully");
         $this->refresh();
     }
 
@@ -180,13 +181,18 @@ class PluginMakeCommand extends Command
         $controller_content = $this->replace($controller_content);
         $this->write($this->path . "/controllers/" . ucfirst($this->module) . "Controller.php", $controller_content);
 
+        // Commands
+        File::makeDirectory($this->path . "/commands", $this->permission, true, true);
+
+        // Middlewares
+        File::makeDirectory($this->path . "/middlewares", $this->permission, true, true);
 
         if ($this->model) {
             // model
             File::makeDirectory($this->path . "/models", $this->permission, true, true);
             $model_content = file_get_contents(templates_path("resources/model.tpl"));
             $model_content = $this->replace($model_content);
-            $this->write($this->path . "/models/" . ucfirst($this->module) . ".php", $model_content);
+            $this->write($this->path . "/models/" . ucfirst($this->model) . ".php", $model_content);
         }
 
         // lang
@@ -208,7 +214,7 @@ class PluginMakeCommand extends Command
             $this->call("plugin:migration", ['name' => "create_" . $this->table . "_table", 'plugin' => $this->module, '--create' => $this->table]);
         }
 
-        $this->info("Module '" . $this->module . "' has been created successfully");
+        $this->info("Plugin '" . $this->module . "' is created successfully");
         $this->refresh();
 
     }
@@ -251,15 +257,14 @@ class PluginMakeCommand extends Command
     public function fire()
     {
 
-
         if ($this->argument("module") == "") {
-            $this->module = $name = strtolower($this->ask("Module name *"));
+            $this->module = $name = strtolower($this->ask("Plugin name *"));
         } else {
             $this->module = $name = strtolower($this->argument("module"));
         }
 
         if ($this->module == "") {
-            return $this->error("Module name is requird");
+            return $this->error("Plugin name is requird");
         }
 
         $this->path = $path = plugins_path($this->module);
@@ -290,10 +295,11 @@ class PluginMakeCommand extends Command
 
         }
 
-        if ($this->option("resources")) {
-            return $this->createResourcesPlugin();
-        }
+        //if ($this->option("resources")) {
+        return $this->createResourcesPlugin();
+        //}
 
+        die();
 
         /*
          * Crud mode

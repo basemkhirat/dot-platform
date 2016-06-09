@@ -70,7 +70,6 @@ class OptionsController extends BackendController
 
     function social()
     {
-
         if (Request::isMethod("post")) {
 
             Option::store(Request::except("_token"));
@@ -86,7 +85,6 @@ class OptionsController extends BackendController
 
     function plugins()
     {
-
         if (Request::isMethod("post")) {
 
             $active_plugins = array_keys(Request::get("plugins", []));
@@ -113,44 +111,58 @@ class OptionsController extends BackendController
 
             $installed_plugins = Plugin::installedPaths();
 
-            if ($status == 1) {
+            try {
 
-                $installed_plugins[] = $name;
+                if ($status == 1) {
 
-            } else {
+                    $installed_plugins[] = $name;
 
-                if (($key = array_search($name, $installed_plugins)) !== false) {
-                    unset($installed_plugins[$key]);
+                } else {
+
+                    if (($key = array_search($name, $installed_plugins)) !== false) {
+                        unset($installed_plugins[$key]);
+                    }
                 }
+
+                foreach ($installed_plugins as $key => $plugin) {
+                    if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/plugin.php")) {
+                        unset($installed_plugins[$key]);
+                    }
+                }
+
+            }catch(Exception $error){
+                // exception
             }
 
-            foreach ($installed_plugins as $key => $plugin) {
-                if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/plugin.php")) {
-                    unset($installed_plugins[$key]);
-                }
-            }
 
             Option::store([
                 "plugins" => json_encode(array_unique(array_values($installed_plugins)))
             ]);
 
-            return Redirect::route("admin.plugins.activation", ["name" => $plugin, "status" => $status, "step" => 2]);
+            return Redirect::route("admin.plugins.activation", ["name" => $name, "status" => $status, "step" => 2]);
 
 
         } elseif ($step == 2) {
 
-            $plugin = Plugin::get($name);
+            try {
+
+                $plugin = Plugin::get($name);
+
+                if ($status == 1) {
+                    // installing
+                    $plugin->install();
+                } else {
+                    // uninstalling
+                    $plugin->uninstall();
+                }
+
+            } catch (Exception $error) {
+                // exception
+            }
 
             if ($status == 1) {
-                // installing
-                $plugin->install();
-
                 $message = trans("options::options.events.installed");
-
             } else {
-                // uninstalling
-                $plugin->uninstall();
-
                 $message = trans("options::options.events.uninstalled");
             }
 

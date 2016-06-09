@@ -2,8 +2,7 @@
 
 return [
 
-    'module' => '#module#',
-
+    'module' => '#module|ucfirst#',
 
     'events' => [
         // Actions messages

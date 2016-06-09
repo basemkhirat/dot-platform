@@ -3,9 +3,21 @@
 class #model|ucfirst# extends Model {
 
     protected $table = '#table#';
-    
-    protected $rules = [
-        // validation rules
+
+    /**
+     * Creating rules
+     * @var array
+     */
+    protected $creatingRules = [
+
+    ];
+
+    /**
+     * Updating rules
+     * @var array
+     */
+    protected $updatingRules = [
+
     ];
 
 }

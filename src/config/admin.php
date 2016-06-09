@@ -99,7 +99,7 @@ return [
      * | @var array
      */
 
-    "routed_middlewares" => [
+    "route_middlewares" => [
         'auth' => 'AuthMiddleware',
         'guest' => 'GuestMiddleware'
     ],

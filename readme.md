@@ -45,7 +45,7 @@ Then Run this artisan command to install
 
 #####3) Clone the repo:
 
-	git clone https://bitbucket.org/basemkhirat/devcms.git folder-name
+	git clone https://bitbucket.org/basemkhirat/dot-cms.git folder-name
 
 Then,
 	
@@ -78,7 +78,7 @@ Also you can change admin url prefix from admin config:
      	* | @var string
      	*/
 
-    	'default_path' => env("DEFAULT_PATH", "users"),
+    	'default_path' => env("DEFAULT_PATH", "posts"),
 
 
 ### Plugin structure:
@@ -94,7 +94,7 @@ Each plugin may contain these directories:
 - `migrations`
 - `views`
 - `routes.php`
-- `start.php`
+- `plugin.php`
 
 ### Creating plugin
 	
@@ -392,17 +392,23 @@ Some extra keys are created to translate module name, permissions, attributes an
 	'module' => '{module_title}',
 	
 	'attributes' => [
+	    
 	    'title' => 'Title',
+	    
 	    // some other fields
 	],
 
 	'permissions' => [
+	    
 	    'create_item' => 'Create an item',
+	    
 	    // some other messages
 	],
 	
 	'messages' => [
+	    
 	    'required' => 'This field is required',
+	    
 	    // some other messages
 	]	
 	
@@ -414,27 +420,90 @@ Some extra keys are created to translate module name, permissions, attributes an
 	<?php
 	
 	Route::group([
+    
     	"prefix" => ADMIN,
+    
     	"middleware" => ["web", "auth"],
+	
 	], function ($route) {
+	
 			// routes goes here
+			
 	});
 
 
-###Start file:
+###Plugin file:
 
-This is plugin bootstrap file, you may want to:
+This is plugin bootstrap class hav this structure:
 
-- Attaching tasks to system Actions.
-- Creating items in sidebar menu.
-- Add some urls to sitemap file.
-- Creating some schedule tasks.
-- Adding widgets to dashboard.
-- Adding extra html inputs to admin forms.
-- Add some plugin helper functions.
+	<?php
 
-It's not good to write any thing in this file, You should create extra files and include them in start file to make a good coding style. 
+	/**
+ 	  * Plugin sample class
+ 	  */
+	
+	class Plugin
+	{
+    
+    	/**
+     	  * Plugin details
+     	  * @return array
+     	  */
+    	public function info()
+    	{
 
+        	return [
+            	"name" => "Products plugins",
+            	"description" => "",
+            	"version" => "0.1",
+            	"author" => "",
+            	"icon" => "fa-puzzle-piece"
+        	];
+
+    	}
+
+    	/**
+     	  * Plugin bootstrap
+     	  * Called in system boot
+     	  */
+    	public function boot()
+    	{
+        	// booted
+    	}
+
+    	/**
+     	  * Plugin install
+     	  * Running plugin migrations and default options
+     	  */
+    	public function install()
+    	{
+			parent::install();
+    	}
+
+
+    	/**
+     	  * Plugin uninstall
+     	  * Rollback plugin installation
+     	  */
+    	public function uninstall()
+    	{
+    		parent::uninstall();    
+    	}
+
+	}
+
+
+- Plugin info return array of plugin details.
+- Plugin install and uninstall methods are called when installing and uninstalling plugin.
+- Boot method is called when system booted.
+- In boot method you can add some functionalites such as:
+	- Attaching tasks to system Actions.
+	- Creating items in sidebar menu.
+	- Add some urls to sitemap file.
+	- Creating some schedule tasks.
+	- Adding widgets to dashboard.
+	- Adding extra html inputs to admin forms.
+	- Add some plugin helper functions.
 
 
 ### Actions:
@@ -469,12 +538,14 @@ Let's do an example with actions.
 
 #####Example: Adding gender field to users:
 
-We will add this code to plugin start file to add the the html view of field using `user.form.featured` action.
+We will add this code to plugin class boot method to add the the html view of field using `user.form.featured` action.
 
 	<?php
 	
 	Action::listen("user.form.featured", function ($user) {
+    
     	return view("users::custom")->with("user", $user);
+    	
 	});
 
 In `custom` view, we will add the required gender field.
@@ -537,6 +608,14 @@ Almost done, just save it using `user.saving` action.
 	Action::listen("page.form.featured", function($page){});
 	Action::listen("page.form.sidebar", function($page){});
 	
+	// Posts
+	Action::listen("post.saving", function($post){});
+	Action::listen("post.saving", function($post){});
+	Action::listen("post.deleting", function($post){});
+	Action::listen("post.deleted", function($post){});
+	Action::listen("post.form.featured", function($post){});
+	Action::listen("post.form.sidebar", function($post){});
+	
 	// Tags
 	Action::listen("tag.saving", function($tag){});
 	Action::listen("tag.saving", function($tag){});
@@ -567,8 +646,11 @@ Almost done, just save it using `user.saving` action.
 	<?php
 	
 	Navigation::menu("sidebar", function ($menu) {
-    	$menu->item('products', trans("tweets::tweets.tweets"), URL::to(ADMIN . '/tweets'))
-    	->icon("fa-twitter")	// optional
+    	
+    	$menu->item('products', trans("products::products.name"), URL::to(ADMIN . '/products'))
+    	
+    	->icon("fa-product-hunt")	// optional
+    	
     	->order(1);				// optional
 	});
 	
@@ -584,6 +666,7 @@ Almost done, just save it using `user.saving` action.
 	<?php
 	
 	Schedule::run(function($schedule){
+   	 	
    	 	$schedule->call(function(){
         	
         	// Executing some db queries
@@ -591,40 +674,42 @@ Almost done, just save it using `user.saving` action.
         	sleep(7);
         	
     	})->cron('* * * * *')->name("task_name")->withoutOverlapping();
-	});
-
-
-
-### Creating a widget:
-
-
-There area some widgets listeners in dashboard 
-
-- `dashboard.featured`
-- `dashboard.right`
-- `dashboard.left`
-- `dashboard.middle`
-
----
-
-	Action::listen("dashboard.featured", function ($widget) {
-	    $user = User::all();
-    	return view("products::widget_view", $data)->with("users", $users);
-	});
 	
+	});
 
 
 ### Adding links to sitemap:
 
+	<?php
+	
 	Sitemap::set("sitemap", function($sitemap){
+		
 		$sitemap->url(url("/"))
+		
 		->date(time())		// optional
+		
 		->priority("0.9")	// optional
+		
 		->freq("hourly")	// optional
 	});
 
 This url will be appended in main sitemap `sitemap.xml` in `public/sitemaps` directory.
 
+
+### Commands:
+
+There are some commands to help you to giva a fast work with plugins
+
+	plugin:list          List all plugins
+	plugin:make          make a plugin (--plain & --resources)
+	plugin:migration     Create a plugin migration file
+	plugin:migrate       Migrate plugin migration files
+	plugin:migrate:up    Make plugin migrations up
+	plugin:migrate:down  Make plugin migrations down
+	plugin:publish       Publishing plugin public and config files
+	plugin:install       Install a plugin
+	plugin:uninstall     Uninstall a plugin
+	plugin:update        reinstall a plugin
 
 ### And more..
 

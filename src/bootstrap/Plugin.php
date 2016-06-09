@@ -37,25 +37,24 @@ class Plugin
      */
     public function install()
     {
-        $plugin = strtolower(rtrim(get_called_class(), "Provider"));
 
-        Artisan::call("plugin:migrate:up", [
-            "plugin" => $plugin
+        // Getting plugin class
+        $plugin = str_replace("Provider", "", get_called_class());
+
+        // getting plugin type
+        $reflector = new ReflectionClass($plugin."Provider");
+        $file = $reflector->getFileName();
+        $type = str::singular(basename(dirname(dirname($file))));
+
+        // Migrating up
+        Artisan::call("$type:migrate:up", [
+            $type => $plugin
         ]);
 
-        Artisan::call("module:migrate:up", [
-            "module" => $plugin
+        // Publishing
+        Artisan::call("$type:publish", [
+            $type => $plugin
         ]);
-
-        Artisan::call("plugin:publish", [
-            "plugin" => $plugin
-        ]);
-
-        Artisan::call("module:publish", [
-            "module" => $plugin
-        ]);
-
-
 
     }
 
@@ -66,14 +65,17 @@ class Plugin
      */
     public function uninstall()
     {
-        $plugin = strtolower(rtrim(get_called_class(), "Provider"));
+        // Getting plugin class
+        $plugin = str_replace("Provider", "", get_called_class());
 
-        Artisan::call("plugin:migrate:down", [
-            "plugin" => $plugin
-        ]);
+        // getting plugin type
+        $reflector = new ReflectionClass($plugin."Provider");
+        $file = $reflector->getFileName();
+        $type = str::singular(basename(dirname(dirname($file))));
 
-        Artisan::call("module:migrate:down", [
-            "module" => $plugin
+        // Migrating down
+        Artisan::call("$type:migrate:down", [
+            $type => $plugin
         ]);
     }
 
