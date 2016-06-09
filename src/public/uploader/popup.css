@@ -692,13 +692,12 @@ div[data-size="free"] {
     margin: 0;
 }
 
-
-
 .filter-bar{
     float: left;
     position: fixed;
     background: #f3f3f3;
     margin-top: 48px !important;
+    right:2%;
 }
 
 .media-wrapper{
