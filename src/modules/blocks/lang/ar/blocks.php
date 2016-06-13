@@ -31,8 +31,14 @@ return [
     "yes" => "نعم",
     "no" => "لا",
 
+
+    'type_post' => "خبر",
+    'type_category' => "تصنيف",
+    'type_tag' => "وسم",
+
     'attributes' => [
         'name' => 'إسم المكان',
+        "type" => "النوع",
     ],
 
     "events" => [

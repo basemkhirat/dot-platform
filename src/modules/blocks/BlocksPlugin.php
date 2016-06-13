@@ -22,7 +22,7 @@ class BlocksPlugin extends Plugin
     {
 
         Navigation::menu("sidebar", function ($menu) {
-            $menu->item('blocks', trans("blocks::blocks.blocks"), URL::to(ADMIN . '/blocks'))->icon("fa-blocks")->order(3);
+            $menu->item('blocks', trans("blocks::blocks.blocks"), URL::to(ADMIN . '/blocks'))->icon("fa fa-th-large")->order(4);
         });
 
         include __DIR__ . "/routes.php";
