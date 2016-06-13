@@ -730,7 +730,7 @@
         var transitionize = require("abpetkov~transitionize@0.0.3"), fastclick = require("ftlabs~fastclick@v0.6.11"), classes = require("component~classes@1.2.1"), events = require("component~events@1.0.9");
         module.exports = Switchery;
         var defaults = {
-            color: "#1ab394",
+            color: $("body").hasClass("dark-theme")? "#1e8cbe": "#1ab394",
             secondaryColor: "#dfdfdf",
             jackColor: "#fff",
             jackSecondaryColor: null,
