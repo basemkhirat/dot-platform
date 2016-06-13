@@ -125,8 +125,9 @@ class OptionsController extends BackendController
                     }
                 }
 
+                // fix removed installed plugins folders
                 foreach ($installed_plugins as $key => $plugin) {
-                    if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/" . $class . ".php")) {
+                    if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/" . get_plugin_class($plugin) . ".php")) {
                         unset($installed_plugins[$key]);
                     }
                 }
