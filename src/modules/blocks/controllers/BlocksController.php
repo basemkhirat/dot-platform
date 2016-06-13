@@ -17,6 +17,7 @@ class BlocksController extends BackendController
                 }
             }
         }
+        
 
         $this->data["sort"] = $sort = (Request::has("sort")) ? Request::get("sort") : "id";
         $this->data["order"] = $order = (Request::has("order")) ? Request::get("order") : "DESC";
