@@ -41,6 +41,13 @@
 </form>
 
 
+@stop
+
+@section("footer")
+@parent
+
+<script src="<?php echo assets("admin::") ?>/js/plugins/switchery/switchery.js"></script>
+
 <script>
 
     var elems = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
@@ -49,6 +56,5 @@
     });
 
 </script>
-
 
 @stop

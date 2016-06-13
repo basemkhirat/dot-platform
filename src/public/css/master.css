@@ -484,22 +484,19 @@ select {
     float: right;
 }
 
-
 body.dark-theme{
     background: #2b2b2b;
 }
 
-
 .dark-theme .nav-header{
-    background: #2b2b2b;
+    background: url("patterns/header-profile-dark.png") no-repeat;
 }
-
 
 .dark-theme #side-menu{
     background: #2b2b2b;
 }
 
-.dark-theme #side-menu   li.active, .dark-theme  #side-menu   li a:hover {
+.dark-theme #side-menu   li.active, .dark-theme  #side-menu li a:hover {
     background: #3e3e3e !important;
     border-color: #1e8cbe;
 }
