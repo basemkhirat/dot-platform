@@ -531,7 +531,8 @@ body.dark-theme{
 
 .dark-theme .chosen-rtl.chosen-container-single-nosearch .chosen-search, .chosen-rtl .chosen-drop{
     border: none;
-    box-shadow: 0px 2px 2px #1e8cbe;
+    box-shadow: 0px 1px 2px #1e8cbe;
+    border: 1px solid #1e8cbe;
 }
 
 .dark-theme.mini-navbar .nav-header{
