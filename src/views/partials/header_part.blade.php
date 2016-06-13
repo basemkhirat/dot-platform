@@ -31,11 +31,6 @@
 
     @yield("header")
 
-    <?php /*
-        <link href="<?php echo assets("admin::") ?>/css/adnan.css" rel="stylesheet">
-       */ ?>
-
-
     <link rel="icon" type="image/png" href="<?php echo url("favicon.ico") ?>">
 
     <script>
@@ -47,4 +42,4 @@
 </head>
 
 <body
-    class="<?php if (DIRECTION == "rtl") { ?>rtls<?php } ?> <?php if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") { ?>mini-navbar<?php } ?>">
+    class="dark-theme <?php if (DIRECTION == "rtl") { ?>rtls<?php } ?> <?php if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") { ?>mini-navbar<?php } ?>">

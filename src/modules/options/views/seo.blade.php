@@ -57,12 +57,12 @@
                                     <div class="row">
                                         <div class="col-md-3 text-center">
                                             <input id="site_logo_path" type="hidden" value="<?php if (Config::get("site_logo") != "") { ?><?php echo Config::get("site_logo"); ?><?php } ?>" id="user_photo_id" name="site_logo" />
-                                            <img id="site_logo" style="border: 1px solid #ccc; width: 100%;" src="<?php if (Config::get("site_logo") != "") { ?> <?php echo thumbnail(Config::get("site_logo")); ?> <?php } else { ?> <?php echo assets("admin::images/user.png"); ?><?php } ?>" />
+                                            <img id="site_logo" style="border: 1px solid #ccc; width: 100%;" src="<?php if (Config::get("site_logo") != "") { ?> <?php echo thumbnail(Config::get("site_logo")); ?> <?php } else { ?> <?php echo assets("admin::default/image.png"); ?><?php } ?>" />
                                         </div>
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <p><?php echo trans("options::options.chane_logo_help"); ?></p>
-                                                <a href="javascript:void(0)" id="change_logo" class=""><?php echo trans("options::options.change_logo") ?></a>
+                                                <a href="javascript:void(0)" id="change_logo" class="text-navy"><?php echo trans("options::options.change_logo") ?></a>
                                             </div>
                                         </div>
                                     </div>

@@ -287,12 +287,12 @@ class CmsServiceProvider extends ServiceProvider
             ], "$module.config");
         }
 
+        $class = get_plugin_class($module);
+
         // including module bootstrap file
-        if (file_exists($bootstrap = $module_path . '/plugin.php')) {
+        if (file_exists($bootstrap = $module_path . "/" . $class . ".php")) {
 
             require_once($bootstrap);
-
-            $class = ucfirst($module . "Provider");
 
             if (class_exists($class)) {
                 $plugin = new $class();

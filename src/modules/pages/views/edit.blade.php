@@ -99,7 +99,7 @@
                             <?php echo trans("pages::pages.change_image"); ?>
                         </a>
                         <a class="post-image-preview" href="javascript:void(0)">
-                            <img width="100%" height="130px" class="post-image" src="<?php if ($page and @ $page->image) { ?> <?php echo thumbnail(@$page->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/post.png"); ?><?php } ?>">
+                            <img width="100%" height="130px" class="post-image" src="<?php if ($page and @ $page->image) { ?> <?php echo thumbnail(@$page->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/image.png"); ?><?php } ?>">
                         </a>
                     </div>
                 </div>

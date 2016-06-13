@@ -143,7 +143,7 @@ class PluginMakeCommand extends Command
         if (File::makeDirectory($this->path, $this->permission, true, true)) {
             $start_content = file_get_contents(templates_path("plain/plugin.tpl"));
             $start_content = $this->replace($start_content);
-            $this->write($this->path . "/plugin.php", $start_content);
+            $this->write($this->path . "/" . ucfirst($this->module) . "Plugin.php", $start_content);
         }
 
         $this->info("Plugin '" . $this->module . "' is created successfully");
@@ -163,7 +163,7 @@ class PluginMakeCommand extends Command
         // start
         $start_content = file_get_contents(templates_path("resources/plugin.tpl"));
         $start_content = $this->replace($start_content);
-        $this->write($this->path . "/plugin.php", $start_content);
+        $this->write($this->path . "/" . ucfirst($this->module) . "Plugin.php", $start_content);
 
         // routes
         $routes_content = file_get_contents(templates_path("resources/routes.tpl"));

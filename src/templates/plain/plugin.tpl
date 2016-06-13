@@ -3,7 +3,7 @@
 /**
  * Class #module|ucfirst#Provider
  */
-class #module|ucfirst#Provider extends Plugin
+class #module|ucfirst#Plugin extends Plugin
 {
 
     /**

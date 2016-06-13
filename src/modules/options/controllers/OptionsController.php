@@ -8,6 +8,7 @@ class OptionsController extends BackendController
     function __construct()
     {
         parent::__construct();
+
         $this->data["all_plugins"] = $plugins = Plugin::all();
         $this->data["active_plugins"] = $active_plugins = Plugin::installed();
         $this->data["available_plugins_count"] = count($plugins) - count($active_plugins);
@@ -107,7 +108,7 @@ class OptionsController extends BackendController
 
             $path = PLUGINS_PATH . "/" . $name;
 
-            $plugin = Plugin::get($name);
+            $class = get_plugin_class($path);
 
             $installed_plugins = Plugin::installedPaths();
 
@@ -125,12 +126,12 @@ class OptionsController extends BackendController
                 }
 
                 foreach ($installed_plugins as $key => $plugin) {
-                    if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/plugin.php")) {
+                    if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/" . $class . ".php")) {
                         unset($installed_plugins[$key]);
                     }
                 }
 
-            }catch(Exception $error){
+            } catch (Exception $error) {
                 // exception
             }
 

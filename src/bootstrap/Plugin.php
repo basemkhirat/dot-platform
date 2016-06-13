@@ -39,10 +39,10 @@ class Plugin
     {
 
         // Getting plugin class
-        $plugin = str_replace("Provider", "", get_called_class());
+        $plugin = str_replace("Plugin", "", get_called_class());
 
         // getting plugin type
-        $reflector = new ReflectionClass($plugin."Provider");
+        $reflector = new ReflectionClass($plugin . "Plugin");
         $file = $reflector->getFileName();
         $type = str::singular(basename(dirname(dirname($file))));
 
@@ -66,10 +66,10 @@ class Plugin
     public function uninstall()
     {
         // Getting plugin class
-        $plugin = str_replace("Provider", "", get_called_class());
+        $plugin = str_replace("Plugin", "", get_called_class());
 
         // getting plugin type
-        $reflector = new ReflectionClass($plugin."Provider");
+        $reflector = new ReflectionClass($plugin . "Plugin");
         $file = $reflector->getFileName();
         $type = str::singular(basename(dirname(dirname($file))));
 
@@ -88,7 +88,7 @@ class Plugin
     {
         $plugins = [];
 
-        foreach (glob(PLUGINS_PATH . '/*/plugin.php') as $file) {
+        foreach (glob(PLUGINS_PATH . '/*/*Plugin.php') as $file) {
 
             $module_path = dirname($file);
 
@@ -116,7 +116,7 @@ class Plugin
 
         $installed_plugins = self::installedPaths();
 
-        foreach (glob(PLUGINS_PATH . '/*/plugin.php') as $file) {
+        foreach (glob(PLUGINS_PATH . '/*/*Plugin.php') as $file) {
 
             $module_path = dirname($file);
 
@@ -152,18 +152,21 @@ class Plugin
 
         $path = PLUGINS_PATH . "/" . $plugin_folder;
 
-        $class = ucfirst($plugin_folder) . "Provider";
+        $class = get_plugin_class($path);
 
         if (!class_exists($class)) {
-            include($path . "/plugin.php");
+            include($path . "/" . $class.".php");
         }
 
         $installed_plugins = self::installedPaths();
 
         if (class_exists($class)) {
 
+
+
             $object = new $class();
             $info = $object->info();
+
 
             $plugin = self::instance($plugin_folder);
 
@@ -210,7 +213,7 @@ class Plugin
     public static function instance($plugin_folder)
     {
 
-        $class = $plugin_folder . "Provider";
+        $class = get_plugin_class($plugin_folder);
 
         $plugin = new $class();
 

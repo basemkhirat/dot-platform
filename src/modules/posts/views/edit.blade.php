@@ -91,7 +91,7 @@
 
                                 <a class="post-media-preview" href="javascript:void(0)">
                                     <img width="100%" height="130px" class="post-image"
-                                         src="<?php if ($post and @ $post->image) { ?> <?php echo thumbnail($post->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/post.png"); ?><?php } ?>">
+                                         src="<?php if ($post and @ $post->image) { ?> <?php echo thumbnail($post->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/image.png"); ?><?php } ?>">
                                 </a>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
 
                                 <a class="post-media-preview" href="javascript:void(0)">
                                     <img width="100%" height="130px" class="post-media"
-                                         src="<?php if ($post and @ $post->media) { ?> <?php echo ($post->media->provider_image); ?> <?php } else { ?> <?php echo assets("admin::default/media.gif"); ?><?php } ?>">
+                                         src="<?php if ($post and @ $post->media) { ?> <?php echo ($post->media->provider_image); ?> <?php } else { ?> <?php echo assets("admin::default/video.png"); ?><?php } ?>">
                                 </a>
                             </div>
                         </div>
@@ -154,6 +154,8 @@
                     <?php echo trans("posts::posts.add_category"); ?>
                 </div>
                 <div class="panel-body">
+
+                    <?php if(Category::count()){ ?>
                     <ul class='tree-views'>
                         <?php
                         echo Category::tree(array(
@@ -168,6 +170,9 @@
                         ));
                         ?>
                     </ul>
+                    <?php }else{ ?>
+                        <?php echo trans("categories::categories.no_records"); ?>
+                    <?php } ?>
                 </div>
             </div>
 
