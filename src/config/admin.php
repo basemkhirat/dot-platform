@@ -55,7 +55,8 @@ return [
         "tags",
         "pages",
         "posts",
-        "blocks"
+        "blocks",
+        "navigations"
     ],
 
     /**

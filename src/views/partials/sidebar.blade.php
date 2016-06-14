@@ -24,7 +24,7 @@
                         <?php } ?>
                     </a>
 
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                    <ul class="dropdown-menu m-t-xs">
 
                         <li>
                             <a href="<?php echo route("admin.users.edit", array("id" => Auth::user()->id)); ?>"><?php echo trans("auth::auth.edit_profile") ?></a>

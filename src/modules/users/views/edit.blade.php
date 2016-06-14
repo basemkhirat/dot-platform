@@ -149,6 +149,21 @@
                         </div>
                     <?php } ?>
 
+                    <?php /*
+                    <div class="row form-group">
+                        <label class="col-sm-3 control-label"><?php echo trans("users::users.color") ?></label>
+                        <div class="col-sm-9">
+                            <select class="form-control select2 chosen-rtl" name="lang">
+                                <?php  foreach (["default", "dark"] as $color) { ?>
+                                    <option <?php if ($user and $code == $user->lang) { ?> selected="selected" <?php } ?>
+                                        value="<?php echo $code; ?>"><?php echo $lang["title"]; ?></option>
+                                <?php }  ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    */ ?>
+
                     <div class="row form-group">
                         <label class="col-sm-3 control-label"><?php echo trans("users::users.language") ?></label>
                         <div class="col-sm-9">
@@ -220,6 +235,7 @@
 @stop
 
 @section("header")
+
 @stop
 
 @section("footer")

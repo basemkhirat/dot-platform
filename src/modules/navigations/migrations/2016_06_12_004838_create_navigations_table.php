@@ -16,7 +16,6 @@ class CreateNavigationsTable extends Migration
         Schema::create('navigations', function ($table) {
             $table->increments('id');
             $table->string("name")->index();
-            $table->string("description")->index();
             $table->string("link")->index();
             $table->integer("parent");
             $table->integer("order");

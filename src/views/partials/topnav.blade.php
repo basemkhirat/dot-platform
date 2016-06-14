@@ -16,13 +16,15 @@
             <ul class="nav navbar-top-links navbar-right">
 
                 <li>
-                    <span class="m-r-sm text-muted welcome-message"><?php echo strtoupper(Config::get("site_title", Config::get("site_name"))); ?></span>
+                    <span
+                        class="m-r-sm text-muted welcome-message"><?php echo strtoupper(Config::get("site_title", Config::get("site_name"))); ?></span>
                 </li>
 
                 <?php echo Navigation::get("topnav")->render(); ?>
 
                 <li>
-                    <a href="<?php echo route("admin.auth.logout"); ?>" class="ask" message="<?php echo trans("admin::common.sure_logout"); ?>">
+                    <a href="<?php echo route("admin.auth.logout"); ?>" class="ask"
+                       message="<?php echo trans("admin::common.sure_logout"); ?>">
                         <i class="fa fa-sign-out"></i>
                     </a>
                 </li>

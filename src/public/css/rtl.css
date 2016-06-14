@@ -216,6 +216,11 @@ select::-ms-expand {
     float:right
 }
 
+
+.remove-item{
+    right:unset;
+    left: 17px;
+}
 /*
 XS
 */
