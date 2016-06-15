@@ -494,7 +494,9 @@ body.dark-theme{
     background: #2b2b2b;
 }
 
-
+.dark-theme .navy-bg{
+    background-color: #1e8cbe;
+}
 
 .dark-theme #side-menu{
     background: #2b2b2b;

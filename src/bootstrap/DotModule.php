@@ -86,7 +86,7 @@ class DotModule
     {
         $plugins = [];
 
-        foreach (glob(MODULES_PATH . '/*/plugin.php') as $file) {
+        foreach (glob(MODULES_PATH . '/*/*Plugin.php') as $file) {
 
             $module_path = dirname($file);
 
@@ -117,10 +117,10 @@ class DotModule
 
         $path = MODULES_PATH . "/" . $plugin_folder;
 
-        $class = ucfirst($plugin_folder) . "Provider";
+        $class = get_plugin_class($path);
 
         if (!class_exists($class)) {
-            include($path . "/plugin.php");
+            include($path . "/" . $class.".php");
         }
 
         if (class_exists($class)) {
@@ -169,7 +169,7 @@ class DotModule
     public static function instance($plugin_folder)
     {
 
-        $class = $plugin_folder . "Provider";
+        $class = $plugin_folder . "Plugin";
 
         $plugin = new $class();
 

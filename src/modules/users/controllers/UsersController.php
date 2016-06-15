@@ -11,12 +11,16 @@ class UsersController extends BackendController
      */
     public $data = array();
 
-
     /**
      * @return mixed
      */
     public function index()
     {
+
+        if (!User::access("users.manage")) {
+            return denied();
+        }
+
 
         if (Request::isMethod("post")) {
             if (Request::has("action")) {
@@ -30,7 +34,6 @@ class UsersController extends BackendController
         $this->data["sort"] = (Request::has("sort")) ? Request::get("sort") : "created_at";
         $this->data["order"] = (Request::has("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::has("per_page")) ? Request::get("per_page") : 20;
-
 
         $query = User::with("role", "photo")->orderBy($this->data["sort"], $this->data["order"]);
 
@@ -84,7 +87,8 @@ class UsersController extends BackendController
      */
     public function create()
     {
-        if (!User::access("users.create")) {
+
+        if (!User::access("users.manage")) {
             return denied();
         }
 
@@ -138,6 +142,12 @@ class UsersController extends BackendController
      */
     public function edit($user_id)
     {
+
+        if (Auth::user()->id != $user_id) {
+            if (!User::access("users.manage")) {
+                return denied();
+            }
+        }
 
         $user = User::with("photo")->where("id", $user_id)->first();
 
@@ -202,6 +212,11 @@ class UsersController extends BackendController
      */
     public function delete()
     {
+
+        if (!User::access("users.manage")) {
+            return denied();
+        }
+
         $ids = Request::get("id");
         if (!is_array($ids)) {
             $ids = array($ids);

@@ -144,11 +144,10 @@
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <?php if (User::access("users.delete")) { ?>
-                                    <th style="width:35px"><input type="checkbox" class="i-checks check_all"
-                                                                  name="ids[]"/>
-                                    </th>
-                                <?php } ?>
+
+                                <th style="width:35px"><input type="checkbox" class="i-checks check_all"
+                                                              name="ids[]"/>
+                                </th>
                                 <th style="width:50px"><?php echo trans("users::users.photo") ?></th>
                                 <th><?php echo trans("users::users.name"); ?></th>
                                 <th><?php echo trans("users::users.email"); ?></th>
@@ -159,34 +158,32 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i = 0; foreach ($users as $user) { ?>
+                            <?php $i = 0;
+                            foreach ($users as $user) { ?>
                                 <tr>
 
-                                    <?php if (User::access("users.delete")) { ?>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="id[]"
-                                                   value="<?php echo $user->id; ?>"/>
-                                        </td>
-                                    <?php } ?>
+                                    <td>
+                                        <input type="checkbox" class="i-checks" name="id[]"
+                                               value="<?php echo $user->id; ?>"/>
+                                    </td>
 
                                     <td>
                                         <?php if ($user->photo) { ?>
                                             <img class="img-rounded" style="width:50px"
                                                  src="<?php echo thumbnail($user->photo->media_path) ?>"/>
                                         <?php } else { ?>
-                                            <img class="img-rounded" src="<?php echo assets("admin::images/user.png"); ?>"/>
+                                            <img class="img-rounded"
+                                                 src="<?php echo assets("admin::images/user.png"); ?>"/>
                                         <?php } ?>
                                     </td>
 
                                     <td>
-                                        <?php if (User::access("users.edit")) { ?>
-                                            <a class="text-navy"
-                                               href="<?php echo URL::to(ADMIN) ?>/users/<?php echo $user->id; ?>/edit">
-                                                <strong> <?php echo $user->name; ?> </strong>
-                                            </a>
-                                        <?php } else { ?>
-                                            <strong> <?php echo $user->name; ?></strong>
-                                        <?php } ?>
+
+                                        <a class="text-navy"
+                                           href="<?php echo URL::to(ADMIN) ?>/users/<?php echo $user->id; ?>/edit">
+                                            <strong> <?php echo $user->name; ?> </strong>
+                                        </a>
+
                                     </td>
 
                                     <td>
@@ -198,6 +195,7 @@
                                             <?php } ?>
                                         </small>
                                     </td>
+
                                     <td>
                                         <small>
                                             <?php echo $user->created_at->render(); ?>
@@ -224,23 +222,21 @@
                                             </a>
                                         <?php } */ ?>
 
-                                        <?php if (User::access("users.edit")) { ?>
-                                            <a href="<?php echo URL::to(ADMIN) ?>/users/<?php echo $user->id; ?>/edit">
-                                                <i class="fa fa-pencil text-navy"></i>
-                                            </a>
-                                        <?php } ?>
 
-                                        <?php if (User::access("users.delete")) { ?>
-                                            <a class="delete_user ask"
-                                               message="<?php echo trans("users::users.sure_delete") ?>"
-                                               href="<?php echo URL::route("admin.users.delete", array("id" => $user->id)) ?>">
-                                                <i class="fa fa-times text-navy"></i>
-                                            </a>
-                                        <?php } ?>
+                                        <a href="<?php echo URL::to(ADMIN) ?>/users/<?php echo $user->id; ?>/edit">
+                                            <i class="fa fa-pencil text-navy"></i>
+                                        </a>
+
+                                        <a class="delete_user ask"
+                                           message="<?php echo trans("users::users.sure_delete") ?>"
+                                           href="<?php echo URL::route("admin.users.delete", array("id" => $user->id)) ?>">
+                                            <i class="fa fa-times text-navy"></i>
+                                        </a>
 
                                     </td>
                                 </tr>
-                            <?php $i++; } ?>
+                                <?php $i++;
+                            } ?>
 
                             </tbody>
                         </table>

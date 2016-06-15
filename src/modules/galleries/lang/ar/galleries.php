@@ -28,7 +28,6 @@ return [
     "media_count" => "عدد الملفات",
     "no_galleries" => "لا توجد ألبومات",
 
-
     "attributes" => [
         "name" => "إسم الألبوم",
         "author" => "إسم المحرر"

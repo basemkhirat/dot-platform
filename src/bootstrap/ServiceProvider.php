@@ -48,6 +48,7 @@ class CmsServiceProvider extends ServiceProvider
         if (Config::get("app.key") == "") {
             return false;
         }
+
         $this->app = $app;
         $this->kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
 
@@ -78,6 +79,10 @@ class CmsServiceProvider extends ServiceProvider
 
     function bindDotClasses()
     {
+
+        $this->app->bind('dot', function () {
+            return new Dot;
+        });
 
         $this->app->bind('module', function () {
             return new DotModule;

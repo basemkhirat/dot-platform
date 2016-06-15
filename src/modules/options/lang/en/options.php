@@ -28,6 +28,15 @@ return [
     'sure_install_plugin' => 'Are you sure to install :name plugin ?',
     'no_plugins' => 'No Plugins found',
     'file_not_supported' => 'File is not allowed',
+
+
+    "dot_version" => "Dot platform version",
+    "check_for_update" => "Check for updates",
+    "checking" => "Checking..",
+    "how_update" => "How to update",
+    "version_available" => "Dot platform <strong style='font-family: sans-serif, Arial, Verdana'>:version</strong> is available !",
+    "up_to_date" => "Dot platform is up to date.",
+
     'attributes' => [
         'site_name' => 'Site name',
         'site_slogan' => 'Site slogan',
@@ -75,14 +84,24 @@ return [
         'linkedin_page' => 'Linked in',
         'soundcloud_page' => "Soundcloud",
 
-        'breaking_hash_tag' => 'Breaking hash tag',
-        'breaking_live_stream' => 'breaking_live_stream',
+
+
         '' => '',
         '' => '',
     ],
+
+
     "events" => [
         'saved' => 'Options saved successfully',
         'installed' => "Plugin installed successfully",
         'uninstalled' => "Plugin uninstalled successfully"
+    ],
+
+    "permissions" =>[
+        "manage_general" => "Manage general options",
+        "manage_seo" => "Manage SEO options",
+        "manage_social" => "Manage social pages",
+        "manage_media" => "Manage media options",
+        "manage_plugins" => "Manage plugins",
     ]
 ];

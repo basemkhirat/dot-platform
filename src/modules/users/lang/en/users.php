@@ -60,10 +60,9 @@ return [
     'activated' => 'Activated',
 
     "module" => "Users",
+
     "permissions" => [
-        "create" => "Create users",
-        "edit" => "Edit users",
-        "delete" => "Delete users"
+        "manage" => "Manage users"
     ],
 
     "attributes" => [

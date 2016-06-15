@@ -3,6 +3,8 @@
 class Nav extends Model
 {
 
+    protected $module = 'navigations';
+
     protected $table = 'navigations';
 
     protected $parentKey = "parent";

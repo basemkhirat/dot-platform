@@ -4,6 +4,7 @@
             <div class="navbar-header">
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:void(0)"><i
                         class="fa fa-bars"></i> </a>
+                <?php /*
                 <form method="get" role="search" class="navbar-form-custom"
                       action="">
                     <div class="form-group">
@@ -12,6 +13,7 @@
                                class="form-control" name="q" id="top-search">
                     </div>
                 </form>
+                */ ?>
             </div>
             <ul class="nav navbar-top-links navbar-right">
 

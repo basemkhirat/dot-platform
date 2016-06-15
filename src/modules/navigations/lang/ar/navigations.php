@@ -46,7 +46,7 @@ return [
     ],
 
     'permissions' => [
-        // Permissions translations
+        "manage" => "التحكم بالقوائم"
     ]
 
 ];

@@ -17,6 +17,7 @@ class OptionsController extends BackendController
     function index()
     {
 
+
         if (Request::isMethod("post")) {
 
             $options = Request::except("_token");
@@ -34,6 +35,25 @@ class OptionsController extends BackendController
         }
         $this->data["option_page"] = "main";
         return View::make("options::show", $this->data);
+    }
+
+    function check_update(){
+
+        $version =  Dot::check();
+
+        if($version){
+
+            Option::store([
+                "latest_version" => $version->version
+            ]);
+
+            $this->data["version"] = $version->version;
+        }else{
+            $this->data["version"] = false;
+        }
+
+        return View::make("options::update", $this->data);
+
     }
 
     function seo()

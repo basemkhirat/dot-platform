@@ -1,7 +1,7 @@
 <?php
 
 // CMS Version
-define("CMS_VERSION", 1.0);
+define("DOT_VERSION", "0.0.37");
 
 if (Config::get("app.url") == "http://localhost") {
     Config::set("app.url", Request::root());

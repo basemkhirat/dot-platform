@@ -147,6 +147,9 @@
                                 </select>
                             </div>
                         </div>
+                    <?php }else{ ?>
+                        <input type="hidden" name="role_id" value="<?php echo isset($user->id)?$user->id:0; ?>" />
+                        <input type="hidden" name="status" value="<?php echo isset($user->status)?$user->status:0; ?>" />
                     <?php } ?>
 
                     <?php /*

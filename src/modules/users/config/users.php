@@ -2,8 +2,6 @@
 
 return [
     "permissions" => [
-        "create",
-        "edit",
-        "delete"
+        "manage"
     ]
 ];

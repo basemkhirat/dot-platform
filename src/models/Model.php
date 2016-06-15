@@ -437,6 +437,7 @@ trait ModelTraits
                 if ($options['depth'] == $options['count']) {
 
                     continue;
+
                 } else {
 
                     $options["start"] = $row->$options['id'];

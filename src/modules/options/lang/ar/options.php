@@ -27,6 +27,15 @@ return [
     'sure_install_plugin' => 'تثبيت :name ؟',
     'no_plugins' => 'لا توجد إضافات',
     'file_not_supported' => 'ملف غير مسموح به',
+
+
+    "dot_version" => "إصدار النظام",
+    "check_for_update" => "التحقق من وجود تحديثات",
+    "checking" => "جاري الفحص ..",
+    "how_update" => "كيفية التحديث",
+    "version_available" => "النظام <strong style='font-family: sans-serif, Arial, Verdana'>:version</strong> متوفر الان !",
+    "up_to_date" => "لا توجد تحديثات",
+
     '' => '',
     '' => '',
     '' => '',
@@ -84,5 +93,14 @@ return [
         'saved' => 'تم تحديث الإعدادات بنجاح',
         'installed' => "تم تثبيت الإضافة بنجاح",
         'uninstalled' => "تم إلغاء تثبيت الإضافة بنجاح"
+    ],
+
+    "permissions" => [
+        "manage_general" => "التحكم بالإعدادات العامة",
+        "manage_seo" => "التحكم بإعدادات SEO",
+        "manage_social" => "التحكم بالصفحات الإجتماعية",
+        "manage_media" => "التحكم بالملتيمديا",
+        "manage_plugins" => "التحكم بالأضافات",
     ]
+
 ];

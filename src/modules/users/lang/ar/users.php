@@ -56,9 +56,7 @@ return [
     "no_records" => "لا يوجد أعضاء",
 
     "permissions" => [
-        "create" => "إضافة الأعضاء",
-        "edit" => "تحرير الأعضاء",
-        "delete" => "حذف الأعضاء"
+        "manage" => "التحكم بالأعضاء"
     ],
 
     "attributes" => [

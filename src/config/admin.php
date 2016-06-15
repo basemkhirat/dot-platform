@@ -90,7 +90,7 @@ return [
      */
 
     "middlewares" => [
-        'AdminMiddleware'
+        AdminMiddleware::class
     ],
 
     /**
@@ -102,8 +102,9 @@ return [
      */
 
     "route_middlewares" => [
-        'auth' => 'AuthMiddleware',
-        'guest' => 'GuestMiddleware'
+        'auth' => AuthMiddleware::class,
+        'guest' => GuestMiddleware::class,
+        'permission' => PermissionMiddleware::class
     ],
 
     /**
@@ -115,29 +116,29 @@ return [
     "commands" => [
 
         // Dot commands
-        'DotInstallCommand',
-        'DotAutoloadCommand',
-        'DotMigrateCommand',
+        DotInstallCommand::class,
+        DotAutoloadCommand::class,
+        DotMigrateCommand::class,
 
         // Modules commands
-        'ModuleMigrationCommand',
-        'ModuleMigrateCommand',
-        'ModuleMigrateUpCommand',
-        'ModuleMigrateDownCommand',
-        'ModuleInstallCommand',
-        'ModulePublishCommand',
+        ModuleMigrationCommand::class,
+        ModuleMigrateCommand::class,
+        ModuleMigrateUpCommand::class,
+        ModuleMigrateDownCommand::class,
+        ModuleInstallCommand::class,
+        ModulePublishCommand::class,
 
         // Plugins commands
-        'PluginMakeCommand',
-        'PluginMigrationCommand',
-        'PluginMigrateCommand',
-        'PluginMigrateUpCommand',
-        'PluginMigrateDownCommand',
-        'pluginInstallCommand',
-        'PluginUninstallCommand',
-        'PluginListCommand',
-        'PluginPublishCommand',
-        'PluginUpdateCommand'
+        PluginMakeCommand::class,
+        PluginMigrationCommand::class,
+        PluginMigrateCommand::class,
+        PluginMigrateUpCommand::class,
+        PluginMigrateDownCommand::class,
+        pluginInstallCommand::class,
+        PluginUninstallCommand::class,
+        PluginListCommand::class,
+        PluginPublishCommand::class,
+        PluginUpdateCommand::class,
 
     ]
 
