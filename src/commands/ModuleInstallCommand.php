@@ -33,7 +33,9 @@ class ModuleInstallCommand extends Command
 
         $module = trim($this->input->getArgument('module'));
 
-        $path = MODULES_PATH . "/" . trim($module) . "/plugin.php";
+        $class = get_plugin_class($module);
+
+        $path = MODULES_PATH . "/" . trim($module) . "/" . $class . ".php";
 
         if (!file_exists($path)) {
             return $this->error("Module $module not found");

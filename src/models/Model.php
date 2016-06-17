@@ -380,12 +380,15 @@ trait ModelTraits
         if (!isset($options['table'])) {
             $options['table'] = $this->table;
         }
+
         if (!isset($options['id'])) {
             $options['id'] = $this->primaryKey;
         }
+
         if (!isset($options['parent'])) {
             $options['parent'] = $this->parentKey;
         }
+
         if (!isset($options['start'])) {
             $options['start'] = 0;
         }

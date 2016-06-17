@@ -35,7 +35,9 @@ class PluginInstallCommand extends Command
 
         $installed_plugins = Plugin::installedPaths();
 
-        $path = PLUGINS_PATH . "/" . trim($plugin) . "/plugin.php";
+        $class = get_plugin_class($plugin);
+
+        $path = PLUGINS_PATH . "/" . trim($plugin) . "/" . $class . ".php";
 
         if (!file_exists($path)) {
             return $this->error("Plugin $plugin not found");
