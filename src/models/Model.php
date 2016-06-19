@@ -104,7 +104,7 @@ trait ModelTraits
     /**
      * Return a timestamp as DateTime object.
      *
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return \Carbon\Carbon
      */
     protected function asDateTime($value)
@@ -262,7 +262,7 @@ trait ModelTraits
     public function rules($rules = [], $messages = [], $attributes = [])
     {
 
-        if(count($rules) == 0){
+        if (count($rules) == 0) {
             return false;
         }
 
@@ -443,7 +443,12 @@ trait ModelTraits
 
                 } else {
 
-                    $options["start"] = $row->$options['id'];
+                    if (isset($row->$options['id'])) {
+                        $options["start"] = $row->$options['id'];
+                    } else {
+                        $options["start"] = $row->id;
+                    }
+
                     self::tree($options);
                 }
             }

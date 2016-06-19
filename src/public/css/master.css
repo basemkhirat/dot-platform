@@ -387,7 +387,7 @@ table.wpseoanalysis td.score {
 
 }
 
-.dropdown-menu:after {
+.navbar .dropdown-menu:after {
     content: '';
     display: block;
     position: absolute;
@@ -490,6 +490,15 @@ select {
     left: -12px
 }
 
+
+.ibox-content .table-responsive{
+    margin: 35px 0 !important;
+}
+
+.ibox-content .table-responsive th{
+    font-size: 14px;
+}
+
 body.dark-theme{
     background: #2b2b2b;
 }
@@ -573,6 +582,8 @@ body.dark-theme{
 .dark-theme .btn[disabled]{
     background: #699cb3;
 }
+
+
 
 /*
 XS

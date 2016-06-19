@@ -6,11 +6,13 @@
 .bootstrap-datetimepicker-widget {
   list-style: none;
   direction: ltr;
+  font-family: Tahoma !important;
 }
 .bootstrap-datetimepicker-widget.dropdown-menu {
   margin: 2px 0;
-  padding: 4px;
-  width: 19em;
+  padding: 8px;
+  width: 23em;
+
 }
 @media (min-width: 768px) {
   .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
@@ -210,11 +212,12 @@
   height: auto;
   width: auto;
   line-height: inherit;
+  text-align: center;
 }
+
 .bootstrap-datetimepicker-widget .picker-switch td span {
   line-height: 2.5;
   height: 2.5em;
-  width: 100%;
 }
 .bootstrap-datetimepicker-widget table {
   width: 100%;
