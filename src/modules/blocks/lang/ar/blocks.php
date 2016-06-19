@@ -39,6 +39,7 @@ return [
     'attributes' => [
         'name' => 'إسم المكان',
         "type" => "النوع",
+        'limit' => "عدد الأخبار"
     ],
 
     "events" => [

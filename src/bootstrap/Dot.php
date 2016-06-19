@@ -2,14 +2,15 @@
 
 namespace Dot\Platform;
 
-//use \Illuminate\Foundation\Application as Laravel;
 
 /**
  * Class Dot
- * Dotcms super class extends Laravel super App class
+ * Dot cms super class
  */
 class Dot
 {
+
+    const VERSION = '0.0.39';
 
     /**
      * get all system locales
@@ -30,11 +31,16 @@ class Dot
     }
 
 
-    public function current_version()
+    public function version()
     {
-        return DOT_VERSION;
+        return $this::VERSION;
     }
 
+
+    public function current_version()
+    {
+        return $this::VERSION;
+    }
 
     public function latest_version()
     {
@@ -52,7 +58,7 @@ class Dot
 
         $versions = [];
 
-        foreach($tags as $version => $data){
+        foreach ($tags as $version => $data) {
             $versions[strtotime($data["utctimestamp"])] = [
                 "version" => $version,
                 "message" => $data["message"]
@@ -62,9 +68,8 @@ class Dot
         krsort($versions);
 
 
-
         $vers = [];
-        foreach($versions as $time => $data){
+        foreach ($versions as $time => $data) {
 
             $ver = new \stdClass();
             $ver->version = $data["version"];
@@ -86,16 +91,13 @@ class Dot
 
         $last = $this->latest_version();
 
-        if(version_compare($last->version, $dot_version, ">")){
+        if (version_compare($last->version, $dot_version, ">")) {
             return $last;
         }
 
         return false;
 
     }
-
-
-
 
 
 }

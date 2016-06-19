@@ -117,6 +117,8 @@ return [
 
         // Dot commands
         DotInstallCommand::class,
+        DotUpdateCommand::class,
+        DotPublishCommand::class,
         DotAutoloadCommand::class,
         DotMigrateCommand::class,
 

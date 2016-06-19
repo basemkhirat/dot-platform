@@ -63,6 +63,12 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="input-limit"><?php echo trans("blocks::blocks.attributes.limit") ?></label>
+                        <input name="limit" min="0" type="number" value="<?php echo @Request::old("limit", $block->limit); ?>" class="form-control" id="input-limit" placeholder="<?php echo trans("blocks::blocks.attributes.limit") ?>">
+                    </div>
+
+
                 </div>
             </div>
         </div>

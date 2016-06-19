@@ -45,6 +45,7 @@ class BlocksController extends BackendController
 
             $block->name = Request::get("name");
             $block->type = Request::get("type");
+            $block->limit = Request::get("limit", 0);
 
             // fire saving block
             Action::fire("block.saving", $block);
@@ -79,6 +80,7 @@ class BlocksController extends BackendController
 
             $block->name = Request::get("name");
             $block->type = Request::get("type");
+            $block->limit = Request::get("limit", 0);
 
             // fire saving action
             Action::fire("block.saving", $block);

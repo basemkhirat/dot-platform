@@ -46,6 +46,20 @@ class Plugin
         $file = $reflector->getFileName();
         $type = str::singular(basename(dirname(dirname($file))));
 
+        $this->doInstall($plugin, $type);
+
+    }
+
+    function doInstall($plugin = false, $type = "module", $force = false)
+    {
+
+        if ($force) {
+            // Migrating down
+            Artisan::call("$type:migrate:down", [
+                $type => $plugin
+            ]);
+        }
+
         // Migrating up
         Artisan::call("$type:migrate:up", [
             $type => $plugin
@@ -53,7 +67,8 @@ class Plugin
 
         // Publishing
         Artisan::call("$type:publish", [
-            $type => $plugin
+            $type => $plugin,
+            "--force" => $force
         ]);
 
     }
@@ -155,13 +170,12 @@ class Plugin
         $class = get_plugin_class($path);
 
         if (!class_exists($class)) {
-            include($path . "/" . $class.".php");
+            include($path . "/" . $class . ".php");
         }
 
         $installed_plugins = self::installedPaths();
 
         if (class_exists($class)) {
-
 
 
             $object = new $class();

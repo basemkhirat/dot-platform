@@ -56,6 +56,7 @@ return [
     'attributes' => [
         "type" => "Type",
         'name' => 'Name',
+        'limit' => "Limit"
     ],
     "events" => [
         'created' => 'Block created successfully',

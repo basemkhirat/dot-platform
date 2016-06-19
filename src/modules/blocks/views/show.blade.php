@@ -31,9 +31,7 @@
                     <select name="sort" class="form-control chosen-select chosen-rtl">
                         <option
                             value="name" <?php if ($sort == "name") { ?> selected='selected' <?php } ?>><?php echo ucfirst(trans("blocks::blocks.attributes.name")); ?></option>
-                        <option
-                            value="created_at" <?php if ($sort == "created_at") { ?> selected='selected' <?php } ?>><?php echo ucfirst(trans("blocks::blocks.attributes.created_at")); ?></option>
-                      </select>
+                         </select>
                     <select name="order" class="form-control chosen-select chosen-rtl">
                         <option
                             value="DESC" <?php if (Request::get("order") == "DESC") { ?> selected='selected' <?php } ?>><?php echo trans("blocks::blocks.desc"); ?></option>
@@ -48,7 +46,6 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <form action="" method="get" class="search_form">
-
 
                     <div class="input-group">
                         <div class="autocomplete_area">
@@ -67,7 +64,6 @@
                         </span>
 
                     </div>
-
 
                 </form>
             </div>
@@ -120,6 +116,7 @@
                                 </th>
 
                                 <th><?php echo trans("blocks::blocks.attributes.name"); ?></th>
+                                <th><?php echo trans("blocks::blocks.attributes.limit"); ?></th>
 
                                 <th><?php echo trans("blocks::blocks.actions"); ?></th>
                             </tr>
@@ -138,6 +135,10 @@
                                            href="<?php echo route("admin.blocks.edit", array("id" => $block->id)); ?>">
                                            <strong><?php echo $block->name; ?></strong>
                                         </a>
+                                    </td>
+
+                                    <td>
+                                       <?php echo $block->limit; ?>
                                     </td>
 
 

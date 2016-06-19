@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class MigrateCommand
@@ -49,7 +50,7 @@ class PluginInstallCommand extends Command
 
         $installed_plugins[] = $plugin;
 
-        Plugin::get($plugin)->install();
+        Plugin::get($plugin)->doInstall($plugin, "plugin", $this->option("force"));
 
         $plugins = json_encode(array_unique(array_values($installed_plugins)));
 
@@ -72,6 +73,18 @@ class PluginInstallCommand extends Command
     {
         return [
             ['plugin', InputArgument::REQUIRED, 'The name of the plugin']
+        ];
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['force', null, InputOption::VALUE_NONE, 'Force overwrite config files', null]
         ];
     }
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class MigrateCommand
@@ -41,7 +42,7 @@ class ModuleInstallCommand extends Command
             return $this->error("Module $module not found");
         }
 
-        Module::get($module)->install();
+        Module::get($module)->doInstall($module, "module", $this->option("force"));
 
         $this->info("Module $module is installed successfully");
 
@@ -58,5 +59,18 @@ class ModuleInstallCommand extends Command
             ['module', InputArgument::REQUIRED, 'The name of the module']
         ];
     }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['force', null, InputOption::VALUE_NONE, 'Force overwrite config files', null]
+        ];
+    }
+
 
 }
