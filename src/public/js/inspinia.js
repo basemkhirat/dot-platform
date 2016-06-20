@@ -16,12 +16,6 @@ $(document).ready(function () {
 
     // MetsiMenu
     //$('#side-menu').metisMenu();
-    $("#side-menu li a").click(function(){
-        var link = $(this).attr("href");
-        window.location.href = link;
-        return false;
-    });
-
 
     // Collapse ibox function
     $('.collapse-link').click( function() {

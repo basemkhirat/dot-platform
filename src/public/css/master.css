@@ -387,7 +387,7 @@ table.wpseoanalysis td.score {
 
 }
 
-.navbar .dropdown-menu:after {
+.nav-header .dropdown-menu:after, .navbar .dropdown-menu:after {
     content: '';
     display: block;
     position: absolute;
@@ -399,7 +399,6 @@ table.wpseoanalysis td.score {
     border-top: 10px solid transparent;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-
 }
 
 .dropdown-messages {
@@ -639,4 +638,14 @@ LG
 }
 
 
+.fa.arrow{
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
 
+#side-menu li.active .fa.arrow{
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+    transform: rotate(0deg);
+}
