@@ -131,7 +131,7 @@
 
                 </div>
             </div>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="form-group">
                     <input type="submit" class="pull-left btn-flat btn btn-primary" value="<?php echo trans("galleries::galleries.save_gallery") ?>" />
                 </div>

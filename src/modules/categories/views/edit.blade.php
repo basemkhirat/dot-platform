@@ -114,7 +114,7 @@
     </div>
 
     <div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="form-group">
                 <input type="submit" class="pull-left btn btn-flat btn-primary" value="<?php echo trans("categories::categories.save_category") ?>" />
             </div>
