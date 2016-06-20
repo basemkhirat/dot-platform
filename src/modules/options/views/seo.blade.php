@@ -162,16 +162,6 @@
                                             </div>
                                         </div>
 
-                                        <?php if (!File::isWritable(dirname(public_path(Config::get("sitemap_path"))))) { ?>
-                                            <div class="alert alert-danger " role="alert">
-                                                <span class="pull-right text-left ltr"> <?php echo dirname(public_path(Config::get("sitemap_path"))) ?>
-                                                    <?php echo trans("options::options.not_writable") ?>
-                                                </span>
-                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                            </div>
-
-                                        <?php } ?>
-
                                         <div class="form-group">
                                             <label for="sitemap_path"><?php echo trans("options::options.attributes.sitemap_path") ?></label>
                                             <div class="input-group" style="direction: rtl;">
@@ -179,6 +169,18 @@
                                                 <span class="input-group-addon">/public/</span>
                                             </div>
                                         </div>
+
+
+                                        <?php if (!File::isWritable(public_path(Config::get("sitemap_path")))) { ?>
+                                            <div class="alert alert-danger " role="alert">
+                                                <span class="pull-right text-left "> <?php echo public_path(Config::get("sitemap_path")) ?>
+                                                    <?php echo trans("options::options.not_writable") ?>
+                                                </span>
+                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                            </div>
+
+                                        <?php } ?>
+
 
                                         <?php /*
                                         <div class="form-group">
