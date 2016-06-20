@@ -1,7 +1,6 @@
 <?php
 
 namespace Dot\Platform;
-
 use Illuminate\Support\Facades\Storage;
 
 /**

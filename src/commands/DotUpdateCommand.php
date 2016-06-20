@@ -82,29 +82,19 @@ class DotUpdateCommand extends Command
         $modules = Module::all();
 
         foreach ($modules as $module) {
-            $module->doInstall($module->path, "module", $this->option("force"));
+
+            // Exception for core modules
+            if(in_array($module->path, ["users", "options"])) {
+                $module->doInstall($module->path, "module");
+            }else{
+                $module->doInstall($module->path, "module", $this->option("force"));
+            }
+
         }
 
         $this->call('optimize', [
             '--quiet' => true
         ]);
-
-        if ($this->option("force")) {
-
-            $this->info("\n");
-
-            $this->info("Creating Administrator account:");
-            $username = $this->ask("Username");
-            $password = $this->secret("Password");
-            $name = $this->ask("Full name");
-
-            $user = User::where("root", 1)->first();
-            $user->username = $username;
-            $user->password = $password;
-            $user->first_name = $name;
-            $user->save();
-
-        }
 
         $this->info("Congratulations, DOTCMS is now up to date!");
         $this->info("Dot platform version: " . Dot::version());

@@ -5,6 +5,37 @@
  */
 class Plugin
 {
+
+    /**
+     * @var array
+     */
+    public $providers = [];
+
+    /**
+     * @var array
+     */
+    public $aliases = [];
+
+    /**
+     * @var array
+     */
+    public $commands = [];
+
+    /**
+     * @var array
+     */
+    public $middlwares = [];
+
+    /**
+     * @var array
+     */
+    public $route_middlewares = [];
+
+    /**
+     * @var array
+     */
+    public $permissions = [];
+
     /**
      * Plugin details
      * @return array
@@ -50,6 +81,11 @@ class Plugin
 
     }
 
+    /**
+     * @param bool $plugin
+     * @param string $type
+     * @param bool $force
+     */
     function doInstall($plugin = false, $type = "module", $force = false)
     {
 

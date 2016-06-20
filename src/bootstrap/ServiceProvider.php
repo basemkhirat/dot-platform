@@ -227,7 +227,6 @@ class CmsServiceProvider extends ServiceProvider
     {
         foreach ((array)Config::get("admin.middlewares") as $middleware) {
             $this->router->pushMiddlewareToGroup("web", $middleware);
-            //$this->kernel->pushMiddleware($middleware);
         }
 
         foreach ((array)Config::get("admin.route_middlewares") as $alias => $middleware) {
@@ -292,7 +291,7 @@ class CmsServiceProvider extends ServiceProvider
             ], "$module.config");
         }
 
-        $class = get_plugin_class($module);
+        $class = \get_plugin_class($module);
 
         // including module bootstrap file
         if (file_exists($bootstrap = $module_path . "/" . $class . ".php")) {
