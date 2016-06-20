@@ -10,10 +10,10 @@
 <div class="ibox-content" style="direction: ltr">
     <h2 class="text-left "><?php echo trans("options::options.how_update") ?></h2>
 
-    <small>First update your composer packages</small>
+    <small>First update your composer package</small>
     <ul class="todo-list m-t small-list">
         <li>
-            <span class="m-l-xs"><strong>></strong> composer update</span>
+            <span class="m-l-xs"><strong>></strong> composer update dot/platform</span>
         </li>
     </ul>
     <br/>
