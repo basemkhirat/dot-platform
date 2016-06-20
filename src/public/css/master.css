@@ -499,6 +499,10 @@ select {
     font-size: 14px;
 }
 
+#page-wrapper{
+    min-height:105% !important;
+}
+
 body.dark-theme{
     background: #2b2b2b;
 }
