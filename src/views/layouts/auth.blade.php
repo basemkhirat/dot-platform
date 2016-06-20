@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title><?php echo Config::get("site_title"); ?> - CMS</title>
+    <title><?php echo Config::get("site_title"); ?> - CMS</title>
 
-        <link href="<?php echo assets("admin::") ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="<?php echo assets("admin::") ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/animate.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/style.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="<?php echo assets("admin::") ?>/css/auth.css" rel="stylesheet"/>
+
+    <?php if (DIRECTION == "rtl") { ?>
         <link href="<?php echo assets("admin::") ?>/css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
-        <link href="<?php echo assets("admin::") ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
-        <link href="<?php echo assets("admin::") ?>/css/animate.css" rel="stylesheet">
-        <link href="<?php echo assets("admin::") ?>/css/style.css" rel="stylesheet">
-        <link href="<?php echo assets("admin::") ?>/css/plugins/switchery/switchery.css" rel="stylesheet">
-        <link href="<?php echo assets("admin::") ?>/css/auth.css" rel="stylesheet" />
+    <?php } ?>
 
-        @yield("header")
-        
-    </head>
+    @yield("header")
 
-    <body class="dark-theme gray-bg rtls">
+</head>
 
-        <div class="middle-box text-center loginscreen animated fadeInDown">
-            <div>
+<body class="dark-theme gray-bg rtls">
 
-                <div>
-                    <h1 class="logo-name"><?php echo Config::get("site_name") ?></h1>
-                </div> 
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
 
-                <h3><?php echo Config::get("site_slogan") ?></h3>
-
-                @yield("content")
-
-                <p class="m-t"> <small> <?php echo Config::get("site_copyrights") ?> </small> </p>
-            </div>
+        <div>
+            <h1 class="logo-name"><?php echo Config::get("site_name") ?></h1>
         </div>
 
-        <!-- Mainly scripts -->
-        <script src="<?php echo assets("admin::js/jquery-2.1.1.js") ?>"></script>
-        <script src="<?php echo assets("admin::js/bootstrap.min.js") ?>"></script>
+        <h3><?php echo Config::get("site_slogan") ?></h3>
 
-        @yield("footer")
+        @yield("content")
 
-    </body>
+        <p class="m-t">
+            <small> <?php echo Config::get("site_copyrights") ?> </small>
+        </p>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="<?php echo assets("admin::js/jquery-2.1.1.js") ?>"></script>
+<script src="<?php echo assets("admin::js/bootstrap.min.js") ?>"></script>
+
+@yield("footer")
+
+</body>
 
 </html>
