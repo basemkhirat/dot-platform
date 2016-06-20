@@ -20,7 +20,7 @@
     <small>Installing update using this artisan command </small>
     <ul class="todo-list m-t small-list">
         <li>
-            <span class="m-l-xs"> <strong>></strong> php artisan dot:update</span>
+            <span class="m-l-xs"> <strong>></strong> php artisan dot:update [--force]</span>
         </li>
     </ul>
 </div>
