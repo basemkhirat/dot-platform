@@ -566,10 +566,6 @@ body.dark-theme{
     background-image: url(plugins/iCheck/blue.png) !important;
 }
 
-.dark-theme .icheckbox_square-green.checked {
-    background-image: url(plugins/iCheck/blue@2x.png);
-}
-
 .dark-theme .nav-header .dropdown-menu li a:hover{
     color:#fff !important;
 }
