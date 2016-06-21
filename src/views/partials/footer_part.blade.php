@@ -109,13 +109,16 @@
         $("#side-menu li a[href='" + url + "']").parents("li").addClass("active");
         $("#side-menu li a[href='" + url + "']").parents("li").parents(".nav-second-level").addClass("collapse in");
 
+        $("#side-menu li.active").each(function(){
+            $(this).children("ul").addClass("in");
+        });
+
         $(".minimalize-styl-2").click(function () {
             if ($("body").hasClass("mini-navbar")) {
                 $.cookie('mini_nav', "1", {path: '/'});
             } else {
                 $.cookie('mini_nav', "0", {path: '/'});
             }
-
         });
 
         // trash page action
