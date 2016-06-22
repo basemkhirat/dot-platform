@@ -90,9 +90,17 @@ class PostsController extends BackendController
             }
 
             $post->save();
-
             $post->syncTags(Request::get("tags", []));
             $post->categories()->sync(Request::get("categories", []));
+
+            // saving meta
+            $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
+            foreach($custom_fields as $name => $value){
+                $meta = new PostMeta();
+                $meta->name = $name;
+                $meta->value = $value;
+                $post->meta()->save($meta);
+            }
 
             // fire  saved action
             Action::fire("post.saved", $post);
@@ -135,6 +143,16 @@ class PostsController extends BackendController
 
             $post->syncTags(Request::get("tags", []));
             $post->categories()->sync(Request::get("categories", []));
+
+            // saving meta
+            PostMeta::where("post_id", $post->id)->delete();
+            $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
+            foreach($custom_fields as $name => $value){
+                $meta = new PostMeta();
+                $meta->name = $name;
+                $meta->value = $value;
+                $post->meta()->save($meta);
+            }
 
             // fire post saved action
             Action::fire("post.saved", $post);

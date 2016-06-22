@@ -60,6 +60,11 @@ return [
     "format_article" => "Article",
     "format_video" => "Video",
 
+    "add_fields" => "Add custom fields",
+    "custom_name" => "Name",
+    "custom_value" => "Value",
+    "sure_delete_field" => "Are you sure to delete custom field ?",
+
 
     'attributes' => [
         'title' => 'title',

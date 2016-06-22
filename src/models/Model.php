@@ -438,19 +438,12 @@ trait ModelTraits
                 }
 
                 if ($options['depth'] == $options['count']) {
-
                     continue;
-
                 } else {
-
-                    if (isset($row->$options['id'])) {
-                        $options["start"] = $row->$options['id'];
-                    } else {
-                        $options["start"] = $row->id;
-                    }
-
+                    $options["start"] = $row->{$options['id']};
                     self::tree($options);
                 }
+
             }
 
             if ($options['count'] >= 2) {

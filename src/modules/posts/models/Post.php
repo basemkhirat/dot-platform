@@ -13,6 +13,7 @@ class Post extends Model {
     protected $searchable = ['title', 'excerpt', 'content'];
     protected $perPost = 20;
 
+
     protected $sluggable = [
         'slug' => 'title',
     ];
@@ -24,6 +25,10 @@ class Post extends Model {
     protected $updatingRules = [
         'title' => 'required'
     ];
+
+    public function meta(){
+        return $this->hasMany("PostMeta");
+    }
 
     public function image() {
         return $this->hasOne("Media", "id", "image_id");

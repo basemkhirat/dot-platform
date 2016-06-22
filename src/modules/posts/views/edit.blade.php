@@ -69,6 +69,64 @@
                 </div>
             </div>
 
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <i class="fa fa-camera"></i>
+                    <?php echo trans("posts::posts.add_fields"); ?>
+                    <a class="add-custom-field pull-right" href="javascript:void(0)">
+                        <i class="fa fa-plus text-navy"></i>
+                    </a>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="form-group meta-rows">
+
+
+
+                        <?php foreach($post->meta as $meta){ ?>
+                        <div class="meta-row">
+
+                            <input type="text" name="custom_names[]" value="<?php echo $meta->name; ?>"
+                                   class="form-control input-md pull-left custom-field-name"
+                                   placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
+
+                            <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"
+                                      rows="1"
+                                      placeholder="<?php echo trans("posts::posts.custom_value") ?>"><?php echo $meta->value; ?></textarea>
+
+                            <a class="remove-custom-field pull-right" href="javascript:void(0)">
+                                <i class="fa fa-times text-navy"></i>
+                            </a>
+
+                        </div>
+                        <?php } ?>
+
+                        <div class="meta-row">
+
+                            <input type="text" name="custom_names[]"
+                                   class="form-control input-md pull-left custom-field-name"
+                                   placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
+
+                            <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"
+                                      rows="1"
+                                      placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>
+
+                            <a class="remove-custom-field pull-right" href="javascript:void(0)">
+                                <i class="fa fa-times text-navy"></i>
+                            </a>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
 
             <div class="row">
 
@@ -236,7 +294,36 @@
 @parent
 <link href="<?php echo assets("admin::tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
 <link href="<?php echo assets("admin::tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+
+
+<style>
+    .custom-field-name {
+        width: 40%;
+        margin: 5px;
+    }
+
+    .custom-field-value {
+        width: 50%;
+        margin: 5px;
+    }
+
+    .remove-custom-field {
+        margin: 10px;
+    }
+
+    .meta-rows{
+
+    }
+    .meta-row{
+        background: #f1f1f1;
+        overflow: hidden;
+        margin-top: 4px;
+    }
+
+</style>
+
 @stop
+
 @section("footer")
 @parent
 <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
@@ -250,20 +337,51 @@
             var switchery = new Switchery(html, {size: 'small'});
         });
 
+        $("body").on("click", ".remove-custom-field", function(){
+
+            var item = $(this);
+            confirm_box("<?php echo trans("posts::posts.sure_delete_field"); ?>", function(){
+                item.parents(".meta-row").remove();
+            });
+
+        });
+
+        $(".add-custom-field").click(function(){
+
+            var html = ' <div class="meta-row">'
+                +'<input type="text" name="custom_names[]"'
+                + 'class="form-control input-md pull-left custom-field-name"'
+                + ' placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>'
+                + '   <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"'
+                +'   rows="1"'
+                +'   placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>'
+                +'   <a class="remove-custom-field pull-right" href="javascript:void(0)">'
+                +'   <i class="fa fa-times text-navy"></i>'
+                + '   </a>'
+                + '   </div>';
+
+            $(".meta-rows").append(html);
+
+
+        });
+
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
+
         $('.tree-views input[type=checkbox]').on('ifChecked', function () {
             var checkbox = $(this).closest('ul').parent("li").find("input[type=checkbox]").first();
             checkbox.iCheck('check');
             checkbox.change();
         });
+
         $('.tree-views input[type=checkbox]').on('ifUnchecked', function () {
             var checkbox = $(this).closest('ul').parent("li").find("input[type=checkbox]").first();
             checkbox.iCheck('uncheck');
             checkbox.change();
         });
+
         $(".expand").each(function (index, element) {
             var base = $(this);
             if (base.parents("li").find("ul").first().length > 0) {

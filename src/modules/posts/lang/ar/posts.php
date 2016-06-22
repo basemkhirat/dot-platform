@@ -57,6 +57,11 @@ return [
     "format_article" => "مقال",
     "format_video" => "فيديو",
 
+    "add_fields" => "أضف بيانات أخري",
+    "custom_name" => "الإسم",
+    "custom_value" => "القيمة",
+    "sure_delete_field" => "هل أنت متأكد من الحذف ؟",
+
     'attributes' => [
         'title' => 'العنوان',
         'excerpt' => 'المقتطف',
