@@ -128,36 +128,36 @@ The plugin Class name is the same as plugin file name.
  	
 	class ProductsPlugin extends Plugin {
 
-    	/**
+    	/** [optional]
      	* | Plugin Service providers
      	* |
      	* | @var array
      	*/
     	public $providers = [];
 
-    	/**
+    	/** [optional]
      	* | Plugin aliases
      	* |
      	* | @var array
      	*/
     	public $aliases = [];
 
-    	/**
+    	/** [optional]
      	* | Admin commands
      	* | Located in plugin commands folder
      	* | @var array
      	*/
     	public $commands = [];
 
-    	/**
+    	/** [optional]
     	* | plugin middlewares are located in plugin middlewares folder
      	* | @var array
      	*/
     	public $middlewares = [
-    		PluginMiddleware::class
+    		//PluginMiddleware::class
     	];
 
-       /**
+       /** [optional]
      	* | Plugin routed middleware.
      	* | Located in plugin middlewares folder
      	* | These middleware may be assigned to groups or used individually.
@@ -166,7 +166,7 @@ The plugin Class name is the same as plugin file name.
      	*/
     	public $route_middlewares = [];
 
-    	/**
+    	/** [optional]
      	* | Plugin permissions
      	* | A list of plugin permissions
      	* | @var array
@@ -176,7 +176,7 @@ The plugin Class name is the same as plugin file name.
     	];
 
 
-    	/**
+    	/** [required]
      	* Plugin details
      	* @return array
      	*/
@@ -193,7 +193,7 @@ The plugin Class name is the same as plugin file name.
 
     	}
 
-    	/**
+    	/** [required]
      	* Plugin bootstrap
      	* Called in system boot
      	*/
@@ -201,7 +201,7 @@ The plugin Class name is the same as plugin file name.
 	
     	}	
 
-    	/**
+    	/** [optional]
      	* Plugin install
      	* Running plugin migrations and default options
      	*/
@@ -209,7 +209,7 @@ The plugin Class name is the same as plugin file name.
         	parent::install();
     	}
 
-    	/**
+    	/** [optional]
     	* Plugin uninstall
     	* Rollback plugin installation
     	*/
