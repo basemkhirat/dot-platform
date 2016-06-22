@@ -104,6 +104,11 @@ you can also create a plugin with some extra resources.
 
 	php artisan plugin:make plugin-name --resources
 	
+	
+By default the plugin is uninstalled. To install Run: 
+
+	php artisan plugin:install plugin-name
+	
 
 
 ###Plugin bootstrap file class
@@ -243,9 +248,6 @@ You can access plugin config item value using:
 	config("module_name.config_key");
 
     
-***
-
-
 #### Plugin Controllers directory
 
 -  Created contollers should be extended from `BackendController` class.
