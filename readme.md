@@ -94,7 +94,7 @@ Each plugin may contain these directories:
 - `migrations`
 - `views`
 - `routes.php`
-- `[Name]plugin.php` 
+- `{Name}Plugin.php` 
 
 ### Creating plugin
 	
@@ -112,14 +112,13 @@ Naming this file will be the upper camel case of plugin folder suffixed with Plu
 
 Example:
 
-The plugin file with folder name "products" will be ProductsPlugin.php and the plugin file with folder name "featured_products" will be FeaturedProductsPlugin.php.
+ - The plugin file with folder name "products" will be ProductsPlugin.php and the plugin file with folder name "featured_products" will be FeaturedProductsPlugin.php.
 
-The plugin Class is the same as plugin file name.
+The plugin Class name is the same as plugin file name.
 
 
 ####A sample "products" plugin
 
- 
  
  	<?php
 
@@ -219,7 +218,6 @@ The plugin Class is the same as plugin file name.
     	}
 
 	}
-
 
 	
 
