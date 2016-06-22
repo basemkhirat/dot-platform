@@ -31,11 +31,12 @@
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
         <?php if ($post) { ?>
-            <a href="<?php echo route("admin.posts.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("posts::posts.add_new") ?></a>
+            <a href="<?php echo route("admin.posts.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
+                    class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("posts::posts.add_new") ?></a>
         <?php } else { ?>
             <a href="<?php echo route("admin.posts.show"); ?>" class="btn btn-primary btn-labeled btn-main">
                 <?php echo trans("posts::posts.back_to_posts") ?>
-                &nbsp;  <i class="fa fa-chevron-left"></i>
+                &nbsp; <i class="fa fa-chevron-left"></i>
             </a>
         <?php } ?>
     </div>
@@ -44,22 +45,25 @@
 @section("content")
 @include("admin::partials.messages")
 <form action="" method="post">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
 
                     <div class="form-group">
-                        <textarea name="title" class="form-control input-lg" rows="1" id="post_title" placeholder="<?php echo trans("posts::posts.attributes.title") ?>"><?php echo @Request::old("title", $post->title); ?></textarea>
+                        <textarea name="title" class="form-control input-lg" rows="1" id="post_title"
+                                  placeholder="<?php echo trans("posts::posts.attributes.title") ?>"><?php echo @Request::old("title", $post->title); ?></textarea>
                     </div>
 
                     <div class="form-group">
-                        <textarea name="excerpt" class="form-control" id="post_excerpt" placeholder="<?php echo trans("posts::posts.attributes.excerpt") ?>"><?php echo @Request::old("excerpt", $post->excerpt); ?></textarea>
+                        <textarea name="excerpt" class="form-control" id="post_excerpt"
+                                  placeholder="<?php echo trans("posts::posts.attributes.excerpt") ?>"><?php echo @Request::old("excerpt", $post->excerpt); ?></textarea>
                     </div>
 
                     <div class="form-group">
-                        @include("admin::partials.editor", ["name" => "content", "id" => "postcontent", "value" => @$post->content])
+                        @include("admin::partials.editor", ["name" => "content", "id" => "postcontent", "value" =>
+                        @$post->content])
                     </div>
 
                 </div>
@@ -121,7 +125,7 @@
 
                                 <a class="post-media-preview" href="javascript:void(0)">
                                     <img width="100%" height="130px" class="post-media"
-                                         src="<?php if ($post and @ $post->media) { ?> <?php echo ($post->media->provider_image); ?> <?php } else { ?> <?php echo assets("admin::default/video.png"); ?><?php } ?>">
+                                         src="<?php if ($post and @ $post->media) { ?> <?php echo($post->media->provider_image); ?> <?php } else { ?> <?php echo assets("admin::default/video.png"); ?><?php } ?>">
                                 </a>
                             </div>
                         </div>
@@ -139,14 +143,40 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group switch-row">
-                        <label class="col-sm-9 control-label" for="input-status"><?php echo trans("posts::posts.attributes.status") ?></label>
+                        <label class="col-sm-9 control-label"
+                               for="input-status"><?php echo trans("posts::posts.attributes.status") ?></label>
                         <div class="col-sm-3">
-                            <input <?php if (@Request::old("status", $post->status)) { ?> checked="checked" <?php } ?> type="checkbox" id="input-status" name="status" value="1" class="status-switcher switcher-sm">
+                            <input <?php if (@Request::old("status", $post->status)) { ?> checked="checked" <?php } ?>
+                                type="checkbox" id="input-status" name="status" value="1"
+                                class="status-switcher switcher-sm">
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-folder"></i>
+                    <?php echo trans("posts::posts.attributes.format"); ?>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group" style="margin-bottom:0px">
+
+                        <?php foreach (["post" => "fa-newspaper-o", "article" => "fa-newspaper-o", "video" => "fa-video-camera"] as $format => $icon) { ?>
+                            <div class="radio" style="margin-top: 0;">
+                                <label>
+                                    <input type="radio" name="format" value="<?php echo $format; ?>" class="i-checks"
+                                           <?php if ((!$post->id and $format == "post") or ($post and $post->format == $format)) { ?>checked<?php } ?>>&nbsp;
+                                    <i class="fa <?php echo $icon ?>"></i>&nbsp;
+                                    <span class="lbl"><?php echo trans('posts::posts.format_' . $format); ?></span>
+                                </label>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                </div>
+
+            </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -155,22 +185,22 @@
                 </div>
                 <div class="panel-body">
 
-                    <?php if(Category::count()){ ?>
-                    <ul class='tree-views'>
-                        <?php
-                        echo Category::tree(array(
-                            "row" => function ($row, $depth) use ($post, $post_categories) {
-                                $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a> <label><input type='checkbox' ";
-                                if ($post and in_array($row->id, $post_categories->lists("id")->toArray())) {
-                                    $html .= 'checked="checked"';
+                    <?php if (Category::count()) { ?>
+                        <ul class='tree-views'>
+                            <?php
+                            echo Category::tree(array(
+                                "row" => function ($row, $depth) use ($post, $post_categories) {
+                                    $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a> <label><input type='checkbox' ";
+                                    if ($post and in_array($row->id, $post_categories->lists("id")->toArray())) {
+                                        $html .= 'checked="checked"';
+                                    }
+                                    $html .= "name='categories[]' value='" . $row->id . "'> &nbsp;" . $row->name . "</label></div>";
+                                    return $html;
                                 }
-                                $html .= "name='categories[]' value='" . $row->id . "'> &nbsp;" . $row->name . "</label></div>";
-                                return $html;
-                            }
-                        ));
-                        ?>
-                    </ul>
-                    <?php }else{ ?>
+                            ));
+                            ?>
+                        </ul>
+                    <?php } else { ?>
                         <?php echo trans("categories::categories.no_records"); ?>
                     <?php } ?>
                 </div>
@@ -195,7 +225,8 @@
     <div>
         <div class="container-fluid">
             <div class="form-group">
-                <input type="submit" class="pull-left btn btn-flat btn-primary" value="<?php echo trans("posts::posts.save_post") ?>" />
+                <input type="submit" class="pull-left btn btn-flat btn-primary"
+                       value="<?php echo trans("posts::posts.save_post") ?>"/>
             </div>
         </div>
     </div>
@@ -203,12 +234,12 @@
 </form>
 @section("header")
 @parent
-<link href="<?php echo assets("admin::tagit")?>/jquery.tagit.css" rel="stylesheet" type="text/css">
-<link href="<?php echo assets("admin::tagit")?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 @stop
 @section("footer")
 @parent
-<script type="text/javascript" src="<?php echo assets("admin::tagit")?>/tag-it.js"></script>
+<script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
 <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js') ?>"></script>
 <script>
 

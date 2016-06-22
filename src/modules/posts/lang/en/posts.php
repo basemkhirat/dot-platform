@@ -55,6 +55,12 @@ return [
     'all_categories' => "All categories",
 
     'add_category' => "Add to category",
+
+    "format_post" => "Post",
+    "format_article" => "Article",
+    "format_video" => "Video",
+
+
     'attributes' => [
         'title' => 'title',
         'excerpt' => 'Excerpt',
@@ -63,7 +69,8 @@ return [
         'updated_at' => 'Updated date',
         'status' => 'Status',
         'template' => 'Template',
-        'default' => 'Default'
+        'default' => 'Default',
+        "format" => "Post format"
     ],
     "events" => [
         'created' => 'Post created successfully',

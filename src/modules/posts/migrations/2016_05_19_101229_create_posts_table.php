@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->integer('media_id')->index();
             $table->integer('user_id')->index();
             $table->integer('status')->index();
+            $table->string("format")->index();
             $table->timestamps();
         });
 

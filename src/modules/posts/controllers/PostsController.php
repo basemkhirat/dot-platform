@@ -80,6 +80,7 @@ class PostsController extends BackendController
             $post->media_id = Request::get('media_id');
             $post->user_id = Auth::user()->id;
             $post->status = Request::get("status", 0);
+            $post->format = Request::get("format", "post");
 
             // fire post saving action
             Action::fire("post.saving", $post);
@@ -121,6 +122,7 @@ class PostsController extends BackendController
             $post->image_id = Request::get('image_id');
             $post->media_id = Request::get('media_id');
             $post->status = Request::get("status", 0);
+            $post->format = Request::get("format", "post");
 
             // fire post saving action
             Action::fire("post.saving", $post);

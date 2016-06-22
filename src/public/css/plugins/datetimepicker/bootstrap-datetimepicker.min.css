@@ -239,7 +239,7 @@
 .bootstrap-datetimepicker-widget table th.disabled,
 .bootstrap-datetimepicker-widget table th.disabled:hover {
   background: none;
-  color: #ccc;
+  color: #777777;
   cursor: not-allowed;
 }
 .bootstrap-datetimepicker-widget table th.prev::after {
@@ -322,7 +322,7 @@
 .bootstrap-datetimepicker-widget table td.disabled,
 .bootstrap-datetimepicker-widget table td.disabled:hover {
   background: none;
-  color: #ccc;
+  color: #777777;
   cursor: not-allowed;
 }
 .bootstrap-datetimepicker-widget table td span {

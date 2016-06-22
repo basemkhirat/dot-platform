@@ -566,6 +566,11 @@ body.dark-theme{
     background-image: url(plugins/iCheck/blue.png) !important;
 }
 
+.dark-theme .iradio_square-green {
+    background-image: url(plugins/iCheck/blue.png) !important;
+}
+
+
 .dark-theme .nav-header .dropdown-menu li a:hover{
     color:#fff !important;
 }

@@ -52,6 +52,11 @@ return [
     'tags' => 'الوسوم',
     'add_tag' => 'أضف وسوم',
     'templates' => 'القوالب',
+
+    "format_post" => "خبر",
+    "format_article" => "مقال",
+    "format_video" => "فيديو",
+
     'attributes' => [
         'title' => 'العنوان',
         'excerpt' => 'المقتطف',
@@ -60,7 +65,8 @@ return [
         'updated_at' => 'تاريخ التعديل',
         'status' => 'الحالة',
         'template' => 'القالب',
-        'default' => 'إفتراضى'
+        'default' => 'إفتراضى',
+        "format" => "نوع الخبر"
     ],
     "events" => [
         'created' => 'تم إضافة الخبر بنجاح',
