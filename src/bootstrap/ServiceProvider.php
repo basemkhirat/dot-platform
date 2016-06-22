@@ -2,6 +2,9 @@
 
 namespace Dot\Platform;
 
+use Dot;
+use System;
+use Plugin;
 use Illuminate\Support\Facades\Schema;
 use \Loader;
 use \DB;
@@ -71,8 +74,8 @@ class CmsServiceProvider extends ServiceProvider
         $this->loadAdmin();
 
         // Initializing modules
-        foreach ($this->modules as $module => $module_path) {
-            $this->loadModule($module, $module_path);
+        foreach ($this->modules as $module) {
+            $this->loadModule($module);
         }
 
     }
@@ -81,7 +84,7 @@ class CmsServiceProvider extends ServiceProvider
     {
 
         $this->app->bind('dot', function () {
-            return new Dot;
+            return new DotPlatform;
         });
 
         $this->app->bind('module', function () {
@@ -136,6 +139,8 @@ class CmsServiceProvider extends ServiceProvider
         // Binging dot classes
         $this->bindDotClasses();
 
+        $this->system = $this->getSystem();
+
         // loading admin configuration file
         $this->mergeConfigFrom(
             ADMIN_PATH . '/config/admin.php', "admin"
@@ -152,29 +157,29 @@ class CmsServiceProvider extends ServiceProvider
          * Loading admin providers
          */
 
-        foreach ((array)Config::get("admin.providers") as $provider) {
+        foreach ($this->system->providers as $provider) {
             $this->app->register($provider);
         }
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-        foreach ((array)Config::get("admin.aliases") as $alias => $class) {
+        foreach ($this->system->aliases as $alias => $class) {
             $loader->alias($alias, $class);
         }
 
-        $this->modules = $this->getModules();
+        $this->modules = $this->getComponents();
 
-        foreach ($this->modules as $module => $module_path) {
+        foreach ($this->modules as $module) {
 
             Loader::add(array(
-                $module_path . "/controllers",
-                $module_path . "/models",
-                $module_path . "/middlewares",
-                $module_path . "/commands"
+                $module->root . "/controllers",
+                $module->root . "/models",
+                $module->root . "/middlewares",
+                $module->root . "/commands"
             ));
 
-            if (file_exists($config = $module_path . '/config/' . $module . '.php')) {
+            if (file_exists($config = $module->root . '/config/' . $module->path . '.php')) {
                 $this->mergeConfigFrom(
-                    $config, $module
+                    $config, $module->path
                 );
             }
 
@@ -182,15 +187,15 @@ class CmsServiceProvider extends ServiceProvider
              * Loading modules providers
              */
 
-            if ($module != "auth") {
+            if ($module->path != "auth") {
 
                 // Avoid conflict with system auth config laravel v5.2
 
-                foreach ((array)Config::get("$module.providers") as $provider) {
+                foreach ($module->providers as $provider) {
                     $this->app->register($provider);
                 }
 
-                foreach ((array)Config::get("$module.aliases") as $alias => $class) {
+                foreach ($module->aliases as $alias => $class) {
                     $loader->alias($alias, $class);
                 }
             }
@@ -206,7 +211,7 @@ class CmsServiceProvider extends ServiceProvider
         Loader::register($cached);
 
         // loading admin bootstrap file
-        require_once(ADMIN_PATH . '/start.php');
+        //
     }
 
     /**
@@ -225,17 +230,15 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected function loadAdmin()
     {
-        foreach ((array)Config::get("admin.middlewares") as $middleware) {
+        foreach ($this->system->middlewares as $middleware) {
             $this->router->pushMiddlewareToGroup("web", $middleware);
         }
 
-        foreach ((array)Config::get("admin.route_middlewares") as $alias => $middleware) {
+        foreach ($this->system->route_middlewares as $alias => $middleware) {
             $this->router->middleware($alias, $middleware);
         }
 
-        if (count(Config::get("admin.commands"))) {
-            $this->commands(Config::get("admin.commands"));
-        }
+        $this->commands($this->system->commands);
 
         // loading admin views and translations
         $this->loadViewsFrom(ADMIN_PATH . '/views', 'admin');
@@ -256,55 +259,56 @@ class CmsServiceProvider extends ServiceProvider
     /**
      * Load specific module
      * @param $module
-     * @param $module_path
      */
-    protected function loadModule($module, $module_path)
+    protected function loadModule($module)
     {
 
-        foreach ((array)Config::get($module . ".middlewares") as $middleware) {
+        foreach ($module->middlewares as $middleware) {
             $this->kernel->pushMiddleware($middleware);
         }
 
-        foreach ((array)Config::get($module . ".route_middlewares") as $alias => $middleware) {
+        foreach ($module->route_middlewares as $alias => $middleware) {
             $this->router->middleware($alias, $middleware);
         }
 
-        if (count(Config::get($module . ".commands"))) {
-            $this->commands(Config::get($module . ".commands"));
+        $commands = $module->commands;
+        if (count($commands)) {
+            $this->commands($commands);
         }
 
         // loading module views and translations
-        $this->loadViewsFrom($module_path . '/views', $module);
-        $this->loadTranslationsFrom($module_path . '/lang', $module);
+        $this->loadViewsFrom($module->root . '/views', $module->path);
+        $this->loadTranslationsFrom($module->root . '/lang', $module->path);
 
         // Publishing module public assets
-        if (file_exists($module_path . '/public/')) {
+        if (file_exists($module->root . '/public/')) {
             $this->publishes([
-                $module_path . '/public/' => public_path(Module::path($module)),
-            ], "$module.public");
+                $module->root . '/public/' => public_path(Module::path($module->path)),
+            ], "$module->path.public");
         }
 
         // Publishing module config
-        if (file_exists($module_path . '/config/')) {
+        if (file_exists($module->root . '/config/')) {
             $this->publishes([
-                $module_path . '/config/' => config_path(),
-            ], "$module.config");
+                $module->root . '/config/' => config_path(),
+            ], "$module->path.config");
         }
 
-        $class = \get_plugin_class($module);
+        // Booting
+        $module->boot();
 
-        // including module bootstrap file
-        if (file_exists($bootstrap = $module_path . "/" . $class . ".php")) {
+    }
 
-            require_once($bootstrap);
 
-            if (class_exists($class)) {
-                $plugin = new $class();
-                $plugin->boot();
-            }
+    function getSystem()
+    {
 
-        }
+        require_once(ADMIN_PATH . '/System.php');
 
+        $system = new System();
+        $system->boot();
+
+        return $system;
 
     }
 
@@ -312,11 +316,11 @@ class CmsServiceProvider extends ServiceProvider
      * List modules
      * @return array
      */
-    protected function getModules()
+    protected function getComponents()
     {
-        return Module::components();
-
+        return array_merge(Module::all(), Plugin::installed());
     }
+
 }
 
 /**

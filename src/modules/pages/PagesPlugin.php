@@ -10,7 +10,7 @@ class PagesPlugin extends Plugin
     {
 
         return [
-            "name" => trans("pages::pages.module"),
+            "name" => "pages",
             "version" => "1.0",
         ];
 

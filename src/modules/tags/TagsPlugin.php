@@ -11,7 +11,7 @@ class TagsPlugin extends Plugin
     {
 
         return [
-            "name" => trans("tags::tags.module"),
+            "name" => "tags",
             "version" => "1.0",
         ];
 

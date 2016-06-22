@@ -10,7 +10,7 @@ class CategoriesPlugin extends Plugin
     {
 
         return [
-            "name" => trans("categories::categories.module"),
+            "name" => "categories",
             "version" => "1.0",
         ];
 

@@ -2,15 +2,14 @@
 
 namespace Dot\Platform;
 
-
 /**
  * Class Dot
  * Dot cms super class
  */
-class Dot
+class DotPlatform
 {
 
-    const VERSION = '0.0.44';
+    const VERSION = '0.0.45';
 
     /**
      * get all system locales
@@ -96,6 +95,14 @@ class Dot
         }
 
         return false;
+
+    }
+
+    function getPluginClass($path)
+    {
+
+        $folder = basename($path);
+        return ucfirst(camel_case($folder)) . "Plugin";
 
     }
 

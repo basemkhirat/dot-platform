@@ -1,10 +1,41 @@
 <?php
 
 /**
- * Class #module|ucfirst#Provider
+ * Class #module|ucfirst#Plugin
  */
 class #module|ucfirst#Plugin extends Plugin
 {
+
+    /**
+     * @var array
+     */
+    public $providers = [];
+
+    /**
+     * @var array
+     */
+    public $aliases = [];
+
+    /**
+     * @var array
+     */
+    public $commands = [];
+
+    /**
+     * @var array
+     */
+    public $middlewares = [];
+
+    /**
+     * @var array
+     */
+    public $route_middlewares = [];
+
+    /**
+     * @var array
+     */
+    public $permissions = [];
+
 
     /**
      * Plugin details

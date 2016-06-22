@@ -3,6 +3,9 @@
 class UsersPlugin extends Plugin
 {
 
+    public $permissions = [
+        "manage"
+    ];
 
     /**
      * @return array
@@ -11,12 +14,11 @@ class UsersPlugin extends Plugin
     {
 
         return [
-            "name" => trans("users::users.module"),
+            "name" => "users",
             "version" => "1.0",
         ];
 
     }
-
 
     function boot()
     {

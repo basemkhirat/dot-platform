@@ -254,11 +254,3 @@ function get_migration_class($file)
     $name = join("_", $pure_name);
     return strtoupper(camel_case($name));
 }
-
-function get_plugin_class($path)
-{
-
-    $folder = basename($path);
-    return ucfirst($folder) . "Plugin";
-
-}

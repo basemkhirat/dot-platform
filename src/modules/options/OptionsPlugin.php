@@ -3,6 +3,18 @@
 class OptionsPlugin extends Plugin
 {
 
+    public $providers = [
+        Roumen\Sitemap\SitemapServiceProvider::class
+    ];
+
+    public $permissions = [
+        "manage_general",
+        "manage_seo",
+        "manage_media",
+        "manage_social",
+        "manage_plugins",
+    ];
+
     /**
      * @return array
      */
@@ -10,7 +22,7 @@ class OptionsPlugin extends Plugin
     {
 
         return [
-            "name" => trans("options::options.module"),
+            "name" => "options",
             "version" => "1.0",
         ];
 

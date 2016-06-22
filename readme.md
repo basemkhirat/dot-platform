@@ -94,7 +94,7 @@ Each plugin may contain these directories:
 - `migrations`
 - `views`
 - `routes.php`
-- `plugin.php`
+- `[Name]plugin.php` 
 
 ### Creating plugin
 	
@@ -104,7 +104,138 @@ you can also create a plugin with some extra resources.
 
 	php artisan plugin:make plugin-name --resources
 	
+
+
+###Plugin bootstrap file class
+
+Naming this file will be the upper camel case of plugin folder suffixed with Plugin.php
+
+Example:
+
+The plugin file with folder name "products" will be ProductsPlugin.php and the plugin file with folder name "featured_products" will be FeaturedProductsPlugin.php.
+
+The plugin Class is the same as plugin file name.
+
+
+####A sample "products" plugin
+
+ 
+ 
+ 	<?php
+
+	/*
+ 	 * Class ProductsPlugin
+ 	 */
+ 	
+	class ProductsPlugin extends Plugin {
+
+    	/**
+     	* | Plugin Service providers
+     	* |
+     	* | @var array
+     	*/
+    	public $providers = [];
+
+    	/**
+     	* | Plugin aliases
+     	* |
+     	* | @var array
+     	*/
+    	public $aliases = [];
+
+    	/**
+     	* | Admin commands
+     	* | Located in plugin commands folder
+     	* | @var array
+     	*/
+    	public $commands = [];
+
+    	/**
+    	* | plugin middlewares are located in plugin middlewares folder
+     	* | @var array
+     	*/
+    	public $middlewares = [
+    		PluginMiddleware::class
+    	];
+
+       /**
+     	* | Plugin routed middleware.
+     	* | Located in plugin middlewares folder
+     	* | These middleware may be assigned to groups or used individually.
+     	* |
+     	* | @var array
+     	*/
+    	public $route_middlewares = [];
+
+    	/**
+     	* | Plugin permissions
+     	* | A list of plugin permissions
+     	* | @var array
+     	*/
+    	public $permissions = [
+    		// "create"
+    	];
+
+
+    	/**
+     	* Plugin details
+     	* @return array
+     	*/
+    	function info(){
+
+        	return [
+            	'name' => 'products',
+            	'description' => '',
+            	'version' => '0.1',
+            	'icon' => 'fa-puzzle-piece',
+            	'author' => '',
+            	'url' => ''
+        	];
+
+    	}
+
+    	/**
+     	* Plugin bootstrap
+     	* Called in system boot
+     	*/
+    	function boot(){
 	
+    	}	
+
+    	/**
+     	* Plugin install
+     	* Running plugin migrations and default options
+     	*/
+    	function install(){
+        	parent::install();
+    	}
+
+    	/**
+    	* Plugin uninstall
+    	* Rollback plugin installation
+    	*/
+    	function uninstall(){
+       		parent::uninstall();
+    	}
+
+	}
+
+
+	
+
+- Plugin info method return an array of plugin details.
+- Plugin install and uninstall methods are called when installing and uninstalling plugin.
+- Boot method is called when system booted.
+- In boot method you can add some functionalites such as:
+	- Attaching tasks to system Actions.
+	- Creating items in sidebar menu.
+	- Add some urls to sitemap file.
+	- Creating some schedule tasks.
+	- Adding widgets to dashboard.
+	- Adding extra html inputs to admin forms.
+	- Add some plugin helper functions.
+	
+
 ###Config directory:
 
 After creating plugin using command line, a new file named with module name is placed in config folder may contain these default options
@@ -113,95 +244,9 @@ You can access plugin config item value using:
 
 	config("module_name.config_key");
 
-#####Plugin permissions:
-
-	<?php
-	
-    /**
-     * | Plugin permissions
-     * | A list of plugin permissions
-     * | @var array
-     */
-
-    'permissions' => [
-        // "create_item"
-    ],
-
-#####Plugin service providers:
-
-	<?php
-	
-    /**
-     * | Plugin Service providers
-     * |
-     * | @var array
-     */
-
-    'providers' => [
-        
-    ],
-
-#####Plugin aliases:
-
-	<?php
-	
-    /**
-     * | Plugin aliases
-     * |
-     * | @var array
-     */
-
-    'aliases' => [
-
-    ],
-    
-#####Plugin middlewares:
-
-	<?php 
-	
-    /**
-     * | Plugin HTTP middleware stack.
-     * | Located in plugin middlewares folder
-     * | These middleware are run during every request to your admin.
-     * |
-     * | @var array
-     */
-
-    "middlewares" => [
-       // 'PluginMiddleware'
-    ],
-
-#####Plugin routed middlewares:
-
-	<?php
-
-    /**
-     * | Plugin routed middleware.
-     * | Located in plugin middlewares folder
-     * | These middleware may be assigned to groups or used individually.
-     * |
-     * | @var array
-     */
-
-    "routed_middlewares" => [
-       // 'check' => 'PluginMiddleware',
-    ],
-    
-#####Plugin commands:
-
-	<?php
-
-    /**
-     * | Admin commands
-     * | Located in plugin commands folder
-     * | @var array
-     */
-
-    "commands" => [
-        // 'PluginCommand',
-    ]
     
 ***
+
 
 #### Plugin Controllers directory
 
@@ -431,79 +476,6 @@ Some extra keys are created to translate module name, permissions, attributes an
 			
 	});
 
-
-###Plugin file:
-
-This is plugin bootstrap class hav this structure:
-
-	<?php
-
-	/**
- 	  * Plugin sample class
- 	  */
-	
-	class Plugin
-	{
-    
-    	/**
-     	  * Plugin details
-     	  * @return array
-     	  */
-    	public function info()
-    	{
-
-        	return [
-            	"name" => "Products plugins",
-            	"description" => "",
-            	"version" => "0.1",
-            	"author" => "",
-            	"icon" => "fa-puzzle-piece"
-        	];
-
-    	}
-
-    	/**
-     	  * Plugin bootstrap
-     	  * Called in system boot
-     	  */
-    	public function boot()
-    	{
-        	// booted
-    	}
-
-    	/**
-     	  * Plugin install
-     	  * Running plugin migrations and default options
-     	  */
-    	public function install()
-    	{
-			parent::install();
-    	}
-
-
-    	/**
-     	  * Plugin uninstall
-     	  * Rollback plugin installation
-     	  */
-    	public function uninstall()
-    	{
-    		parent::uninstall();    
-    	}
-
-	}
-
-
-- Plugin info return array of plugin details.
-- Plugin install and uninstall methods are called when installing and uninstalling plugin.
-- Boot method is called when system booted.
-- In boot method you can add some functionalites such as:
-	- Attaching tasks to system Actions.
-	- Creating items in sidebar menu.
-	- Add some urls to sitemap file.
-	- Creating some schedule tasks.
-	- Adding widgets to dashboard.
-	- Adding extra html inputs to admin forms.
-	- Add some plugin helper functions.
 
 
 ### Actions:

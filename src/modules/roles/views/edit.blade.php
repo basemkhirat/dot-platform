@@ -45,7 +45,7 @@
                     </div>
 
                     <?php foreach ($modules as $module) {
-                        $permissions = Config::get("$module->path.permissions", []);
+                        $permissions = $module->permissions;
                         ?>
 
                         <?php if (count($permissions)) { ?>

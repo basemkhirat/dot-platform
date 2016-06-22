@@ -13,7 +13,7 @@ class NavigationsPlugin extends Plugin
     function info(){
 
         return [
-            'name' => 'navigations',
+            'name' => "navigations",
             'description' => '',
             'version' => '0.1',
             'icon' => 'fa-puzzle-piece',

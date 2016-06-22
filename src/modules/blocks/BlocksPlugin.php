@@ -11,7 +11,7 @@ class BlocksPlugin extends Plugin
     {
 
         return [
-            "name" => trans("blocks::blocks.module"),
+            "name" => "blocks",
             "version" => "1.0",
         ];
 

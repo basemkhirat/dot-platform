@@ -68,23 +68,5 @@ return [
          */
 
         "delete_locally" => false
-    ],
-
-
-    "permissions" => [
-        "manage_captions",
-        "watermarking",
-        "cropping"
-    ],
-
-
-    "providers" => [
-        Intervention\Image\ImageServiceProvider::class,
-        Aws\Laravel\AwsServiceProvider::class,
-    ],
-
-    "aliases" => [
-        'Image' => Intervention\Image\Facades\Image::class,
-        'AWS' => Aws\Laravel\AwsFacade::class,
     ]
 ];

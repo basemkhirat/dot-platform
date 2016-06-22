@@ -1,6 +1,8 @@
 <?php
 
 namespace Dot\Platform;
+
+use Dot;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -116,7 +118,7 @@ class DotModule
 
         $path = MODULES_PATH . "/" . $plugin_folder;
 
-        $class = get_plugin_class($path);
+        $class = Dot::getPluginClass($path);
 
         if (!class_exists($class)) {
             include($path . "/" . $class.".php");
@@ -172,7 +174,8 @@ class DotModule
 
         $plugin = new $class();
 
-        $plugin->path = "";
+        $plugin->path = $plugin_folder;
+        $plugin->root = MODULES_PATH."/".$plugin_folder;
         $plugin->name = "plugin";
         $plugin->description = "";
         $plugin->version = "";

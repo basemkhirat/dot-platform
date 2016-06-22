@@ -3,6 +3,22 @@
 class MediaPlugin extends Plugin
 {
 
+    public $providers = [
+        Intervention\Image\ImageServiceProvider::class,
+        Aws\Laravel\AwsServiceProvider::class,
+    ];
+
+    public $aliases = [
+        'Image' => Intervention\Image\Facades\Image::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
+    ];
+
+    public $permissions = [
+        "manage_captions",
+        "watermarking",
+        "cropping"
+    ];
+
     /**
      * @return array
      */
@@ -10,7 +26,7 @@ class MediaPlugin extends Plugin
     {
 
         return [
-            "name" => trans("media::media.module"),
+            "name" => "media",
             "version" => "1.0",
         ];
 

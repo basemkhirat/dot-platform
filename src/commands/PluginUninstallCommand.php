@@ -35,7 +35,7 @@ class PluginUninstallCommand extends Command
 
         $installed_plugins = Plugin::installedPaths();
 
-        $class = get_plugin_class($plugin);
+        $class = Dot::getPluginClass($plugin);
 
         $path = PLUGINS_PATH . "/" . trim($plugin) . "/" . $class . ".php";
 

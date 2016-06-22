@@ -34,7 +34,7 @@ class ModuleInstallCommand extends Command
 
         $module = trim($this->input->getArgument('module'));
 
-        $class = get_plugin_class($module);
+        $class = Dot::getPluginClass($module);
 
         $path = MODULES_PATH . "/" . trim($module) . "/" . $class . ".php";
 

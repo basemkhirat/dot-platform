@@ -11,7 +11,7 @@ class RolesPlugin extends Plugin
     {
 
         return [
-            "name" => trans("roles::roles.module"),
+            "name" => "roles",
             "version" => "1.0",
         ];
 

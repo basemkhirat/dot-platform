@@ -24,7 +24,7 @@ class Plugin
     /**
      * @var array
      */
-    public $middlwares = [];
+    public $middlewares = [];
 
     /**
      * @var array
@@ -203,7 +203,7 @@ class Plugin
 
         $path = PLUGINS_PATH . "/" . $plugin_folder;
 
-        $class = get_plugin_class($path);
+        $class = Dot::getPluginClass($path);
 
         if (!class_exists($class)) {
             include($path . "/" . $class . ".php");
@@ -263,11 +263,12 @@ class Plugin
     public static function instance($plugin_folder)
     {
 
-        $class = get_plugin_class($plugin_folder);
+        $class = Dot::getPluginClass($plugin_folder);
 
         $plugin = new $class();
 
-        $plugin->path = "";
+        $plugin->path = $plugin_folder;
+        $plugin->root = PLUGINS_PATH."/".$plugin_folder;
         $plugin->name = "plugin";
         $plugin->description = "";
         $plugin->version = "";

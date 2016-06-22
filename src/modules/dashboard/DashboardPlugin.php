@@ -10,7 +10,7 @@ class DashboardPlugin extends Plugin
     {
 
         return [
-            "name" => trans("dashboard::dashboard.module"),
+            "name" => "dashboard",
             "version" => "1.0",
         ];
 

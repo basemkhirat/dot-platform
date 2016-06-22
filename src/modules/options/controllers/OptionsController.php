@@ -128,7 +128,7 @@ class OptionsController extends BackendController
 
             $path = PLUGINS_PATH . "/" . $name;
 
-            $class = get_plugin_class($path);
+            $class = Dot::getPluginClass($path);
 
             $installed_plugins = Plugin::installedPaths();
 
@@ -147,7 +147,7 @@ class OptionsController extends BackendController
 
                 // fix removed installed plugins folders
                 foreach ($installed_plugins as $key => $plugin) {
-                    if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/" . get_plugin_class($plugin) . ".php")) {
+                    if (!file_exists(PLUGINS_PATH . "/" . $plugin . "/" . Dot::getPluginClass($plugin) . ".php")) {
                         unset($installed_plugins[$key]);
                     }
                 }

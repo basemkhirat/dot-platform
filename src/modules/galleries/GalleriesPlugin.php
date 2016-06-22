@@ -11,7 +11,7 @@ class GalleriesPLugin extends Plugin
     {
 
         return [
-            "name" => trans("galleries::galleries.module"),
+            "name" => "galleries",
             "version" => "1.0",
         ];
 

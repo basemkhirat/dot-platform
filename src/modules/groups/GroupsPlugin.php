@@ -3,6 +3,12 @@
 class GroupsPlugin extends Plugin
 {
 
+    public $permissions = [
+        "create",
+        "edit",
+        "delete"
+    ];
+
     /**
      * @return array
      */
@@ -10,7 +16,7 @@ class GroupsPlugin extends Plugin
     {
 
         return [
-            "name" => trans("groups::groups.module"),
+            "name" => "groups",
             "version" => "1.0",
         ];
 

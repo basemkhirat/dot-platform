@@ -3,7 +3,6 @@
 class AuthPlugin extends Plugin
 {
 
-
     /**
      * @return array
      */
@@ -11,7 +10,7 @@ class AuthPlugin extends Plugin
     {
 
         return [
-            "name" => trans("auth::auth.module"),
+            "name" => "auth",
             "version" => "1.0",
         ];
 

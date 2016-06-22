@@ -10,7 +10,7 @@ class PostsPlugin extends Plugin
     {
 
         return [
-            "name" => "Posts",
+            "name" => "posts",
             "version" => "1.0",
         ];
 
