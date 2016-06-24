@@ -3,6 +3,7 @@
 namespace Dot\Platform;
 
 use Dot;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -45,7 +46,7 @@ class DotModule
         foreach ((array)$this->config->get("admin.modules") as $module) {
             if ($module_path = get_module_path($module)) {
                 $this->modules[$module] = $module_path;
-                $this->paths[$module] = "modules/". $module;
+                $this->paths[$module] = "modules/" . $module;
             }
         }
 
@@ -53,7 +54,7 @@ class DotModule
             $plugins = json_decode($this->config->get("plugins"));
             foreach ($plugins as $plugin) {
                 $this->modules[$plugin] = PLUGINS_PATH . "/" . $plugin;
-                $this->paths[$plugin] = "plugins/". $plugin;
+                $this->paths[$plugin] = "plugins/" . $plugin;
             }
         }
 
@@ -75,9 +76,40 @@ class DotModule
      */
     public function path($module)
     {
-        return isset($this->paths[$module])?$this->paths[$module] : "";
+        return isset($this->paths[$module]) ? $this->paths[$module] : "";
     }
 
+
+    /**
+     * Get all installed modules
+     * @return array
+     */
+    public static function installed()
+    {
+        $modules = [];
+
+        $installed_modules = self::installedPaths();
+
+        foreach (glob(MODULES_PATH . '/*/*Plugin.php') as $file) {
+
+            $module_path = dirname($file);
+
+            $folder_name = basename($module_path);
+
+            if (in_array($folder_name, $installed_modules)) {
+
+                $module = self::get($folder_name);
+
+                if ($module->path != "") {
+                    $modules[] = $module;
+                }
+
+            }
+        }
+
+        return $modules;
+
+    }
 
     /**
      * Get all system plugins
@@ -121,7 +153,7 @@ class DotModule
         $class = Dot::getPluginClass($path);
 
         if (!class_exists($class)) {
-            include($path . "/" . $class.".php");
+            include($path . "/" . $class . ".php");
         }
 
         if (class_exists($class)) {
@@ -175,7 +207,7 @@ class DotModule
         $plugin = new $class();
 
         $plugin->path = $plugin_folder;
-        $plugin->root = MODULES_PATH."/".$plugin_folder;
+        $plugin->root = MODULES_PATH . "/" . $plugin_folder;
         $plugin->name = "plugin";
         $plugin->description = "";
         $plugin->version = "";
@@ -185,6 +217,15 @@ class DotModule
 
         return $plugin;
 
+    }
+
+    /**
+     * Get installed pathes
+     * @return array
+     */
+    public static function installedPaths()
+    {
+        return Config::get("admin.modules", []);
     }
 
 }

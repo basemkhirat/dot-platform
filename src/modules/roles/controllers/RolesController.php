@@ -71,7 +71,7 @@ class RolesController extends BackendController
         }
 
         $this->data["role"] = false;
-        $this->data["modules"] = array_merge(Module::all(), Plugin::installed());
+        $this->data["modules"] = array_merge(Module::installed(), Plugin::installed());
         return View::make("roles::edit", $this->data);
     }
 
@@ -104,7 +104,7 @@ class RolesController extends BackendController
         $this->data["role"] = $role;
         $this->data["role_permissions"] = $role->permissions->lists("permission")->toArray();
 
-        $this->data["modules"] = array_merge(Module::all(), Plugin::installed());
+        $this->data["modules"] = array_merge(Module::installed(), Plugin::installed());
 
         return View::make("roles::edit", $this->data);
     }

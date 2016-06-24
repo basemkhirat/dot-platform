@@ -318,7 +318,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected function getComponents()
     {
-        return array_merge(Module::all(), Plugin::installed());
+        return array_merge(Module::installed(), Plugin::installed());
     }
 
 }
