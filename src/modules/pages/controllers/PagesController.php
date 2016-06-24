@@ -64,6 +64,7 @@ class PagesController extends BackendController
             $page->image_id = Request::get('image_id');
             $page->user_id = Auth::user()->id;
             $page->status = Request::get("status", 0);
+            $page->lang = LANG;
 
             // fire page saving action
             Action::fire("page.saving", $page);
@@ -102,6 +103,7 @@ class PagesController extends BackendController
             $page->content = Request::get('content');
             $page->image_id = Request::get('image_id');
             $page->status = Request::get("status", 0);
+            $page->lang = LANG;
 
             // fire page saving action
             Action::fire("page.saving", $page);

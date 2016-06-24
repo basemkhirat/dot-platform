@@ -8,7 +8,6 @@ class NavigationsController extends BackendController
     function index($id = 0)
     {
 
-
         $nav = Nav::find($id);
 
         if (!$id) {
@@ -18,7 +17,6 @@ class NavigationsController extends BackendController
                 return redirect()->route("admin.navigations.show", ["id" => $nav->id]);
             }
         }
-
 
         $this->data["nav"] = $nav;
         $this->data["navs"] = Nav::where("menu", 0)->get();
@@ -109,6 +107,7 @@ class NavigationsController extends BackendController
         }
 
         $nav->name = Request::get("name");
+        $nav->lang = LANG;
 
         if (!$nav->validate()) {
             return json_encode($nav->errors());
@@ -167,12 +166,14 @@ class NavigationsController extends BackendController
             if (isset($item->id)) {
 
                 $nav = new Nav();
+
                 $nav->name = $item->name;
                 $nav->type = $item->type;
                 $nav->type_id = $item->type_id;
                 $nav->parent = 0;
                 $nav->order = $order;
                 $nav->menu = $menu_id;
+                $nav->lang = LANG;
 
                 $nav->save();
 

@@ -18,6 +18,7 @@ class CreateBlocksTable extends Migration
             $table->string("slug")->index();
             $table->string("type")->index();
             $table->integer("limit")->index();
+            $table->string("lang")->index();
 
         });
     }

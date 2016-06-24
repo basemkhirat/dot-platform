@@ -34,4 +34,16 @@ class Gallery extends Model {
         return $this->belongsToMany("Media", "galleries_media", "gallery_id", "media_id");
     }
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new LangScope);
+    }
+
 }

@@ -2,7 +2,7 @@
 
 Route::group(array(
     "prefix" => ADMIN,
-    "middleware" => "auth",
+    "middleware" => ['web', 'auth'],
         ), function($route) {
         $route->group(array("prefix" => "#module#"), function($route) {
             $route->any('/', array("as" => "admin.#module#.show", "uses" => "#module|ucfirst#Controller@index"));

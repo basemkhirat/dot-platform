@@ -1,19 +1,21 @@
 @extends("admin::layouts.master")
 @section("breadcrumb")
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-4">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
         <h2>
             <i class="fa #options.icon#"></i>
             <?php echo trans("#module#::#module#.#module#") ?>
         </h2>
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo URL::to(ADMIN . "/#module#"); ?>"><?php echo trans("#module#::#module#.#module#") ?> (<?php echo $#module#->total() ?>)</a>
             </li>
         </ol>
     </div>
-    <div class="col-lg-5"></div>
-    <div class="col-lg-3">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
         <a href="<?php echo route("admin.#module#.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("#module#::#module#.add_new") ?></a>
     </div>
 </div>
@@ -183,7 +185,7 @@
                                 {if options.status}
                                 <td>
                                    <?php if($#model#->status){ ?>
-                                    <a data-toggle="tooltip" data-placement="bottom" title="<?php echo trans("#module#::#module#.activated"); ?>" class="ask" message="<?php echo trans('#module#::#module#.sure_deactivate') ?>" href="<?php echo URL::route("admin.admin.#module#.status", array("#key#" => $#model#->#key#, "status" => 0)) ?>">
+                                    <a data-toggle="tooltip" data-placement="bottom" title="<?php echo trans("#module#::#module#.activated"); ?>" class="ask" message="<?php echo trans('#module#::#module#.sure_deactivate') ?>" href="<?php echo URL::route("admin.#module#.status", array("#key#" => $#model#->#key#, "status" => 0)) ?>">
                                         <i class="fa fa-toggle-off text-success"></i>
                                     </a>
                                    <?php }else{ ?>

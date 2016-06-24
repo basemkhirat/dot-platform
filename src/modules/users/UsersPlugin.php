@@ -34,14 +34,9 @@ class UsersPlugin extends Plugin
             }
         });
 
-        Widget::sidebar("dashboard.middle", function ($widget) {
+        Action::listen("dashboard.middle", function () {
 
-            $users = User::where("status", 1)
-                ->select("users.*", "roles.*", "users.id as id", "roles.name as role_name")
-                ->leftJoin("media", "media.media_id", "=", "users.photo_id")
-                ->join("roles", "roles.id", "=", "users.role_id")
-                ->orderBy("users.id", "DESC")
-                ->take(7)->get();
+            $users = User::orderBy("created_at", "DESC")->limit(5)->get();
 
             return view("users::widgets.users", ["users" => $users]);
 

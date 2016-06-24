@@ -22,6 +22,7 @@ class CreatePagesTable extends Migration
             $table->integer('image_id')->index();
             $table->integer('user_id')->index();
             $table->integer('status')->index();
+            $table->string("lang")->index();
             $table->timestamps();
         });
 

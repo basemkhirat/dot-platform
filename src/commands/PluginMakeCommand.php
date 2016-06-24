@@ -81,15 +81,6 @@ class PluginMakeCommand extends Command
      */
     protected $relationships = [];
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * @param $fields
@@ -270,9 +261,8 @@ class PluginMakeCommand extends Command
         $this->path = $path = plugins_path($this->module);
 
         if (file_exists($path)) {
-            //  return $this->error("Module " . $this->path . " is already exists");
+            // return $this->error("Module " . $this->path . " is already exists");
         }
-
 
         $this->keys = array(
             "module" => $name,
@@ -285,21 +275,21 @@ class PluginMakeCommand extends Command
         $this->model = false;
         $this->table = false;
 
-        if ($this->confirm("Are you want to create a model for this plugin?", false)) {
 
-            $this->model = $this->askModelName();
-            $this->table = $this->askTableName();
+        if ($this->option("resources")) {
 
-            $this->keys["model"] = $this->model;
-            $this->keys["table"] = $this->table;
+            if ($this->confirm("Are you want to create a model for this plugin?", false)) {
 
+                $this->model = $this->askModelName();
+                $this->table = $this->askTableName();
+
+                $this->keys["model"] = $this->model;
+                $this->keys["table"] = $this->table;
+
+            }
+
+            return $this->createResourcesPlugin();
         }
-
-        //if ($this->option("resources")) {
-        return $this->createResourcesPlugin();
-        //}
-
-        die();
 
         /*
          * Crud mode
@@ -308,8 +298,14 @@ class PluginMakeCommand extends Command
         $folder_exists = file_exists($path);
         $json_exists = file_exists($path . "/" . $this->json_file);
 
+        $this->model = $model = $this->askModelName();
+        $this->table = $table = $this->askTableName();
+
+        $this->keys["model"] = $this->model;
+        $this->keys["table"] = $this->table;
+
         if ($json_exists) {
-            $default_json = (file_get_contents(templates_path("advanced/module.tpl")) == file_get_contents($path . "/" . $this->json_file)) ? true : false;
+            $default_json = (file_get_contents(templates_path("crud/module.tpl")) == file_get_contents($path . "/" . $this->json_file)) ? true : false;
         } else {
             $default_json = false;
         }
@@ -319,27 +315,34 @@ class PluginMakeCommand extends Command
         }
 
         if (!$json_exists) {
-            $json_content = file_get_contents(templates_path("advanced/module.tpl"));
+            $json_content = file_get_contents(templates_path("crud/module.tpl"));
             $this->write($path . "/" . $this->json_file, $json_content);
-            return $this->info($name . "/$this->json_file created\nConfigure your module and install");
+            return $this->info($name . "/$this->json_file created\nConfigure your plugin and install");
         }
 
         if ($default_json) {
-            return $this->error("Module '" . $name . "' is not configured");
+            return $this->error("Plugin '" . $name . "' is not configured. check plugin json file");
         }
-
 
         // Reading module json file
         $this->json = $json = json_decode(file_get_contents($path . "/" . $this->json_file));
 
-
         // getting primary key
-
         $default_primary_key = null;
         if (isset($this->json->fields) and count($this->json->fields)) {
             $fields = array_keys((array)$this->json->fields);
             $default_primary_key = $fields[0];
         }
+
+        /* if ($this->confirm("Are you want to create a model for this plugin?", false)) {
+
+             $this->model = $model = $this->askModelName();
+             $this->table = $table =  $this->askTableName();
+
+             $this->keys["model"] = $this->model;
+             $this->keys["table"] = $this->table;
+
+         }*/
 
         if ($this->argument("key") == "") {
             $this->key = $key = $this->ask("Primary key field *", $default_primary_key);
@@ -372,19 +375,19 @@ class PluginMakeCommand extends Command
         // migrate base module table
         $this->migrate();
 
-        // start
-        $start_content = file_get_contents(templates_path("advanced/start.tpl"));
+// start
+        $start_content = file_get_contents(templates_path("resources/plugin.tpl"));
         $start_content = $this->replace($start_content);
-        $this->write($path . "/start.php", $start_content);
+        $this->write($this->path . "/" . ucfirst($this->module) . "Plugin.php", $start_content);
 
         // routes
-        $routes_content = file_get_contents(templates_path("advanced/routes.tpl"));
+        $routes_content = file_get_contents(templates_path("crud/routes.tpl"));
         $routes_content = $this->replace($routes_content);
         $this->write($path . "/routes.php", $routes_content);
 
         // view
         File::makeDirectory($path . "/views", $this->permission, true, true);
-        $view_content = file_get_contents(templates_path("advanced/show.view.tpl"));
+        $view_content = file_get_contents(templates_path("crud/show.view.tpl"));
 
 
         $sortable_fields = array();
@@ -432,7 +435,7 @@ class PluginMakeCommand extends Command
         $view_content = $this->replace($view_content, array("fields" => $gridable_fields, "sortable_fields" => $sortable_fields));
         $this->write($path . "/views/show.blade.php", $view_content);
 
-        $view_content = file_get_contents(templates_path("advanced/edit.view.tpl"));
+        $view_content = file_get_contents(templates_path("crud/edit.view.tpl"));
 
 
         // generating inputs for fields
@@ -464,13 +467,13 @@ class PluginMakeCommand extends Command
         File::makeDirectory($path . "/models", $this->permission, true, true);
 
         if ($this->required("categories")) {
-            $cat_model_content = file_get_contents(templates_path("advanced/plain.model.tpl"));
+            $cat_model_content = file_get_contents(templates_path("crud/plain.model.tpl"));
             $cat_model_content = $this->replace($cat_model_content, array("related_model" => ucfirst($model) . "Category", "table" => $this->module . "_categories"));
             $this->write($path . "/models/" . ucfirst($model) . "Category.php", $cat_model_content);
         }
 
         if ($this->required("tags")) {
-            $tag_model_content = file_get_contents(templates_path("advanced/plain.model.tpl"));
+            $tag_model_content = file_get_contents(templates_path("crud/plain.model.tpl"));
             $tag_model_content = $this->replace($tag_model_content, array("related_model" => ucfirst($model) . "Tag", "table" => $this->module . "_tags"));
             $this->write($path . "/models/" . ucfirst($model) . "Tag.php", $tag_model_content);
         }
@@ -491,7 +494,7 @@ class PluginMakeCommand extends Command
                 }
                 // generation related models
                 if ($this->confirm("Create $rmodel model for $func_name $type relationship ?", false)) {
-                    $tag_model_content = file_get_contents(templates_path("advanced/plain.model.tpl"));
+                    $tag_model_content = file_get_contents(templates_path("crud/plain.model.tpl"));
                     $tag_model_content = $this->replace($tag_model_content, array("related_model" => $rmodel, "table" => $table));
                     $this->write($path . "/models/" . $rmodel . ".php", $tag_model_content);
                     $this->info("$rmodel model created for $type relationship");
@@ -507,14 +510,13 @@ class PluginMakeCommand extends Command
 
         $this->keys["relation_functions"] = $relation_fuctions;
 
-        $model_content = file_get_contents(templates_path("advanced/model.tpl"));
+        $model_content = file_get_contents(templates_path("crud/model.tpl"));
         $this->keys["searchable"] = "'" . join("', '", $this->getTextFields($json->fields)) . "'";
 
         $this->keys["sluggable"] = "";
         foreach ($this->sluggable as $from => $to) {
             $this->keys["sluggable"] .= "'" . $from . "' => '" . $to . "',";
         }
-
 
         $model_content = $this->replace($model_content);
 
@@ -523,7 +525,7 @@ class PluginMakeCommand extends Command
 
         // Controller
         File::makeDirectory($path . "/controllers", $this->permission, true, true);
-        $controller_content = file_get_contents(templates_path("advanced/controller.tpl"));
+        $controller_content = file_get_contents(templates_path("crud/controller.tpl"));
 
 
         $controller_attributes = [];
@@ -577,7 +579,7 @@ class PluginMakeCommand extends Command
         $this->info("Generating $this->module lang files");
 
         // lang
-        $lang_content = file_get_contents(templates_path("advanced/lang.tpl"));
+        $lang_content = file_get_contents(templates_path("crud/lang.tpl"));
         $lang_content = $this->replace($lang_content, array("attributes" => $this->model_attributes, "additional" => $this->langs));
         foreach (Config::get("admin.locales") as $code => $lang) {
             File::makeDirectory($path . "/lang/" . $code, $this->permission, true, true);
@@ -585,18 +587,6 @@ class PluginMakeCommand extends Command
         }
 
         $this->info("Module '" . $name . "' has been created successfully");
-
-        $this->info("Registering $name module");
-
-        $modules = Option::where("name", "modules")->pluck("value");
-        $modules = (array)json_decode($modules);
-
-        if (!is_array($modules)) {
-            $modules = array();
-        }
-
-        $modules[$this->module] = 1;
-        Option::where("name", "modules")->update(array("value" => json_encode($modules)));
 
         $this->call("vendor:publish");
         $this->call("clear-compiled");
@@ -678,9 +668,9 @@ class PluginMakeCommand extends Command
                 }
 
                 if ($name == "date") {
-                    $this->css("css/plugins/datetimepicker/bootstrap-datetimepicker.min.css");
-                    $this->js("js/plugins/moment/moment.min.js");
-                    $this->js("js/plugins/datetimepicker/bootstrap-datetimepicker.min.js");
+                    $this->css("admin::css/plugins/datetimepicker/bootstrap-datetimepicker.min.css");
+                    $this->js("admin::js/plugins/moment/moment.min.js");
+                    $this->js("admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js");
                     $this->code("$('.datepick').datetimepicker({
                         format: 'YYYY-MM-DD',
                     });");
@@ -695,9 +685,9 @@ class PluginMakeCommand extends Command
                 }
 
                 if ($name == "time") {
-                    $this->css("css/plugins/datetimepicker/bootstrap-datetimepicker.min.css");
-                    $this->js("js/plugins/moment/moment.min.js");
-                    $this->js("js/plugins/datetimepicker/bootstrap-datetimepicker.min.js");
+                    $this->css("admin::css/plugins/datetimepicker/bootstrap-datetimepicker.min.css");
+                    $this->js("admin::js/plugins/moment/moment.min.js");
+                    $this->js("admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js");
                     $this->code("$('.timepick').datetimepicker({
                         format: 'HH:mm:ss',
                     });");
@@ -712,9 +702,9 @@ class PluginMakeCommand extends Command
                 }
 
                 if ($name == "datetime") {
-                    $this->css("css/plugins/datetimepicker/bootstrap-datetimepicker.min.css");
-                    $this->js("js/plugins/moment/moment.min.js");
-                    $this->js("js/plugins/datetimepicker/bootstrap-datetimepicker.min.js");
+                    $this->css("admin::css/plugins/datetimepicker/bootstrap-datetimepicker.min.css");
+                    $this->js("admin::js/plugins/moment/moment.min.js");
+                    $this->js("admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js");
                     $this->code("$('.datetimepick').datetimepicker({
                         format: 'YYYY-MM-DD HH:mm:ss',
                     });");
@@ -729,7 +719,7 @@ class PluginMakeCommand extends Command
                 }
 
                 if ($name == "html") {
-                    $this->js("ckeditor/ckeditor.js");
+                    $this->js("admin::ckeditor/ckeditor.js");
                     $this->html('
                     <div class="form-group">
                         <label for="input-' . $field . '"><?php echo trans("' . $this->module . '::' . $this->module . '.attributes.' . $field . '") ?></label>
@@ -1265,6 +1255,7 @@ class PluginMakeCommand extends Command
             ['plain', null, InputOption::VALUE_NONE, 'Create a simple plugin without any resources', null],
             ['resources', null, InputOption::VALUE_NONE, 'Create a plugin with resources', null],
             ['crud', null, InputOption::VALUE_NONE, 'Create a crud plugin', null],
+            ['f', null, InputOption::VALUE_NONE, 'Create a crud plugin', null],
         ];
     }
 

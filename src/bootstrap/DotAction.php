@@ -24,12 +24,11 @@ class DotAction extends Dispatcher
         $output = $this->fire($event, $payload, $halt);
 
         if ($halt) {
-            echo $output;
             return true;
         }
 
         foreach ($output as $value) {
-            echo $value;
+           echo $value;
         }
 
         return true;

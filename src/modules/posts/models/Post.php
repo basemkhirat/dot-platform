@@ -2,7 +2,8 @@
 
 use Carbon\Carbon;
 
-class Post extends Model {
+class Post extends Model
+{
 
     protected $module = 'posts';
 
@@ -11,8 +12,8 @@ class Post extends Model {
     public $timestamps = true;
 
     protected $searchable = ['title', 'excerpt', 'content'];
-    protected $perPost = 20;
 
+    protected $perPage = 20;
 
     protected $sluggable = [
         'slug' => 'title',
@@ -26,27 +27,54 @@ class Post extends Model {
         'title' => 'required'
     ];
 
-    public function meta(){
+
+    public function scopeStatus($query, $status)
+    {
+
+        switch ($status) {
+            case "published":
+                $query->where("status", 1);
+                break;
+
+            case "unpublished":
+                $query->where("status", 0);
+                break;
+        }
+
+    }
+
+    public function scopeFormat($query, $format)
+    {
+        $query->where("format", $format);
+    }
+
+    public function meta()
+    {
         return $this->hasMany("PostMeta");
     }
 
-    public function image() {
+    public function image()
+    {
         return $this->hasOne("Media", "id", "image_id");
     }
 
-    public function media() {
+    public function media()
+    {
         return $this->hasOne("Media", "id", "media_id");
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->hasOne("User", "id", "user_id");
     }
-    
-    public function tags() {
+
+    public function tags()
+    {
         return $this->belongsToMany("Tag", "posts_tags", "post_id", "tag_id");
     }
 
-    public function categories() {
+    public function categories()
+    {
         return $this->belongsToMany("Category", "posts_categories", "post_id", "category_id");
     }
 
@@ -68,7 +96,8 @@ class Post extends Model {
     }
     */
 
-    public function syncTags($tags) {
+    public function syncTags($tags)
+    {
         $tag_ids = array();
         if ($tags = @explode(",", $tags)) {
             $tags = array_filter($tags);
@@ -87,6 +116,18 @@ class Post extends Model {
             }
         }
         $this->tags()->sync($tag_ids);
+    }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new LangScope);
     }
 
 }

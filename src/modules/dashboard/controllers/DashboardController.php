@@ -15,22 +15,9 @@ class DashboardController extends BackendController
 
     public function index($cat_id = 0)
     {
-
-
         $cat_id = (int) Request::get("cat_id");
 
         $this->data["cat_id"] = $cat_id;
-
-
-        /*
-          $this->data["comments"] = DB::table("comments")
-          ->join("posts", "posts.post_id", "=", "comments.comment_post_id")
-          ->join("posts_langs", "posts_langs.post_id", "=", "posts.post_id")
-          ->join("users", "comments.comment_user_id", "=","users.id")
-          ->where("posts_langs.lang", LANG)
-          ->take(15)
-          ->get();
-         */
 
         return View::make("dashboard::show", $this->data);
     }
@@ -41,44 +28,12 @@ class DashboardController extends BackendController
         $start = date("Y-m-d H:i:s", strtotime(urldecode(Request::get("start"))));
         $end = date("Y-m-d H:i:s", strtotime(urldecode(Request::get("end"))));
 
-        $cats = Category::with(['postViews', 'postStats'])->where('site', $this->conn)->orderBy('name', 'desc');/*->whereHas('postViews', function($q) {
-            $q->where('post_type', 'post');
-        });*/
-
-//        $ob1 = DB::table('posts')->leftJoin('posts_categories', 'posts_categories.post_id', '=', 'posts.post_id')
-//                ->leftJoin('categories', 'posts_categories.cat_id', '=', 'categories.cat_id')
-//                ->where('categories.site', $this->conn)
-//                ->where('post_type', 'post')
-//                //->where('cat_parent', 0)
-//                ->select(DB::raw('sum(post_views) as total'), 'cat_name', 'categories.cat_id')
-//                ->groupBy('posts_categories.cat_id')
-//                ->orderBy('cat_name', 'desc');
-//
-//        $ob2 = DB::table('posts_stats')->leftJoin('posts_categories', 'posts_categories.post_id', '=', 'posts_stats.post_id')
-//                ->leftJoin('posts', 'posts_stats.post_id', '=', 'posts.post_id')
-//                ->leftJoin('categories', 'posts_categories.cat_id', '=', 'categories.cat_id')
-//                ->where('categories.site', $this->conn)
-//                ->where('post_type', 'post')
-//                //->where('cat_parent', 0)
-//                ->select(DB::raw('sum(facebook) as facebook'), DB::raw('sum(twitter) as twitter'), DB::raw('sum(youtube) as youtube'), 'cat_name', 'categories.cat_id')
-//                ->groupBy('posts_categories.cat_id')
-//                ->orderBy('cat_name', 'desc');
+        $cats = Category::with(['postViews', 'postStats'])->where('site', $this->conn)->orderBy('name', 'desc');
 
         $articlesViews = Post::where('site', LANG)->where('type', 'article');
         $articlesStats = PostStat::whereHas('posts', function ($q) {
             $q->where('site', $this->conn)->where('type', 'article');
         })->select(DB::raw('sum(facebook) as facebook'), DB::raw('sum(twitter) as twitter'), DB::raw('sum(youtube) as youtube'));
-
-//        $ob3 = DB::table('posts')
-//                ->where('posts.site', $this->conn)
-//                ->where('post_type', 'article');
-//
-//
-//        $ob4 = DB::table('posts_stats')
-//                ->leftJoin('posts', 'posts_stats.post_id', '=', 'posts.post_id')
-//                ->where('posts.site', $this->conn)
-//                ->where('post_type', 'article')
-//                ->select(DB::raw('sum(facebook) as facebook'), DB::raw('sum(twitter) as twitter'), DB::raw('sum(youtube) as youtube'));
 
         if (Request::has("start")) {
             $cats->whereHas('posts', function ($q) use ($start) {

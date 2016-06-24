@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string("slug")->index();
             $table->integer("image_id")->index();
             $table->integer("user_id")->index();
+            $table->string("lang")->index();
             $table->timestamps();
         });
 

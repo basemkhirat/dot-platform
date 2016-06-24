@@ -42,6 +42,7 @@ class CategoriesController extends BackendController {
             $category->slug = Request::get('slug');
             $category->image_id = Request::get('image_id');
             $category->parent = Request::get('parent');
+            $category->lang = LANG;
 
             // fire category saving action
             Action::fire("category.saving", $category);
@@ -74,6 +75,7 @@ class CategoriesController extends BackendController {
             $category->slug = Request::get('slug');
             $category->image_id = Request::get('image_id');
             $category->parent = Request::get('parent');
+            $category->lang = LANG;
 
             // fire category saving action
             Action::fire("category.saving", $category);

@@ -18,6 +18,7 @@ class CreateGalleriesTable extends Migration
             $table->string("name")->index();
             $table->string("slug")->index();
             $table->string("author")->index();
+            $table->string("lang")->index();
             $table->timestamps();
             $table->integer("user_id")->index();
 

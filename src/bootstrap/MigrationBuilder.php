@@ -171,7 +171,7 @@ class " . $class_name . " extends Migration {
         $filename = $module . "_create_" . $this->table . "_table.php";
 
         //$path = app()->databasePath() . '/migrations/';
-        $path = modules_path($module."/migrations");
+        $path = plugins_path($module."/migrations");
 
         file_put_contents($path ."/". $filename, $schema);
     }

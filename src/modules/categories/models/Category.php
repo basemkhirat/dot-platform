@@ -133,4 +133,16 @@ class Category extends Model {
                         ->leftJoin('posts', 'posts.id', '=', 'posts_stats.post_id')->where('type', 'post')->groupBy('posts.id');
     }
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new LangScope);
+    }
+
 }

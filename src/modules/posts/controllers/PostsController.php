@@ -12,6 +12,7 @@ class PostsController extends BackendController
 
     function index()
     {
+
         if (Request::isMethod("post")) {
             if (Request::has("action")) {
                 switch (Request::get("action")) {
@@ -60,6 +61,7 @@ class PostsController extends BackendController
         if (Request::has("status")) {
             $query->where("status", Request::get("status"));
         }
+
         if (Request::has("q")) {
             $query->search(urldecode(Request::get("q")));
         }
@@ -81,6 +83,7 @@ class PostsController extends BackendController
             $post->user_id = Auth::user()->id;
             $post->status = Request::get("status", 0);
             $post->format = Request::get("format", "post");
+            $post->lang = LANG;
 
             // fire post saving action
             Action::fire("post.saving", $post);
@@ -95,7 +98,7 @@ class PostsController extends BackendController
 
             // saving meta
             $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
-            foreach($custom_fields as $name => $value){
+            foreach ($custom_fields as $name => $value) {
                 $meta = new PostMeta();
                 $meta->name = $name;
                 $meta->value = $value;
@@ -131,6 +134,7 @@ class PostsController extends BackendController
             $post->media_id = Request::get('media_id');
             $post->status = Request::get("status", 0);
             $post->format = Request::get("format", "post");
+            $post->lang = LANG;
 
             // fire post saving action
             Action::fire("post.saving", $post);
@@ -147,7 +151,7 @@ class PostsController extends BackendController
             // saving meta
             PostMeta::where("post_id", $post->id)->delete();
             $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
-            foreach($custom_fields as $name => $value){
+            foreach ($custom_fields as $name => $value) {
                 $meta = new PostMeta();
                 $meta->name = $name;
                 $meta->value = $value;

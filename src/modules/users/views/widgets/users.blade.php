@@ -3,8 +3,9 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>
-                    <i class="fa fa-users"></i>
-                    <?php echo trans("dashboard::dashboard.recent_users") ?>                </h5>
+                    <i class="fa fa-users"></i> &nbsp;
+                    <?php echo trans("dashboard::dashboard.recent_users") ?>
+                </h5>
 
                 <strong class="pull-right">
                     <a class="text-navy" href="<?php echo URL::to(ADMIN . "/users"); ?>">
@@ -14,27 +15,14 @@
             </div>
             <div class="ibox-content">
                 <table class="table table-striped table-hover">
-                    <?php /*
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th><?php echo trans("dashboard::dashboard.photo") ?></th>
-                                <th><?php echo trans("dashboard::dashboard.full_name") ?></th>
-                                <th><?php echo trans("dashboard::dashboard.role") ?></th>
-                                <th></th>
-                            </tr>
-                            </thead>
- */ ?>
+
                     <tbody class="valign-middle">
-                    <?php
-                    $i = 1;
-                    foreach ($users as $user) {
-                        ?>
+
+                    <?php foreach ($users as $user) { ?>
                         <tr>
-                            <td><?php echo $i; ?></td>
                             <td>
-                                <?php if ($user->media_path != "") { ?>
-                                    <img src="<?php echo thumbnail($user->media_path); ?>" alt=""
+                                <?php if ($user->photo != "") { ?>
+                                    <img src="<?php echo thumbnail($user->photo->path); ?>" alt=""
                                          style="width:26px;height:26px;" class="rounded">
                                 <?php } else { ?>
                                     <img src="<?php echo assets("admin::images/user.png"); ?>" alt=""
@@ -48,13 +36,12 @@
                                     <?php echo $user->first_name . " " . $user->last_name; ?>
                                 </a>
                             </td>
-                            <td><?php echo $user->role_name; ?></td>
-                            <td></td>
+
+                            <td class="text-right">
+                                <small><?php echo $user->role->name; ?></small>
+                            </td>
                         </tr>
-                        <?php
-                        $i++;
-                    }
-                    ?>
+                        <?php } ?>
 
                     </tbody>
                 </table>

@@ -1,7 +1,7 @@
 <div class="row  border-bottom white-bg dashboard-header" style="margin:0">
 
     <div class="col-sm-3">
-        <h2><?php echo trans("dashboard::dashboard.dotuae") ?></h2>
+        <h2><?php echo Config::get("site_title"); ?></h2>
         <small><?php echo trans("dashboard::dashboard.welcome") ?></small>
         <ul class="list-group clear-list m-t">
             <li class="list-group-item fist-item">

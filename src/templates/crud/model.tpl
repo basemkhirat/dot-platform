@@ -35,7 +35,7 @@ class #model|ucfirst# extends Model {
     
     {if module.image}
     public function image() {
-        return $this->hasOne("Media", "media_id", "image_id");
+        return $this->hasOne("Media", "id", "image_id");
     }
     {/if}
     

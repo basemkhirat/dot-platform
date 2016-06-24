@@ -67,4 +67,16 @@ class Block extends Model
         return $this->belongsToMany("Category", "blocks_categories", "block_id", "category_id");
     }
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new LangScope);
+    }
+
 }

@@ -39,6 +39,7 @@
 @section("content")
 @include("admin::partials.messages")
 <form action="" method="post">
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
@@ -48,6 +49,15 @@
                     [/loop]
                 </div>
             </div>
+
+            <div>
+                <div class="container-fluid">
+                    <div class="form-group">
+                        <input type="submit" class="pull-left btn btn-flat btn-primary" value="<?php echo trans("#module#::#module#.save_#model#") ?>" />
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-md-4">
             {if options.status}
@@ -71,13 +81,16 @@
                 <div class="panel-heading">
                     <i class="fa fa-picture-o"></i>
                     <?php echo trans("#module#::#module#.add_image"); ?>
+                    <a class="remove-post-image pull-right" href="javascript:void(0)">
+                        <i class="fa fa-times text-navy"></i>
+                    </a>
                 </div>
                 <div class="panel-body form-group">
 
                     <div class="row post-image-block">
                         <input type="hidden" name="image_id" class="post-image-id" value="<?php
                         if ($#model# and @ $#model#->image->media_path != "") {
-                            echo @$#model#->image->media_id;
+                            echo @$#model#->image->id;
                         }
                         ?>">
 
@@ -87,7 +100,7 @@
                         </a>
 
                         <a class="post-image-preview" href="javascript:void(0)">
-                            <img width="100%" height="130px" class="post-image" src="<?php if ($#model# and @ $#model#->image->media_id != "") { ?> <?php echo thumbnail(@$#model#->image->media_path); ?> <?php } else { ?> <?php echo assets("default/post.png"); ?><?php } ?>">
+                            <img width="100%" height="130px" class="post-image" src="<?php if ($#model# and @ $#model#->image->id != "") { ?> <?php echo thumbnail(@$#model#->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/post.png"); ?><?php } ?>">
                         </a>
 
                     </div>
@@ -102,9 +115,9 @@
                 </div>
 
                 <div class="panel-body">
+                    <?php if (Category::count()) { ?>
                     <ul class='tree-views'>
-                        <?php
-                        echo Category::tree(array(
+                        <?php echo Category::tree(array(
                             "row" => function($row, $depth) use ($#model#_categories) {
                                 $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a><label><input type='checkbox' ";
                                 if (in_array($row->id, $#model#_categories)) {
@@ -114,8 +127,11 @@
                                 return $html;
                             }
                         ));
-                        ?>
+                    ?>
                     </ul>
+                    <?php } else { ?>
+                        <?php echo trans("categories::categories.no_records"); ?>
+                    <?php } ?>
                 </div>
             </div>
             {/if}
@@ -134,21 +150,14 @@
             </div>
             {/if}
         </div>
-        <div style="clear:both"></div>
-        <div>
-            <div class="panel-footer" style="border-top: 1px solid #ececec; position: relative;">
-                <div class="form-group" style="margin-bottom:0">
-                    <input type="submit" class="pull-right btn btn-flat btn-primary" value="<?php echo trans("#module#::#module#.save_#model#") ?>" />
-                </div>
-            </div>
-        </div>
+
     </div>
 </form>
 @section("header")
 @parent
 {if module.tags}
-<link href="<?php echo assets("tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
-<link href="<?php echo assets("tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
+<link href="<?php echo assets("admin::tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 {/if}
 [loop stylesheets as link]
 <link href="<?php echo assets('#link#') ?>" rel="stylesheet" type="text/css">
@@ -157,7 +166,7 @@
 @section("footer")
 @parent
 {if module.tags}
-<script type="text/javascript" src="<?php echo assets("tagit") ?>/tag-it.js"></script>
+<script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
 {/if}
 [loop javascripts as link]
 <script type="text/javascript" src="<?php echo assets('#link#') ?>"></script>
@@ -179,15 +188,22 @@
             done: function (result, base) {
                 if (result.length) {
                     var file = result[0];
-                    base.parents(".post-image-block").find(".post-image-id").first().val(file.media_id);
-                    base.parents(".post-image-block").find(".post-image").first().attr("src", file.media_thumbnail);
+                    base.parents(".post-image-block").find(".post-image-id").first().val(file.id);
+                    base.parents(".post-image-block").find(".post-image").first().attr("src", file.thumbnail);
                 }
             },
             error: function (media_path) {
                 alert("<?php echo trans("#module#::#module#.not_allowed_file") ?>");
             }
         });
-        {/if}
+
+        $(".remove-post-image").click(function () {
+            var base = $(this);
+            $(".post-image-id").first().val(0);
+            $(".post-image").attr("src", "<?php echo assets("admin::default/post.png"); ?>");
+        });
+
+    {/if}
         {if module.tags}
         $("#mytags").tagit({
             singleField: true,

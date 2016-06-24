@@ -22,6 +22,7 @@ class CreateNavigationsTable extends Migration
             $table->string("type")->index();
             $table->integer("type_id")->index();
             $table->integer("menu")->index();
+            $table->string("lang")->index();
             $table->timestamps();
         });
 

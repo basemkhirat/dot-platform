@@ -37,9 +37,8 @@ class DashboardPlugin extends Plugin
         });
 
 
-        /*
-        Widget::sidebar("dashboard.featured", function ($widget) {
 
+        Action::listen("dashboard.featured", function () {
 
             $data = [];
 
@@ -47,44 +46,50 @@ class DashboardPlugin extends Plugin
 
             $data["cat_id"] = $cat_id;
 
+            $ob = Post::status("published")->format("post");
 
-            $ob = Post::status("published")->type("post")->where("site", LANG);
             if ($cat_id) {
                 $ob->where("categories.id", $cat_id);
             }
+
             $data["news_count"] = $ob->count();
 
+            $ob = Post::status("published")->format("article");
 
-            $ob = Post::status("published")->type("article")->where("site", LANG);
             if ($cat_id) {
                 $ob->where("categories.id", $cat_id);
             }
+
             $data["articles_count"] = $ob->count();
 
             $data["users_count"] = User::where("status", 1)->count();
             $data["galleries_count"] = Gallery::count();
             $data["categories_count"] = Category::where("parent", 0)->count();
-            $data["tags_count"] = Tag::where("site", LANG)->count();
+            $data["tags_count"] = Tag::count();
 
             $posts_charts = array();
+
             for ($i = 0; $i <= 8; $i++) {
 
-                $today = strtotime(date("Y-m-d", time()));
+                $today = time();
+
                 $current_day = $today - $i * 24 * 60 * 60;
                 $end_current_day = $current_day + 24 * 60 * 60;
 
                 $e = $i + 1;
-                $start_of_day = new MongoDate($current_day);
-                $end_of_day = new MongoDate($end_current_day);
 
-                $ob = Post::status("published")->type("post")->where("site", LANG);
+                $start_of_day = date("Y-m-d H:i:s", $current_day);
+                $end_of_day = date("Y-m-d H:i:s", $end_current_day);
+
+                $ob = Post::status("published")->format("post");
+
                 if ($cat_id) {
                     $ob->where("categories.id", $cat_id);
                 }
 
                 $posts_charts[date("Y-m-d", $current_day)] = $ob
-                    ->where("date", '>', $start_of_day)
-                    ->where("date", '<', $end_of_day)
+                    ->where("created_at", '>', $start_of_day)
+                    ->where("created_at", '<', $end_of_day)
                     ->count();
             }
 
@@ -94,7 +99,7 @@ class DashboardPlugin extends Plugin
 
         });
 
-        */
+
 
         include __DIR__ . "/routes.php";
 

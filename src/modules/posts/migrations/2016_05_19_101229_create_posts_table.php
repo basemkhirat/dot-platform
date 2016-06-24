@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->integer('user_id')->index();
             $table->integer('status')->index();
             $table->string("format")->index();
+            $table->string("lang")->index();
             $table->timestamps();
         });
 
