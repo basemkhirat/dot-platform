@@ -170,7 +170,7 @@
                                     <td>
                                         <?php if ($user->photo) { ?>
                                             <img class="img-rounded" style="width:50px"
-                                                 src="<?php echo thumbnail($user->photo->media_path) ?>"/>
+                                                 src="<?php echo thumbnail($user->photo->path) ?>"/>
                                         <?php } else { ?>
                                             <img class="img-rounded"
                                                  src="<?php echo assets("admin::images/user.png"); ?>"/>
