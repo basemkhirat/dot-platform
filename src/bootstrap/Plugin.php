@@ -75,7 +75,7 @@ class Plugin
         // getting plugin type
         $reflector = new ReflectionClass($plugin . "Plugin");
         $file = $reflector->getFileName();
-        $type = str::singular(basename(dirname(dirname($file))));
+        $type = Str::singular(basename(dirname(dirname($file))));
 
         $this->doInstall($plugin, $type);
 
@@ -122,7 +122,7 @@ class Plugin
         // getting plugin type
         $reflector = new ReflectionClass($plugin . "Plugin");
         $file = $reflector->getFileName();
-        $type = str::singular(basename(dirname(dirname($file))));
+        $type = Str::singular(basename(dirname(dirname($file))));
 
         // Migrating down
         Artisan::call("$type:migrate:down", [
