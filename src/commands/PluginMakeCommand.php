@@ -298,7 +298,7 @@ class PluginMakeCommand extends Command
         $folder_exists = file_exists($path);
         $json_exists = file_exists($path . "/" . $this->json_file);
 
-        $this->model = $model = $this->askModelName();
+        $this->model = $model = strtolower($this->askModelName());
         $this->table = $table = $this->askTableName();
 
         $this->keys["model"] = $this->model;
@@ -334,16 +334,6 @@ class PluginMakeCommand extends Command
             $default_primary_key = $fields[0];
         }
 
-        /* if ($this->confirm("Are you want to create a model for this plugin?", false)) {
-
-             $this->model = $model = $this->askModelName();
-             $this->table = $table =  $this->askTableName();
-
-             $this->keys["model"] = $this->model;
-             $this->keys["table"] = $this->table;
-
-         }*/
-
         if ($this->argument("key") == "") {
             $this->key = $key = $this->ask("Primary key field *", $default_primary_key);
         } else {
@@ -376,7 +366,7 @@ class PluginMakeCommand extends Command
         $this->migrate();
 
 // start
-        $start_content = file_get_contents(templates_path("resources/plugin.tpl"));
+        $start_content = file_get_contents(templates_path("crud/plugin.tpl"));
         $start_content = $this->replace($start_content);
         $this->write($this->path . "/" . ucfirst($this->module) . "Plugin.php", $start_content);
 
@@ -422,8 +412,9 @@ class PluginMakeCommand extends Command
                         }
                     }
                 } else {
-                    $sortable_fields[$field] = "<?php echo \$$model->$field; ?>";
-                    $gridable_fields[$field] = "<?php echo \$$model->$field; ?>";
+                    $small_model = strtolower($model);
+                    $sortable_fields[$field] = "<?php echo \$$small_model->$field; ?>";
+                    $gridable_fields[$field] = "<?php echo \$$small_model->$field; ?>";
                 }
             }
         }
@@ -553,18 +544,18 @@ class PluginMakeCommand extends Command
 
         if ($this->required("user")) {
             $this->load("user");
-            $this->langs["user"] = "user";
+            $this->langs["user"] = "User";
         }
 
         if ($this->required("categories")) {
             $this->load("categories");
-            $this->langs["categories"] = "categories";
+            $this->langs["categories"] = "Categories";
             $this->langs["add_category"] = "Add to category";
         }
 
         if ($this->required("tags")) {
             $this->load("tags");
-            $this->langs["tags"] = "tags";
+            $this->langs["tags"] = "Tags";
             $this->langs["add_tag"] = "Add tags";
         }
 
@@ -580,7 +571,15 @@ class PluginMakeCommand extends Command
 
         // lang
         $lang_content = file_get_contents(templates_path("crud/lang.tpl"));
-        $lang_content = $this->replace($lang_content, array("attributes" => $this->model_attributes, "additional" => $this->langs));
+
+
+        $lang_attrs = [];
+
+        foreach($this->model_attributes as $attr){
+            $lang_attrs[$attr] = ucfirst($attr);
+        }
+
+        $lang_content = $this->replace($lang_content, array("attributes" => $lang_attrs, "additional" => $this->langs));
         foreach (Config::get("admin.locales") as $code => $lang) {
             File::makeDirectory($path . "/lang/" . $code, $this->permission, true, true);
             $this->write($path . "/lang/" . $code . "/" . $name . ".php", $lang_content);

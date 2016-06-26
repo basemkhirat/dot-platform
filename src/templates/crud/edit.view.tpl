@@ -1,7 +1,7 @@
 @extends("admin::layouts.master")
 @section("breadcrumb")
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-7">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
         <h2>
         <i class="fa #options.icon#"></i>
         <?php if($#model#){
@@ -25,7 +25,7 @@
             </li>
         </ol>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
         <?php if($#model#){ ?>
            <a href="<?php echo route("admin.#module#.create"); ?>" class="btn btn-primary btn-labeled btn-main pull-right"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("#module#::#module#.add_new") ?></a>
         <?php } ?>
@@ -89,7 +89,7 @@
 
                     <div class="row post-image-block">
                         <input type="hidden" name="image_id" class="post-image-id" value="<?php
-                        if ($#model# and @ $#model#->image->media_path != "") {
+                        if ($#model# and @ $#model#->image->path != "") {
                             echo @$#model#->image->id;
                         }
                         ?>">

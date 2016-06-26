@@ -24,37 +24,38 @@
 <div id="content-wrapper">
     @include("admin::partials.messages")
     <form action="" method="get" class="filter-form">
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
         <input type="hidden" name="per_page" value="<?php echo Request::get('per_page') ?>" />
         {if module.tags}
         <input type="hidden" name="tag_id" value="<?php echo Request::get('tag_id') ?>" />
         {/if}
         <div class="row">
-            <div class="col-sm-5 m-b-xs">
+            <div class="col-lg-4 col-md-4">
                 <div class="form-group">
-                    <select name="sort" class="form-control chosen-select chosen-rtl" style="width:auto; display: inline-block;">
+                    <select name="sort" class="form-control chosen-select chosen-rtl">
                         <option value="#key#" <?php if(Request::get("sort") == "#key#"){ ?> selected='selected' <?php } ?>><?php echo trans("#module#::#module#.sort_by"); ?></option>
                         [loop sortable_fields as field => value]
                         <option value="#field#" <?php if(Request::get("sort") == "#field#"){ ?> selected='selected' <?php } ?>><?php echo trans("#module#::#module#.attributes.#field#"); ?></option>
                         [/loop]
                     </select>
-                    <select name="order" class="form-control chosen-select chosen-rtl" style="width:auto; display: inline-block;">
+                    <select name="order" class="form-control chosen-select chosen-rtl">
                         <option value="DESC" <?php if(Request::get("order") == "DESC"){ ?> selected='selected' <?php } ?>><?php echo trans("#module#::#module#.desc"); ?></option>
                         <option value="ASC" <?php if(Request::get("order") == "ASC"){ ?> selected='selected' <?php } ?>><?php echo trans("#module#::#module#.asc"); ?></option>
                     </select>
                     <button type="submit" class="btn btn-primary"><?php echo trans("#module#::#module#.order"); ?></button>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-md-4">
                 <div class="form-group">
                     {if options.status}
-                    <select name="status" class="form-control chosen-select chosen-rtl" style="width:auto; display: inline-block;">
+                    <select name="status" class="form-control chosen-select chosen-rtl">
                         <option value=""><?php echo trans("#module#::#module#.all"); ?></option>
                         <option <?php if(Request::get("status") == "1"){ ?> selected='selected' <?php } ?> value="1"><?php echo trans("#module#::#module#.activated"); ?></option>
                         <option <?php if(Request::get("status") == "0"){ ?> selected='selected' <?php } ?> value="0"><?php echo trans("#module#::#module#.deactivated"); ?></option>
                     </select>
                     {/if}
                     {if module.categories}
-                    <select name="category_id" class="form-control chosen-select chosen-rtl" style="width:auto; display: inline-block;">
+                    <select name="category_id" class="form-control chosen-select chosen-rtl">
                         <option value=""><?php echo trans("#module#::#module#.all_categories"); ?></option>
                         <?php
                         echo Category::tree(array(
@@ -76,8 +77,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-4 col-md-4">
                 <form action="" method="get" class="search_form">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
                     <div class="input-group">
                         <input name="q" value="<?php echo Request::get("q"); ?>" type="text" class=" form-control" placeholder="<?php echo trans("#module#::#module#.search_#module#") ?> ...">
                         <span class="input-group-btn">
@@ -89,6 +91,7 @@
         </div>
     </form>
     <form action="" method="post" class="action_form">
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>
@@ -99,9 +102,8 @@
             <div class="ibox-content">
                 <?php if(count($#module#)){ ?>
                 <div class="row">
-                    <div class="col-sm-3 m-b-xs">
-                        <div class="form-group">
-                            <select name="action" class="form-control chosen-select chosen-rtl" style="width:auto; display: inline-block;">
+                        <div class="col-lg-3 action-box">
+                            <select name="action" class="form-control chosen-select chosen-rtl pull-left">
                                 <option value="-1" selected="selected"><?php echo trans("#module#::#module#.bulk_actions"); ?></option>
                                 <option value="delete"><?php echo trans("#module#::#module#.delete"); ?></option>
                                 {if options.status}
@@ -109,12 +111,12 @@
                                 <option value="deactivate"><?php echo trans("#module#::#module#.deactivate"); ?></option>
                                 {/if}
                             </select>
-                            <button type="submit" class="btn btn-primary"><?php echo trans("#module#::#module#.apply"); ?></button>
+                            <button type="submit" class="btn btn-primary pull-right"><?php echo trans("#module#::#module#.apply"); ?></button>
                         </div>
+                    <div class="col-lg-7">
 
                     </div>
-                    <div class="col-sm-6 m-b-xs"></div>
-                    <div class="col-sm-3">
+                    <div class="col-lg-2">
                         <select  name="post_status" id="post_status" class="form-control per_page_filter chosen-select chosen-rtl">
                             <option value="" selected="selected">-- <?php echo trans("#module#::#module#.per_page") ?> --</option>
                             <?php foreach (array(10, 20, 30, 40) as $num) { ?>

@@ -9,30 +9,30 @@ return [
     'back_to_#module#' => 'Back to #module#',
     'no_records' => 'No #module# found',
     'save_#model#' => 'save #model#',
-    'search' => 'search',
+    'search' => 'Search',
     'search_#module#' => 'Search #module#',
-    'per_page' => 'per page',
-    'bulk_actions' => 'bulk actions',
-    'delete' => 'delete',
-    'apply' => 'apply',
+    'per_page' => 'Per page',
+    'bulk_actions' => 'Bulk actions',
+    'delete' => 'Delete',
+    'apply' => 'Apply',
     'page' => 'Page',
     'of' => 'of',
-    'order' => 'order',
+    'order' => 'Order',
     'sort_by' => 'Sort by',
     'asc' => 'Ascending',
     'desc' => 'Descending',
-    'actions' => 'actions',
-    'filter' => 'filter',
+    'actions' => 'Actions',
+    'filter' => 'Filter',
     {if module.categories}
     'all_categories' => 'All categories',
     {/if}
     {if options.status}
     '#model#_status' => '#model|ucfirst# status',
-    'activate' => 'activate',
-    'activated' => 'activated',
+    'activate' => 'Activate',
+    'activated' => 'Activated',
     'all' => 'All',
-    'deactivate' => 'deactivate',
-    'deactivated' => 'deactivated',
+    'deactivate' => 'Deactivate',
+    'deactivated' => 'Deactivated',
     'sure_activate' => "Are you sure to activate #model# ?",
     'sure_deactivate' => "Are you sure to deactivate #model# ?",
     {/if}
@@ -41,12 +41,12 @@ return [
     '#item#' => '#title#',
     [/loop]
     'attributes' => [
-        [loop attributes as attribute]
-        '#attribute#' => '#attribute#',
+        [loop attributes as key => name ]
+        '#key#' => '#name#',
         [/loop]
         {if options.timestamps}
-        'created_at' => 'created date',
-        'updated_at' => 'updated date',
+        'created_at' => 'Created date',
+        'updated_at' => 'Updated date',
         {/if}
         {if options.status}
         'status' => 'Status'

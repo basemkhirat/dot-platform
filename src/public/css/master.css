@@ -498,10 +498,6 @@ select {
     font-size: 14px;
 }
 
-#page-wrapper{
-    min-height:105% !important;
-}
-
 body.dark-theme{
     background: #2b2b2b;
 }
@@ -587,6 +583,10 @@ body.dark-theme{
     background: #699cb3;
 }
 
+.dark-theme .label-primary, .dark-theme .badge-primary {
+    background-color: #1e8cbe;
+}
+
 
 
 /*
@@ -649,4 +649,8 @@ LG
     -ms-transform: rotate(0deg); /* IE 9 */
     -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
     transform: rotate(0deg);
+}
+
+.container-fluid{
+    margin: 10px 0 15px 0;
 }

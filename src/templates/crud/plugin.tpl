@@ -46,7 +46,7 @@ class #module|ucfirst#Plugin extends Plugin
             'name' => '#module#',
             'description' => '',
             'version' => '0.1',
-            'icon' => 'fa-puzzle-piece',
+            'icon' => '#options.icon#',
             'author' => '',
             'url' => ''
         ];
@@ -62,7 +62,7 @@ class #module|ucfirst#Plugin extends Plugin
         Navigation::menu("sidebar", function ($menu) {
             $menu->item('#module#', trans("#module#::#module#.module"), route("admin.#module#.show"))
                 ->order(1)
-                ->icon("fa-th-large");
+                ->icon("#options.icon#");
         });
 
         include __DIR__ . "/routes.php";
