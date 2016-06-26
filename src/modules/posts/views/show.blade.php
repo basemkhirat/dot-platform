@@ -199,7 +199,7 @@
                                                title="<?php echo trans("posts::posts.activated"); ?>" class="ask"
                                                message="<?php echo trans('posts::posts.sure_deactivate') ?>"
                                                href="<?php echo URL::route("admin.posts.status", array("id" => $post->id, "status" => 0)) ?>">
-                                                <i class="fa fa-toggle-off text-success"></i>
+                                                <i class="fa fa-toggle-on text-success"></i>
                                             </a>
                                         <?php } else { ?>
                                             <a data-toggle="tooltip" data-placement="bottom"

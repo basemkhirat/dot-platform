@@ -168,7 +168,7 @@
                                                title="<?php echo trans("pages::pages.activated"); ?>" class="ask"
                                                message="<?php echo trans('pages::pages.sure_deactivate') ?>"
                                                href="<?php echo URL::route("admin.pages.status", array("id" => $page->id, "status" => 0)) ?>">
-                                                <i class="fa fa-toggle-off text-success"></i>
+                                                <i class="fa fa-toggle-on text-success"></i>
                                             </a>
                                         <?php } else { ?>
                                             <a data-toggle="tooltip" data-placement="bottom"
