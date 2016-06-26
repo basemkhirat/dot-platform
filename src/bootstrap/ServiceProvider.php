@@ -318,7 +318,19 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected function getComponents()
     {
-        return array_merge(Module::installed(), Plugin::installed());
+        $components = [];
+
+        foreach (Module::installed() as $module) {
+            $components[] = $module;
+            Module::set($module->path, "modules/" . $module->path);
+        }
+
+        foreach (Plugin::installed() as $plugin) {
+            $components[] = $plugin;
+            Module::set($plugin->path, "plugins/" . $plugin->path);
+        }
+
+        return $components;
     }
 
 }
