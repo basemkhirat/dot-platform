@@ -192,6 +192,8 @@
 
             </div>
 
+            <?php Action::render("post.form.featured", $post); ?>
+
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
@@ -276,6 +278,9 @@
                     </div>
                 </div>
             </div>
+
+            <?php Action::render("post.form.sidebar", $post); ?>
+
         </div>
 
     </div>
