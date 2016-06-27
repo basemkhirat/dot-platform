@@ -71,6 +71,9 @@
 
                 </div>
             </div>
+
+            <?php Action::render("block.form.featured", $block); ?>
+
         </div>
         <div class="col-md-4">
 
@@ -115,6 +118,9 @@
                     </div>
                 </div>
             </div>
+
+            <?php Action::render("block.form.sidebar", $block); ?>
+
         </div>
 
         </div>
