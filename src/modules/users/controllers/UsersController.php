@@ -182,6 +182,13 @@ class UsersController extends BackendController
 
             $user->save();
 
+            if ($user->id == Auth::user()->id) {
+                $user_lang = $user->lang;
+                if (in_array($user_lang, array_keys(Config::get("admin.locales")))) {
+                    Session::put('locale', $user_lang);
+                }
+            }
+
             // Fire user updated action
             Action::fire("user.saved", $user);
 

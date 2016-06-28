@@ -30,6 +30,12 @@ class AuthController extends BackendController {
 
                 if (Auth::attempt($userdata, Request::get("remember"))) {
 
+                    $user_lang = Auth::user()->lang;
+
+                    if (in_array($user_lang, array_keys(Config::get("admin.locales")))) {
+                        Session::put('locale', $user_lang);
+                    }
+
                     // fire login action
                     Action::fire("auth.login", Auth::user());
 

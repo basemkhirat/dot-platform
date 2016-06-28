@@ -86,10 +86,10 @@
                                      src="<?php if ($user and $user->photo) { ?> <?php echo thumbnail($user->photo->path); ?> <?php } else { ?> <?php echo assets("admin::images/user.png"); ?><?php } ?>"/>
 
                                 <a href="javascript:void(0)" <?php if(($user and $user->photo_id != 0)){ ?>style="display: none"<?php } ?> id="change_photo"
-                                   class="col-lg-12 "><?php echo trans("users::users.change") ?></a>
+                                   class="col-lg-12 image-label"><?php echo trans("users::users.change") ?></a>
 
                                 <a href="javascript:void(0)" <?php if(!$user or ($user and $user->photo_id == 0)){ ?>style="display: none"<?php } ?> id="remove_photo"
-                                   class="col-lg-12"><?php echo trans("users::users.remove_photo") ?></a>
+                                   class="col-lg-12 image-label"><?php echo trans("users::users.remove_photo") ?></a>
                             </div>
 
                         </div>
@@ -241,6 +241,14 @@
 @stop
 
 @section("header")
+
+<style>
+
+    .image-label{
+        margin-top : -24px;
+    }
+
+</style>
 
 @stop
 
