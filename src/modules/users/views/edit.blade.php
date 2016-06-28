@@ -85,8 +85,11 @@
                                 <img class="col-lg-12" id="user_photo" style="width: 100%"
                                      src="<?php if ($user and $user->photo) { ?> <?php echo thumbnail($user->photo->path); ?> <?php } else { ?> <?php echo assets("admin::images/user.png"); ?><?php } ?>"/>
 
-                                <a href="javascript:void(0)" id="change_photo"
+                                <a href="javascript:void(0)" <?php if(($user and $user->photo_id != 0)){ ?>style="display: none"<?php } ?> id="change_photo"
                                    class="col-lg-12 "><?php echo trans("users::users.change") ?></a>
+
+                                <a href="javascript:void(0)" <?php if(!$user or ($user and $user->photo_id == 0)){ ?>style="display: none"<?php } ?> id="remove_photo"
+                                   class="col-lg-12"><?php echo trans("users::users.remove_photo") ?></a>
                             </div>
 
                         </div>
@@ -256,10 +259,24 @@
                     $("#user_photo_id").val(file.id);
                     $("#user_photo").attr("src", file.thumbnail);
                 }
+
+                $("#change_photo").hide();
+                $("#remove_photo").show();
             },
             error: function (media_path) {
                 alert(media_path + " <?php echo trans("users::users.is_not_an_image") ?>");
             }
+        });
+
+        $("#remove_photo").click(function(){
+
+            $("#user_photo_id").val(0);
+            $("#user_photo").attr("src", "<?php echo assets("admin::images/user.png"); ?>");
+
+            $("#remove_photo").hide();
+            $("#change_photo").show();
+
+           return false;
         });
     });
 

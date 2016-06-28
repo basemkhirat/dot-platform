@@ -25,6 +25,7 @@ return [
     "confirm_password" => "Confirm password",
     "email" => "Email",
     "change" => "Change",
+    "remove_photo" => "Remove",
     "first_name" => "First name",
     "last_name" => "Last name",
     "about_me" => "About me",

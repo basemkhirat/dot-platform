@@ -22,6 +22,7 @@ return [
     "confirm_password" => "تأكيد كلمة المرور",
     "email" => "البريد الإلكترونى",
     "change" => "تغيير",
+    "remove_photo" => "إزالة",
     "first_name" => "الإسم بالكامل",
     "last_name" => "الإسم الأخير",
     "about_me" => "عن العضو",
