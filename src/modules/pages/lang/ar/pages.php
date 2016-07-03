@@ -43,6 +43,7 @@ return [
     'attributes' => [
         
         'title' => 'العنوان',
+        'slug' => "الإسم اللطيف",
         'excerpt' => 'المقتطف',
         'content' => 'المحتوى',
         'created_at' => 'تاريخ الإضافة',

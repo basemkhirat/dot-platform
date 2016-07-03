@@ -59,6 +59,7 @@ class PagesController extends BackendController
         if (Request::isMethod("post")) {
 
             $page->title = Request::get('title');
+            $page->slug = Request::get('slug');
             $page->excerpt = Request::get('excerpt');
             $page->content = Request::get('content');
             $page->image_id = Request::get('image_id');
@@ -98,6 +99,7 @@ class PagesController extends BackendController
 
         if (Request::isMethod("post")) {
 
+            $page->slug = Request::get('slug');
             $page->title = Request::get('title');
             $page->excerpt = Request::get('excerpt');
             $page->content = Request::get('content');

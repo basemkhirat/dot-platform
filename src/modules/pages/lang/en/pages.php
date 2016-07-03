@@ -42,16 +42,19 @@ return [
     'tags' => 'Tags',
     'add_tag' => 'Add tags',
     'templates' => 'Templates',
+
     'attributes' => [
-        'title' => 'title',
-        'excerpt' => 'excerpt',
-        'content' => 'content',
-        'created_at' => 'created date',
-        'updated_at' => 'updated date',
+        'title' => 'Title',
+        'slug' => "Slug",
+        'excerpt' => 'Excerpt',
+        'content' => 'Content',
+        'created_at' => 'Created date',
+        'updated_at' => 'Updated date',
         'status' => 'Status',
         'template' => 'Template',
         'default' => 'Default'
     ],
+
     "events" => [
         'created' => 'Page created successfully',
         'updated' => 'Page updated successfully',

@@ -55,6 +55,10 @@
                     </div>
 
                     <div class="form-group">
+                        <textarea name="slug" class="form-control input-lg" rows="1" id="post_slug" placeholder="<?php echo trans("pages::pages.attributes.slug") ?>"><?php echo @Request::old("slug", $page->slug); ?></textarea>
+                    </div>
+
+                    <div class="form-group">
                         <textarea name="excerpt" class="form-control" id="post_excerpt" placeholder="<?php echo trans("pages::pages.attributes.excerpt") ?>"><?php echo @Request::old("excerpt", $page->excerpt); ?></textarea>
                     </div>
 
