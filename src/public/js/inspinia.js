@@ -273,3 +273,13 @@ function WinMove() {
 }
 
 
+
+/*
+$('.nav li').hover(function() {
+    $(this).addClass("active");
+    $(this).find('.nav').addClass("in").stop(true, true).delay(200).fadeIn(500);
+}, function() {
+    $(this).removeClass("active");
+    $(this).find('.nav').removeClass("in").stop(true, true).delay(200).fadeOut(500);
+});
+*/

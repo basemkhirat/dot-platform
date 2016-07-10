@@ -60,6 +60,13 @@ return [
     'deactivated' => 'Deactivated',
     'activated' => 'Activated',
 
+
+
+    "color" => "Color",
+    "color_green" => "Green",
+    "color_blue" => "Blue",
+
+
     "module" => "Users",
 
     "permissions" => [

@@ -54,6 +54,10 @@ return [
     'deactivated' => 'غير مفعل',
     'activated' => 'مفعل',
 
+    "color" => "اللون",
+    "color_green" => "أخضر",
+    "color_blue" => "أزرق",
+
     "no_records" => "لا يوجد أعضاء",
 
     "permissions" => [

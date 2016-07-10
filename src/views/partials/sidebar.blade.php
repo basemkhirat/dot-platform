@@ -1,4 +1,4 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<nav class="main-nav navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="nav-header">
@@ -42,7 +42,7 @@
 
             </li>
 
-            <?php  echo Navigation::get("sidebar")->render(); ?>
+            <?php echo Navigation::get("sidebar")->render(); ?>
 
         </ul>
     </div>

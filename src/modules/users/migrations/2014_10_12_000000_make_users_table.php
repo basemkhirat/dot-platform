@@ -37,6 +37,7 @@ class MakeUsersTable extends Migration
             $table->integer('root')->index();
             $table->integer('photo_id')->index();
             $table->string('lang', 5)->index();
+            $table->string('color', 20)->default("blue")->index();
             $table->text('about');
             $table->string('facebook')->index();
             $table->string('twitter')->index();

@@ -106,6 +106,7 @@ class UsersController extends BackendController
             $user->role_id = Request::get("role_id", 0);
             $user->photo_id = Request::get("photo_id", 0);
             $user->lang = Request::get("lang");
+            $user->color = Request::get("color", "blue");
             $user->status = Request::get("status", 0);
             $user->facebook = Request::get("facebook");
             $user->twitter = Request::get("twitter");
@@ -167,6 +168,7 @@ class UsersController extends BackendController
             $user->role_id = Request::get("role_id", 0);
             $user->photo_id = Request::get("photo_id", 0);
             $user->lang = Request::get("lang");
+            $user->color = Request::get("color", "blue");
             $user->status = Request::get("status", 0);
             $user->facebook = Request::get("facebook");
             $user->twitter = Request::get("twitter");

@@ -85,10 +85,14 @@
                                 <img class="col-lg-12" id="user_photo" style="width: 100%"
                                      src="<?php if ($user and $user->photo) { ?> <?php echo thumbnail($user->photo->path); ?> <?php } else { ?> <?php echo assets("admin::images/user.png"); ?><?php } ?>"/>
 
-                                <a href="javascript:void(0)" <?php if(($user and $user->photo_id != 0)){ ?>style="display: none"<?php } ?> id="change_photo"
+                                <a href="javascript:void(0)"
+                                   <?php if (($user and $user->photo_id != 0)){ ?>style="display: none"<?php } ?>
+                                   id="change_photo"
                                    class="col-lg-12 image-label"><?php echo trans("users::users.change") ?></a>
 
-                                <a href="javascript:void(0)" <?php if(!$user or ($user and $user->photo_id == 0)){ ?>style="display: none"<?php } ?> id="remove_photo"
+                                <a href="javascript:void(0)"
+                                   <?php if (!$user or ($user and $user->photo_id == 0)){ ?>style="display: none"<?php } ?>
+                                   id="remove_photo"
                                    class="col-lg-12 image-label"><?php echo trans("users::users.remove_photo") ?></a>
                             </div>
 
@@ -150,9 +154,10 @@
                                 </select>
                             </div>
                         </div>
-                    <?php }else{ ?>
-                        <input type="hidden" name="role_id" value="<?php echo isset($user->id)?$user->id:0; ?>" />
-                        <input type="hidden" name="status" value="<?php echo isset($user->status)?$user->status:0; ?>" />
+                    <?php } else { ?>
+                        <input type="hidden" name="role_id" value="<?php echo isset($user->id) ? $user->id : 0; ?>"/>
+                        <input type="hidden" name="status"
+                               value="<?php echo isset($user->status) ? $user->status : 0; ?>"/>
                     <?php } ?>
 
                     <?php /*
@@ -177,6 +182,18 @@
                                 <?php foreach (Config::get("admin.locales") as $code => $lang) { ?>
                                     <option <?php if ($user and $code == $user->lang) { ?> selected="selected" <?php } ?>
                                         value="<?php echo $code; ?>"><?php echo $lang["title"]; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-sm-3 control-label"><?php echo trans("users::users.color") ?></label>
+                        <div class="col-sm-9">
+                            <select class="form-control select2 chosen-rtl" name="color">
+                                <?php foreach (["blue", "green"] as $color) { ?>
+                                    <option <?php if ($user and $color == $user->color) { ?> selected="selected" <?php } ?>
+                                        value="<?php echo $color; ?>"><?php echo trans("users::users.color_" . $color) ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -244,8 +261,8 @@
 
 <style>
 
-    .image-label{
-        margin-top : -24px;
+    .image-label {
+        margin-top: -24px;
     }
 
 </style>
@@ -276,7 +293,7 @@
             }
         });
 
-        $("#remove_photo").click(function(){
+        $("#remove_photo").click(function () {
 
             $("#user_photo_id").val(0);
             $("#user_photo").attr("src", "<?php echo assets("admin::images/user.png"); ?>");
@@ -284,7 +301,7 @@
             $("#remove_photo").hide();
             $("#change_photo").show();
 
-           return false;
+            return false;
         });
     });
 

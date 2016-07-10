@@ -42,4 +42,4 @@
 </head>
 
 <body
-    class="dark-theme <?php if (DIRECTION == "rtl") { ?>rtls<?php } ?> <?php if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") { ?>mini-navbar<?php } ?>">
+    class="<?php if(Auth::user()->color == "blue"){ ?>dark-theme<?php } ?> <?php if (DIRECTION == "rtl") { ?>rtls<?php } ?> <?php if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") { ?>mini-navbar<?php } ?>">

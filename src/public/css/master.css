@@ -654,3 +654,108 @@ LG
 .container-fluid{
     margin: 10px 0 15px 0;
 }
+
+
+/*
+    Top menu
+*/
+
+
+/*
+
+.header-nav {
+
+}
+
+.header-nav  .navbar-default{
+    width: 100%;
+    height: 55px !important;
+}
+
+.header-nav  #side-menu li{
+    width: auto;
+    float: left;
+    height: 100%;
+}
+
+.header-nav  #side-menu li.active {
+
+}
+.header-nav  #side-menu li a {
+    height: 100%;
+    line-height: 26px;
+}
+
+.header-nav  #side-menu li.lev-3{
+    width:100%
+}
+
+.header-nav  #side-menu li a .arrow {
+    margin:7px;
+}
+
+.header-nav #page-wrapper{
+    margin: 0px;
+}
+
+.header-nav .main-nav  li.active {
+    border-right: none;
+    border-left: none;
+    border-bottom: 3px solid;
+    height: 46px;
+}
+
+.header-nav  .profile-element img{
+    float: left;
+    width: 36px;
+    margin: 10px 3px;
+}
+
+.header-nav  .nav-header {
+    float: right !important;
+    position: initial;
+    padding: 0;
+    width:170px !important;
+}
+
+.header-nav  .nav-second-level{
+    display: none
+}
+
+.header-nav  .nav-second-level.in
+{
+    display: block;
+}
+
+.header-nav  .nav-second-level {
+    background: #000;
+    border-radius: 0 0 3px 3px;
+}
+
+.header-nav  #side-menu .nav-header a{
+    line-height:12px;
+}
+
+.header-nav  .profile-element .dropdown-menu {
+    top: 55px;
+}
+
+.header-nav  .nav-header .block{
+    margin-top: 7px;
+}
+
+.header-nav  .nav-second-level li.lev-3 a{
+    padding: 11px;
+}
+
+.header-nav  .nav-second-level {
+    position: absolute;
+    width: 200px;
+}
+
+#side-menu{
+    position: fixed;
+    width:100%;
+}
+
+*/
