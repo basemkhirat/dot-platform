@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label for="input-type"><?php echo trans("blocks::blocks.attributes.type") ?></label>
                         <select id="input-type" class="form-control chosen-select chosen-rtl" name="type">
-                            <?php foreach (array("post", "tag", "category") as $type) { ?>
+                            <?php foreach (array("post", "tag", "category", "program", "presenter", "live") as $type) { ?>
                                 <option value="<?php echo $type; ?>" <?php if ($block and $block->type == $type) { ?> selected="selected" <?php } ?>><?php echo trans("blocks::blocks.type_".$type) ?></option>
                             <?php } ?>
                         </select>

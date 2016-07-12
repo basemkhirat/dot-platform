@@ -23,7 +23,6 @@ class DotModule
      */
     public $modules = [];
 
-
     /**
      * @var \Illuminate\Foundation\Application|mixed
      */

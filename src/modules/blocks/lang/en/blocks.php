@@ -52,6 +52,9 @@ return [
     'type_post' => "post",
     'type_category' => "category",
     'type_tag' => "tag",
+    'type_program' => "program",
+    'type_presenter' => "presenter",
+    'type_live' => "live stream",
 
     'attributes' => [
         "type" => "Type",
