@@ -1,5 +1,5 @@
 <?php
-class PageTag extends Model {
+class PageTag extends Dot\Model {
     
     protected $table = "page_tags";
     

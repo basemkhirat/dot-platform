@@ -1,6 +1,6 @@
 <?php
 
-class Page extends Model {
+class Page extends Dot\Model {
 
     protected $module = 'pages';
 

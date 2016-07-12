@@ -1,11 +1,9 @@
 <?php
 
-use Illuminate\Console\Command;
-
 /**
  * Class AutoloadCommand
  */
-class DotAutoloadCommand extends Command
+class DotAutoloadCommand extends Dot\Command
 {
 
     /**

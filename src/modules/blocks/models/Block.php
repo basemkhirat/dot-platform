@@ -1,6 +1,6 @@
 <?php
 
-class Block extends Model
+class Block extends Dot\Model
 {
     protected $module = "blocks";
 

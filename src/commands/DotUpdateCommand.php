@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Support\Facades\Hash;
@@ -8,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * Class DotInstallCommand
  */
-class DotUpdateCommand extends Command
+class DotUpdateCommand extends Dot\Command
 {
 
     /**

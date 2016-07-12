@@ -1,6 +1,6 @@
 <?php
 
-class AuthController extends BackendController {
+class AuthController extends Dot\Controller {
 
     public $data = array();
 

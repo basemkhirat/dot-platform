@@ -1,6 +1,6 @@
 <?php
 
-class NavigationsController extends BackendController
+class NavigationsController extends Dot\Controller
 {
 
     public $data = [];

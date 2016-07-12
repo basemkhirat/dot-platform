@@ -1,6 +1,6 @@
 <?php
 
-class PagesController extends BackendController
+class PagesController extends Dot\Controller
 {
 
     protected $data = [];

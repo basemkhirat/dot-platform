@@ -1,6 +1,6 @@
 <?php
 
-class TagsController extends BackendController
+class TagsController extends Dot\Controller
 {
 
     protected $data = [];

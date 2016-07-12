@@ -1,6 +1,6 @@
 <?php
 
-class Group extends Model {
+class Group extends Dot\Model {
 
     protected $module = 'groups';
     protected $table = 'groups';

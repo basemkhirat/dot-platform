@@ -1,13 +1,12 @@
 <?php
 
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class ModulePublishCommand
  */
-class ModulePublishCommand extends Command
+class ModulePublishCommand extends Dot\Command
 {
 
     /**

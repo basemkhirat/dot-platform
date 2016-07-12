@@ -4,7 +4,7 @@
  * Class ServicesController
  */
 
-class ServicesController extends BackendController {
+class ServicesController extends Dot\Controller {
 
     /**
      * ServicesController constructor.

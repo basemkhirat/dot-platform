@@ -1,6 +1,6 @@
 <?php
 
-class Gallery extends Model {
+class Gallery extends Dot\Model {
 
     protected $module = 'galleries';
 

@@ -1,6 +1,6 @@
 <?php
 
-class RolesController extends BackendController
+class RolesController extends Dot\Controller
 {
 
     public $data = array();

@@ -1,6 +1,6 @@
 <?php
 
-class DashboardController extends BackendController
+class DashboardController extends Dot\Controller
 {
 
     public $data = array();

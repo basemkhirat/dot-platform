@@ -1,6 +1,6 @@
 <?php
 
-class PostMeta extends Model{
+class PostMeta extends Dot\Model{
 
     protected $table = "posts_meta";
 

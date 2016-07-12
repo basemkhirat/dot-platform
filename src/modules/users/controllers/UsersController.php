@@ -3,7 +3,7 @@
 /**
  * Class UsersController
  */
-class UsersController extends BackendController
+class UsersController extends Dot\Controller
 {
 
     /**

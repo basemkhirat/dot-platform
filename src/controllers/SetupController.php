@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema;
 
-class SetupController extends BackendController
+class SetupController extends Dot\Controller
 {
 
     public $data = [];

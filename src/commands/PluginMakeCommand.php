@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Facades\Schema;
@@ -8,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Class ModuleCommand
  */
-class PluginMakeCommand extends Command
+class PluginMakeCommand extends Dot\Command
 {
 
     /**

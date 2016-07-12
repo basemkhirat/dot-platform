@@ -1,6 +1,6 @@
 <?php
 
-class GalleryMedia extends Model {
+class GalleryMedia extends Dot\Model {
 
     protected $table = "galleries_media";
 

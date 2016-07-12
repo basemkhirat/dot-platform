@@ -3,7 +3,7 @@
 /**
  * Class Media
  */
-class Media extends Model
+class Media extends Dot\Model
 {
 
     /**

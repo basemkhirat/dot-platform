@@ -1,6 +1,6 @@
 <?php
 
-class Option extends Model
+class Option extends Dot\Model
 {
 
     protected $module = 'options';

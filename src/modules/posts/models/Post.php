@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 
-class Post extends Model
+class Post extends Dot\Model
 {
 
     protected $module = 'posts';

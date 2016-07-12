@@ -1,12 +1,14 @@
 <?php
 
-use Illuminate\Routing\Controller;
+namespace Dot;
+
+use Illuminate\Routing\Controller as LaravelController;
 use Carbon\Carbon;
 
 /**
  * Class BackendController
  */
-class BackendController extends Controller {
+class Controller extends LaravelController {
 
     /**
      * BackendController constructor.

@@ -1,5 +1,5 @@
 <?php
-class PostTag extends Model {
+class PostTag extends Dot\Model {
     
     protected $table = "post_tags";
     

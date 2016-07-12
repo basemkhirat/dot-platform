@@ -37,9 +37,9 @@
                     </select>
                     <select name="order" class="form-control chosen-select chosen-rtl">
                         <option
-                            value="DESC" <?php if ($sort == "DESC") { ?> selected='selected' <?php } ?>><?php echo trans("posts::posts.desc"); ?></option>
+                            value="DESC" <?php if ($order == "DESC") { ?> selected='selected' <?php } ?>><?php echo trans("posts::posts.desc"); ?></option>
                         <option
-                            value="ASC" <?php if ($sort == "ASC") { ?> selected='selected' <?php } ?>><?php echo trans("posts::posts.asc"); ?></option>
+                            value="ASC" <?php if ($order == "ASC") { ?> selected='selected' <?php } ?>><?php echo trans("posts::posts.asc"); ?></option>
                     </select>
                     <button type="submit" class="btn btn-primary"><?php echo trans("posts::posts.order"); ?></button>
                 </div>

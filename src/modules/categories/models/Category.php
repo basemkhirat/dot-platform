@@ -1,6 +1,6 @@
 <?php
 
-class Category extends Model {
+class Category extends Dot\Model {
 
     protected $module = 'categories';
     protected $table = 'categories';

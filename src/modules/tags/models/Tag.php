@@ -1,6 +1,6 @@
 <?php
 
-class Tag extends Model
+class Tag extends Dot\Model
 {
     protected $module = "tags";
 

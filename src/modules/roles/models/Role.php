@@ -1,6 +1,6 @@
 <?php
 
-class Role extends Model {
+class Role extends Dot\Model {
 
     protected $module = "roles";
 

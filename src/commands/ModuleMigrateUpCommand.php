@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Class MigrateCommand
  */
-class ModuleMigrateUpCommand extends Command
+class ModuleMigrateUpCommand extends Dot\Command
 {
 
     /**

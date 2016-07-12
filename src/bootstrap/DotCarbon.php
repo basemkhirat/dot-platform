@@ -1,12 +1,13 @@
 <?php
 
-use Carbon\Carbon;
+namespace Dot;
 
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class DotCarbon
  */
-class DotCarbon extends Carbon{
+class Carbon extends \Carbon\Carbon{
 
 
     /**
@@ -15,6 +16,7 @@ class DotCarbon extends Carbon{
     function ago(){
         return time_ago($this->toDateTimeString());
     }
+
 
     function render(){
 

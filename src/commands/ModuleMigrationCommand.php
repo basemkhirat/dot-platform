@@ -1,15 +1,12 @@
 <?php
 
-//namespace Illuminate\Database\Console\Migrations;
-
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 use Illuminate\Support\Composer;
 use Illuminate\Database\Migrations\MigrationCreator;
 
-class ModuleMigrationCommand extends Command
+class ModuleMigrationCommand extends Dot\Command
 {
 
     protected $signature = 'module:migration {name : The name of the migration.} {module : The name of the module.}

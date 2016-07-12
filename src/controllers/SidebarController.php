@@ -6,7 +6,7 @@
  * @author basem
  */
 
-class SidebarController extends BackendController {
+class SidebarController extends Dot\Controller {
 
     /**
      * @var array

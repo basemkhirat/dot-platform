@@ -1,6 +1,6 @@
 <?php
 
-class GalleriesController extends BackendController
+class GalleriesController extends Dot\Controller
 {
 
     public $data = array();

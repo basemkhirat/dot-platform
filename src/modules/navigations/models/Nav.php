@@ -1,6 +1,6 @@
 <?php
 
-class Nav extends Model
+class Nav extends Dot\Model
 {
 
     protected $module = 'navigations';

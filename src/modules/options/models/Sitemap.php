@@ -1,6 +1,6 @@
 <?php
 
-class Mapss extends Model {
+class Mapss extends Dot\Model {
     /*
      * Update sitemap links
      *

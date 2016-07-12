@@ -1,6 +1,6 @@
 <?php
 
-class MediaController extends BackendController
+class MediaController extends Dot\Controller
 {
 
     public $data = array();

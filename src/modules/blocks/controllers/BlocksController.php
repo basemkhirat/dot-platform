@@ -1,6 +1,6 @@
 <?php
 
-class BlocksController extends BackendController
+class BlocksController extends Dot\Controller
 {
 
     protected $data = [];

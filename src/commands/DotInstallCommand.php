@@ -1,13 +1,12 @@
 <?php
 
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Facades\Hash;
 
 /**
  * Class DotInstallCommand
  */
-class DotInstallCommand extends Command
+class DotInstallCommand extends Dot\Command
 {
 
     /**

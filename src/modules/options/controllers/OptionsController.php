@@ -1,6 +1,6 @@
 <?php
 
-class OptionsController extends BackendController
+class OptionsController extends Dot\Controller
 {
 
     protected $data = [];

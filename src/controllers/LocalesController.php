@@ -3,7 +3,7 @@
 /**
  * Class LocalesController
  */
-class LocalesController extends BackendController
+class LocalesController extends Dot\Controller
 {
 
     function index($lang)

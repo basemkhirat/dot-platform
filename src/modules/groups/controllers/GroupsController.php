@@ -1,6 +1,6 @@
 <?php
 
-class GroupsController extends BackendController {
+class GroupsController extends Dot\Controller {
 
     protected $data = [];
 
@@ -35,12 +35,15 @@ class GroupsController extends BackendController {
                 $query->where("users.id", Request::get("user_id"));
             });
         }
+
         if (Request::has("status")) {
             $query->where("status", Request::get("status"));
         }
+
         if (Request::has("q")) {
             $query->search(urldecode(Request::get("q")));
         }
+
         $this->data["groups"] = $query->paginate($this->data['per_page']);
         return View::make("groups::show", $this->data);
     }

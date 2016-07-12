@@ -1,7 +1,11 @@
 <?php
 
+namespace Dot;
+
+use Dot\Carbon;
 use Illuminate\Database\Eloquent\Model as BaseModel;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 
 /**
  * Class Model
@@ -105,7 +109,7 @@ trait ModelTraits
      * Return a timestamp as DateTime object.
      *
      * @param  mixed $value
-     * @return \Carbon\Carbon
+     * @return \Dot\Carbon
      */
     protected function asDateTime($value)
     {
@@ -113,7 +117,7 @@ trait ModelTraits
         // If this value is already a Carbon instance, we shall just return it as is.
         // This prevents us having to re-instantiate a Carbon instance when we know
         // it already is one, which wouldn't be fulfilled by the DateTime check.
-        if ($value instanceof DotCarbon) {
+        if ($value instanceof \Dot\Carbon) {
             return $value;
         }
 
@@ -121,7 +125,7 @@ trait ModelTraits
         // these checks since they will be a waste of time, and hinder performance
         // when checking the field. We will just return the DateTime right away.
         if ($value instanceof DateTimeInterface) {
-            return new Carbon(
+            return new \Dot\Carbon(
                 $value->format('Y-m-d H:i:s.u'), $value->getTimeZone()
             );
         }
@@ -130,20 +134,20 @@ trait ModelTraits
         // and format a Carbon object from this timestamp. This allows flexibility
         // when defining your date fields as they might be UNIX timestamps here.
         if (is_numeric($value)) {
-            return DotCarbon::createFromTimestamp($value);
+            return \Dot\Carbon::createFromTimestamp($value);
         }
 
         // If the value is in simply year, month, day format, we will instantiate the
         // Carbon instances from that format. Again, this provides for simple date
         // fields on the database, while still supporting Carbonized conversion.
         if (preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value)) {
-            return DotCarbon::createFromFormat('Y-m-d', $value)->startOfDay();
+            return \Dot\Carbon::createFromFormat('Y-m-d', $value)->startOfDay();
         }
 
         // Finally, we will just assume this date is in the format used by default on
         // the database connection and use that format to create the Carbon object
         // that is returned back out to the developers after we convert it here.
-        return DotCarbon::createFromFormat($this->getDateFormat(), $value);
+        return \Dot\Carbon::createFromFormat($this->getDateFormat(), $value);
     }
 
     /**

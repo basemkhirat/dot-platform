@@ -1,6 +1,6 @@
 <?php
 
-class SitemapController extends BackendController {
+class SitemapController extends Dot\Controller {
 
     public function update() {
         //Sitemap::render("");

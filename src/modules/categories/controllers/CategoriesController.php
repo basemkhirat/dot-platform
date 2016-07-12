@@ -1,6 +1,6 @@
 <?php
 
-class CategoriesController extends BackendController {
+class CategoriesController extends Dot\Controller {
 
     protected $data = [];
 
