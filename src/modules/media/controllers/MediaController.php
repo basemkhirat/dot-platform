@@ -406,10 +406,14 @@ class MediaController extends Dot\Controller
         if (Request::isMethod("post")) {
 
             $gallery = new Gallery();
+
             $gallery->name = Request::get("name");
             $gallery->author = Request::get("author");
             $gallery->user_id = Auth::user()->id;
+            $gallery->lang = LANG;
+
             $gallery->save();
+
             return $gallery->id;
         }
     }
@@ -431,9 +435,13 @@ class MediaController extends Dot\Controller
     function gallery_delete()
     {
         if (Request::isMethod("post")) {
+
             $gallery = Gallery::find(Request::get("id"));
-            $gallery->delete();
-            $gallery->files()->detach();
+
+            if(count($gallery)){
+                $gallery->delete();
+            }
+
         }
     }
 

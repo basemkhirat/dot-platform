@@ -1,10 +1,12 @@
 <?php
 
+namespace Dot;
+
 /**
  * Class ServicesController
  */
 
-class ServicesController extends Dot\Controller {
+class ServicesController extends \Dot\Controller {
 
     /**
      * ServicesController constructor.

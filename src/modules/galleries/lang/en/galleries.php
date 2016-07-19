@@ -25,6 +25,9 @@ return [
     "files" => "files",
     "bulk_actions" => "Bulk actions",
 
+    "media_row_delete" => "Are you sure to delete this file",
+    "delete_gallery" => "Are you sure to delete this gallery",
+
 
     "media_count" => "Files length",
     "no_galleries" => "No galleries",

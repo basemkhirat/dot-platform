@@ -106,8 +106,9 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
 
     public function getPhotoUrlAttribute()
     {
+
         if (Auth::user()->photo) {
-            return thumbnail(Auth::user()->photo->media_path, "thumbnail", "admin::images/author.png");
+            return thumbnail(Auth::user()->photo->path, "thumbnail", "admin::images/author.png");
         } else {
             return assets("admin::images/author.png");
         }

@@ -645,7 +645,7 @@ $(function () {
 
     $("body").on("click", ".media_row_delete", function (e) {
         var base = $(this);
-        confirm_box("Do you want to delete this file from gallery?", function () {
+        confirm_box(base.attr("data-message"), function () {
             base.button('loading');
             base.parents(".media_row").slideUp(function () {
                 base.parents(".media_row").remove();
@@ -671,7 +671,7 @@ $(function () {
     $("body").on("click", "#delete_gallery", function (e) {
         var base = $(this);
 
-        confirm_box("Do you want to delete this gallery?", function () {
+        confirm_box(base.attr("data-message"), function () {
             var gallery_id = base.attr("gallery-id");
 
             var next_gallery = null;

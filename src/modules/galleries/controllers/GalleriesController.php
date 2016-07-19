@@ -151,8 +151,7 @@ class GalleriesController extends Dot\Controller
 
         $limit = 20;
 
-        $ob = DB::table("galleries")
-            ->select(array("media.*", "galleries.*", "name", DB::raw('(select COUNT(*) from galleries_media where galleries_media.gallery_id = galleries.id) as media_count')))
+        $ob = Gallery::select(array("media.*", "galleries.*", "name", DB::raw('(select COUNT(*) from galleries_media where galleries_media.gallery_id = galleries.id) as media_count')))
             ->leftJoin("galleries_media", "galleries.id", "=", "galleries_media.gallery_id")
             ->leftJoin("media", "media.id", "=", "galleries_media.media_id")
             ->groupBy("galleries.id")
@@ -236,7 +235,7 @@ class GalleriesController extends Dot\Controller
                     <li class="media_row">
                         <input type="hidden" name="media_id[]" value="<?php echo $media->media_id; ?>"/>
 
-                        <a href="#" class="media_row_delete">
+                        <a href="#" class="media_row_delete" data-message="<?php echo trans("galleries::galleries.media_row_delete"); ?>">
                             <i class="fa fa-times"></i>
                         </a>
 

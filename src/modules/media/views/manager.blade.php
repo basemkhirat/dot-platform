@@ -632,7 +632,7 @@
 
                                     <button data-loading-text="<?php echo trans("media::media.deleting_gallery"); ?>"
                                             id="delete_gallery" type="button" class="btn btn-default"
-                                            aria-label="<?php echo trans("media::media.add_to_gallery"); ?>">
+                                            aria-label="<?php echo trans("media::media.add_to_gallery"); ?>" data-message="<?php echo trans("galleries::galleries.delete_gallery"); ?>">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
 

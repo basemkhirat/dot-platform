@@ -221,6 +221,13 @@ select::-ms-expand {
     right:unset;
     left: 17px;
 }
+
+
+
+.media_rows .media_row .media_row_delete {
+    right: unset;
+    left: 2px;
+}
 /*
 XS
 */

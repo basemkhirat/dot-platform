@@ -74,11 +74,12 @@ td.center > a {
 .media_rows .media_row .media_row_delete {
     background: none repeat scroll 0 0 #fff;
     color: #dadada;
-    left: 2px;
+    right: 2px;
     position: absolute;
     text-align: center;
     text-shadow: 0 0 0 #000000;
     width: 19px;
+    height: 19px;
 }
 
 .media_row label {

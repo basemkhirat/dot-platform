@@ -4,6 +4,11 @@
 <script>
 
     var confirm_box = function (message, callback) {
+
+        if(message === undefined){
+            callback();
+        }
+
         bootbox.dialog({
             message: message,
             buttons: {

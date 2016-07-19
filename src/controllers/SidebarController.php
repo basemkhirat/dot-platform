@@ -1,12 +1,14 @@
 <?php
 
+namespace Dot;
+
 /**
  * Description of SidebarController
  *
  * @author basem
  */
 
-class SidebarController extends Dot\Controller {
+class SidebarController extends \Dot\Controller {
 
     /**
      * @var array

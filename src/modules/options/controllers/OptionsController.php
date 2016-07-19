@@ -31,7 +31,7 @@ class OptionsController extends Dot\Controller
             Option::store($options);
 
             return Redirect::back()
-                ->with("message", trans("options::options.events.saved"));
+                ->with("message", trans("options::options.events.saved", [], "messages", Request::get("app_locale")));
         }
         $this->data["option_page"] = "main";
         return View::make("options::show", $this->data);

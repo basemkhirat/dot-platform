@@ -24,7 +24,7 @@ class CreateOptionsTable extends Migration
         "app.timezone" => "Etc/GMT",
         "date_format" => "relative",
         "site_logo" => "",
-        "media.allowed_file_types" => "jpg,png,jpeg,gif,zip,doc,rar,pdf",
+        "media.allowed_file_types" => "jpg,png,jpeg,bmp,gif,zip,doc,docx,rar,zip,pdf,txt,csv,xls",
         "media.max_file_size" => "23444344",
         "media.max_width" => "1200222",
         "media.cropping" => "0",

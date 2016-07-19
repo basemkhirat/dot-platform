@@ -13,6 +13,7 @@ return [
     'media' => 'Media',
     'plugins' => 'Plugins',
     'change_logo' => 'Change site logo',
+    'remove_logo' => 'Remove site logo',
     'chane_logo_help' => 'appears when sharing',
     'amazon_integration' => 'Amazon integration',
     'kilobytes' => 'KB',

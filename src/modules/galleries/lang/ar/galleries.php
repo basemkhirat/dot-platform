@@ -25,6 +25,9 @@ return [
     "files" => "ملفات",
     "bulk_actions" => "إختر الحدث",
 
+    "media_row_delete" => "هل تريد حذف الملف ؟ ",
+    "delete_gallery" => "هل تريد حذف الألبوم ؟",
+
     "media_count" => "عدد الملفات",
     "no_galleries" => "لا توجد ألبومات",
 

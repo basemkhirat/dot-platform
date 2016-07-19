@@ -62,7 +62,8 @@
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <p><?php echo trans("options::options.chane_logo_help"); ?></p>
-                                                <a href="javascript:void(0)" id="change_logo" class="text-navy"><?php echo trans("options::options.change_logo") ?></a>
+                                                <a href="javascript:void(0)" id="change_logo" class="text-navy" <?php if(Config::get("site_logo") != ""){ ?>style="display: none"<?php } ?>><?php echo trans("options::options.change_logo") ?></a>
+                                                <a href="javascript:void(0)" id="remove_logo" class="text-navy" <?php if(Config::get("site_logo") == ""){ ?>style="display: none"<?php } ?>><?php echo trans("options::options.remove_logo") ?></a>
                                             </div>
                                         </div>
                                     </div>
@@ -278,11 +279,22 @@
                     var file = result[0];
                     $("#site_logo_path").val(file.path);
                     $("#site_logo").attr("src", file.thumbnail);
+
+                    base.hide();
+                    $("#remove_logo").show();
                 }
             },
             error: function (media_path) {
                 alert_box(media_path + " <?php echo trans("options::options.file_not_supported") ?>");
             }
+        });
+
+        $("#remove_logo").click(function(){
+            $("#site_logo_path").val("");
+            $("#site_logo").attr("src", "<?php echo assets("admin::default/image.png"); ?>");
+
+            $(this).hide();
+            $("#change_logo").show();
         });
 
 

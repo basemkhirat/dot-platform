@@ -12,6 +12,7 @@ return [
     'media' => 'الملتيمديا',
     'plugins' => 'الإضافات',
     'change_logo' => 'تغيير الشعار',
+    'remove_logo' => 'حذف الشعار',
     'chane_logo_help' => 'يظهر عند مشاركة الموقع عبر مواقع التواصل الإجتماعى',
     'amazon_integration' => 'إعدادات   S3',
     'kilobytes' => 'كيلو بايت',
