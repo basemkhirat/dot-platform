@@ -14,6 +14,9 @@
         </h2>
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo URL::to(ADMIN . "/tags"); ?>"><?php echo trans("tags::tags.tags"); ?></a>
             </li>
             <li class="active">

@@ -217,8 +217,9 @@
                             ));
                             ?>
 
+                            <?php /*
                             <li class="dd-item dd-placeholder">
-
+                               */ ?>
 
                         </ul>
                     </div>
@@ -353,6 +354,13 @@
 
 @section("header")
 
+<style>
+
+    .dd-placeholder, .dd-empty{
+        background: none;
+    }
+
+</style>
 
 @stop
 
@@ -463,7 +471,10 @@
 
             $.post("<?php echo route("admin.navigations.add_link"); ?>", base.serialize(), function (data) {
 
-                $(data).insertBefore( $(".dd-list .dd-placeholder"));
+
+                $(".dd-list").append(data);
+
+                // $(data).insertBefore( $(".dd-list .dd-placeholder"));
 
                 base.find("[name=name]").first().val("");
                 base.find("[name=link]").first().val("");

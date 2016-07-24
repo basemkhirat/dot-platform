@@ -36,6 +36,7 @@ class CategoriesController extends Dot\Controller {
     public function create() {
 
         if (Request::isMethod("post")) {
+
             $category = new Category();
 
             $category->name = Request::get('name');
@@ -59,8 +60,6 @@ class CategoriesController extends Dot\Controller {
             return Redirect::route("admin.categories.edit", array("id" => $category->id))
                             ->with("message", trans("categories::categories.events.created"));
         }
-
-
 
         $this->data["category"] = false;
         return View::make("categories::edit", $this->data);

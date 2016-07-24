@@ -9,6 +9,9 @@
         </h2>
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo URL::to(ADMIN . "/roles"); ?>"><?php echo trans("roles::roles.roles") ?></a>
             </li>
             <li class="active">

@@ -9,6 +9,9 @@
         </h2>
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo route("admin.galleries.show"); ?>"><?php echo trans("galleries::galleries.galleries") ?>
                     (<?php echo $galleries->total() ?>)</a>
             </li>

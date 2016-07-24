@@ -5,7 +5,7 @@
         <h2>
             <i class="fa fa-newspaper-o"></i>
             <?php
-            if ($post) {
+            if ($post->id) {
                 echo trans("posts::posts.edit");
             } else {
                 echo trans("posts::posts.add_new");
@@ -14,12 +14,15 @@
         </h2>
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo URL::to(ADMIN . "/posts"); ?>"><?php echo trans("posts::posts.posts"); ?></a>
             </li>
             <li class="active">
                 <strong>
                     <?php
-                    if ($post) {
+                    if ($post->id) {
                         echo trans("posts::posts.edit");
                     } else {
                         echo trans("posts::posts.add_new");

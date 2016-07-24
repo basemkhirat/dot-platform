@@ -6,6 +6,9 @@
         <h2><?php echo trans("users::users.edit") ?></h2>
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo URL::to(ADMIN . "/users"); ?>"><?php echo trans("users::users.users") ?></a>
             </li>
             <li class="active">

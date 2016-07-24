@@ -8,6 +8,9 @@
         </h2>
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo URL::to(ADMIN . "/groups"); ?>"><?php echo trans("groups::groups.groups") ?> (<?php echo $groups->total() ?>)</a>
             </li>
         </ol>

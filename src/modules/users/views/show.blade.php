@@ -12,6 +12,9 @@
 
         <ol class="breadcrumb">
             <li>
+                <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+            </li>
+            <li>
                 <a href="<?php echo route("admin.users.show"); ?>">
                     <?php echo trans("users::users.users") ?>
                     (<?php echo $users->total() ?>)</a>
