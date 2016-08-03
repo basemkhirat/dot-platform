@@ -202,7 +202,7 @@
                             </button>
 
                             <br/><br/>
-                            <?php if (User::access("media.cropping")) { ?>
+
                                 <div class="cropped_images">
                                     <?php /*
                                       <div class="size-row" data-size="full">
@@ -275,9 +275,9 @@
                                         </div>
                                     </fieldset>
                                 </form>
-                            <?php } ?>
 
-                            <?php if (User::access("media.watermarking")) { ?>
+
+
                                 <fieldset>
                                     <legend><?php echo trans("media::media.watermark_settings"); ?></legend>
 
@@ -305,7 +305,7 @@
                                     </button>
 
                                 </fieldset>
-                            <?php } ?>
+
                         </div>
                     </span>
                 </div>
@@ -399,12 +399,15 @@
                                        id="download_media">
                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                     </a>
-                                    <?php // if (User::access("media.watermarking") or User::access("media.cropping")) { ?>
+
+                                    <?php /*
+
                                         <a class="btn btn-success btn-flat" href="javascript:void(0)"
                                            data-loading-text="<?php echo trans("media::media.please_wait") ?>"
                                            target="_blank"
                                            id="set_media"><?php echo trans("media::media.settings") ?></a>
-                                    <?php // } ?>
+
+ */ ?>
                                     <a class="btn btn-danger btn-flat" href="javascript:void(0)"
                                        data-loading-text="<?php echo trans("media::media.deleting") ?>"
                                        data-message="<?php echo trans("media::media.confirm_delete_file"); ?>"
@@ -429,7 +432,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php if (User::access("media.manage_captions")) { ?>
+
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -455,7 +458,7 @@
                                                    id="save_media" class="pull-right btn btn-flat btn-primary"
                                                    ><i class="fa fa-floppy-o" aria-hidden="true"></i> <?php echo trans("media::media.save"); ?></button>
                                         </div>
-                                    <?php } ?>
+
 
                                 </form><!-- media-form -->
                             </div><!-- media-form-wrapper -->

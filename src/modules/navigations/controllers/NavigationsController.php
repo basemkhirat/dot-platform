@@ -15,15 +15,16 @@ class NavigationsController extends Dot\Controller
 
     function index($id = 0)
     {
-
         $nav = Nav::find($id);
 
         if (!$id) {
+
             $nav = Nav::first();
 
             if (count($nav)) {
                 return redirect()->route("admin.navigations.show", ["id" => $nav->id]);
             }
+
         }
 
         $this->data["nav"] = $nav;
