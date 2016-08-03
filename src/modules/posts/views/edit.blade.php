@@ -88,23 +88,22 @@
                     <div class="form-group meta-rows">
 
 
+                        <?php foreach ($post->meta as $meta) { ?>
+                            <div class="meta-row">
 
-                        <?php foreach($post->meta as $meta){ ?>
-                        <div class="meta-row">
-
-                            <input type="text" name="custom_names[]" value="<?php echo $meta->name; ?>"
-                                   class="form-control input-md pull-left custom-field-name"
-                                   placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
+                                <input type="text" name="custom_names[]" value="<?php echo $meta->name; ?>"
+                                       class="form-control input-md pull-left custom-field-name"
+                                       placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
 
                             <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"
                                       rows="1"
                                       placeholder="<?php echo trans("posts::posts.custom_value") ?>"><?php echo $meta->value; ?></textarea>
 
-                            <a class="remove-custom-field pull-right" href="javascript:void(0)">
-                                <i class="fa fa-times text-navy"></i>
-                            </a>
+                                <a class="remove-custom-field pull-right" href="javascript:void(0)">
+                                    <i class="fa fa-times text-navy"></i>
+                                </a>
 
-                        </div>
+                            </div>
                         <?php } ?>
 
                         <div class="meta-row">
@@ -122,7 +121,6 @@
                             </a>
 
                         </div>
-
 
 
                     </div>
@@ -319,10 +317,11 @@
         margin: 10px;
     }
 
-    .meta-rows{
+    .meta-rows {
 
     }
-    .meta-row{
+
+    .meta-row {
         background: #f1f1f1;
         overflow: hidden;
         margin-top: 4px;
@@ -330,41 +329,66 @@
 
 </style>
 
+
 @stop
 
 @section("footer")
 @parent
 <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
 <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js') ?>"></script>
+
+<script src="<?php echo assets('admin::js/voice.js') ?>"></script>
+
 <script>
 
     $(document).ready(function () {
+
+        $(".translator-btn").click(function () {
+            translate();
+        });
+
+        function parseHtmlEnteties(str) {
+
+            str = str.replace("&nbsp;", "");
+            return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
+                var num = parseInt(numStr, 10); // read num as normal number
+                return String.fromCharCode(num);
+            });
+        }
+
+        function translate() {
+
+            var objEditor = CKEDITOR.instances["postcontent"];
+            var msg = objEditor.getData().replace(/<\/?[^>]+(>|$)/g, "");
+
+            responsiveVoice.speak(parseHtmlEnteties(msg), "Arabic Male");
+        }
 
         var elems = Array.prototype.slice.call(document.querySelectorAll('.status-switcher'));
         elems.forEach(function (html) {
             var switchery = new Switchery(html, {size: 'small'});
         });
 
-        $("body").on("click", ".remove-custom-field", function(){
+        $("body").on("click", ".remove-custom-field", function () {
 
             var item = $(this);
-            confirm_box("<?php echo trans("posts::posts.sure_delete_field"); ?>", function(){
+            confirm_box("<?php echo trans("posts::posts.sure_delete_field"); ?>", function () {
                 item.parents(".meta-row").remove();
             });
 
         });
 
-        $(".add-custom-field").click(function(){
+        $(".add-custom-field").click(function () {
 
             var html = ' <div class="meta-row">'
-                +'<input type="text" name="custom_names[]"'
+                + '<input type="text" name="custom_names[]"'
                 + 'class="form-control input-md pull-left custom-field-name"'
                 + ' placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>'
                 + '   <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"'
-                +'   rows="1"'
-                +'   placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>'
-                +'   <a class="remove-custom-field pull-right" href="javascript:void(0)">'
-                +'   <i class="fa fa-times text-navy"></i>'
+                + '   rows="1"'
+                + '   placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>'
+                + '   <a class="remove-custom-field pull-right" href="javascript:void(0)">'
+                + '   <i class="fa fa-times text-navy"></i>'
                 + '   </a>'
                 + '   </div>';
 

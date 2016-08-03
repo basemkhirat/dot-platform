@@ -5,6 +5,14 @@ class GalleriesController extends Dot\Controller
 
     public $data = array();
 
+    function __construct()
+    {
+        parent::__construct();
+        if (! User::access("galleries.manage")) {
+            Dot::denied();
+        }
+    }
+
     public function index($id = false)
     {
 

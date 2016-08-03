@@ -5,6 +5,14 @@ class NavigationsController extends Dot\Controller
 
     public $data = [];
 
+    function __construct()
+    {
+        parent::__construct();
+        if (! User::access("navigations.manage")) {
+            Dot::denied();
+        }
+    }
+
     function index($id = 0)
     {
 
@@ -75,6 +83,7 @@ class NavigationsController extends Dot\Controller
 
                 $items[] = $item;
             }
+
         } else if ($type == "tag") {
 
             $result = Tag::search($q)->limit(5)->get();

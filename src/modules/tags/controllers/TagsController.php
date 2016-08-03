@@ -5,6 +5,13 @@ class TagsController extends Dot\Controller
 
     protected $data = [];
 
+    function __construct()
+    {
+        parent::__construct();
+        if (! User::access("tags.manage")) {
+            Dot::denied();
+        }
+    }
 
     function index()
     {

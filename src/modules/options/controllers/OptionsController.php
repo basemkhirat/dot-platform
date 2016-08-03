@@ -17,6 +17,9 @@ class OptionsController extends Dot\Controller
     function index()
     {
 
+        if(! User::access("options.general")){
+            Dot::denied();
+        }
 
         if (Request::isMethod("post")) {
 
@@ -59,6 +62,10 @@ class OptionsController extends Dot\Controller
     function seo()
     {
 
+        if(! User::access("options.seo")){
+            Dot::denied();
+        }
+
         if (Request::isMethod("post")) {
 
             // creating sitemap directory if not exists
@@ -91,6 +98,11 @@ class OptionsController extends Dot\Controller
 
     function social()
     {
+
+        if(! User::access("options.social")){
+            Dot::denied();
+        }
+
         if (Request::isMethod("post")) {
 
             Option::store(Request::except("_token"));
@@ -106,6 +118,11 @@ class OptionsController extends Dot\Controller
 
     function plugins()
     {
+
+        if(! User::access("options.plugins")){
+            Dot::denied();
+        }
+
         if (Request::isMethod("post")) {
 
             $active_plugins = array_keys(Request::get("plugins", []));
@@ -196,6 +213,12 @@ class OptionsController extends Dot\Controller
 
     function media()
     {
+
+
+        if(! User::access("options.media")){
+            Dot::denied();
+        }
+
         if (Request::isMethod("post")) {
 
             $options = Request::except("_token");
@@ -206,6 +229,14 @@ class OptionsController extends Dot\Controller
             $options["s3_status"] = Request::get("s3_status", 0);
             $options["s3_delete_locally"] = Request::get("s3_delete_locally", 0);
 
+            $options["resize_mode"] = Request::get("media_resize_mode", "resize_crop");
+            $options["resize_background_color"] = Request::get("resize_background_color", "#FFFFFF");
+            $options["resize_gradient_first_color"] = Request::get("resize_gradient_first_color", "#FFFFFF");
+            $options["resize_gradient_second_color"] = Request::get("resize_gradient_second_color", "#000000");
+
+           // dd($options);
+
+            // background_color
             Option::store($options, "media");
 
             return Redirect::back()

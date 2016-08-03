@@ -6,6 +6,14 @@ class BlocksController extends Dot\Controller
     protected $data = [];
 
 
+    function __construct()
+    {
+        parent::__construct();
+        if (! User::access("blocks.manage")) {
+            Dot::denied();
+        }
+    }
+
     function index()
     {
 

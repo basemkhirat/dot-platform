@@ -401,6 +401,9 @@ class DotNavigation {
      * @return array|mixed
      */
     private function sortItems() {
+
+        $this->items = $this->items ? $this->items : [];
+
         $this->items = array_merge_recursive($this->items, $this->waiting_items);
 
         if (Config::has("sidebar") and Config::get("sidebar") != "") {

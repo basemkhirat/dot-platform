@@ -30,7 +30,6 @@ class Post extends Dot\Model
 
     public function scopeStatus($query, $status)
     {
-
         switch ($status) {
             case "published":
                 $query->where("status", 1);
@@ -40,7 +39,6 @@ class Post extends Dot\Model
                 $query->where("status", 0);
                 break;
         }
-
     }
 
     public function scopeFormat($query, $format)

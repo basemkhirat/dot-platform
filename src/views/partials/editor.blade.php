@@ -9,6 +9,12 @@ $id = isset($id) ? $id : "post-content";
         <span class="btn-label icon fa fa-camera"></span>
         &nbsp;{!!Lang::get('admin::editor.add_media')!!}</a>
 
+
+    <?php /*
+
+    */ ?>
+    <input class="btn pull-right translator-btn" type='button' value='🔊 ' />
+
 </div>
 <textarea style="display: none" name="<?php echo $name; ?>" id="<?php echo $id; ?>"><?php echo $value; ?></textarea>
 
@@ -49,6 +55,10 @@ $id = isset($id) ? $id : "post-content";
         resize_enabled: true,
         resize_dir: 'vertical',
     });
+
+
+
+
 
     $(document).ready(function () {
 

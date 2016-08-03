@@ -4,8 +4,12 @@ class CategoriesController extends Dot\Controller {
 
     protected $data = [];
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
+        if (! User::access("categories.manage")) {
+            Dot::denied();
+        }
     }
 
     function index($parent = 0) {

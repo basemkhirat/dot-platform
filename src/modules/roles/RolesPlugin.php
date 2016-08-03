@@ -3,7 +3,6 @@
 class RolesPlugin extends Plugin
 {
 
-
     /**
      * @return array
      */

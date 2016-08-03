@@ -83,6 +83,10 @@ return [
         'deleted' => 'Post deleted successfully',
         'activated' => 'Post activated successfully',
         'deactivated' => 'Post deactivated successfully'
+    ],
+
+    "permissions" => [
+        "manage" => "Manage posts"
     ]
     
 ];

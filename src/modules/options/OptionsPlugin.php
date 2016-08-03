@@ -8,11 +8,11 @@ class OptionsPlugin extends Plugin
     ];
 
     public $permissions = [
-        "manage_general",
-        "manage_seo",
-        "manage_media",
-        "manage_social",
-        "manage_plugins",
+        "general",
+        "seo",
+        "media",
+        "social",
+        "plugins",
     ];
 
     /**
@@ -33,21 +33,38 @@ class OptionsPlugin extends Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            $menu->item('options', trans("admin::common.settings"), URL::to(ADMIN . '/options'))
-                ->order(9)
-                ->icon("fa-cogs");
+            if (User::access("options")) {
 
-            $menu->item('options.main', trans("options::options.main"), URL::to(ADMIN . '/options'))
-                ->icon("fa-sliders");
-            $menu->item('options.seo', trans("options::options.seo"), URL::to(ADMIN . '/options/seo'))
-                ->icon("fa-line-chart");
-            $menu->item('options.media', trans("options::options.media"), URL::to(ADMIN . '/options/media'))
-                ->icon("fa-camera");
-            $menu->item('options.social', trans("options::options.social"), URL::to(ADMIN . '/options/social'))
-                ->icon("fa-globe");
+                $menu->item('options', trans("admin::common.settings"), "javascript::void(0)")
+                    ->order(9)
+                    ->icon("fa-cogs");
 
-            $menu->item('options.plugins', trans("options::options.plugins"), URL::to(ADMIN . '/options/plugins'))
-                ->icon("fa-puzzle-piece");
+                if (User::access("options.general")) {
+                    $menu->item('options.main', trans("options::options.main"), URL::to(ADMIN . '/options'))
+                        ->icon("fa-sliders");
+                }
+
+                if (User::access("options.seo")) {
+                    $menu->item('options.seo', trans("options::options.seo"), URL::to(ADMIN . '/options/seo'))
+                        ->icon("fa-line-chart");
+                }
+
+                if (User::access("options.media")) {
+                    $menu->item('options.media', trans("options::options.media"), URL::to(ADMIN . '/options/media'))
+                        ->icon("fa-camera");
+                }
+
+                if (User::access("options.social")) {
+                    $menu->item('options.social', trans("options::options.social"), URL::to(ADMIN . '/options/social'))
+                        ->icon("fa-globe");
+                }
+
+                if (User::access("options.plugins")) {
+                    $menu->item('options.plugins', trans("options::options.plugins"), URL::to(ADMIN . '/options/plugins'))
+                        ->icon("fa-puzzle-piece");
+                }
+
+            }
 
         });
 
@@ -56,7 +73,9 @@ class OptionsPlugin extends Plugin
         });
 
         Navigation::menu("topnav", function ($menu) {
-            $menu->make("options::dropmenu");
+            if (User::access("options")) {
+                $menu->make("options::dropmenu");
+            }
         });
 
         include __DIR__ . "/routes.php";

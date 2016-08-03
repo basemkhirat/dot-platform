@@ -128,6 +128,7 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         $user = Auth::user();
 
         $role_name = "";
+
         if ($user->role) {
             $role_name = strtolower($user->role->name);
         }

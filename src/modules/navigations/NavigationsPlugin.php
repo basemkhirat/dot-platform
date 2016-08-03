@@ -6,6 +6,10 @@
 class NavigationsPlugin extends Plugin
 {
 
+    public $permissions = [
+        "manage"
+    ];
+    
     /**
      * Plugin details
      * @return array
@@ -30,9 +34,12 @@ class NavigationsPlugin extends Plugin
     function boot(){
 
         Navigation::menu("sidebar", function ($menu) {
-            $menu->item('navigations', trans("navigations::navigations.module"), route("admin.navigations.show"))
-            ->order(1)
-            ->icon("fa-th-large");
+
+            if (User::access("navigations.manage")) {
+                $menu->item('navigations', trans("navigations::navigations.module"), route("admin.navigations.show"))
+                    ->order(1)
+                    ->icon("fa-th-large");
+            }
         });
 
         include __DIR__ . "/routes.php";

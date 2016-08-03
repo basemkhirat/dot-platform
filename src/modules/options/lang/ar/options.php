@@ -37,10 +37,12 @@ return [
     "version_available" => "النظام <strong style='font-family: sans-serif, Arial, Verdana'>:version</strong> متوفر الان !",
     "up_to_date" => "لا توجد تحديثات",
 
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'resize_mode_resize' => 'نغيير الأبعاد مع المحافظة علي أبعاد الصورة',
+    'resize_mode_resize_crop' => 'تغيير الأبعاد مع قطع',
+    'resize_mode_color_background' => 'تغيير الأبعاد مع خلفية ملونة',
+    'resize_mode_gradient_background' => 'تغيير الأبعاد مع تدرج في اللون',
+    'resize_mode_blur_background' => 'تغيير الأبعاد مع أضافة تأثير Blur',
+
     'attributes' => [
         'site_name' => 'إسم الموقع',
         'site_slogan' => 'عن الموقع',
@@ -88,7 +90,12 @@ return [
         'soundcloud_page' => "ساوند كلاود",
         'breaking_hash_tag' => 'الهاش تاج',
         'breaking_live_stream' => 'البث المباشر',
-        '' => '',
+
+
+        'resize_mode' => 'وضعية القطع',
+        'resize_background_color' => 'لون الخلفية',
+        'resize_gradient_first_color' => 'اللون الأول',
+        'resize_gradient_second_color' => 'اللون الأخر'
     ],
     "events" => [
         'saved' => 'تم تحديث الإعدادات بنجاح',
@@ -97,11 +104,11 @@ return [
     ],
 
     "permissions" => [
-        "manage_general" => "التحكم بالإعدادات العامة",
-        "manage_seo" => "التحكم بإعدادات SEO",
-        "manage_social" => "التحكم بالصفحات الإجتماعية",
-        "manage_media" => "التحكم بالملتيمديا",
-        "manage_plugins" => "التحكم بالأضافات",
+        "general" => "التحكم بالإعدادات العامة",
+        "seo" => "التحكم بإعدادات SEO",
+        "social" => "التحكم بالصفحات الإجتماعية",
+        "media" => "التحكم بالملتيمديا",
+        "plugins" => "التحكم بالأضافات",
     ]
 
 ];

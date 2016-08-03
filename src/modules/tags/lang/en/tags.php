@@ -68,6 +68,9 @@ return [
         'updated' => 'Tag updated successfully',
         'deleted' => 'Tag deleted successfully',
 
+    ],
+    "permissions" => [
+        "manage" => "Manage tags"
     ]
 
 ];

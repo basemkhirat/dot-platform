@@ -3,6 +3,9 @@
 class GalleriesPLugin extends Plugin
 {
 
+    public $permissions = [
+        "manage"
+    ];
 
     /**
      * @return array
@@ -21,9 +24,12 @@ class GalleriesPLugin extends Plugin
     {
 
         Navigation::menu("sidebar", function ($menu) {
-            $menu->item('galleries', trans("admin::common.galleries"), URL::to(ADMIN . '/galleries'))
-                ->order(5)
-                ->icon("fa-camera");
+
+            if (User::access("galleries.manage")) {
+                $menu->item('galleries', trans("admin::common.galleries"), URL::to(ADMIN . '/galleries'))
+                    ->order(5)
+                    ->icon("fa-camera");
+            }
         });
 
         include __DIR__ . "/routes.php";

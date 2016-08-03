@@ -44,5 +44,8 @@ return [
         "created" => "Gallery created successfully",
         "updated" => "Gallery updated successfully",
         "deleted" => "Gallery deleted successfully",
+    ],
+    "permissions" => [
+        "manage" => "Manage galleries"
     ]
 ];

@@ -216,13 +216,84 @@ class Media extends Dot\Model
             $width = Image::make($file_directory . "/" . $filename)->width();
             $height = Image::make($file_directory . "/" . $filename)->height();
 
+            $resize_mode = config("media.resize_mode", "resize_crop");
+
             foreach ($sizes as $size => $dimensions) {
 
-                Image::make($file_directory . "/" . $filename)
-                    ->fit($dimensions[0], $dimensions[1], function ($constraint) {
-                        $constraint->upsize();
-                    })
-                    ->save($file_directory . "/" . $size . "-" . $filename);
+                if ($width > $height) {
+                    $new_width = $dimensions[0];
+                    $new_height = null;
+                } else {
+                    $new_height = $dimensions[1];
+                    $new_width = null;
+                }
+
+                if ($resize_mode == "resize") {
+
+                    Image::make($file_directory . "/" . $filename)
+                        ->resize($new_width, $new_height, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })
+                        ->save($file_directory . "/" . $size . "-" . $filename);
+
+                }
+
+                if ($resize_mode == "resize_crop") {
+
+                    Image::make($file_directory . "/" . $filename)
+                        ->fit($dimensions[0], $dimensions[1])
+                        ->save($file_directory . "/" . $size . "-" . $filename);
+
+                }
+
+                if ($resize_mode == "color_background") {
+
+                    $background_color = config("media.resize_background_color", "#000000");
+
+                    $background = Image::canvas($dimensions[0], $dimensions[1], $background_color);
+
+                    $image = Image::make($file_directory . "/" . $filename)
+                        ->resize($new_width, $new_height, function ($constraint) {
+                            $constraint->aspectRatio();
+                            //$constraint->upsize();
+                        });
+
+                    $background->insert($image, 'center');
+                    $background->save($file_directory . "/" . $size . "-" . $filename);
+                }
+
+                if ($resize_mode == "gradient_background") {
+
+                    $first_color = config("media.resize_gradient_first_color", "#000000");
+                    $second_color = config("media.resize_gradient_second_color", "#ffffff");
+
+                    $background = Image::make($this->gradient($dimensions[0], $dimensions[1], array($first_color, $first_color, $second_color, $second_color)));
+
+                    $image = Image::make($file_directory . "/" . $filename)
+                        ->resize($new_width, $new_height, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+
+                    $background->insert($image, 'center');
+                    $background->save($file_directory . "/" . $size . "-" . $filename);
+
+                }
+
+                if ($resize_mode == "blur_background") {
+
+                    $background = Image::make($file_directory . "/" . $filename)
+                        ->fit($dimensions[0], $dimensions[1])
+                        ->blur(100);
+
+                    $image = Image::make($file_directory . "/" . $filename)
+                        ->resize($new_width, $new_height, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+
+                    $background->insert($image, 'center');
+                    $background->save($file_directory . "/" . $size . "-" . $filename);
+
+                }
 
                 if ($s3_save) {
                     s3_save(date("Y/m/") . $size . "-" . $filename);
@@ -423,6 +494,64 @@ class Media extends Dot\Model
         }
 
 
+    }
+
+    function gradient($w = 100, $h = 100, $c = array('#FFFFFF', '#FF0000', '#00FF00', '#0000FF'), $hex = true)
+    {
+
+        /*
+        Generates a gradient image
+
+        Author: Christopher Kramer
+
+        Parameters:
+        w: width in px
+        h: height in px
+        c: color-array with 4 elements:
+            $c[0]:   top left color
+            $c[1]:   top right color
+            $c[2]:   bottom left color
+            $c[3]:   bottom right color
+
+        if $hex is true (default), colors are hex-strings like '#FFFFFF' (NOT '#FFF')
+        if $hex is false, a color is an array of 3 elements which are the rgb-values, e.g.:
+        $c[0]=array(0,255,255);
+
+        */
+
+        $im = imagecreatetruecolor($w, $h);
+
+        if ($hex) {  // convert hex-values to rgb
+            for ($i = 0; $i <= 3; $i++) {
+                $c[$i] = $this->hex2rgb($c[$i]);
+            }
+        }
+
+        $rgb = $c[0]; // start with top left color
+        for ($x = 0; $x <= $w; $x++) { // loop columns
+            for ($y = 0; $y <= $h; $y++) { // loop rows
+                // set pixel color
+                $col = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
+                imagesetpixel($im, $x - 1, $y - 1, $col);
+                // calculate new color
+                for ($i = 0; $i <= 2; $i++) {
+                    $rgb[$i] =
+                        $c[0][$i] * (($w - $x) * ($h - $y) / ($w * $h)) +
+                        $c[1][$i] * ($x * ($h - $y) / ($w * $h)) +
+                        $c[2][$i] * (($w - $x) * $y / ($w * $h)) +
+                        $c[3][$i] * ($x * $y / ($w * $h));
+                }
+            }
+        }
+        return $im;
+    }
+
+    function hex2rgb($hex)
+    {
+        $rgb[0] = hexdec(substr($hex, 1, 2));
+        $rgb[1] = hexdec(substr($hex, 3, 2));
+        $rgb[2] = hexdec(substr($hex, 5, 2));
+        return ($rgb);
     }
 
 

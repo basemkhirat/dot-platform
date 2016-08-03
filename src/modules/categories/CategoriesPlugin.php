@@ -3,6 +3,10 @@
 class CategoriesPlugin extends Plugin
 {
 
+    public $permissions = [
+        "manage"
+    ];
+
     /**
      * @return array
      */
@@ -19,8 +23,11 @@ class CategoriesPlugin extends Plugin
     function boot()
     {
         Navigation::menu("sidebar", function ($menu) {
-            //$menu->item('news_options.categories', trans("categories::categories.categories"), URL::to(ADMIN . '/categories'))->icon("fa-folder")->order(1);
-            $menu->item('categories', trans("categories::categories.categories"), URL::to(ADMIN . '/categories'))->icon("fa-folder")->order(1);
+
+            if (User::access("categories.manage")) {
+                //$menu->item('news_options.categories', trans("categories::categories.categories"), URL::to(ADMIN . '/categories'))->icon("fa-folder")->order(1);
+                $menu->item('categories', trans("categories::categories.categories"), URL::to(ADMIN . '/categories'))->icon("fa-folder")->order(1);
+            }
         });
 
         include __DIR__ . "/routes.php";

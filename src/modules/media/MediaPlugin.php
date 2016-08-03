@@ -13,11 +13,13 @@ class MediaPlugin extends Plugin
         'AWS' => Aws\Laravel\AwsFacade::class,
     ];
 
+    /*
     public $permissions = [
         "manage_captions",
         "watermarking",
         "cropping"
     ];
+    */
 
     /**
      * @return array

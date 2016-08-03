@@ -31,5 +31,4 @@ return array(
     "attributes" => [
         "name" => "إسم الصلاحية"
     ]
-
 );

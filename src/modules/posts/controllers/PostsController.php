@@ -8,6 +8,9 @@ class PostsController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
+        if (! User::access("posts.manage")) {
+            Dot::denied();
+        }
     }
 
     function index()

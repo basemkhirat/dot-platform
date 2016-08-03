@@ -399,12 +399,12 @@
                                        id="download_media">
                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                     </a>
-                                    <?php /* if (User::access("media.watermarking") or User::access("media.cropping")) { ?>
+                                    <?php // if (User::access("media.watermarking") or User::access("media.cropping")) { ?>
                                         <a class="btn btn-success btn-flat" href="javascript:void(0)"
                                            data-loading-text="<?php echo trans("media::media.please_wait") ?>"
                                            target="_blank"
                                            id="set_media"><?php echo trans("media::media.settings") ?></a>
-                                    <?php } */ ?>
+                                    <?php // } ?>
                                     <a class="btn btn-danger btn-flat" href="javascript:void(0)"
                                        data-loading-text="<?php echo trans("media::media.deleting") ?>"
                                        data-message="<?php echo trans("media::media.confirm_delete_file"); ?>"

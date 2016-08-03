@@ -8,6 +8,9 @@ class PagesController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
+        if (! User::access("pages.manage")) {
+            Dot::denied();
+        }
     }
 
     function index()

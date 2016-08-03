@@ -119,9 +119,9 @@
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th style="width:35px"><input type="checkbox" class="i-checks check_all" name="ids[]"/>
+                                <th style="width:35px">
+                                    <input type="checkbox" class="i-checks check_all" name="ids[]"/>
                                 </th>
-
                                 <th><?php echo trans("tags::tags.attributes.name"); ?></th>
                                 <th><?php echo trans("tags::tags.attributes.date"); ?></th>
                                 <th><?php echo trans("tags::tags.actions"); ?></th>

@@ -66,6 +66,9 @@ return [
         'updated' => 'Block updated successfully',
         'deleted' => 'Block deleted successfully',
 
+    ],
+    "permissions" => [
+        "manage" => "Manage blocks"
     ]
 
 ];

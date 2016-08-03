@@ -3,6 +3,10 @@
 class PostsPlugin extends Plugin
 {
 
+    public $permissions = [
+        "manage"
+    ];
+
     /**
      * @return array
      */
@@ -18,13 +22,19 @@ class PostsPlugin extends Plugin
 
     function boot()
     {
+
         Navigation::menu("sidebar", function ($menu) {
-            $menu->item('posts', trans("posts::posts.posts"), URL::to(ADMIN . '/posts'))
-                ->order(0)
-                ->icon("fa-newspaper-o");
+
+            if (User::access("posts.manage")) {
+                $menu->item('posts', trans("posts::posts.posts"), URL::to(ADMIN . '/posts'))
+                    ->order(0)
+                    ->icon("fa-newspaper-o");
+            }
+
         });
 
         include __DIR__ . "/routes.php";
+
     }
 
     function install()

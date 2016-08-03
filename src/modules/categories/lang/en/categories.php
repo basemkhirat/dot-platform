@@ -47,6 +47,9 @@ return [
         'updated' => 'Category updated successfully',
         'deleted' => 'Category deleted successfully',
         
+    ],
+    "permissions" => [
+        "manage" => "Manage categories"
     ]
     
 ];

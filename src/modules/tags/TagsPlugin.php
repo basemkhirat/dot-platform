@@ -3,6 +3,9 @@
 class TagsPlugin extends Plugin
 {
 
+    public $permissions = [
+        "manage"
+    ];
 
     /**
      * @return array
@@ -22,7 +25,10 @@ class TagsPlugin extends Plugin
     {
 
         Navigation::menu("sidebar", function ($menu) {
-            $menu->item('tags', trans("tags::tags.tags"), URL::to(ADMIN . '/tags'))->icon("fa-tags")->order(3);
+
+            if (User::access("tags.manage")) {
+                $menu->item('tags', trans("tags::tags.tags"), URL::to(ADMIN . '/tags'))->icon("fa-tags")->order(3);
+            }
         });
 
         include __DIR__ . "/routes.php";

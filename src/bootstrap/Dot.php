@@ -106,5 +106,9 @@ class DotPlatform
 
     }
 
+    function denied(){
+        app()->abort(403, "Access denied");
+    }
+
 
 }

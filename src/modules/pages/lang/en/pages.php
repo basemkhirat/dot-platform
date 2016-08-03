@@ -61,6 +61,10 @@ return [
         'deleted' => 'Page deleted successfully',
         'activated' => 'Page activated successfully',
         'deactivated' => 'Page deactivated successfully'
+    ],
+
+    "permissions" => [
+        "manage" => "Manage pages"
     ]
     
 ];

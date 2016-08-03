@@ -265,7 +265,7 @@ class MediaController extends Dot\Controller
     }
 
 
-    /*
+
         function set_sizes($filename, $s3_save = 1)
         {
 
@@ -324,7 +324,7 @@ class MediaController extends Dot\Controller
                 return "Image Not found";
             }
         }
-    */
+
     function set_sizes_canvas($filename)
     {
 
@@ -504,7 +504,7 @@ class MediaController extends Dot\Controller
             $media = Media::find(Request::get("id"));
             $media->delete();
 
-            if ($media->provider != NULL) {
+            if ($media->provider == NULL or $media->provider == "") {
 
                 if (file_exists(uploads_path($media->path))) {
                     @unlink(uploads_path($media->path));

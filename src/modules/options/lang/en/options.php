@@ -38,6 +38,12 @@ return [
     "version_available" => "Dot platform <strong style='font-family: sans-serif, Arial, Verdana'>:version</strong> is available !",
     "up_to_date" => "Dot platform is up to date.",
 
+    'resize_mode_resize' => 'Resize with aspect ratio',
+    'resize_mode_resize_crop' => 'Smart Resize and crop',
+    'resize_mode_color_background' => 'Resize with background color',
+    'resize_mode_gradient_background' => 'Resize with gradients background',
+    'resize_mode_blur_background' => 'Resize with blur background',
+
     'attributes' => [
         'site_name' => 'Site name',
         'site_slogan' => 'Site slogan',
@@ -86,9 +92,11 @@ return [
         'soundcloud_page' => "Soundcloud",
 
 
+        'resize_mode' => 'Resize mode',
+        'resize_background_color' => 'Background color',
+        'resize_gradient_first_color' => 'First color',
+        'resize_gradient_second_color' => 'Second color'
 
-        '' => '',
-        '' => '',
     ],
 
 
@@ -99,10 +107,10 @@ return [
     ],
 
     "permissions" =>[
-        "manage_general" => "Manage general options",
-        "manage_seo" => "Manage SEO options",
-        "manage_social" => "Manage social pages",
-        "manage_media" => "Manage media options",
-        "manage_plugins" => "Manage plugins",
+        "general" => "Manage general options",
+        "seo" => "Manage SEO options",
+        "social" => "Manage social pages",
+        "media" => "Manage media options",
+        "plugins" => "Manage plugins",
     ]
 ];
