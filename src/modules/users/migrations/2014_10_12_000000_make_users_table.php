@@ -16,9 +16,11 @@ class MakeUsersTable extends Migration
     {
 
         // delete original users table
+
+        /*
         if (Schema::hasTable("users")) {
             Schema::drop('users');
-        }
+        }*/
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
@@ -45,19 +47,25 @@ class MakeUsersTable extends Migration
             $table->string('google_plus')->index();
         });
 
-        // create administrator user
-        $user = new User();
-        $user->username = "admin";
-        $user->password = "admin";
-        $user->email = "info@example.com";
-        $user->first_name = "admin";
-        $user->last_name = "";
-        $user->lang = App::getLocale();
-        $user->status = 1;
-        $user->role_id = 1;
-        $user->backend = 1;
-        $user->root = 1;
-        $user->save();
+        // create default administrator user
+
+        if (! User::where("root", 1)->count()) {
+
+            $user = new User();
+            $user->username = "admin";
+            $user->password = "admin";
+            $user->email = "info@example.com";
+            $user->first_name = "admin";
+            $user->last_name = "";
+            $user->lang = App::getLocale();
+            $user->status = 1;
+            $user->role_id = 1;
+            $user->backend = 1;
+            $user->root = 1;
+            $user->save();
+
+        }
+
 
     }
 
