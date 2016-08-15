@@ -2,6 +2,8 @@
 
 namespace Dot;
 
+use Illuminate\Support\Facades\Request;
+
 /**
  * Description of SidebarController
  *
@@ -85,6 +87,7 @@ class SidebarController extends \Dot\Controller {
             ));
             die();
         }
+
 
         //print_r(Menu::get("sidebar")->items());
         //die();

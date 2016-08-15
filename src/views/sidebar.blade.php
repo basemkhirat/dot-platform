@@ -75,6 +75,7 @@
                     item.attr('data-parent', newParent);
                 }
             });
+            
             $('#save-order').click(function (e) {
                 var items = $('#menu-items').nestedSortable('toHierarchy', {startDepthCount: 0});
 
