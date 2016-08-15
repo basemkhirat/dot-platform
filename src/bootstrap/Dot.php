@@ -9,7 +9,7 @@ namespace Dot\Platform;
 class DotPlatform
 {
 
-    const VERSION = '0.0.48';
+    const VERSION = '0.0.50';
 
     /**
      * get all system locales
