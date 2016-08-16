@@ -8,8 +8,9 @@ class TagsController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
+
         if (! User::access("tags.manage")) {
-            Dot::denied();
+            Dot::forbidden();
         }
     }
 

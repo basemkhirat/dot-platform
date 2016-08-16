@@ -8,7 +8,7 @@ class CategoriesController extends Dot\Controller {
     {
         parent::__construct();
         if (! User::access("categories.manage")) {
-            Dot::denied();
+            Dot::forbidden();
         }
     }
 

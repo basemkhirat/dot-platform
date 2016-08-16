@@ -66,6 +66,7 @@ class System
     public $route_middlewares = [
         'auth' => AuthMiddleware::class,
         'guest' => GuestMiddleware::class,
+        'role' => RoleMiddleware::class,
         'permission' => PermissionMiddleware::class
     ];
 

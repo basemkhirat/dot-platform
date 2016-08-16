@@ -11,7 +11,7 @@ class RolesController extends Dot\Controller
         parent::__construct();
 
         if (User::isNot("superadmin")) {
-            return denied();
+            Dot::forbidden();
         }
     }
 

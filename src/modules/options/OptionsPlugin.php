@@ -72,11 +72,13 @@ class OptionsPlugin extends Plugin
             $menu->make("options::locales");
         });
 
+
         Navigation::menu("topnav", function ($menu) {
-            if (User::access("options")) {
+            if (User::access("options.general")) {
                 $menu->make("options::dropmenu");
             }
         });
+
 
         include __DIR__ . "/routes.php";
 

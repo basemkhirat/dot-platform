@@ -9,7 +9,7 @@ class GalleriesController extends Dot\Controller
     {
         parent::__construct();
         if (! User::access("galleries.manage")) {
-            Dot::denied();
+            Dot::forbidden();
         }
     }
 

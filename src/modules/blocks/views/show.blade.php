@@ -3,7 +3,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
         <h2>
-            <i class="fa fa-blocks"></i>
+            <i class="fa fa-th-large"></i>
             <?php echo trans("blocks::blocks.blocks") ?>
         </h2>
         <ol class="breadcrumb">

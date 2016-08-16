@@ -2,6 +2,7 @@
 
     <div class="col-lg-3 col-md-3 col-sm-4 hidden-xs">
         <h2>
+            <i class="fa fa-cogs"></i>
             <?php echo trans("options::options.options"); ?>
         </h2>
         <ol class="breadcrumb ">

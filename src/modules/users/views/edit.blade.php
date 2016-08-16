@@ -118,6 +118,7 @@
                         </div>
                     </div>
 
+                    <br/>
                     <div class="form-group">
                         <textarea name="about" class="markdown form-control"
                                   placeholder="<?php echo trans("users::users.about_me") ?>"

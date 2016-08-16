@@ -337,32 +337,10 @@
 <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
 <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js') ?>"></script>
 
-<script src="<?php echo assets('admin::js/voice.js') ?>"></script>
 
 <script>
 
     $(document).ready(function () {
-
-        $(".translator-btn").click(function () {
-            translate();
-        });
-
-        function parseHtmlEnteties(str) {
-
-            str = str.replace("&nbsp;", "");
-            return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
-                var num = parseInt(numStr, 10); // read num as normal number
-                return String.fromCharCode(num);
-            });
-        }
-
-        function translate() {
-
-            var objEditor = CKEDITOR.instances["postcontent"];
-            var msg = objEditor.getData().replace(/<\/?[^>]+(>|$)/g, "");
-
-            responsiveVoice.speak(parseHtmlEnteties(msg), "Arabic Male");
-        }
 
         var elems = Array.prototype.slice.call(document.querySelectorAll('.status-switcher'));
         elems.forEach(function (html) {

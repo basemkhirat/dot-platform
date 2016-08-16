@@ -13,7 +13,12 @@ $id = isset($id) ? $id : "post-content";
     <?php /*
 
     */ ?>
-    <input class="btn pull-right translator-btn" type='button' value='🔊 ' />
+
+
+        <a id="add_files" class="btn btn-default btn-md pull-right translator-btn" href="#">
+        <i class="fa fa-microphone" aria-hidden="true"></i>
+            </a>
+
 
 </div>
 <textarea style="display: none" name="<?php echo $name; ?>" id="<?php echo $id; ?>"><?php echo $value; ?></textarea>
@@ -47,7 +52,33 @@ $id = isset($id) ? $id : "post-content";
 
 @section("footer")
 @parent
+
+<script src="<?php echo assets('admin::js/voice.js') ?>"></script>
 <script>
+
+    $(document).ready(function () {
+
+        $(".translator-btn").click(function () {
+            translate();
+        });
+
+        function parseHtmlEnteties(str) {
+
+            str = str.replace("&nbsp;", "");
+            return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
+                var num = parseInt(numStr, 10); // read num as normal number
+                return String.fromCharCode(num);
+            });
+        }
+
+        function translate() {
+
+            var objEditor = CKEDITOR.instances["<?php echo $id; ?>"];
+            var msg = objEditor.getData().replace(/<\/?[^>]+(>|$)/g, "");
+
+            responsiveVoice.speak(parseHtmlEnteties(msg), "Arabic Male");
+        }
+    });
 
     CKEDITOR.replace("<?php echo $id; ?>", {
         language: '<?php echo App::getLocale(); ?>',
@@ -55,9 +86,6 @@ $id = isset($id) ? $id : "post-content";
         resize_enabled: true,
         resize_dir: 'vertical',
     });
-
-
-
 
 
     $(document).ready(function () {

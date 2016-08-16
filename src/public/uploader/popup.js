@@ -1563,7 +1563,7 @@ $(".filter-bar a").click(function () {
                                                     settings.galleries(galleries);
                                                 }, "json");
 
-                                                $(".file_manager").slideUp(function () {
+                                                $(".file_manager").fadeOut(function () {
 
 
                                                     $(".files-area").show(function () {
@@ -1590,7 +1590,7 @@ $(".filter-bar a").click(function () {
 
 
                     if (error == false) {
-                        $(".file_manager").slideUp(function () {
+                        $(".file_manager").fadeOut(function () {
 
                             $("#media-editor").hide();
                             $(".files-area").show();

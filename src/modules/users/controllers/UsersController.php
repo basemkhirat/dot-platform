@@ -18,7 +18,7 @@ class UsersController extends Dot\Controller
     {
 
         if (!User::access("users.manage")) {
-            return denied();
+            Dot::forbidden();
         }
 
         if (Request::isMethod("post")) {
@@ -89,7 +89,7 @@ class UsersController extends Dot\Controller
     {
 
         if (!User::access("users.manage")) {
-            return denied();
+            Dot::forbidden();
         }
 
         if (Request::isMethod("post")) {
@@ -146,7 +146,7 @@ class UsersController extends Dot\Controller
 
         if (Auth::user()->id != $user_id) {
             if (!User::access("users.manage")) {
-                return denied();
+                Dot::forbidden();
             }
         }
 
@@ -223,7 +223,7 @@ class UsersController extends Dot\Controller
     {
 
         if (!User::access("users.manage")) {
-            return denied();
+            Dot::forbidden();
         }
 
         $ids = Request::get("id");

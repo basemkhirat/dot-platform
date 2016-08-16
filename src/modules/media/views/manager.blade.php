@@ -28,12 +28,16 @@
                     <strong class="hidden-xs"><?php echo trans("media::media.media"); ?></strong>
                 </a>
             </li>
+
+            <?php if(User::access("galleries.manage")){ ?>
             <li>
                 <a data-toggle="tab" href="#galleries-area">
                     <i class="fa fa-camera"></i>
 
                     <strong class="hidden-xs"><?php echo trans("media::media.galleries"); ?></strong></a>
             </li>
+            <?php } ?>
+
             <!--<li>
                 <a data-toggle="tab" href="#embed-settings">
                     <i class="fa fa-cog"></i>
@@ -469,6 +473,7 @@
                 </div>
             </div>
 
+            <?php if(User::access("galleries.manage")){ ?>
             <div id="galleries-area" class="tab-pane fade gallery_rows row" style="margin: 0;">
                 <?php $galleries_count = Gallery::count(); ?>
                 <div class="no-galleries text-center <?php if ($galleries_count) { ?>hidden<?php } ?>">
@@ -684,6 +689,7 @@
 
                 </div>
             </div>
+            <?php } ?>
 
             <div id="embed-settings" class="tab-pane fade">
                 <div class="container">

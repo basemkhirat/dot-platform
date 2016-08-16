@@ -9,7 +9,7 @@ namespace Dot\Platform;
 class DotPlatform
 {
 
-    const VERSION = '0.0.50';
+    const VERSION = '0.1';
 
     /**
      * get all system locales
@@ -106,8 +106,10 @@ class DotPlatform
 
     }
 
-    function denied(){
-        app()->abort(403, "Access denied");
+    function forbidden()
+    {
+        response(view("admin::errors.forbidden")->render(), 403)->send();
+        exit();
     }
 
 

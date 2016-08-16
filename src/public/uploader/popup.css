@@ -142,7 +142,7 @@ div[data-size="free"] {
     display: none;
     margin: 2%;
     position: fixed;
-    width: 96%;
+    width: 97%;
     z-index: 2040;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -717,7 +717,7 @@ div#galleries-area {
 .media-form-wrapper{
     position: fixed !important;
     right: 2%;
-    top:6%;
+    top:50px;
     height: 100%;
     background: #f3f3f3;
     margin-top: 64px;

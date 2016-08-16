@@ -38,7 +38,7 @@ return [
     "up_to_date" => "لا توجد تحديثات",
 
     'resize_mode_resize' => 'نغيير الأبعاد مع المحافظة علي أبعاد الصورة',
-    'resize_mode_resize_crop' => 'تغيير الأبعاد مع قطع',
+    'resize_mode_resize_crop' => 'تغيير الأبعاد مع قطع أطراف الصورة الزائدة',
     'resize_mode_color_background' => 'تغيير الأبعاد مع خلفية ملونة',
     'resize_mode_gradient_background' => 'تغيير الأبعاد مع تدرج في اللون',
     'resize_mode_blur_background' => 'تغيير الأبعاد مع أضافة تأثير Blur',

@@ -9,7 +9,7 @@ class NavigationsController extends Dot\Controller
     {
         parent::__construct();
         if (! User::access("navigations.manage")) {
-            Dot::denied();
+            Dot::forbidden();
         }
     }
 

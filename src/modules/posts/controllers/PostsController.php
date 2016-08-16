@@ -9,7 +9,7 @@ class PostsController extends Dot\Controller
     {
         parent::__construct();
         if (! User::access("posts.manage")) {
-            Dot::denied();
+            Dot::forbidden();
         }
     }
 

@@ -18,7 +18,7 @@ class OptionsController extends Dot\Controller
     {
 
         if(! User::access("options.general")){
-            Dot::denied();
+            Dot::forbidden();
         }
 
         if (Request::isMethod("post")) {
@@ -63,7 +63,7 @@ class OptionsController extends Dot\Controller
     {
 
         if(! User::access("options.seo")){
-            Dot::denied();
+            Dot::forbidden();
         }
 
         if (Request::isMethod("post")) {
@@ -100,7 +100,7 @@ class OptionsController extends Dot\Controller
     {
 
         if(! User::access("options.social")){
-            Dot::denied();
+            Dot::forbidden();
         }
 
         if (Request::isMethod("post")) {
@@ -120,7 +120,7 @@ class OptionsController extends Dot\Controller
     {
 
         if(! User::access("options.plugins")){
-            Dot::denied();
+            Dot::forbidden();
         }
 
         if (Request::isMethod("post")) {
@@ -216,7 +216,7 @@ class OptionsController extends Dot\Controller
 
 
         if(! User::access("options.media")){
-            Dot::denied();
+            Dot::forbidden();
         }
 
         if (Request::isMethod("post")) {

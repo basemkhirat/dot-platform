@@ -10,7 +10,7 @@ class BlocksController extends Dot\Controller
     {
         parent::__construct();
         if (! User::access("blocks.manage")) {
-            Dot::denied();
+            Dot::forbidden();
         }
     }
 

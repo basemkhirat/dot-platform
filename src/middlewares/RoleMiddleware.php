@@ -1,7 +1,7 @@
 <?php
 
 
-class PermissionMiddleware
+class RoleMiddleware
 {
 
     /**
@@ -9,13 +9,13 @@ class PermissionMiddleware
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
-     * @param  string|null $permission
+     * @param  string|null $role
      * @return mixed
      */
-    public function handle($request, Closure $next, $permission = null)
+    public function handle($request, Closure $next, $role = null)
     {
 
-        if (!User::access($permission)) {
+        if (!User::is($role) and !User::is("superadmin")) {
             Dot::forbidden();
         }
 

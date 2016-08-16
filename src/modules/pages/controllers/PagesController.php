@@ -9,7 +9,7 @@ class PagesController extends Dot\Controller
     {
         parent::__construct();
         if (! User::access("pages.manage")) {
-            Dot::denied();
+            Dot::forbidden();
         }
     }
 
