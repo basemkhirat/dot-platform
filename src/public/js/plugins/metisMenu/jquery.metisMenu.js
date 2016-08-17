@@ -43,6 +43,12 @@
             }
 
             $this.find("li").has("ul").children("a").on("click" + "." + pluginName, function(e) {
+
+                if($(this).attr("href") !== "#" && $(this).attr("href") !== "" && $(this).attr("href") !== "javascript:void(0)"){
+                    window.location.href = $(this).attr("href");
+                    return;
+                }
+
                 e.preventDefault();
 
                 //Do we need to enable the double tap

@@ -35,7 +35,7 @@ class OptionsPlugin extends Plugin
 
             if (User::access("options")) {
 
-                $menu->item('options', trans("admin::common.settings"), URL::to(ADMIN . '/options'))
+                $menu->item('options', trans("admin::common.settings"), "")
                     ->order(9)
                     ->icon("fa-cogs");
 
