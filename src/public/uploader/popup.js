@@ -44,7 +44,6 @@ var activate_media = function (id) {
     var media_created_date = base.children("[name=media_created_date]").val();
     var media_motive = base.children("[name=media_motive]").val();
 
-    //$(".cropped_image").attr("src", base_url + "/uploads/" + media_path);
 
     $(".media-form [name=file_id]").val(media_id);
     $(".details-box-image img").attr("src", media_thumbnail);
@@ -58,6 +57,13 @@ var activate_media = function (id) {
 
     $(".details-box-name .file_date").text(media_created_date);
     $(".details-box-name .file_size").text(media_size);
+
+
+    if(media_type == "image"){
+        $('#set_media').show();
+    }else{
+        $('#set_media').hide();
+    }
 
     if (media_type == "audio" || media_type == "video") {
         $(".details-box-name .file_duration").text(media_duration);

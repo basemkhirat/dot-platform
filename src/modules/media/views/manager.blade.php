@@ -449,7 +449,7 @@
                                     <a class="btn btn-success btn-flat" href="javascript:void(0)"
                                        data-loading-text="<?php echo trans("media::media.please_wait") ?>"
                                        target="_blank"
-                                       id="set_media">
+                                       id="set_media" style="display: none">
 
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     <!--    <?php echo trans("media::media.settings") ?> -->
