@@ -70,6 +70,7 @@ return [
     "confirm_delete_files" => "سيتم حذف الملفات المحددة",
     "confirm_delete_file" => "سيتم حذف الملف",
 
+    "saved" => "تم الحفظ",
 
     "module" => "الملتيميديا",
     "permissions" => [

@@ -27,34 +27,73 @@ class MediaController extends Dot\Controller
     function download($path = false)
     {
 
-        if (!$path) {
-            $path = Request::get("path");
+
+        if (in_array(Request::get("path"), [null, []])) {
+            return json_encode([]);
         }
 
-        $link = uploads_url($path);
+        $path = Request::get("path");
 
-        $file = $path;
+        $sizes = [];
 
-        if (strstr($path, "/")) {
+        // Adding original size
 
-// S3 File
-            $parts = explode("/", $path);
-            $file = end($parts);
 
-            if (!file_exists(UPLOADS_PATH . "/" . $file)) {
-                if (copy($link, UPLOADS_PATH . "/" . $file)) {
+        $size = new stdClass();
 
-// download sizes if it is an image
-                    $parts = explode(".", $file);
-                    $extension = end($parts);
-                    if (in_array(strtolower($extension), array("jpg", "jpeg", "gif", "png", "bmp"))) {
-                        $this->set_sizes($file, 0);
-                    }
-                }
-            }
+        $size->name = "original";
+        $size->path = $path;
+        $size->url = uploads_url($path);
+        $size->width = NULL;
+        $size->height = NULL;
+
+        $sizes[] = $size;
+
+
+        foreach (Config::get("media.sizes", []) as $name => $dimensions) {
+
+            $size = new stdClass();
+
+            list($year, $month, $filename) = @explode("/", $path);
+
+            $size->name = $name;
+            $size->path = $year . "/" . $month . "/" . $name . "-" . $filename;
+            $size->url = thumbnail($path, $name);
+            $size->width = $dimensions[0];
+            $size->height = $dimensions[1];
+
+            $sizes[] = $size;
+
         }
 
-        return $file;
+        return json_encode($sizes);
+
+        /*
+         *
+       //$link = uploads_url($path);
+
+       $file = $path;
+
+       if (strstr($path, "/")) {
+
+           $parts = explode("/", $path);
+           $file = end($parts);
+
+           if (!file_exists(UPLOADS_PATH . "/" . $file)) {
+               if (copy($link, UPLOADS_PATH . "/" . $file)) {
+
+                   $parts = explode(".", $file);
+                   $extension = end($parts);
+                   if (in_array(strtolower($extension), array("jpg", "jpeg", "gif", "png", "bmp"))) {
+                       $this->set_sizes($file, 0);
+                   }
+               }
+           }
+       }
+
+       return $file;
+       */
+
     }
 
     function watermark()
@@ -106,44 +145,61 @@ class MediaController extends Dot\Controller
     function crop()
     {
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $amazon_path = Request::get("amazon_path");
+        $path = Request::get("path");
+        $size = Request::get("size");
 
-            if (!File::exists(UPLOADS_PATH . "/" . $_POST['path'])) {
-                $this->download($_POST['amazon_path']);
-            }
+        $w = (int)Request::get("w");
+        $h = (int)Request::get("h");
+        $x = (int)Request::get("x");
+        $y = (int)Request::get("y");
 
-            $src = UPLOADS_PATH . "/" . $_POST["size"] . "-" . $_POST['path'];
+        list($year, $month, $filename) = @explode("/", $path);
 
-            if ($_POST['w'] != "") {
-                $img = Image::make(UPLOADS_PATH . "/" . $_POST['path']);
-                // crop image
-                $img->crop((int)$_POST['w'], (int)$_POST['h'], (int)$_POST['x'], (int)$_POST['y'])->save($src);
-
-                $sizes = Config::get("media.sizes");
-                $current_size = $sizes[$_POST['size']];
-
-                Image::make($src)
-                    ->resize($current_size[0], $current_size[1])
-                    ->save($src);
-
-                echo json_encode(array(
-                    "path" => $_POST["size"] . "-" . $_POST['path'],
-                    "width" => $current_size[0],
-                    "height" => $current_size[1]
-                ));
-            } else {
-                echo json_encode(array(
-                    "path" => $_POST["size"] . "-" . $_POST['path']
-                ));
-            }
-
-            if (strstr($_POST['amazon_path'], "/")) {
-                $parts = explode("/", $_POST['amazon_path']);
-                @s3_save($parts[0] . "/" . $parts[1] . "/" . $_POST['size'] . "-" . $_POST['path']);
-            }
-//$this->delete_hard($_POST['path']);
-            exit;
+        if (!File::exists(UPLOADS_PATH . "/" . $path)) {
+            //    $this->download($amazon_path);
         }
+
+        $src = UPLOADS_PATH . "/" . $year . "/" . $month . "/" . $size . "-" . $filename;
+
+        if ($w != "") {
+            $img = Image::make(UPLOADS_PATH . "/" . $path);
+
+            $img->crop((int)$w, (int)$h, (int)$x, (int)$y)->save($src);
+
+            $sizes = Config::get("media.sizes");
+
+            $current_size = $sizes[$size];
+            /*
+
+            Image::make($src)
+                ->resize($current_size[0], $current_size[1])
+                ->save($src);
+
+            */
+            echo json_encode(array(
+                "url" => uploads_url($year . "/" . $month . "/" . $size . "-" . $filename),
+                "path" => $year . "/" . $month . "/" . $size . "-" . $filename,
+                "width" => $current_size[0],
+                "height" => $current_size[1],
+                "status" => 1,
+            ));
+        } else {
+            echo json_encode(array(
+                "url" =>"sdaf",
+                "path" => $size . "-" . $path,
+                "status" => 0,
+                "message" => "image is already cropped"
+            ));
+        }
+
+        if (strstr($_POST['amazon_path'], "/")) {
+            $parts = explode("/", $amazon_path);
+            @s3_save($parts[0] . "/" . $parts[1] . "/" . $size . "-" . $path);
+        }
+
+        exit;
+
     }
 
     function interactive($file, $id)
@@ -265,65 +321,64 @@ class MediaController extends Dot\Controller
     }
 
 
-
-        function set_sizes($filename, $s3_save = 1)
-        {
-
-
-            if (!Config::get("media.thumbnails")) {
-                return false;
-            }
-
-            if (file_exists(UPLOADS_PATH . "/" . $filename)) {
+    function set_sizes($filename, $s3_save = 1)
+    {
 
 
-                $sizes = Config::get("media.sizes");
-                $width = Image::make(UPLOADS_PATH . "/" . $filename)->width();
-                $height = Image::make(UPLOADS_PATH . "/" . $filename)->height();
-
-                foreach ($sizes as $size => $dimensions) {
-
-                    if ($size == "free") {
-                        Image::make(UPLOADS_PATH . "/" . $filename)
-                            ->resize($dimensions[0], null, function ($constraint) {
-                                $constraint->aspectRatio();
-                                $constraint->upsize();
-                            })
-                            ->save(UPLOADS_PATH . "/" . $size . "-" . $filename);
-                    } else {
-
-                        if ($width > $height) {
-                            $new_width = $dimensions[0];
-                            $new_height = null;
-                        } else {
-                            $new_height = $dimensions[1];
-                            $new_width = null;
-                        }
-
-                        $background = Image::make(UPLOADS_PATH . "/" . $filename)
-                            ->fit($dimensions[0], $dimensions[1])
-                            ->blur(100);
-
-                        $image = Image::make(UPLOADS_PATH . "/" . $filename)
-                            ->resize($new_width, $new_height, function ($constraint) {
-                                $constraint->aspectRatio();
-                                $constraint->upsize();
-                            });
-
-                        $background->insert($image, 'center');
-                        $background->save(UPLOADS_PATH . "/" . $size . "-" . $filename);
-
-                    }
-
-                    if ($s3_save) {
-                        // run after file upload only and not used in download case
-                        s3_save(date("Y/m/") . $size . "-" . $filename);
-                    }
-                }
-            } else {
-                return "Image Not found";
-            }
+        if (!Config::get("media.thumbnails")) {
+            return false;
         }
+
+        if (file_exists(UPLOADS_PATH . "/" . $filename)) {
+
+
+            $sizes = Config::get("media.sizes");
+            $width = Image::make(UPLOADS_PATH . "/" . $filename)->width();
+            $height = Image::make(UPLOADS_PATH . "/" . $filename)->height();
+
+            foreach ($sizes as $size => $dimensions) {
+
+                if ($size == "free") {
+                    Image::make(UPLOADS_PATH . "/" . $filename)
+                        ->resize($dimensions[0], null, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        })
+                        ->save(UPLOADS_PATH . "/" . $size . "-" . $filename);
+                } else {
+
+                    if ($width > $height) {
+                        $new_width = $dimensions[0];
+                        $new_height = null;
+                    } else {
+                        $new_height = $dimensions[1];
+                        $new_width = null;
+                    }
+
+                    $background = Image::make(UPLOADS_PATH . "/" . $filename)
+                        ->fit($dimensions[0], $dimensions[1])
+                        ->blur(100);
+
+                    $image = Image::make(UPLOADS_PATH . "/" . $filename)
+                        ->resize($new_width, $new_height, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+
+                    $background->insert($image, 'center');
+                    $background->save(UPLOADS_PATH . "/" . $size . "-" . $filename);
+
+                }
+
+                if ($s3_save) {
+                    // run after file upload only and not used in download case
+                    s3_save(date("Y/m/") . $size . "-" . $filename);
+                }
+            }
+        } else {
+            return "Image Not found";
+        }
+    }
 
     function set_sizes_canvas($filename)
     {
@@ -438,7 +493,7 @@ class MediaController extends Dot\Controller
 
             $gallery = Gallery::find(Request::get("id"));
 
-            if(count($gallery)){
+            if (count($gallery)) {
                 $gallery->delete();
             }
 

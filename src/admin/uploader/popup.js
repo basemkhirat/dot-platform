@@ -4,6 +4,12 @@
 
 var $image = $(".cropper");
 $image.cropper({
+
+    center : true,
+   // movable: false,
+    //minCanvasWidth: 1500,
+   // minContainerWidth: 1000,
+    //minCropBoxWidth: 1500,
     crop: function (data) {
         // console.log(data.x);
         $("#x").val(Math.round(data.x));
@@ -381,88 +387,114 @@ $(function () {
     });
 
 
+
     $(".crop_form").submit(function () {
 
         $("#cropbtn").button('loading');
-        $(".media_loader").css("display", "inline");
-        //alert($('#w').val());
-        //if (parseInt($('#w').val())) {
-        var d = new Date();
-        var time = d.getTime();
-        var size = $(".size-row.active").attr("data-size");
 
+        $(".media_loader").css("display", "inline");
+
+
+        var size = $(".size-row.active").attr("data-size");
 
         var media_path = $image.attr("data-src");
         var remote_media_path = $(".details-box-name .file_name").text();
 
-
         $.post(baseURL + "media/crop", $(".crop_form").serialize() + "&amazon_path=" + remote_media_path + "&path=" + media_path + "&size=" + size, function (data) {
 
-            $(".size-row img[data-size=" + size + "]").attr("src", base_url + "/uploads/" + size + "-" + media_path + "?" + time);
+            var d = new Date();
+            var time = d.getTime();
 
+            $(".size-row img[data-size=" + size + "]").attr("src", data.url + "?" + time);
+
+            // Reset coordinates
             $('#x').val("");
             $('#y').val("");
             $('#w').val("");
             $('#h').val("");
 
-            // var media_path = $(".dz-preview.active").children("[name=media_path]").val();
+            // refresh cropped image and replace with new one
 
+            $("img").each(function (image) {
 
-            //$(".cropper").attr("data-src", data.path);
-            $image.cropper("replace", base_url + "/uploads/" + data.path + "?" + time);
+                if($(this).attr("src").indexOf(data.url) > -1){
+                    $(this).attr("src", data.url + "?" + time);
+                }
 
-            // destroy cropper
-
-
-            $.post(baseURL + "media/get", function (data) {
-
-
-                $('.media-grid').html(data);
-
-                var media_id = $("input[name=file_id]").val();
-                $(".dz-preview").removeClass("active");
-                $(".dz-preview[media-id=" + media_id + "]").addClass("active");
-                activate_media(media_id);
-
-                $image.cropper('disable');
-                $(".media_loader").hide();
             });
+
+/*
+            var selector = "img[src='" + data.url + "']";
+
+            if($(selector).length > 0){
+                $(selector).attr("src", data.url + "?" + time);
+                alert("replaced: " + $(selector).length);
+            }else{
+
+                alert("No box found");
+
+            }
+            */
+
             $("#cropbtn").button('reset');
+            $(".media_loader").hide();
+
+            $(".crop-status").show();
+            setTimeout(function(){
+                $(".crop-status").hide();
+            }, 3000);
+
+
         }, "json");
 
-        //} else {
-        //    alert('يرجى تحديد الجزء المراد قصه أولا');
-        //}
         return false;
     });
 
 
+    var activate_size = function (base) {
+
+        // box
+        var size = base.attr("data-size");
+        var media_width = base.attr("data-width");
+        var media_height = base.attr("data-height");
+        //var media_url = $(".cropper").attr("src");
+
+        var d = new Date();
+        var time = d.getTime();
+
+        var media_path = $image.attr("data-src");
+
+        $image.cropper("replace", base_url + "uploads/" + media_path + "?" + time);
+        $image.cropper("setAspectRatio", media_width / media_height);
+
+    }
+
+
     $("#set_media").click(function () {
         var base = $(this);
-        var media_path = $(".details-box-name .file_name").text();
+
+        var media_path = $(".dz-preview.active input[name=media_path]").first().val();
 
         // download files from s3 to local server
         base.button('loading');
-        $.post(baseURL + "media/download", {media_path: media_path}, function (media_path) {
+        $.post(baseURL + "media/download", {path: media_path}, function (sizes) {
+
+            var sizes = JSON.parse(sizes);
 
             var d = new Date();
             var time = d.getTime();
 
-
-            $image.attr("data-src", media_path);
-            $image.attr("src", base_url + "/uploads/" + media_path);
+            $image.attr("data-src", sizes[0].path);
             $image.cropper("enable");
 
+            $image.cropper("replace", sizes[0].url);
 
-            $image.cropper("replace", base_url + "/uploads/" + media_path + "?" + time);
-            //$(".cropped_image").attr("src", base_url + "/uploads/" + media_path + "?" + time);
 
-            $(".size-row img[data-size=large]").attr("src", base_url + "/uploads/large" + "-" + media_path + "?" + time);
-            $(".size-row img[data-size=medium]").attr("src", base_url + "/uploads/medium" + "-" + media_path + "?" + time);
-            $(".size-row img[data-size=small]").attr("src", base_url + "/uploads/small" + "-" + media_path + "?" + time);
-            $(".size-row img[data-size=thumbnail]").attr("src", base_url + "/uploads/thumbnail" + "-" + media_path + "?" + time);
-            $(".size-row img[data-size=one]").attr("src", base_url + "/uploads/one" + "-" + media_path + "?" + time);
-            $(".size-row img[data-size=free]").attr("src", base_url + "/uploads/free" + "-" + media_path + "?" + time);
+
+            sizes.forEach(function (size, i) {
+                $(".size-row img[data-size=" + size.name + "]").attr("src", size.url);
+            });
+
 
             //$(".cropper").cropper("zoom", -1);
 
@@ -474,7 +506,9 @@ $(function () {
 
             $(".size-row").removeClass("active");
             $(".size-row").first().addClass("active");
+
             activate_size($(".size-row").first());
+
             base.button('reset');
 
         });
@@ -508,27 +542,7 @@ $(function () {
         return false;
     });
 
-    var activate_size = function (base) {
 
-        // box
-        var size = base.attr("data-size");
-        var media_width = base.attr("data-width");
-        var media_height = base.attr("data-height");
-        //var media_url = $(".cropper").attr("src");
-
-        var d = new Date();
-        var time = d.getTime();
-
-        var media_path = $image.attr("data-src");
-        $image.cropper("replace", base_url + "/uploads/" + media_path + "?" + time);
-        //var cropper = $(".cropper").data("cropper");
-
-        //
-        //$(".cropper").cropper("zoom", -1);
-        //alert(media_width +" "+ media_height)
-        $image.cropper("setAspectRatio", media_width / media_height);
-
-    }
 
     $(".size-row").click(function () {
         var base = $(this);

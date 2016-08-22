@@ -62,18 +62,16 @@ div[data-size="free"] {
 }
 #media-editor {
     display: none;
-    height: 473px;
-    overflow: scroll;
 }
 .media-setting-panel {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 1px 1px 7px #d0d0d0;
-    padding: 6px;
+    padding: 16px;
     position: relative;
-    right: 101px;
-    top: 7px;
+    right: 30px;
+    top: 30px;
     z-index: 9999;
 }
 .media-setting-panel:hover {
@@ -91,7 +89,7 @@ div[data-size="free"] {
 .cropped_images {
     border: 3px solid #f2f2f2;
     border-radius: 7px;
-    height: 147px;
+    height: 256px;
     margin: 6px 0;
     overflow-y: scroll;
     padding: 5px;
@@ -349,6 +347,14 @@ div[data-size="free"] {
 .media-form {
     margin-top: 7px;
 }
+
+.crop-status{
+    font-weight: bold;
+    padding: 0 9px;
+    color: green;
+    display: none;
+}
+
 .vid {
     color: #ffffff;
     font-size: 43px !important;
@@ -890,11 +896,6 @@ LG
 
 
 }
-
-
-
-
-
 
 
 

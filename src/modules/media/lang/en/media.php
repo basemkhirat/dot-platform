@@ -39,7 +39,7 @@ return [
     "delete_gallery" => "Delete gallery",
     "add_to_gallery" => "Add to gallery",
     "edit_gallery" => "Edit gallery",
-    "back" => "Back",
+    "back" => "Cancel",
     "please_wait" => "please wait..",
     "crop_settings" => "Crop settings",
     "crop_settings_help" => "select crop area and click crop",
@@ -51,6 +51,8 @@ return [
     "deleting_gallery" => "Deleting gallery",
     "saving_gallery" => "Saving gallery",
     "settings" => "Edit",
+
+    "saved" => "Saved",
 
     "processing" => "Processing...",
 
