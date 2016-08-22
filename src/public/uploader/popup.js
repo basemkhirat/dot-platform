@@ -414,11 +414,12 @@ $(function () {
             $(".size-row img[data-size=" + size + "]").attr("src", data.url + "?" + time);
 
             // Reset coordinates
+            /*
             $('#x').val("");
             $('#y').val("");
             $('#w').val("");
             $('#h').val("");
-
+            */
             // refresh cropped image and replace with new one
 
             $("img").each(function (image) {

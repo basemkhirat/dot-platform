@@ -238,13 +238,14 @@
                                     <div class="size-row" data-width="<?php echo $dim[0] ?>"
                                          data-height="<?php echo $dim[1] ?>" data-size="<?php echo $size ?>">
 
-                                        <img class="cropped_image" src="" width="<?php echo $dim[0] / 4 ?>"
+                                             <span class="pull-right size-label">
+                                                <?php echo ucfirst($size) ?> <?php echo $dim[0] ?>X<?php echo $dim[1] ?>
+                                            </span>
+
+                                        <img class="cropped_image" src="" width="<?php echo $dim[0] / 2.5 ?>"
                                              data-width="<?php echo $dim[0] ?>" data-height="<?php echo $dim[1] ?>"
                                              data-size="<?php echo $size ?>"/>
-                                            <span class="pull-right">
-                                                <?php echo ucfirst($size) ?> <?php echo $dim[0] ?>X<?php echo $dim[1] ?>
-                                                <br/>
-                                            </span>
+
                                     </div>
                                 <?php } ?>
                             </div>
