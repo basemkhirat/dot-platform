@@ -13,11 +13,11 @@ class MediaController extends Dot\Controller
             $media = new Media();
 
             if (strstr($link, "youtube.") and get_youtube_video_id($link)) {
-                $response = $media->saveYoutubeLink($link);
+                $response = $media->saveYoutube($link)->response();
             } else if (strstr($link, "soundcloud.")) {
-                $response = $media->saveSoundcloudLink($link);
+                $response = $media->saveSoundcloud($link)->response();
             } else {
-                $response = $media->saveFileLink($link);
+                $response = $media->saveLink($link)->response();
             }
 
             return Response::json($response, 200);

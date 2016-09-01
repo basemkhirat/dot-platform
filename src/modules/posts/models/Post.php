@@ -76,43 +76,15 @@ class Post extends Dot\Model
         return $this->belongsToMany("Category", "posts_categories", "post_id", "category_id");
     }
 
-    /*
-    function setRawAttributes(array $attributes, $sync = false)
-    {
-
-        foreach($attributes as $name => $value){
-            if($name = "created_at"){
-
-                $attributes["created_at"] = "";
-            }
-        }
-
-        $this->attributes = $attributes;
-
-        return $this;
-
-    }
-    */
-
     public function syncTags($tags)
     {
         $tag_ids = array();
+
         if ($tags = @explode(",", $tags)) {
             $tags = array_filter($tags);
-            foreach ($tags as $tag_name) {
-                $tag = Tag::select("id")->where("name", $tag_name)->first();
-                if (count($tag)) {
-                    // tag exists
-                    $tag_ids[] = $tag->id;
-                } else {
-                    // create new tag
-                    $tag = new Tag();
-                    $tag->name = $tag_name;
-                    $tag->save();
-                    $tag_ids[] = $tag->id;
-                }
-            }
+            $tag_ids = Tag::saveNames($tags);
         }
+
         $this->tags()->sync($tag_ids);
     }
 

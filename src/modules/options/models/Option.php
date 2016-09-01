@@ -9,7 +9,7 @@ class Option extends Dot\Model
     public $timestamps = false;
     protected $fillable = array('*');
     protected $guarded = array('ID');
-    protected $visible = array('*');
+    protected $visible = array("name", "value");
     protected $hidden = array();
     protected $perPage = 15;
     protected $sluggable = [

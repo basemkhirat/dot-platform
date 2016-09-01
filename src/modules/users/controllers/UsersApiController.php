@@ -1,0 +1,222 @@
+<?php
+
+use Illuminate\Http\Request;
+
+/**
+ * Class UsersApiController
+ */
+class UsersApiController extends Dot\ApiController
+{
+
+    /**
+     * UsersApiController constructor.
+     */
+    function __construct(Request $request)
+    {
+        parent::__construct($request);
+        $this->middleware("permission:users.manage");
+    }
+
+
+    /**
+     * List users
+     * @param string $api_token (required) The access token.
+     * @param string $q (required) The search query string.
+     * @param int $limit (default: 10) The number of retrieved records.
+     * @param int $page (default: 1) The page number.
+     * @param string $order_by (default: id) The column you wish to sort by.
+     * @param string $order_direction (default: DESC) The sort direction ASC or DESC.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    function show(Request $request, $id = NULL)
+    {
+
+        $limit = $request->get("limit", 10);
+        $sort_by = $request->get("sort_by", "id");
+        $sort_direction = $request->get("sort_direction", "DESC");
+
+        $query = User::orderBy($sort_by, $sort_direction);
+
+        if ($request->has("q")) {
+            $query->search($request->get("q"));
+        }
+
+
+        /*
+
+        // $q =  json_decode($request->get("query"));
+
+
+        //dd($q);
+        //$query->build($q);
+        //{"username": {"$in" : ["admin", "beso"]}}
+        $query->build([
+            "username" => ['$in' => ["ahmed", "basem"]]
+        ]);
+        */
+
+        if ($id) {
+            $users = $query->where("id", $id)->first();
+        } else {
+            $users = $query->paginate($limit)->appends($request->all());
+        }
+
+
+        return $this->response($users);
+
+    }
+
+
+    /**
+     * Create a new user
+     * @param string $api_token (required) The access token.
+     * @param string $username (required) The user name.
+     * @param string $password (required) The user password.
+     * @param string $email (required) The user email.
+     * @param string $first_name (required) The user first name.
+     * @param string $last_name (optional) The user last name.
+     * @param int $role_id (default:0) The user role id.
+     * @param int $photo_id (default:0) The user photo id.
+     * @param bool $status (default:0) The user status.
+     * @param bool $backend (default:0) The user backend access status.
+     * @param string $lang (default:'en') The user default lang.
+     * @param string $color (default:'blue') The user backend color theme.
+     * @param string $about (optional) The user bio.
+     * @param string $facebook (optional) The user facebook page.
+     * @param string $twitter (optional) The user twitter page.
+     * @param string $linked_in (optional) The user linked_in page.
+     * @param string $google_plus (optional) The user google+ page.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    function create(Request $request)
+    {
+
+        $user = new User();
+
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->repassword = $request->password;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->status = $request->get("status", 1);
+        $user->backend = $request->get("backend", 0);
+        $user->lang = $request->get("lang", "ar");
+        $user->color = $request->get("color", "blue");
+        $user->about = $request->about;
+        $user->facebook = $request->facebook;
+        $user->twitter = $request->twitter;
+        $user->linked_in = $request->linked_in;
+        $user->google_plus = $request->google_plus;
+        $user->role_id = $request->get("role_id", 0);
+        $user->photo_id = $request->get("photo_id", 0);
+        $user->api_token = $user->newApiToken();
+
+        // Validate and save requested user
+        if (!$user->validate()) {
+
+            // Exception for repassword field
+            $validation_errors = $user->errors()->toArray();
+            if (isset($validation_errors["repassword"])) {
+                unset($validation_errors["repassword"]);
+            }
+            // return validation error
+            return $this->response($validation_errors, "validation error");
+
+        }
+
+        if ($user->save()) {
+            return $this->response($user);
+        }
+
+
+    }
+
+    /**
+     * Update user by id
+     * @param string $api_token (required) The access token.
+     * @param int $id (required) The user id.
+     * @param string $username (optional) The user name.
+     * @param string $password (optional) The user password.
+     * @param string $email (optional) The user email.
+     * @param string $first_name (optional) The user first name.
+     * @param string $last_name (optional) The user last name.
+     * @param int $role_id (default:0) The user role id.
+     * @param int $photo_id (default:0) The user photo id.
+     * @param bool $status (default:0) The user status.
+     * @param bool $backend (default:0) The user backend access status.
+     * @param string $lang (default:'en') The user default lang.
+     * @param string $color (default:'blue') The user backend color theme.
+     * @param string $about (optional) The user bio.
+     * @param string $facebook (optional) The user facebook page.
+     * @param string $twitter (optional) The user twitter page.
+     * @param string $linked_in (optional) The user linked_in page.
+     * @param string $google_plus (optional) The user google+ page.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    function update(Request $request)
+    {
+
+        if (!$request->id) {
+            return $this->error("Missing user id");
+        }
+
+        $user = User::find($request->id);
+
+        if (!$user) {
+            return $this->error("User #" . $request->id . " is not exists");
+        }
+
+        $user->username = $request->get("username", $user->username);
+        $user->password = $request->get("password", $user->password);
+        $user->repassword = $user->password;
+        $user->first_name = $request->get("first_name", $user->first_name);
+        $user->last_name = $request->get("last_name", $user->last_name);
+        $user->email = $request->get("email", $user->email);
+        $user->backend = $request->get("backend", 0);
+        $user->status = $request->get("status", 1);
+        $user->lang = $request->get("lang", "ar");
+        $user->color = $request->get("color", "blue");
+        $user->about = $request->get("about", $user->about);
+        $user->facebook = $request->get("facebook", $user->facebook);
+        $user->twitter = $request->get("twitter", $user->twitter);
+        $user->linked_in = $request->get("linked_in", $user->linked_in);
+        $user->google_plus = $request->get("google_plus", $user->google_plus);
+        $user->role_id = $request->get("role_id", 0);
+        $user->photo_id = $request->get("photo_id", 0);
+
+        if ($user->save()) {
+            return $this->response($user);
+        }
+
+
+    }
+
+    /**
+     * Delete user by id
+     * @param string $api_token (required) The access token.
+     * @param int $id (required) The user id.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    function destroy(Request $request)
+    {
+
+        if (!$request->id) {
+            return $this->error("Missing user id");
+        }
+
+        $user = User::find($request->id);
+
+        if (!$user) {
+            return $this->error("User #" . $request->id . " is not exists");
+        }
+
+        // Destroy requested user
+        $user->delete();
+
+        return $this->response($user);
+
+    }
+
+
+}

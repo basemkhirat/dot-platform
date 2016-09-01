@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * WEB
+ */
+
 Route::group(array(
     "prefix" => ADMIN,
     "middleware" => ["web", "auth"],
@@ -19,3 +23,19 @@ Route::group(array(
         $route->any('/galleries/edit', array("as" => "admin.media.gallery_edit", "uses" => "MediaController@gallery_edit"));
     });
 });
+
+
+/*
+ * API
+ */
+Route::group([
+    "prefix" => API,
+    "middleware" => ["auth:api"]
+], function ($route) {
+        $route->get("/media/show/{id?}", "MediaApiController@show");
+        $route->post("/media/create/{type}", "MediaApiController@create");
+        $route->post("/media/update", "MediaApiController@update");
+        $route->post("/media/destroy", "MediaApiController@destroy");
+});
+
+

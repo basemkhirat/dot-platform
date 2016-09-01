@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * WEB
+ */
 Route::group(array(
     "prefix" => ADMIN,
     "middleware" => ["web", "auth"],
@@ -16,5 +19,19 @@ Route::group(array(
     });
 });
 
-
 Route::any('sitemap', array("as" => "admin.sitemap.update", "uses" => 'SitemapController@update'));
+
+/*
+ * API
+ */
+Route::group([
+    "prefix" => API,
+    "middleware" => ["auth:api"]
+], function ($route) {
+    $route->get("/options/show/{name?}", "OptionsApiController@show");
+    $route->post("/options/create", "OptionsApiController@create");
+    $route->post("/options/update", "OptionsApiController@update");
+    $route->post("/options/destroy", "OptionsApiController@destroy");
+});
+
+

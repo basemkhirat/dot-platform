@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * WEB
+ */
 Route::group([
     "prefix" => ADMIN,
     "middleware" => ["web", "auth"]
@@ -11,4 +14,21 @@ Route::group([
         $route->any('/delete', array("as" => "admin.users.delete", "uses" => "UsersController@delete"));
         $route->any('/search', array("as" => "admin.users.search", "uses" => "UsersController@search"));
     });
+
 });
+
+/*
+ * API
+ */
+Route::group([
+    "prefix" => API,
+    "middleware" => ["auth:api"]
+], function ($route) {
+    $route->get("/users/show/{id?}", "UsersApiController@show");
+    $route->post("/users/create", "UsersApiController@create");
+    $route->post("/users/update", "UsersApiController@update");
+    $route->post("/users/destroy", "UsersApiController@destroy");
+});
+
+
+

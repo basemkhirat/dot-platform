@@ -245,7 +245,8 @@ class UsersController extends Dot\Controller
         return Redirect::back()->with("message", trans("users::users.events.deleted"));
     }
 
-    function gradient($w=100, $h=100, $c=array('#FFFFFF','#FF0000','#00FF00','#0000FF'), $hex=true) {
+    function gradient($w = 100, $h = 100, $c = array('#FFFFFF', '#FF0000', '#00FF00', '#0000FF'), $hex = true)
+    {
 
         /*
         Generates a gradient image
@@ -267,27 +268,27 @@ class UsersController extends Dot\Controller
 
         */
 
-        $im=imagecreatetruecolor($w,$h);
+        $im = imagecreatetruecolor($w, $h);
 
-        if($hex) {  // convert hex-values to rgb
-            for($i=0;$i<=3;$i++) {
-                $c[$i]=$this->hex2rgb($c[$i]);
+        if ($hex) {  // convert hex-values to rgb
+            for ($i = 0; $i <= 3; $i++) {
+                $c[$i] = $this->hex2rgb($c[$i]);
             }
         }
 
-        $rgb=$c[0]; // start with top left color
-        for($x=0;$x<=$w;$x++) { // loop columns
-            for($y=0;$y<=$h;$y++) { // loop rows
+        $rgb = $c[0]; // start with top left color
+        for ($x = 0; $x <= $w; $x++) { // loop columns
+            for ($y = 0; $y <= $h; $y++) { // loop rows
                 // set pixel color
-                $col=imagecolorallocate($im,$rgb[0],$rgb[1],$rgb[2]);
-                imagesetpixel($im,$x-1,$y-1,$col);
+                $col = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
+                imagesetpixel($im, $x - 1, $y - 1, $col);
                 // calculate new color
-                for($i=0;$i<=2;$i++) {
-                    $rgb[$i]=
-                        $c[0][$i]*(($w-$x)*($h-$y)/($w*$h)) +
-                        $c[1][$i]*($x     *($h-$y)/($w*$h)) +
-                        $c[2][$i]*(($w-$x)*$y     /($w*$h)) +
-                        $c[3][$i]*($x     *$y     /($w*$h));
+                for ($i = 0; $i <= 2; $i++) {
+                    $rgb[$i] =
+                        $c[0][$i] * (($w - $x) * ($h - $y) / ($w * $h)) +
+                        $c[1][$i] * ($x * ($h - $y) / ($w * $h)) +
+                        $c[2][$i] * (($w - $x) * $y / ($w * $h)) +
+                        $c[3][$i] * ($x * $y / ($w * $h));
                 }
             }
         }
@@ -296,13 +297,11 @@ class UsersController extends Dot\Controller
 
     function hex2rgb($hex)
     {
-        $rgb[0]=hexdec(substr($hex,1,2));
-        $rgb[1]=hexdec(substr($hex,3,2));
-        $rgb[2]=hexdec(substr($hex,5,2));
-        return($rgb);
+        $rgb[0] = hexdec(substr($hex, 1, 2));
+        $rgb[1] = hexdec(substr($hex, 3, 2));
+        $rgb[2] = hexdec(substr($hex, 5, 2));
+        return ($rgb);
     }
-
-
 
 
 }

@@ -16,7 +16,13 @@ class PermissionMiddleware
     {
 
         if (!User::access($permission)) {
-            Dot::forbidden();
+            if ($request->is(API . "/*")) {
+                $response = new \DotResponse();
+                return $response->json(NULL, "Authorization error", 403);
+            } else {
+                Dot::forbidden();
+            }
+
         }
 
         return $next($request);

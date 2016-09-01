@@ -1,4 +1,8 @@
 <?php
+
+/*
+ * WEB
+ */
 Route::group(array(
     "prefix" => ADMIN,
     "middleware" => ["web", "auth"],
@@ -10,10 +14,9 @@ Route::group(array(
             $route->any('/delete', array("as" => "admin.tags.delete", "uses" => "TagsController@delete"));
             $route->any('/search', array("as" => "admin.tags.search", "uses" => "TagsController@search"));
             $route->any('/migration', array("as" => "admin.tags.migration", "uses" => "TagsController@migration"));
-            $route->get('google/keywords', array("as" => "admin.google.search", "uses" =>"ServicesController@keywords"));
+            $route->get('google/keywords', array("as" => "admin.google.search", "uses" =>"Dot\\ServicesController@keywords"));
         });
 });
-
 
 Route::group(array(
 ), function($route) {
@@ -24,3 +27,18 @@ Route::group(array(
         $route->get('script/{offset?}', array("as" => "admin.tags.script", "uses" => "TagsController@script"));
     });
 });
+
+/*
+ * API
+ */
+Route::group([
+    "prefix" => API,
+    "middleware" => ["auth:api"]
+], function ($route) {
+    $route->get("/tags/show/{id?}", "TagsApiController@show");
+    $route->post("/tags/create", "TagsApiController@create");
+    $route->post("/tags/update", "TagsApiController@update");
+    $route->post("/tags/destroy", "TagsApiController@destroy");
+});
+
+

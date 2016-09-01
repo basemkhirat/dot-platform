@@ -134,7 +134,7 @@ class Media extends Dot\Model
 
 
     /**
-     * delete file from local disk
+     * delete file from storage
      * @param $filename
      */
     function deleteHard($filename)
@@ -306,16 +306,18 @@ class Media extends Dot\Model
 
     /**
      * create response ajax request
-     * @param $media
      * @return stdClass
      */
-    function response($media)
+    function response()
     {
 
+        $media = $this;
+
+        /*
         if (is_int($media)) {
             $media = Media::find($media);
         }
-
+*/
         $row = new stdClass();
 
         $row->error = false;
@@ -369,7 +371,7 @@ class Media extends Dot\Model
      * @param string $link
      * @return stdClass
      */
-    function saveYoutubeLink($link = "")
+    function saveYoutube($link = "", $guard = "web")
     {
         $id = get_youtube_video_id($link);
         $details = get_youtube_video_details($id);
@@ -386,11 +388,11 @@ class Media extends Dot\Model
         $media->length = $details->length;
         $media->created_at = date("Y-m-d H:i:s");
         $media->updated_at = date("Y-m-d H:i:s");
-        $media->user_id = Auth::user()->id;
+        $media->user_id = Auth::guard($guard)->user()->id;
 
         $media->save();
 
-        return $this->response($media->id);
+        return $media;
     }
 
     /**
@@ -398,7 +400,7 @@ class Media extends Dot\Model
      * @param string $link
      * @return stdClass
      */
-    function saveSoundcloudLink($link = "")
+    function saveSoundcloud($link = "", $guard = "web")
     {
 
         $details = get_soundcloud_track_details($link);
@@ -414,110 +416,146 @@ class Media extends Dot\Model
         $media->length = $details->length;
         $media->created_at = date("Y-m-d H:i:s");
         $media->updated_at = date("Y-m-d H:i:s");
-        $media->user_id = Auth::user()->id;
+        $media->user_id = Auth::guard($guard)->user()->id;
 
         $media->save();
 
-        return $this->response($media->id);
+        return $media;
 
     }
+
 
     /**
      * grabbing files using http request
      * @param $link
-     * @return stdClass
+     * @param string $guard
+     * @return Media
      */
-    function saveFileLink($link)
+    function saveLink($link, $guard = "web")
     {
 
-        $name = md5($link);
-
-        if (copy($link, storage_path("temp/" . $name))) {
-
-            $file_hash = sha1_file(storage_path("temp/" . $name));
-
-            $media = Media::where("hash", $file_hash)->first();
-
-            if (count($media)) {
-
-                $media->touch();
-
-            } else {
-
-                $mime = strtolower(mime_content_type(storage_path("temp/" . $name)));
-
-                $extension = get_extension($mime);
-
-                if (!$extension) {
-                    $row = new stdClass();
-                    $row->error = "Invalid link file type";
-                    return Response::json($row, 200);
-                }
-
-                $mime_parts = explode("/", $mime);
-                $type = $mime_parts[0];
-
-                $remote_file_parts = explode("/", ($link));
-
-                $title = $remote_file_name = urldecode(basename(end($remote_file_parts), "." . $extension));
-
-                $filename = time() * rand() . "." . strtolower($extension);
-
-                File::makeDirectory(UPLOADS_PATH . "/" . date("Y/m"), 0777, true, true);
-
-                if (copy(storage_path("temp/" . $name), UPLOADS_PATH . date("/Y/m/") . $filename)) {
-
-                    s3_save(date("Y/m/") . $filename);
-
-                    $media = new Media();
-
-                    $media->title = $title;
-                    $media->type = $type;
-                    $media->path = date("Y/m/") . $filename;
-                    $media->user_id = Auth::user()->id;
-                    $media->created_at = date("Y-m-d H:i:s");
-                    $media->updated_at = date("Y-m-d H:i:s");
-                    $media->hash = $file_hash;
-
-                    if ($media->isImage($extension)) {
-                        $media->set_sizes($filename);
-                    }
-
-                    $media->save();
-
-                }
-
-            }
-
-            return $this->response($media->id);
-
+        if ($content = @file_get_contents($link)) {
+            return $this->saveData($content);
         }
-
 
     }
 
-    function gradient($w = 100, $h = 100, $c = array('#FFFFFF', '#FF0000', '#00FF00', '#0000FF'), $hex = true)
+    /**
+     * Saving raw/base64 data filesystem
+     * @param $content
+     * @param null $extension
+     * @param string $guard
+     * @return Media
+     */
+    function saveContent($content, $extension = NULL, $guard = "web")
     {
 
-        /*
-        Generates a gradient image
+        if ($this->isBase64($content)) {
+            $content = base64_decode($content);
+        }
 
-        Author: Christopher Kramer
+        return $this->saveData($content, $extension, $guard);
 
-        Parameters:
-        w: width in px
-        h: height in px
-        c: color-array with 4 elements:
-            $c[0]:   top left color
-            $c[1]:   top right color
-            $c[2]:   bottom left color
-            $c[3]:   bottom right color
+    }
 
-        if $hex is true (default), colors are hex-strings like '#FFFFFF' (NOT '#FFF')
-        if $hex is false, a color is an array of 3 elements which are the rgb-values, e.g.:
-        $c[0]=array(0,255,255);
+    /**
+     * check if file encoded with base64
+     * @param $data
+     * @return bool
+     */
+    function isBase64($data)
+    {
 
-        */
+        if (preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+
+    }
+
+    /**
+     * @param $data
+     * @param null $extension
+     * @param string $guard
+     * @return Media
+     */
+    function saveData($data, $extension = NULL, $guard = "web")
+    {
+
+        $path = storage_path("temp/" . str_random(20));
+
+        File::put($path, $data);
+        $file_hash = sha1_file($path);
+
+        $media = Media::where("hash", $file_hash)->first();
+
+        if (count($media)) {
+
+            $media->touch();
+
+        } else {
+
+            $mime = strtolower(mime_content_type($path));
+
+            if (!$extension) {
+
+                $extension = get_extension($mime);
+            }
+
+            if (!$extension) {
+                $row = new stdClass();
+                $row->error = "Invalid link file type";
+                return Response::json($row, 200);
+            }
+
+            $mime_parts = explode("/", $mime);
+            $type = $mime_parts[0];
+
+            $filename = time() * rand() . "." . strtolower($extension);
+
+            File::makeDirectory(UPLOADS_PATH . "/" . date("Y/m"), 0777, true, true);
+
+            if (@copy($path, UPLOADS_PATH . date("/Y/m/") . $filename)) {
+
+                s3_save(date("Y/m/") . $filename);
+
+                $media = new Media();
+
+                $media->type = $type;
+                $media->path = date("Y/m/") . $filename;
+                $media->user_id = Auth::guard($guard)->user()->id;
+                $media->created_at = date("Y-m-d H:i:s");
+                $media->updated_at = date("Y-m-d H:i:s");
+                $media->hash = $file_hash;
+
+                if ($media->isImage($extension)) {
+                    $media->set_sizes($filename);
+                }
+
+                $media->save();
+
+            }
+
+            //delete the temporary file
+            @unlink($path);
+
+        }
+
+        return $media;
+
+    }
+
+    /**
+     * Generates a gradient image
+     * @param int $w
+     * @param int $h
+     * @param array $c
+     * @param bool $hex
+     * @return resource
+     */
+    function gradient($w = 100, $h = 100, $c = array('#FFFFFF', '#FF0000', '#00FF00', '#0000FF'), $hex = true)
+    {
 
         $im = imagecreatetruecolor($w, $h);
 
@@ -546,6 +584,10 @@ class Media extends Dot\Model
         return $im;
     }
 
+    /**
+     * @param $hex
+     * @return mixed
+     */
     function hex2rgb($hex)
     {
         $rgb[0] = hexdec(substr($hex, 1, 2));

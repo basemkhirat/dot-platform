@@ -440,23 +440,23 @@
                                 </div>
 
                                 <br/>
-                                <div class="btn-group btn-group-justified">
+                                <div class="btn-group btn-group-justified file-controls">
 
-                                    <a class="btn btn-primary btn-flat" href="javascript:void(0)" target="_blank"
+                                    <a class="btn btn-default btn-flat" href="javascript:void(0)" target="_blank"
                                        id="download_media">
                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                     </a>
 
-                                    <a class="btn btn-success btn-flat" href="javascript:void(0)"
-                                       data-loading-text="<?php echo trans("media::media.please_wait") ?>"
+                                    <a class="btn btn-default btn-flat" href="javascript:void(0)"
+                                       data-loading-text="<i class='fa fa-spinner fa-spin'><i>"
                                        target="_blank"
                                        id="set_media" style="display: none">
 
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        <i class="fa fa-crop" aria-hidden="true"></i>
                                     <!--    <?php echo trans("media::media.settings") ?> -->
                                     </a>
 
-                                    <a class="btn btn-danger btn-flat" href="javascript:void(0)"
+                                    <a class="btn btn-default btn-flat" href="javascript:void(0)"
                                        data-loading-text="<?php echo trans("media::media.deleting") ?>"
                                        data-message="<?php echo trans("media::media.confirm_delete_file"); ?>"
                                        id="delete_media">

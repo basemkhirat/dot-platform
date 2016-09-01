@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * WEB
+ */
 Route::group(array(
     "prefix" => ADMIN,
     "middleware" => ["web", "auth"],
@@ -11,3 +14,18 @@ Route::group(array(
         $route->any('/{id}/edit', array("as" => "admin.categories.edit", "uses" => "CategoriesController@edit"));
     });
 });
+
+/*
+ * API
+ */
+Route::group([
+    "prefix" => API,
+    "middleware" => ["auth:api"]
+], function ($route) {
+    $route->get("/categories/show/{id?}", "CategoriesApiController@show");
+    $route->post("/categories/create", "CategoriesApiController@create");
+    $route->post("/categories/update", "CategoriesApiController@update");
+    $route->post("/categories/destroy", "CategoriesApiController@destroy");
+});
+
+

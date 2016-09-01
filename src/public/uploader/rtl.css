@@ -71,6 +71,20 @@
     right: 2%
 }
 
+.media-setting-panel {
+    right: unset;
+    left: 30px;
+}
+
+.size-label {
+    right: unset;
+    left: 0;
+}
+
+.cropper-container {
+    margin: 30px -30px !important;
+}
+
 /*
 XS
 */

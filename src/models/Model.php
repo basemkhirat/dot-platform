@@ -461,4 +461,11 @@ trait ModelTraits
         return $template;
     }
 
+
+    function scopeBuild($query, $rest_query = [])
+    {
+        $q = new \RestQueryBuilder($rest_query);
+        return $q->build($query);
+    }
+
 }

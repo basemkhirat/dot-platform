@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * WEB
+ */
 Route::group(["prefix" => ADMIN . "/auth", "middleware" => "web"], function ($route) {
     $route->get('/login', ["as" => "admin.auth.login", "middleware" => "guest", "uses" => "AuthController@login"]);
     $route->post('/login', ["middleware" => "guest", "uses" => "AuthController@login"]);
@@ -9,3 +12,17 @@ Route::group(["prefix" => ADMIN . "/auth", "middleware" => "web"], function ($ro
     $route->post('/reset/{code}/{reseted?}', ["uses" => "AuthController@reset"]);
     $route->get('/logout', ["as" => "admin.auth.logout", "uses" => "AuthController@logout"]);
 });
+
+
+/*
+ * API
+ */
+Route::group([
+    "prefix" => API
+], function ($route) {
+    $route->post("/auth/access", "AuthApiController@access");
+    $route->post("/auth/revoke", "AuthApiController@revoke");
+});
+
+
+

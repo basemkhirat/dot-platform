@@ -16,7 +16,12 @@ class RoleMiddleware
     {
 
         if (!User::is($role) and !User::is("superadmin")) {
-            Dot::forbidden();
+            if ($request->is(API . "/*")) {
+                $response = new \DotResponse();
+                return $response->json(NULL, "Authorization error", 403);
+            } else {
+                Dot::forbidden();
+            }
         }
 
         return $next($request);

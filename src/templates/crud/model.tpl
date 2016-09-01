@@ -66,21 +66,7 @@ class #model|ucfirst# extends Dot\Model {
         $tags = @array_filter(explode(",", $tags));
         if (count($tags)) {
             $tags = array_filter($tags);
-            foreach ($tags as $name) {
-                $tag = Tag::select("id")->where("name", $name)->first();
-                if (count($tag)) {
-                    // tag exists
-                    $tag_ids[] = $tag->id;
-                } else {
-                    // create new tag
-                    $tag = new Tag();
-                    $tag->name = $name;
-                    $tag->slug = Str::slug($name);
-                    $tag->save();
-
-                    $tag_ids[] = $tag->id;
-                }
-            }
+            $tag_ids = Tag::saveNames($tags);
         }
 
         $this->tags()->sync($tag_ids);

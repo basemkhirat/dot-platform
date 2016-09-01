@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * WEB
+ */
 Route::group(array(
     "prefix" => ADMIN,
     "middleware" => ["web", "auth"],
@@ -13,3 +16,18 @@ Route::group(array(
         $route->post('newSlug', 'PagesController@new_slug');
     });
 });
+
+/*
+ * API
+ */
+Route::group([
+    "prefix" => API,
+    "middleware" => ["auth:api"]
+], function ($route) {
+    $route->get("/pages/show/{id?}", "PagesApiController@show");
+    $route->post("/pages/create", "PagesApiController@create");
+    $route->post("/pages/update", "PagesApiController@update");
+    $route->post("/pages/destroy", "PagesApiController@destroy");
+});
+
+

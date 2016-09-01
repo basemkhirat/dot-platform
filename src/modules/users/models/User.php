@@ -107,8 +107,8 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
     public function getPhotoUrlAttribute()
     {
 
-        if (Auth::user()->photo) {
-            return thumbnail(Auth::user()->photo->path, "thumbnail", "admin::images/author.png");
+        if (Auth::guard(GUARD)->user()->photo) {
+            return thumbnail(Auth::guard(GUARD)->user()->photo->path, "thumbnail", "admin::images/author.png");
         } else {
             return assets("admin::images/author.png");
         }
@@ -125,7 +125,7 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         $string = strtolower($role);
 
         // get authenticated user
-        $user = Auth::user();
+        $user = Auth::guard(GUARD)->user();
 
         $role_name = "";
 
@@ -155,7 +155,7 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         $params = is_array($params) ? $params : func_get_args();
 
         // get authenticated user
-        $user = Auth::user();
+        $user = Auth::guard(GUARD)->user();
 
         $permissions = [];
 
@@ -181,6 +181,10 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         }
 
         return false;
+    }
+
+    function newApiToken(){
+        return str_random(60);
     }
 
 

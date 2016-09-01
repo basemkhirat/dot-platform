@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Request;
  * @author basem
  */
 
-class SidebarController extends \Dot\Controller {
+class SidebarController extends Controller {
 
     /**
      * @var array

@@ -29,6 +29,10 @@ class Gallery extends Dot\Model {
         "name" => "required"
     ];
 
+    public function user()
+    {
+        return $this->hasOne("User", "id", "user_id");
+    }
 
     function files(){
         return $this->belongsToMany("Media", "galleries_media", "gallery_id", "media_id");

@@ -16,8 +16,8 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title')->index();
             $table->string('slug')->unique();
-            $table->string('excerpt')->index();
-            $table->text('content');
+            $table->string('excerpt')->nullable()->index();
+            $table->text('content')->nullable();
             $table->integer('image_id')->index();
             $table->integer('media_id')->index();
             $table->integer('user_id')->index();

@@ -1,9 +1,7 @@
 <?php
 
 Route::group(["middleware" => ["web"], "namespace" => "Dot"], function ($route) {
-
     $route->get('locale/{lang}', ['uses' => 'LocalesController@index', 'as' => 'admin.languages']);
-
 });
 
 Route::group(["prefix" => ADMIN, "middleware" => ["web", "auth"], "namespace" => "Dot"], function ($route) {
@@ -15,5 +13,8 @@ Route::group(["prefix" => ADMIN, "middleware" => ["web", "auth"], "namespace" =>
         return redirect(ADMIN . "/" . trim($redirect_path));
     }]);
 
+});
 
+Route::get('docs', function(){
+    return view('admin::docs.default');
 });

@@ -8,7 +8,6 @@ use Plugin;
 use Illuminate\Support\Facades\Schema;
 use \Loader;
 use \DB;
-use Mockery\CountValidator\Exception;
 use \Module;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;

@@ -89,7 +89,7 @@ div[data-size="free"] {
 .cropped_images {
     border: 3px solid #f2f2f2;
     border-radius: 7px;
-    height: 256px;
+    max-height: 400px;
     margin: 6px 0;
     overflow-y: scroll;
     padding: 5px;
@@ -137,7 +137,7 @@ div[data-size="free"] {
 }
 .file_manager {
     background: #fff none repeat scroll 0 0;
-    border-radius: 2px;
+    border-radius: 0px;
     display: none;
     margin: 2%;
     position: fixed;
@@ -902,7 +902,6 @@ LG
 
 }
 
-
 /*
 .media-grid-wrapper {
     height: 100%;
@@ -916,5 +915,8 @@ LG
 }
 
 
-
-
+.file-controls .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}

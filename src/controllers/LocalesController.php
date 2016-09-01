@@ -5,9 +5,12 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
 /**
- * Class LocalesController
+ * This is the short description
+ *
+ * This can be an optional longer description of your API call, used within the documentation.
+ *
  */
-class LocalesController extends \Dot\Controller
+class LocalesController extends Controller
 {
 
     function index($lang)

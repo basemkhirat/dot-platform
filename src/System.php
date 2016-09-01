@@ -9,7 +9,7 @@ class System
      * @var array
      */
     public $providers = [
-        Collective\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class
     ];
 
     /**
@@ -18,7 +18,7 @@ class System
     public $aliases = [
         'Str' => Illuminate\Support\Str::class,
         'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class
+        'Html' => Collective\Html\HtmlFacade::class,
     ];
 
     /**
@@ -90,6 +90,7 @@ class System
 
         define("AMAZON", 1);
         define("ADMIN", Config::get("admin.prefix"));
+        define("API", "api");
         define("UPLOADS", "uploads");
         define("UPLOADS_PATH", public_path(UPLOADS));
         define("AMAZON_URL", "https://" . Config::get("media.s3.bucket") . ".s3-" . Config::get("media.s3.region") . ".amazonaws.com/");
@@ -101,6 +102,16 @@ class System
             app()->register(Barryvdh\Debugbar\ServiceProvider::class);
             DB::connection('mysql')->enableQueryLog();
         }
+
+        /*
+         * Getting the request auth guard
+         */
+        if(Request::is(API."/*")){
+            define("GUARD", "api");
+        }else{
+            define("GUARD", "web");
+        }
+
 
         include __DIR__ . '/overrides.php';
         include __DIR__ . '/helpers.php';

@@ -1,6 +1,7 @@
 <?php
 
-class Page extends Dot\Model {
+class Page extends Dot\Model
+{
 
     protected $module = 'pages';
 
@@ -23,35 +24,27 @@ class Page extends Dot\Model {
         'title' => 'required'
     ];
 
-    public function image() {
+    public function image()
+    {
         return $this->hasOne("Media", "id", "image_id");
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->hasOne("User", "id", "user_id");
     }
-    
-    public function tags() {
+
+    public function tags()
+    {
         return $this->belongsToMany("Tag", "pages_tags", "page_id", "tag_id");
     }
 
-    public function syncTags($tags) {
+    public function syncTags($tags)
+    {
         $tag_ids = array();
         if ($tags = @explode(",", $tags)) {
             $tags = array_filter($tags);
-            foreach ($tags as $tag_name) {
-                $tag = Tag::select("id")->where("name", $tag_name)->first();
-                if (count($tag)) {
-                    // tag exists
-                    $tag_ids[] = $tag->id;
-                } else {
-                    // create new tag
-                    $tag = new Tag();
-                    $tag->name = $tag_name;
-                    $tag->save();
-                    $tag_ids[] = $tag->id;
-                }
-            }
+            $tag_ids = Tag::saveNames($tags);
         }
         $this->tags()->sync($tag_ids);
     }
