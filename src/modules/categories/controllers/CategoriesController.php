@@ -7,9 +7,7 @@ class CategoriesController extends Dot\Controller {
     function __construct()
     {
         parent::__construct();
-        if (! User::access("categories.manage")) {
-            Dot::forbidden();
-        }
+        $this->middleware("permission:categories.manage");
     }
 
     function index($parent = 0) {

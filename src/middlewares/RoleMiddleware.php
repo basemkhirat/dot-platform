@@ -15,7 +15,7 @@ class RoleMiddleware
     public function handle($request, Closure $next, $role = null)
     {
 
-        if (!User::is($role) and !User::is("superadmin")) {
+        if (!Auth::user()->hasRole($role) and !Auth::user()->hasRole("superadmin")) {
             if ($request->is(API . "/*")) {
                 $response = new \DotResponse();
                 return $response->json(NULL, "Authorization error", 403);

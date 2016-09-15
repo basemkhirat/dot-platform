@@ -17,7 +17,7 @@ class UsersController extends Dot\Controller
     public function index()
     {
 
-        if (!User::access("users.manage")) {
+        if (!Gate::allows("users.manage")) {
             Dot::forbidden();
         }
 
@@ -88,7 +88,7 @@ class UsersController extends Dot\Controller
     public function create()
     {
 
-        if (!User::access("users.manage")) {
+        if (!Gate::allows("users.manage")) {
             Dot::forbidden();
         }
 
@@ -145,7 +145,7 @@ class UsersController extends Dot\Controller
     {
 
         if (Auth::user()->id != $user_id) {
-            if (!User::access("users.manage")) {
+            if (!Gate::allows("users.manage")) {
                 Dot::forbidden();
             }
         }
@@ -222,7 +222,7 @@ class UsersController extends Dot\Controller
     public function delete()
     {
 
-        if (!User::access("users.manage")) {
+        if (!Gate::allows("users.manage")) {
             Dot::forbidden();
         }
 

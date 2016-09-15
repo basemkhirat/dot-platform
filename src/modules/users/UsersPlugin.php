@@ -25,7 +25,7 @@ class UsersPlugin extends Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            if (User::access('users')) {
+            if (Gate::allows('users')) {
                 $menu->item('users', trans("admin::common.users"), route("admin.users.show"))
                     ->order(16)
                     ->icon("fa-users");

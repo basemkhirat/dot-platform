@@ -140,10 +140,10 @@ class #module|ucfirst#Controller extends Dot\Controller {
         }
 
         {if module.categories}
-        $this->data["#model#_categories"] = $#model#->categories->lists("id")->toArray();
+        $this->data["#model#_categories"] = $#model#->categories->pluck("id")->toArray();
         {/if}
         {if module.tags}
-        $this->data["#model#_tags"] = $#model#->tags->lists("name")->toArray();
+        $this->data["#model#_tags"] = $#model#->tags->pluck("name")->toArray();
         {/if}
         $this->data["#model#"] = $#model#;
         return View::make("#module#::edit", $this->data);

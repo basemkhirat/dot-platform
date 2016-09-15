@@ -18,7 +18,7 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
-        <?php if (User::access("users.create")) { ?>
+        <?php if (Gate::allows("users.create")) { ?>
             <a href="<?php echo route("admin.roles.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
                     class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("roles::roles.add_new"); ?></a>
         <?php } ?>
@@ -184,7 +184,7 @@
     </div> <!-- / #content-wrapper -->
 </form>
 
-
+@section("footer")
 <script>
     $(document).ready(function () {
 
@@ -216,4 +216,5 @@
     });
 
 </script>
+@stop
 @stop

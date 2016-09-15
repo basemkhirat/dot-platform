@@ -20,7 +20,7 @@ class RolesPlugin extends Plugin
     {
 
         Navigation::menu("sidebar", function ($menu) {
-            if (User::is('superadmin')) {
+            if (Auth::user()->hasRole('superadmin')) {
                 $menu->item('users.permissions', trans("admin::common.permissions"), URL::to(ADMIN . '/roles'));
             }
         });

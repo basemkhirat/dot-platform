@@ -25,7 +25,7 @@ class GroupsPlugin extends Plugin
     function boot()
     {
         Navigation::menu("sidebar", function ($menu) {
-            if (User::access('groups')) {
+            if (Gate::allows('groups')) {
                 $menu->item('users.groups', trans("groups::groups.groups"), route("admin.groups.show"));
             }
         });

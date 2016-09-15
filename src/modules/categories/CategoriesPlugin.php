@@ -24,7 +24,7 @@ class CategoriesPlugin extends Plugin
     {
         Navigation::menu("sidebar", function ($menu) {
 
-            if (User::access("categories.manage")) {
+            if (Gate::allows("categories.manage")) {
                 //$menu->item('news_options.categories', trans("categories::categories.categories"), URL::to(ADMIN . '/categories'))->icon("fa-folder")->order(1);
                 $menu->item('categories', trans("categories::categories.categories"), URL::to(ADMIN . '/categories'))->icon("fa-folder")->order(1);
             }

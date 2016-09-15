@@ -3,6 +3,7 @@
 namespace Dot\Platform;
 
 use Dot;
+use Illuminate\Support\Facades\Auth;
 use System;
 use Plugin;
 use Illuminate\Support\Facades\Schema;
@@ -11,6 +12,7 @@ use \DB;
 use \Module;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+
 
 /**
  * Class AdminServiceProvider
@@ -39,7 +41,6 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected $options = [];
 
-
     /**
      * AdminServiceProvider constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
@@ -53,7 +54,6 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->app = $app;
         $this->kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
-
     }
 
 
@@ -77,6 +77,7 @@ class CmsServiceProvider extends ServiceProvider
             $this->loadModule($module);
         }
 
+
     }
 
     function bindDotClasses()
@@ -86,28 +87,10 @@ class CmsServiceProvider extends ServiceProvider
             return new DotPlatform;
         });
 
+        $this->dot = app("dot")->getInstance();
+
         $this->app->bind('module', function () {
             return new DotModule;
-        });
-
-        $this->app->bind('widget', function () {
-            return new DotWidget;
-        });
-
-        $this->app->bind('action', function () {
-            return new DotAction;
-        });
-
-        $this->app->bind('navigation', function () {
-            return new DotNavigation;
-        });
-
-        $this->app->bind('sitemap', function () {
-            return new DotSitemap;
-        });
-
-        $this->app->bind('schedule', function () {
-            return new DotSchedule;
         });
 
     }
@@ -160,6 +143,7 @@ class CmsServiceProvider extends ServiceProvider
             $this->app->register($provider);
         }
 
+
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         foreach ($this->system->aliases as $alias => $class) {
             $loader->alias($alias, $class);
@@ -169,12 +153,11 @@ class CmsServiceProvider extends ServiceProvider
 
         foreach ($this->modules as $module) {
 
-            Loader::add(array(
-                $module->root . "/controllers",
-                $module->root . "/models",
-                $module->root . "/middlewares",
-                $module->root . "/commands"
-            ));
+
+            foreach($module->loader as $path){
+                Loader::add($module->root."/".$path);
+            }
+
 
             if (file_exists($config = $module->root . '/config/' . $module->path . '.php')) {
                 $this->mergeConfigFrom(
@@ -188,7 +171,7 @@ class CmsServiceProvider extends ServiceProvider
 
             if ($module->path != "auth") {
 
-                // Avoid conflict with system auth config laravel v5.2
+                // Avoid conflict with system auth config in laravel v5.2
 
                 foreach ($module->providers as $provider) {
                     $this->app->register($provider);
@@ -198,19 +181,18 @@ class CmsServiceProvider extends ServiceProvider
                     $loader->alias($alias, $class);
                 }
             }
-
         }
 
-        if (Config::get("app.env") == "production") {
-            $cached = true;
-        } else {
-            $cached = false;
+        // loading system directories and plugins directories
+        Loader::register();
+
+        foreach ($this->modules as $module){
+            $module->register();
         }
 
-        Loader::register($cached);
+        // Binding all classes
+        $this->dot->loadDotBindings();
 
-        // loading admin bootstrap file
-        //
     }
 
     /**
@@ -253,6 +235,9 @@ class CmsServiceProvider extends ServiceProvider
             ADMIN_PATH . '/config/' => config_path()
         ], "admin.config");
 
+        // Booting system
+        $this->system->boot();
+
     }
 
     /**
@@ -293,7 +278,7 @@ class CmsServiceProvider extends ServiceProvider
             ], "$module->path.config");
         }
 
-        // Booting
+        // Booting module
         $module->boot();
 
     }
@@ -305,7 +290,6 @@ class CmsServiceProvider extends ServiceProvider
         require_once(ADMIN_PATH . '/System.php');
 
         $system = new System();
-        $system->boot();
 
         return $system;
 

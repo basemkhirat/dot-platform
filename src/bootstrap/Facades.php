@@ -1,5 +1,7 @@
 <?php
 
+namespace Dot\Platform\Facades;
+
 use Illuminate\Support\Facades\Facade;
 
 
@@ -105,6 +107,21 @@ class Schedule extends Facade
     protected static function getFacadeAccessor()
     {
         return 'schedule';
+    }
+
+}
+
+class Auth extends Facade
+{
+
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return 'dauth';
     }
 
 }

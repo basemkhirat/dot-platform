@@ -8,9 +8,7 @@ class PostsController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
-        if (! User::access("posts.manage")) {
-            Dot::forbidden();
-        }
+        $this->middleware("permission:pages.manage");
     }
 
     function index()
@@ -167,7 +165,7 @@ class PostsController extends Dot\Controller
             return Redirect::route("admin.posts.edit", array("id" => $id))->with("message", trans("posts::posts.events.updated"));
         }
 
-        $this->data["post_tags"] = $post->tags->lists("name")->toArray();
+        $this->data["post_tags"] = $post->tags->pluck("name")->toArray();
         $this->data["post_categories"] = $post->categories;
         $this->data["post"] = $post;
 

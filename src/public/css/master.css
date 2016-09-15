@@ -474,7 +474,7 @@ select {
 }
 
 .switch-row label{
-    width: 60%; !important;
+    width: 60% !important;
     float: left;
 }
 
@@ -555,6 +555,10 @@ body.dark-theme{
     background: #1e8cbe;
 }
 
+.dark-theme .pace .pace-progress {
+    background: #1e8cbe;
+}
+
 .dark-theme input.form-control:focus, .dark-theme textarea.form-control:focus {
     border-color: #1e8cbe !important;
 }
@@ -589,6 +593,17 @@ body.dark-theme{
 }
 
 
+.loadingWrapper{
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+
+}
+
+.bodyWrapper{
+    display: none;
+}
 
 /*
 XS

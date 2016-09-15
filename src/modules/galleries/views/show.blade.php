@@ -167,6 +167,7 @@
 
 </div>
 
+@section("footer")
 <script>
     $(document).ready(function () {
 
@@ -205,5 +206,6 @@
 
 
 </script>
+@stop
 
 @stop

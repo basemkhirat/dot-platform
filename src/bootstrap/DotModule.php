@@ -207,7 +207,8 @@ class DotModule
 
         $plugin->path = $plugin_folder;
         $plugin->root = MODULES_PATH . "/" . $plugin_folder;
-        $plugin->name = "plugin";
+        $plugin->type = "module";
+        $plugin->name = basename($plugin_folder);
         $plugin->description = "";
         $plugin->version = "";
         $plugin->author = "";

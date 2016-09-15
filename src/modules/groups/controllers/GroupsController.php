@@ -6,6 +6,7 @@ class GroupsController extends Dot\Controller {
 
     function __construct() {
         parent::__construct();
+        $this->middleware("permission:groups.manage");
     }
 
     function index() {
@@ -104,7 +105,7 @@ class GroupsController extends Dot\Controller {
             return Redirect::route("admin.groups.edit", array("id" => $id))->with("message", trans("groups::groups.events.updated"));
         }
 
-        $this->data["group_users"] = $group->users->lists("username")->toArray();
+        $this->data["group_users"] = $group->users->pluck("username")->toArray();
         $this->data["group"] = $group;
         return View::make("groups::edit", $this->data);
     }

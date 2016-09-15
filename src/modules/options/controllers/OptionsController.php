@@ -17,7 +17,7 @@ class OptionsController extends Dot\Controller
     function index()
     {
 
-        if(! User::access("options.general")){
+        if(! Gate::allows("options.general")){
             Dot::forbidden();
         }
 
@@ -62,7 +62,7 @@ class OptionsController extends Dot\Controller
     function seo()
     {
 
-        if(! User::access("options.seo")){
+        if(! Gate::allows("options.seo")){
             Dot::forbidden();
         }
 
@@ -99,7 +99,7 @@ class OptionsController extends Dot\Controller
     function social()
     {
 
-        if(! User::access("options.social")){
+        if(! Gate::allows("options.social")){
             Dot::forbidden();
         }
 
@@ -119,7 +119,7 @@ class OptionsController extends Dot\Controller
     function plugins()
     {
 
-        if(! User::access("options.plugins")){
+        if(! Gate::allows("options.plugins")){
             Dot::forbidden();
         }
 
@@ -215,7 +215,7 @@ class OptionsController extends Dot\Controller
     {
 
 
-        if(! User::access("options.media")){
+        if(! Gate::allows("options.media")){
             Dot::forbidden();
         }
 

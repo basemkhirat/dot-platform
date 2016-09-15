@@ -8,9 +8,7 @@ class GalleriesController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
-        if (! User::access("galleries.manage")) {
-            Dot::forbidden();
-        }
+        $this->middleware("permission:galleries.manage");
     }
 
     public function index($id = false)

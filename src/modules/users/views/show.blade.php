@@ -24,7 +24,7 @@
     </div>
 
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
-        <?php if (User::access("users.create")) { ?>
+        <?php if (Gate::allows("users.create")) { ?>
             <a href="<?php echo route("admin.users.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
                     class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("users::users.add_new") ?></a>
         <?php } ?>
@@ -273,7 +273,11 @@
 </div>
 </div> <!-- / #content-wrapper -->
 
+
+@section("footer")
+
 <script>
+
 
     $(document).ready(function () {
 
@@ -316,5 +320,7 @@
 
     });
 </script>
+
+@stop
 
 @stop

@@ -148,11 +148,14 @@
                             </select>
                         </div>
                     </div>
+
+
                     <div class="table-responsive">
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped">
                             <thead>
                             <tr>
-                                <th style="width:35px"><input type="checkbox" class="i-checks check_all" name="ids[]"/>
+                                <th style="width:35px">
+                                    <input type="checkbox" class="i-checks check_all" name="ids[]"/>
                                 </th>
 
                                 <th><?php echo trans("posts::posts.attributes.title"); ?></th>
@@ -270,7 +273,11 @@
 <script type="text/javascript" src="<?php echo assets('admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js') ?>"></script>
 
 <script>
+
+
+
     $(document).ready(function () {
+
 
         $('.datetimepick').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss',

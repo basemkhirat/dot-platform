@@ -25,7 +25,7 @@ class BlocksPlugin extends Plugin
     {
 
         Navigation::menu("sidebar", function ($menu) {
-            if (User::access("blocks.manage")) {
+            if (Gate::allows("blocks.manage")) {
                 $menu->item('blocks', trans("blocks::blocks.blocks"), URL::to(ADMIN . '/blocks'))->icon("fa-th-large")->order(4);
             }
         });

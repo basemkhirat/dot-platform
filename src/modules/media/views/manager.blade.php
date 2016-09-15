@@ -1,13 +1,7 @@
 <div class="cinema"></div>
-
-<link rel="stylesheet" href="<?php echo assets("admin::uploader/cropper2.css") ?>" type="text/css"/>
-<script src="<?php echo assets("admin::uploader/cropper2.js") ?>"></script>
-
-
 <div class="file_manager">
 
     <div class="file_manager_header">
-
 
         <div class="media_loader sk-spinner sk-spinner-double-bounce">
             <div class="sk-double-bounce1"></div>
@@ -30,7 +24,7 @@
                 </a>
             </li>
 
-            <?php if (User::access("galleries.manage")) { ?>
+            <?php if (Gate::allows("galleries.manage")) { ?>
                 <li>
                     <a data-toggle="tab" href="#galleries-area">
                         <i class="fa fa-camera"></i>
@@ -69,7 +63,6 @@
     </span>
 
     </div>
-    <link rel="stylesheet" href="<?php echo assets("admin::") ?>/uploader/jquery.fileupload.css"/>
 
     <div class="file_manager_content">
         <div class="tab-content" style="padding:0">
@@ -518,7 +511,7 @@
                 </div>
             </div>
 
-            <?php if (User::access("galleries.manage")) { ?>
+            <?php if (Gate::allows("galleries.manage")) { ?>
                 <div id="galleries-area" class="tab-pane fade gallery_rows row" style="margin: 0;">
                     <?php $galleries_count = Gallery::count(); ?>
                     <div class="no-galleries text-center <?php if ($galleries_count) { ?>hidden<?php } ?>">
@@ -806,6 +799,7 @@
                                     </style>
                                     <!-- / Styles -->
 
+                                    <?php /*
                                     <!-- Javascript -->
                                     <script>
                                         $(document).ready(function () {
@@ -820,16 +814,9 @@
                                                     y: 'auto'
                                                 } : {x: 'auto', y: 'auto'}
                                             }
-                                            /* $('#bs-timepicker-component').timepicker(options2);
-                                             var colorful_sliders_options = {
-                                             'range': 'min',
-                                             'min': 0,
-                                             'max': 60,
-                                             'value': 30
-                                             };
-                                             $('.ui-slider-colors-demo').slider(colorful_sliders_options);*/
-                                        });</script>
 
+                                        });</script>
+                                        */ ?>
 
                                 </fieldset>
                             </div>

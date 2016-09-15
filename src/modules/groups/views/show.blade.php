@@ -17,7 +17,7 @@
     </div>
     <div class="col-lg-5"></div>
     <div class="col-lg-3">
-        <?php if (User::access("groups.create")) { ?>
+        <?php if (Gate::allows("groups.create")) { ?>
             <a href="<?php echo route("admin.groups.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("groups::groups.add_new") ?></a>
         <?php } ?>
     </div>
@@ -86,10 +86,10 @@
                             <div class="form-group">
                                 <select name="action" class="form-control chosen-select chosen-rtl" style="width:auto; display: inline-block;">
                                     <option value="-1" selected="selected"><?php echo trans("groups::groups.bulk_actions"); ?></option>
-                                    <?php if (User::access("groups.delete")) { ?>
+                                    <?php if (Gate::allows("groups.delete")) { ?>
                                         <option value="delete"><?php echo trans("groups::groups.delete"); ?></option>
                                     <?php } ?>
-                                    <?php if (User::access("groups.edit")) { ?>
+                                    <?php if (Gate::allows("groups.edit")) { ?>
                                         <option value="activate"><?php echo trans("groups::groups.activate"); ?></option>
                                         <option value="deactivate"><?php echo trans("groups::groups.deactivate"); ?></option>
                                     <?php } ?>
@@ -118,10 +118,10 @@
                                     <th><?php echo trans("groups::groups.attributes.updated_at"); ?></th>
                                     <th><?php echo trans("groups::groups.user"); ?></th>
                                     <th><?php echo trans("groups::groups.users_count"); ?></th>
-                                    <?php if (User::access("groups.edit")) { ?>
+                                    <?php if (Gate::allows("groups.edit")) { ?>
                                         <th><?php echo trans("groups::groups.attributes.status"); ?></th>
                                     <?php } ?>
-                                    <?php if (User::access("groups.delete") or User::access("groups.edit")) { ?>
+                                    <?php if (Gate::allows("groups.delete") or Gate::allows("groups.edit")) { ?>
                                         <th><?php echo trans("groups::groups.actions"); ?></th>
                                     <?php } ?>
                                 </tr>
@@ -135,7 +135,7 @@
 
                                         <td>
 
-                                            <?php if (User::access("groups.edit")) { ?>
+                                            <?php if (Gate::allows("groups.edit")) { ?>
                                                 <a data-toggle="tooltip" data-placement="bottom" title="<?php echo trans("groups::groups.edit"); ?>" class="text-navy" href="<?php echo route("admin.groups.edit", array("id" => $group->id)); ?>">
                                                     <?php echo $group->name; ?>
                                                 </a>
@@ -160,7 +160,7 @@
                                             <?php echo $group->users->count(); ?>
                                         </td>
 
-                                        <?php if (User::access("groups.edit")) { ?>
+                                        <?php if (Gate::allows("groups.edit")) { ?>
                                             <td>
                                                 <?php if ($group->status) { ?>
                                                     <a data-toggle="tooltip" data-placement="bottom" title="<?php echo trans("groups::groups.activated"); ?>" class="ask" message="<?php echo trans('groups::groups.sure_deactivate') ?>" href="<?php echo URL::route("admin.groups.status", array("id" => $group->id, "status" => 0)) ?>">
@@ -173,14 +173,14 @@
                                                 <?php } ?>
                                             </td>
                                         <?php } ?>
-                                        <?php if (User::access("groups.delete") or User::access("groups.edit")) { ?>
+                                        <?php if (Gate::allows("groups.delete") or Gate::allows("groups.edit")) { ?>
                                             <td class="center">
-                                                <?php if (User::access("groups.edit")) { ?>
+                                                <?php if (Gate::allows("groups.edit")) { ?>
                                                     <a data-toggle="tooltip" data-placement="bottom" title="<?php echo trans("groups::groups.edit"); ?>" href="<?php echo route("admin.groups.edit", array("id" => $group->id)); ?>">
                                                         <i class="fa fa-pencil text-navy"></i>
                                                     </a>
                                                 <?php } ?>
-                                                <?php if (User::access("groups.delete")) { ?>
+                                                <?php if (Gate::allows("groups.delete")) { ?>
                                                     <a data-toggle="tooltip" data-placement="bottom" title="<?php echo trans("groups::groups.delete"); ?>" class="delete_user ask" message="<?php echo trans("groups::groups.sure_delete") ?>" href="<?php echo URL::route("admin.groups.delete", array("id" => $group->id)) ?>">
                                                         <i class="fa fa-times text-navy"></i>
                                                     </a>

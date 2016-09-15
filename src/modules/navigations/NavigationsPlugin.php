@@ -35,7 +35,7 @@ class NavigationsPlugin extends Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            if (User::access("navigations.manage")) {
+            if (Gate::allows("navigations.manage")) {
                 $menu->item('navigations', trans("navigations::navigations.module"), route("admin.navigations.show"))
                     ->order(1)
                     ->icon("fa-th-large");

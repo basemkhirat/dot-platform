@@ -18,24 +18,24 @@
     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
         <ul class="nav nav-tabs option-tabs">
 
-            <?php if(User::access("options.general")) { ?>
+            <?php if(Gate::allows("options.general")) { ?>
             <li <?php if ($option_page == "main") { ?>class="active"<?php } ?>><a href="<?php echo route("admin.options.show"); ?>"><i class="fa fa-sliders"></i> <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.main") ?></span></a></li>
             <?php } ?>
 
-            <?php if(User::access("options.seo")) { ?>
+            <?php if(Gate::allows("options.seo")) { ?>
             <li <?php if ($option_page == "seo") { ?>class="active"<?php } ?>><a  href="<?php echo route("admin.options.seo"); ?>"><i class="fa fa-line-chart"></i> <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.seo") ?></span></a></li>
             <?php } ?>
 
-            <?php if(User::access("options.media")) { ?>
+            <?php if(Gate::allows("options.media")) { ?>
             <li <?php if ($option_page == "media") { ?>class="active"<?php } ?>><a  href="<?php echo route("admin.options.media"); ?>"><i class="fa fa-camera"></i> <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.media") ?></span></a></li>
             <?php  } ?>
 
 
-            <?php if(User::access("options.social")) { ?>
+            <?php if(Gate::allows("options.social")) { ?>
             <li <?php if ($option_page == "social") { ?>class="active"<?php } ?>><a  href="<?php echo route("admin.options.social"); ?>"><i class="fa fa-globe"></i>  <span class="hidden-sm hidden-xs hidden-md"><?php echo trans("options::options.social") ?></span></a></li>
             <?php } ?>
 
-            <?php if(User::access("options.plugins")) { ?>
+            <?php if(Gate::allows("options.plugins")) { ?>
 
                 <li <?php if ($option_page == "plugins") { ?>class="active"<?php } ?>>
                 <a  href="<?php echo route("admin.options.plugins"); ?>"><i class="fa fa-puzzle-piece"></i>

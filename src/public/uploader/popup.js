@@ -1473,12 +1473,7 @@ $(".filter-bar a").click(function () {
                                 file.type = base.children("[name=media_type]").val();
                                 file.url = base.children("[name=media_url]").val();
                                 file.size = base.children("[name=media_size]").val();
-
-                                if (AMAZON != "0" && base.children("[name=media_path]").val().indexOf('/') > -1) {
-                                    file.path = base.children("[name=media_path]").val();
-                                } else {
-                                    file.path = base.children("[name=media_path]").val().replace(/^.*[\\\/]/, '');
-                                }
+                                file.path = base.children("[name=media_path]").val().replace(/^.*[\\\/]/, '');
 
                                 // return sizes of image
                                 if (file.type == "image") {

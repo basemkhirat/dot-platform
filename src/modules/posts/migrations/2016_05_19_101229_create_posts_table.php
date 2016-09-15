@@ -18,12 +18,12 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->string('excerpt')->nullable()->index();
             $table->text('content')->nullable();
-            $table->integer('image_id')->index();
-            $table->integer('media_id')->index();
-            $table->integer('user_id')->index();
-            $table->integer('status')->index();
-            $table->string("format")->index();
-            $table->string("lang")->index();
+            $table->integer('image_id')->default(0)->index();
+            $table->integer('media_id')->default(0)->index();
+            $table->integer('user_id')->default(0)->index();
+            $table->integer('status')->default(0)->index();
+            $table->string("format")->default("post")->index();
+            $table->string("lang")->nullable()->index();
             $table->timestamps();
         });
 

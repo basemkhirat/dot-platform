@@ -20,7 +20,7 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 text-right">
-        <?php if (!User::access("roles.create")) { ?>
+        <?php if (!Gate::allows("roles.create")) { ?>
             <a href="<?php echo route("admin.roles.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
                     class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("roles::roles.add_new") ?></a>
         <?php } ?>

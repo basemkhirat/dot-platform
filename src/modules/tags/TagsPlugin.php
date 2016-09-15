@@ -26,7 +26,7 @@ class TagsPlugin extends Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            if (User::access("tags.manage")) {
+            if (Gate::allows("tags.manage")) {
                 $menu->item('tags', trans("tags::tags.tags"), URL::to(ADMIN . '/tags'))->icon("fa-tags")->order(3);
             }
         });

@@ -1,6 +1,6 @@
 <?php
 
-class GalleriesPLugin extends Plugin
+class GalleriesPlugin extends Plugin
 {
 
     public $permissions = [
@@ -25,7 +25,7 @@ class GalleriesPLugin extends Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            if (User::access("galleries.manage")) {
+            if (Gate::allows("galleries.manage")) {
                 $menu->item('galleries', trans("admin::common.galleries"), URL::to(ADMIN . '/galleries'))
                     ->order(5)
                     ->icon("fa-camera");

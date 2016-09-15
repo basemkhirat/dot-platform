@@ -8,9 +8,8 @@ class PagesController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
-        if (! User::access("pages.manage")) {
-            Dot::forbidden();
-        }
+        $this->middleware("permission:pages.manage");
+
     }
 
     function index()
@@ -98,7 +97,10 @@ class PagesController extends Dot\Controller
     public function edit($id)
     {
 
+
+
         $page = Page::findOrFail($id);
+
 
         if (Request::isMethod("post")) {
 
@@ -127,7 +129,7 @@ class PagesController extends Dot\Controller
         }
 
 
-        $this->data["page_tags"] = $page->tags->lists("name")->toArray();
+        $this->data["page_tags"] = $page->tags->pluck("name")->toArray();
 
         $this->data["page"] = $page;
 

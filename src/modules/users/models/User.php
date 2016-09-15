@@ -72,6 +72,11 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         return $this->hasMany('UserPermission', "user_id", "id");
     }
 
+    public function can($ability, $arguments = [])
+    {
+        $this->access($ability);
+    }
+
     public function groups()
     {
         return $this->belongsToMany('Group', 'users_groups', 'group_id', 'user_id');
@@ -119,7 +124,8 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         return $this->hasOne('Role', "id", 'role_id');
     }
 
-    public static function is($role = "")
+
+    public function hasRole($role = "")
     {
 
         $string = strtolower($role);
@@ -140,15 +146,10 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         return (bool)false;
     }
 
-    public static function isNot($role = "")
-    {
-        return !self::is($role);
-    }
-
-    public static function access($params = array())
+    public function hasAccess($params = array())
     {
 
-        if (self::is("superadmin")) {
+        if ($this->hasRole("superadmin")) {
             return true;
         }
 
@@ -160,7 +161,7 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         $permissions = [];
 
         if ($user->role) {
-            $permissions = (array)$user->role->permissions->lists("permission")->toArray();
+            $permissions = (array)$user->role->permissions->pluck("permission")->toArray();
         }
 
         if (count($permissions) == 0) {

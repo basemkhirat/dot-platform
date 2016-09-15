@@ -159,7 +159,7 @@ ul.tagit li.tagit-choice .tagit-close {
 /* @group Retina compatibility */
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 144dpi) {
     .chosen-rtl .chosen-search input[type="text"] {
-        background-image: url('plugins/chosen/chosen-sprite@2x.png') !important;
+        background-image: url('chosen-sprite@2x.png') !important;
         background-size: 52px 37px !important;
         background-repeat: no-repeat !important;
     }
@@ -198,7 +198,7 @@ select::-ms-expand {
 
 
 .switch-row label{
-    width: 60%; !important;
+    width: 60% !important;
     float: right;
 }
 

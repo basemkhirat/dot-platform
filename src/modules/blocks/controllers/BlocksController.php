@@ -9,9 +9,7 @@ class BlocksController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
-        if (! User::access("blocks.manage")) {
-            Dot::forbidden();
-        }
+        $this->middleware("permission:blocks.manage");
     }
 
     function index()
@@ -110,7 +108,7 @@ class BlocksController extends Dot\Controller
         }
 
         $this->data["block"] = $block;
-        $this->data["block_tags"] = $block->tags->lists("name")->toArray();
+        $this->data["block_tags"] = $block->tags->pluck("name")->toArray();
         $this->data["block_categories"] = $block->categories;
 
         return View::make("blocks::edit", $this->data);

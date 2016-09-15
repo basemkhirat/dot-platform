@@ -1,5 +1,21 @@
 <?php
 
+// Dot helper functions.
+
+
+/**
+ * @return Dot instance
+ */
+function dot($make = NULL)
+{
+
+    if (is_null($make)) {
+        return Dot::getInstance();
+    }
+
+    return Dot::getInstance()->get($make);
+}
+
 /**
  * @return float
  * return current cms version
@@ -54,6 +70,17 @@ function assets($path = "")
         }
 
     }
+
+    /*$path_parts = explode("/", $path);
+    $extension = end($path_parts);
+
+    if($extension == "js"){
+        return Minify::javascript('/js/jquery.js');
+    }
+
+    if($extension == "css"){
+
+    }*/
 
     return asset($prefix . "/" . $path);
 }

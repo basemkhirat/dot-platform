@@ -8,9 +8,7 @@ class NavigationsController extends Dot\Controller
     function __construct()
     {
         parent::__construct();
-        if (! User::access("navigations.manage")) {
-            Dot::forbidden();
-        }
+        $this->middleware("permission:navigations.manage");
     }
 
     function index($id = 0)

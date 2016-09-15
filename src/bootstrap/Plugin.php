@@ -7,31 +7,48 @@ class Plugin
 {
 
     /**
+     * Plugin directories
+     * @var array
+     */
+    public $loader = [
+        "controllers",
+        "models",
+        "middlewares",
+        "commands"
+    ];
+
+    /**
+     * Plugin service providers
      * @var array
      */
     public $providers = [];
 
     /**
+     * Plugin aliases
      * @var array
      */
     public $aliases = [];
 
     /**
+     * Plugin commands
      * @var array
      */
     public $commands = [];
 
     /**
+     * Plugin middlewares
      * @var array
      */
     public $middlewares = [];
 
     /**
+     * Plugin route middlewares
      * @var array
      */
     public $route_middlewares = [];
 
     /**
+     * Plugin permissions
      * @var array
      */
     public $permissions = [];
@@ -42,7 +59,6 @@ class Plugin
      */
     public function info()
     {
-
         return [
             "name" => "Plugin",
             "description" => "",
@@ -50,7 +66,6 @@ class Plugin
             "author" => "",
             "icon" => "fa-puzzle-piece"
         ];
-
     }
 
     /**
@@ -59,7 +74,14 @@ class Plugin
      */
     public function boot()
     {
-        // booted
+    }
+
+    /**
+     * Plugin registration
+     * Extending core classes
+     */
+    public function register()
+    {
     }
 
     /**
@@ -68,17 +90,7 @@ class Plugin
      */
     public function install()
     {
-
-        // Getting plugin class
-        $plugin = str_replace("Plugin", "", get_called_class());
-
-        // getting plugin type
-        $reflector = new ReflectionClass($plugin . "Plugin");
-        $file = $reflector->getFileName();
-        $type = Str::singular(basename(dirname(dirname($file))));
-
-        $this->doInstall($plugin, $type);
-
+        $this->doInstall($this->path, $this->type);
     }
 
     /**
@@ -88,7 +100,6 @@ class Plugin
      */
     function doInstall($plugin = false, $type = "module", $force = false)
     {
-
         if ($force) {
             // Migrating down
             Artisan::call("$type:migrate:down", [
@@ -106,7 +117,6 @@ class Plugin
             $type => $plugin,
             "--force" => $force
         ]);
-
     }
 
 
@@ -116,17 +126,9 @@ class Plugin
      */
     public function uninstall()
     {
-        // Getting plugin class
-        $plugin = str_replace("Plugin", "", get_called_class());
-
-        // getting plugin type
-        $reflector = new ReflectionClass($plugin . "Plugin");
-        $file = $reflector->getFileName();
-        $type = Str::singular(basename(dirname(dirname($file))));
-
         // Migrating down
-        Artisan::call("$type:migrate:down", [
-            $type => $plugin
+        Artisan::call("$this->type:migrate:down", [
+            $this->type => $this->path
         ]);
     }
 
@@ -153,7 +155,6 @@ class Plugin
         }
 
         return $plugins;
-
     }
 
 
@@ -185,7 +186,6 @@ class Plugin
         }
 
         return $plugins;
-
     }
 
 
@@ -255,7 +255,6 @@ class Plugin
 
     }
 
-
     /**
      * Create a plugin instance
      * @return Plugin
@@ -268,8 +267,9 @@ class Plugin
         $plugin = new $class();
 
         $plugin->path = $plugin_folder;
-        $plugin->root = PLUGINS_PATH."/".$plugin_folder;
-        $plugin->name = "plugin";
+        $plugin->root = PLUGINS_PATH . "/" . $plugin_folder;
+        $plugin->type = "plugin";
+        $plugin->name = basename($plugin_folder);
         $plugin->description = "";
         $plugin->version = "";
         $plugin->author = "";

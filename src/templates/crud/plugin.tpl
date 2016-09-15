@@ -7,31 +7,48 @@ class #module|ucfirst#Plugin extends Plugin
 {
 
     /**
+     * Plugin directories
+     * @var array
+     */
+    public $loader = [
+        "controllers",
+        "models",
+        "middlewares",
+        "commands"
+    ];
+
+    /**
+     * Plugin providers
      * @var array
      */
     public $providers = [];
 
     /**
+     * Plugin aliases
      * @var array
      */
     public $aliases = [];
 
     /**
+     * Plugin commands
      * @var array
      */
     public $commands = [];
 
     /**
+     * Plugin middlewares
      * @var array
      */
     public $middlewares = [];
 
     /**
+     * Plugin route middlwares
      * @var array
      */
     public $route_middlewares = [];
 
     /**
+     * Plugin permissions
      * @var array
      */
     public $permissions = [];
@@ -40,8 +57,8 @@ class #module|ucfirst#Plugin extends Plugin
      * Plugin details
      * @return array
      */
-    function info(){
-
+     public function info()
+     {
         return [
             'name' => '#module#',
             'description' => '',
@@ -50,14 +67,15 @@ class #module|ucfirst#Plugin extends Plugin
             'author' => '',
             'url' => ''
         ];
-
     }
 
     /**
      * Plugin bootstrap
      * Called in system boot
      */
-    function boot(){
+    public function boot()
+    {
+        parent::boot();
 
         Navigation::menu("sidebar", function ($menu) {
             $menu->item('#module#', trans("#module#::#module#.module"), route("admin.#module#.show"))
@@ -70,10 +88,20 @@ class #module|ucfirst#Plugin extends Plugin
     }
 
     /**
+    * Plugin registration
+    * Extending core classes
+    */
+    public function register()
+    {
+        parent::register();
+    }
+
+    /**
      * Plugin install
      * Running plugin migrations and default options
      */
-    function install(){
+    public function install()
+    {
         parent::install();
     }
 
@@ -81,7 +109,8 @@ class #module|ucfirst#Plugin extends Plugin
      * Plugin uninstall
      * Rollback plugin installation
      */
-    function uninstall(){
+    public function uninstall()
+    {
         parent::uninstall();
     }
 

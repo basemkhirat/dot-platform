@@ -9,22 +9,37 @@ class System
      * @var array
      */
     public $providers = [
-        Collective\Html\HtmlServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class,
+        //'CeesVanEgmond\Minify\MinifyServiceProvider',
     ];
 
     /**
      * @var array
      */
     public $aliases = [
+
         'Str' => Illuminate\Support\Str::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+        // System aliases
+        'Dot' => Dot\Platform\Facades\Dot::class,
+        'Module' => Dot\Platform\Facades\Module::class,
+        'Navigation' => Dot\Platform\Facades\Navigation::class,
+        'Action' => Dot\Platform\Facades\Action::class,
+        'Widget' => Dot\Platform\Facades\Widget::class,
+        'Sitemap' => Dot\Platform\Facades\Sitemap::class,
+        'Schedule' => Dot\Platform\Facades\Schedule::class,
+        'User' => Dot\Platform\Facades\User::class,
+
+        //'Auth' => Dot\Platform\Facades\Auth::class,
     ];
 
     /**
      * @var array
      */
     public $commands = [
+
         // Dot commands
         DotInstallCommand::class,
         DotUpdateCommand::class,
@@ -71,6 +86,7 @@ class System
     ];
 
     /**
+     * List of permissions
      * @var array
      */
     public $permissions = [];
@@ -106,12 +122,11 @@ class System
         /*
          * Getting the request auth guard
          */
-        if(Request::is(API."/*")){
+        if (Request::is(API . "/*")) {
             define("GUARD", "api");
-        }else{
+        } else {
             define("GUARD", "web");
         }
-
 
         include __DIR__ . '/overrides.php';
         include __DIR__ . '/helpers.php';

@@ -94,7 +94,7 @@
                             echo Category::tree(array(
                                 "row" => function ($row, $depth) use ($block, $block_categories) {
                                     $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a> <label><input type='checkbox' ";
-                                    if ($block and in_array($row->id, $block_categories->lists("id")->toArray())) {
+                                    if ($block and in_array($row->id, $block_categories->pluck("id")->toArray())) {
                                         $html .= 'checked="checked"';
                                     }
                                     $html .= "name='categories[]' value='" . $row->id . "'> &nbsp;" . $row->name . "</label></div>";

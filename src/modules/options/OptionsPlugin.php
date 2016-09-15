@@ -33,33 +33,33 @@ class OptionsPlugin extends Plugin
 
         Navigation::menu("sidebar", function ($menu) {
 
-            if (User::access("options")) {
+            if (Gate::allows("options")) {
 
                 $menu->item('options', trans("admin::common.settings"), "")
                     ->order(9)
                     ->icon("fa-cogs");
 
-                if (User::access("options.general")) {
+                if (Gate::allows("options.general")) {
                     $menu->item('options.main', trans("options::options.main"), URL::to(ADMIN . '/options'))
                         ->icon("fa-sliders");
                 }
 
-                if (User::access("options.seo")) {
+                if (Gate::allows("options.seo")) {
                     $menu->item('options.seo', trans("options::options.seo"), URL::to(ADMIN . '/options/seo'))
                         ->icon("fa-line-chart");
                 }
 
-                if (User::access("options.media")) {
+                if (Gate::allows("options.media")) {
                     $menu->item('options.media', trans("options::options.media"), URL::to(ADMIN . '/options/media'))
                         ->icon("fa-camera");
                 }
 
-                if (User::access("options.social")) {
+                if (Gate::allows("options.social")) {
                     $menu->item('options.social', trans("options::options.social"), URL::to(ADMIN . '/options/social'))
                         ->icon("fa-globe");
                 }
 
-                if (User::access("options.plugins")) {
+                if (Gate::allows("options.plugins")) {
                     $menu->item('options.plugins', trans("options::options.plugins"), URL::to(ADMIN . '/options/plugins'))
                         ->icon("fa-puzzle-piece");
                 }
@@ -74,7 +74,7 @@ class OptionsPlugin extends Plugin
 
 
         Navigation::menu("topnav", function ($menu) {
-            if (User::access("options.general")) {
+            if (Gate::allows("options.general")) {
                 $menu->make("options::dropmenu");
             }
         });

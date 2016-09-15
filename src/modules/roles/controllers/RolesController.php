@@ -9,10 +9,9 @@ class RolesController extends Dot\Controller
     public function __construct()
     {
         parent::__construct();
-
-        if (User::isNot("superadmin")) {
-            Dot::forbidden();
-        }
+        $this->middleware(function($request, $next){
+            return Auth::user()->hasRole("superadmin") ? $next($request) : Dot::forbidden();
+        });
     }
 
     public function index()
@@ -102,7 +101,7 @@ class RolesController extends Dot\Controller
         }
 
         $this->data["role"] = $role;
-        $this->data["role_permissions"] = $role->permissions->lists("permission")->toArray();
+        $this->data["role_permissions"] = $role->permissions->pluck("permission")->toArray();
 
         $this->data["modules"] = array_merge(Module::installed(), Plugin::installed());
 

@@ -15,7 +15,7 @@ class PermissionMiddleware
     public function handle($request, Closure $next, $permission = null)
     {
 
-        if (!User::access($permission)) {
+        if (!Gate::allows($permission)) {
             if ($request->is(API . "/*")) {
                 $response = new \DotResponse();
                 return $response->json(NULL, "Authorization error", 403);

@@ -17,7 +17,7 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
-        <?php if (User::access("users.create")) { ?>
+        <?php if (Gate::allows("users.create")) { ?>
             <a href="<?php echo route("admin.users.create"); ?>" class="btn btn-primary btn-labeled btn-main">
                 <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("users::users.add_new") ?>
             </a>
@@ -135,7 +135,7 @@
 
                 <div class="panel-body">
 
-                    <?php if (User::is("superadmin")) { ?>
+                    <?php if (Auth::user()->hasRole("superadmin")) { ?>
                         <div class="row form-group">
                             <label class="col-sm-3 control-label"><?php echo trans("users::users.role") ?></label>
                             <div class="col-sm-9">

@@ -50,7 +50,7 @@ class PluginUninstallCommand extends Dot\Command
             unset($installed_plugins[$key]);
         }
 
-        Plugin::get($plugin)->install();
+        Plugin::get($plugin)->uninstall();
 
         $plugins = json_encode(array_unique(array_values($installed_plugins)));
 
