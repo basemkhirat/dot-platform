@@ -1,0 +1,302 @@
+<?php
+
+/**
+ * Plugin Super class
+ */
+class Plugin
+{
+
+    /**
+     * Plugin directories
+     * @var array
+     */
+    public $loader = [
+        "controllers",
+        "models",
+        "middlewares",
+        "commands"
+    ];
+
+    /**
+     * Plugin service providers
+     * @var array
+     */
+    public $providers = [];
+
+    /**
+     * Plugin aliases
+     * @var array
+     */
+    public $aliases = [];
+
+    /**
+     * Plugin commands
+     * @var array
+     */
+    public $commands = [];
+
+    /**
+     * Plugin middlewares
+     * @var array
+     */
+    public $middlewares = [];
+
+    /**
+     * Plugin route middlewares
+     * @var array
+     */
+    public $route_middlewares = [];
+
+    /**
+     * Plugin permissions
+     * @var array
+     */
+    public $permissions = [];
+
+    /**
+     * Plugin details
+     * @return array
+     */
+    public function info()
+    {
+        return [
+            "name" => "Plugin",
+            "description" => "",
+            "version" => "0.1",
+            "author" => "",
+            "icon" => "fa-puzzle-piece"
+        ];
+    }
+
+    /**
+     * Plugin bootstrap
+     * Called in system boot
+     */
+    public function boot()
+    {
+    }
+
+    /**
+     * Plugin registration
+     * Extending core classes
+     */
+    public function register()
+    {
+    }
+
+    /**
+     * Plugin install
+     * Running plugin migrations and default options
+     */
+    public function install()
+    {
+        $this->doInstall($this->path, $this->type);
+    }
+
+    /**
+     * @param bool $plugin
+     * @param string $type
+     * @param bool $force
+     */
+    function doInstall($plugin = false, $type = "module", $force = false)
+    {
+        if ($force) {
+            // Migrating down
+            Artisan::call("$type:migrate:down", [
+                $type => $plugin
+            ]);
+        }
+
+        // Migrating up
+        Artisan::call("$type:migrate:up", [
+            $type => $plugin
+        ]);
+
+        // Publishing
+        Artisan::call("$type:publish", [
+            $type => $plugin,
+            "--force" => $force
+        ]);
+    }
+
+
+    /**
+     * Plugin uninstall
+     * Rollback plugin installation
+     */
+    public function uninstall()
+    {
+        // Migrating down
+        Artisan::call("$this->type:migrate:down", [
+            $this->type => $this->path
+        ]);
+    }
+
+
+    /**
+     * Get all system plugins
+     * @return array
+     */
+    public static function all()
+    {
+        $plugins = [];
+
+        foreach (glob(PLUGINS_PATH . '/*/*Plugin.php') as $file) {
+
+            $module_path = dirname($file);
+
+            $folder_name = basename($module_path);
+
+            $plugin = self::get($folder_name);
+
+            if ($plugin and $plugin->path != "") {
+                $plugins[] = $plugin;
+            }
+        }
+
+        return $plugins;
+    }
+
+
+    /**
+     * Get all installed plugins
+     * @return array
+     */
+    public static function installed()
+    {
+        $plugins = [];
+
+        $installed_plugins = self::installedPaths();
+
+        foreach (glob(PLUGINS_PATH . '/*/*Plugin.php') as $file) {
+
+            $module_path = dirname($file);
+
+            $folder_name = basename($module_path);
+
+            if (in_array($folder_name, $installed_plugins)) {
+
+                $plugin = self::get($folder_name);
+
+                if ($plugin and $plugin->path != "") {
+                    $plugins[] = $plugin;
+                }
+
+            }
+        }
+
+        return $plugins;
+    }
+
+
+    /**
+     * Get plugin by folder name
+     * @param string $plugin_folder
+     * @return bool|Plugin
+     */
+    public static function get($plugin_folder = "")
+    {
+
+        if ($plugin_folder == "") {
+            return false;
+        }
+
+        $path = PLUGINS_PATH . "/" . $plugin_folder;
+
+        $class = Dot::getPluginClass($path);
+
+        if (!class_exists($class)) {
+            include($path . "/" . $class . ".php");
+        }
+
+        $installed_plugins = self::installedPaths();
+
+        if (class_exists($class)) {
+
+
+            $object = new $class();
+            $info = $object->info();
+
+
+            $plugin = self::instance($plugin_folder);
+
+            $plugin->path = $plugin_folder;
+
+            if (isset($info["name"])) {
+                $plugin->name = $info["name"];
+            }
+
+            if (isset($info["description"])) {
+                $plugin->description = $info["description"];
+            }
+
+            if (isset($info["version"])) {
+                $plugin->version = $info["version"];
+            }
+
+            if (isset($info["author"])) {
+                $plugin->author = $info["author"];
+            }
+
+            if (isset($info["url"])) {
+                $plugin->url = $info["url"];
+            }
+
+            if (isset($info["icon"])) {
+                $plugin->icon = $info["icon"];
+            }
+
+            if (in_array($plugin_folder, $installed_plugins)) {
+                $plugin->installed = true;
+            }
+
+            return $plugin;
+        }
+
+    }
+
+    /**
+     * Create a plugin instance
+     * @return Plugin
+     */
+    public static function instance($plugin_folder)
+    {
+
+        $class = Dot::getPluginClass($plugin_folder);
+
+        $plugin = new $class();
+
+        $plugin->path = $plugin_folder;
+        $plugin->root = PLUGINS_PATH . "/" . $plugin_folder;
+        $plugin->type = "plugin";
+        $plugin->name = basename($plugin_folder);
+        $plugin->description = "";
+        $plugin->version = "";
+        $plugin->author = "";
+        $plugin->url = "";
+        $plugin->icon = "fa-puzzle-piece";
+        $plugin->installed = false;
+
+        return $plugin;
+
+    }
+
+
+    /**
+     * Get installed pathes
+     * @return array
+     */
+    public static function installedPaths()
+    {
+
+        $active_plugins = [];
+
+        if (Config::has("plugins")) {
+            $active_plugins = json_decode(Config::get("plugins"));
+        }
+
+        return $active_plugins;
+
+    }
+
+}

@@ -1,0 +1,27 @@
+{
+    "fields": {
+        "id": "increments",
+        "name": "string:200|index",
+        "slug": "string:200|index",
+        "parent": "integer|index"
+    },
+    "grid": [
+        "name",
+        "category.category_name"
+    ],
+    "form": {
+        "name": "text",
+        "slug": "slug:name"
+    },
+    "require": [
+        
+    ],
+    "relations": {
+       
+    },
+    "options": {
+        "icon" : "fa-folder",
+        "per_page" : 20
+    }
+
+}

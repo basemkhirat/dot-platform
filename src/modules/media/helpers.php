@@ -1,0 +1,327 @@
+<?php
+
+if (!function_exists("s3_save")) {
+
+    function s3_save($filename = "")
+    {
+
+        if ($filename == "" or !Config::get("media.s3.status")) {
+            return false;
+        }
+
+        $file_directory = UPLOADS_PATH . date("/Y/m");
+
+        $parts = explode("/", $filename);
+        $file = end($parts);
+
+        $s3 = App::make('aws')->get('s3');
+        $op = $s3->putObject(array(
+            'Bucket' => Config::get("media.s3.bucket"),
+            'Key' => $filename,
+            'SourceFile' => $file_directory . "/" . $file,
+            'ACL' => 'public-read'
+        ));
+
+        return $op;
+    }
+
+}
+
+
+if (!function_exists("s3_delete")) {
+
+    function s3_delete($filename = "")
+    {
+
+        if (!Config::get("media.s3.status")) {
+            return false;
+        }
+
+        $s3 = App::make('aws')->get('s3');
+        $result = $s3->deleteObjects(array(
+            'Bucket' => Config::get("media.s3.bucket"),
+            'Objects' => array(
+                array('Key' => $filename)
+            )
+        ));
+
+        return $result;
+    }
+
+}
+
+if (!function_exists("uploads_url")) {
+
+    function uploads_url($file = "")
+    {
+        if (Config::get("media.s3.status")) {
+            $url = "https://" . Config::get("media.s3.bucket") . ".s3-" . Config::get("media.s3.region") . ".amazonaws.com/" . $file;
+        } else {
+            $url = URL::to(UPLOADS . "/" . $file);
+        }
+        return $url;
+    }
+
+}
+
+
+if (!function_exists("thumbnail")) {
+
+    function thumbnail($file = "", $size = "thumbnail", $default = "files/file.png")
+    {
+
+        $parts = explode(".", $file);
+        $ext = end($parts);
+
+        $parts = explode("/", $file);
+
+        if (!Config::get("media.thumbnails")) {
+            return uploads_url($file);
+        }
+
+        if (in_array(strtolower($ext), array("jpg", "jpeg", "png", "bmp", "gif"))) {
+            $file_path = $parts[0]."/". $parts[1]. "/".$size . "-" . $parts[2];
+            return uploads_url($file_path);
+        }
+
+        if (File::exists(public_path("admin/files/" . strtolower($ext) . ".png"))) {
+            return assets("admin::files/" . strtolower($ext) . ".png");
+        } else {
+            return assets($default);
+        }
+    }
+
+}
+
+if (!function_exists("glob_recursive")) {
+
+    function glob_recursive($pattern, $flags = 0)
+    {
+        $files = glob($pattern, $flags);
+        foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+            $files = array_merge($files, glob_recursive($dir . '/' . basename($pattern), $flags));
+        }
+        return $files;
+    }
+
+}
+
+if (!function_exists("rrmdir")) {
+
+    function rrmdir($dir)
+    {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (filetype($dir . "/" . $object) == "dir")
+                        rrmdir($dir . "/" . $object);
+                    else
+                        unlink($dir . "/" . $object);
+                }
+            }
+            reset($objects);
+            rmdir($dir);
+        }
+    }
+
+}
+
+
+if (!function_exists("get_youtube_video_id")) {
+
+    function get_youtube_video_id($url)
+    {
+
+        if (strstr($url, "/v/")) {
+            $array = parse_url($url);
+            $path = trim($array["path"], "/");
+            if ($parts = @explode("/", $path)) {
+                if (isset($parts[1])) {
+                    return $parts[1];
+                }
+            }
+        }
+        $url_string = parse_url($url, PHP_URL_QUERY);
+        parse_str($url_string, $args);
+        return isset($args['v']) ? $args['v'] : false;
+    }
+
+}
+
+
+if (!function_exists("get_extension")) {
+
+    function get_extension($mime = "")
+    {
+
+        $types = array(
+            'csv' => array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel'),
+            'pdf' => array('application/pdf', 'application/x-download'),
+            'ai' => 'application/postscript',
+            'eps' => 'application/postscript',
+            'xls' => array('application/excel', 'application/vnd.ms-excel', 'application/msexcel'),
+            'ppt' => array('application/powerpoint', 'application/vnd.ms-powerpoint'),
+            'swf' => 'application/x-shockwave-flash',
+            'zip' => array('application/x-zip', 'application/zip', 'application/x-zip-compressed'),
+            'mp3' => array('audio/mpeg', 'audio/mpg', 'audio/mpeg3', 'audio/mp3'),
+            'wav' => array('audio/x-wav', 'audio/wave', 'audio/wav'),
+            'bmp' => array('image/bmp', 'image/x-windows-bmp'),
+            'gif' => 'image/gif',
+            'jpg' => array('image/jpeg', 'image/pjpeg'),
+            'png' => array('image/png', 'image/x-png'),
+            'txt' => 'text/plain',
+            'rtx' => 'text/richtext',
+            'rtf' => 'text/rtf',
+            'mpg' => 'video/mpeg',
+            'mov' => 'video/quicktime',
+            'avi' => 'video/x-msvideo',
+            'doc' => 'application/msword',
+            'docx' => array('application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/zip'),
+            'xlsx' => array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/zip'),
+            'word' => array('application/msword', 'application/octet-stream'),
+            'xl' => 'application/excel'
+        );
+
+        foreach ($types as $extension => $mimes) {
+            if ((is_array($mimes) and in_array($mime, $mimes)) or (!is_array($mimes) and $mime == $mimes)) {
+                return $extension;
+            }
+        }
+
+        return false;
+    }
+
+}
+
+
+if (!function_exists("get_youtube_video_details")) {
+
+    function get_youtube_video_details($id)
+    {
+
+        $row = new stdClass();
+
+        $row->title = "";
+        $row->description = "";
+        $row->keywords = "";
+        $row->length = "";
+        $row->image = "";
+        $row->embed = "";
+
+        $json_data = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=" . $id . "&part=snippet,contentDetails&key=AIzaSyDRGXCbaRMxl1ngDvgFr8cJNhwHdJuaACg");
+        $data = json_decode($json_data, true);
+        if (isset($data["items"][0])) {
+
+            $item = $data["items"][0];
+            $row->title = $item["snippet"]["title"];
+            $row->description = $item["snippet"]["description"];
+            $row->keywords = "";
+            $row->length = youtube_video_length($item["contentDetails"]["duration"]);
+            $row->image = "https://i.ytimg.com/vi/" . $id . "/0.jpg";
+            $row->embed = "https://www.youtube.com/embed/" . $id;
+        }
+
+        return $row;
+    }
+
+}
+
+
+if (!function_exists("youtube_video_length")) {
+
+    function youtube_video_length($youtube_time)
+    {
+        preg_match_all('/(\d+)/', $youtube_time, $parts);
+        $hours = floor($parts[0][0] / 60);
+        $minutes = $parts[0][0] % 60;
+        if (isset($parts[0][1]))
+            $seconds = $parts[0][1];
+        else
+            $seconds = $parts[0][0];
+
+        return $hours * 60 * 60 + $minutes * 60 + $seconds;
+    }
+
+}
+
+
+if (!function_exists("get_soundcloud_track_details")) {
+
+    function get_soundcloud_track_details($url = "")
+    {
+
+        if ($content = @file_get_contents("http://api.soundcloud.com/resolve.json?url=" . $url . "&client_id=203ed54b9fd03054e1aa2b2cae337eae")) {
+            $data = json_decode($content);
+            $row = new \stdClass();
+            $row->id = $data->id;
+            $row->title = @$data->title;
+            $row->description = $data->description;
+            $row->length = round(@$data->duration / 1000);
+            $row->link = $data->permalink_url;
+            if (@$data->artwork_url != null) {
+                $row->image = $data->artwork_url;
+            } else {
+                $row->image = "";
+            }
+
+            return $row;
+        }
+    }
+
+}
+
+
+if (!function_exists("format_duration")) {
+
+    function format_duration($init)
+    {
+        $hours = floor($init / 3600);
+        $minutes = floor(($init / 60) % 60);
+        $seconds = $init % 60;
+        $string = "";
+        if ($hours != 0) {
+            $string .= $hours . ":";
+        }
+
+        if (strlen($hours) == 1) {
+            $hours = "0" . $hours;
+        }
+        if (strlen($minutes) == 1) {
+            $minutes = "0" . $minutes;
+        }
+        if (strlen($seconds) == 1) {
+            $seconds = "0" . $seconds;
+        }
+
+        $string .= "$minutes:$seconds";
+        return $string;
+    }
+
+}
+
+
+if (!function_exists("format_file_size")) {
+
+    function format_file_size($size, $type = "KB")
+    {
+        switch ($type) {
+            case "KB":
+                $filesize = $size * .0009765625; // bytes to KB
+                break;
+            case "MB":
+                $filesize = ($size * .0009765625) * .0009765625; // bytes to MB
+                break;
+            case "GB":
+                $filesize = (($size * .0009765625) * .0009765625) * .0009765625; // bytes to GB
+                break;
+        }
+
+        if ($filesize < 0) {
+            return $filesize = 'unknown file size';
+        } else {
+            return round($filesize, 2) . ' ' . $type;
+        }
+    }
+
+}

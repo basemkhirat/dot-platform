@@ -1,0 +1,18 @@
+{
+    "fields": {
+        "ID" : "increments"
+    },
+    "grid": [
+
+    ],
+    "form": {
+
+    },
+    "require": [
+
+    ],
+    "options": {
+
+    }
+
+}

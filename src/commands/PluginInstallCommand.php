@@ -1,0 +1,90 @@
+<?php
+
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+
+/**
+ * Class MigrateCommand
+ */
+class PluginInstallCommand extends Dot\Command
+{
+
+    /**
+     * @var string
+     */
+    protected $name = 'plugin:install';
+
+    /**
+     * @var string
+     */
+    protected $description = "Install a plugin";
+
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     *
+     */
+    public function fire()
+    {
+
+        $plugin = trim($this->input->getArgument('plugin'));
+
+        $installed_plugins = Plugin::installedPaths();
+
+        $class = Dot::getPluginClass($plugin);
+
+        $path = PLUGINS_PATH . "/" . trim($plugin) . "/" . $class . ".php";
+
+        if (!file_exists($path)) {
+            return $this->error("Plugin $plugin not found");
+        }
+
+        if (in_array($plugin, $installed_plugins)) {
+            return $this->info("Plugin $plugin is already installed !");
+        }
+
+        $installed_plugins[] = $plugin;
+
+        Plugin::get($plugin)->doInstall($plugin, "plugin", $this->option("force"));
+
+        $plugins = json_encode(array_unique(array_values($installed_plugins)));
+
+        Option::store([
+            "plugins" => $plugins
+        ]);
+
+        Config::set("plugins", $plugins);
+
+        $this->info("Plugin $plugin is installed successfully");
+
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['plugin', InputArgument::REQUIRED, 'The name of the plugin']
+        ];
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['force', null, InputOption::VALUE_NONE, 'Force overwrite config files', null]
+        ];
+    }
+
+}

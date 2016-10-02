@@ -1,0 +1,91 @@
+<?php
+
+return [
+
+    "module" => "Users",
+
+    "users" => "Users",
+    "add_new" => "Add new",
+    "search_users" => "Search users",
+    "per_page" => "Per page",
+    "bulk_actions" => "Bulk actions",
+    "delete" => "Delete",
+    "apply" => "Apply",
+    "photo" => "Photo",
+    "name" => "Name",
+    "email" => "Email",
+    "created" => "Created date",
+    "role" => "Role",
+    "actions" => "Actions",
+    "sure_delete" => "You are about to delete user.. continue?",
+    "page" => "Page",
+    "add_new_user" => "Add new user",
+    "username" => "Username",
+    "password" => "Password",
+    "confirm_password" => "Confirm password",
+    "email" => "Email",
+    "change" => "Change",
+    "remove_photo" => "Remove",
+    "first_name" => "First name",
+    "last_name" => "Last name",
+    "about_me" => "About me",
+    "is_not_an_image" => "is not an image",
+    "role" => "Role",
+    "activation" => "Activation",
+    "language" => "Language",
+    "special_permissions" => "Special permissions",
+    "save_user" => "Save user",
+    "of" => "of",
+    "activated" => "Activated",
+    "deactivated" => "Deactivated",
+    "bulk_actions" => "Bulk actions",
+    "edit" => "Edit user",
+    "facebook" => "Facebook",
+    "twitter" => "Twitter",
+    "googleplus" => "Google plus",
+    "linkedin" => "Linked in",
+    "search" => "search",
+
+
+    'sort_by' => 'Sort by',
+    'asc' => 'ASC',
+    'desc' => 'DESC',
+    'order' => 'order',
+    'all' => 'All',
+    'all_roles' => "All roles",
+    'filter' => 'view',
+
+    "no_records" => "No users",
+
+    'deactivated' => 'Deactivated',
+    'activated' => 'Activated',
+
+
+
+    "color" => "Color",
+    "color_green" => "Green",
+    "color_blue" => "Blue",
+
+
+    "module" => "Users",
+
+    "permissions" => [
+        "manage" => "Manage users"
+    ],
+
+    "attributes" => [
+        "username" => "username",
+        "password" => "password",
+        "repassword" => "confirm password",
+        "email" => "email",
+        "first_name" => "name",
+        'created_at' => 'created at',
+    ],
+
+    "events" => [
+        "created" => "User created successfully",
+        "updated" => "User updated successfully",
+        "deleted" => "User deleted successfully",
+    ]
+
+];
