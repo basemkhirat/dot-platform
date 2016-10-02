@@ -173,6 +173,7 @@
                                 <input type="hidden" name="media_id" class="post-media-id"
                                        value="<?php echo ($post->media) ? $post->media->id : 0; ?>">
 
+
                                 <a class="change-post-media label" href="javascript:void(0)">
                                     <i class="fa fa-pencil text-navy"></i>
                                     <?php echo trans("posts::posts.change_media"); ?>

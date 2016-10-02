@@ -137,7 +137,6 @@ class PostsController extends Dot\Controller
             $post->format = Request::get("format", "post");
             $post->lang = LANG;
 
-
             // fire post saving action
             Action::fire("post.saving", $post);
 
