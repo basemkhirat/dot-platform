@@ -25,6 +25,9 @@ class PostsApiController extends Dot\ApiController
      * @param string $q (required) The search query string.
      * @param array $with (optional) extra related post components [user, image, media, tags, categories].
      * @param int $limit (default: 10) The number of retrieved records.
+     * @param array $category_ids (optional) The list of categories ids.
+     * @param array $tag_ids (optional) The list of tags ids.
+     * @param array $block_ids (optional) The list of blocks ids.
      * @param int $page (default: 1) The page number.
      * @param string $order_by (default: id) The column you wish to sort by.
      * @param string $order_direction (default: DESC) The sort direction ASC or DESC.
@@ -43,6 +46,24 @@ class PostsApiController extends Dot\ApiController
 
         if ($request->has("q")) {
             $query->search($request->get("q"));
+        }
+
+        if ($request->has("category_ids") and count($request->get("category_ids"))) {
+            $query->whereHas("categories", function ($query) use ($request) {
+                $query->whereIn("categories.id", $request->get("category_ids"));
+            });
+        }
+
+        if ($request->has("tag_ids") and count($request->get("tag_ids"))) {
+            $query->whereHas("tags", function ($query) use ($request) {
+                $query->whereIn("tags.id", $request->get("tag_ids"));
+            });
+        }
+
+        if ($request->has("block_ids") and count($request->get("block_ids"))) {
+            $query->whereHas("blocks", function ($query) use ($request) {
+                $query->whereIn("blocks.id", $request->get("block_ids"));
+            });
         }
 
         if ($id) {

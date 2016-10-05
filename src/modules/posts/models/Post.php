@@ -71,6 +71,11 @@ class Post extends Dot\Model
         return $this->belongsToMany("Tag", "posts_tags", "post_id", "tag_id");
     }
 
+    public function blocks()
+    {
+        return $this->belongsToMany("Block", "blocks_posts", "post_id", "block_id");
+    }
+
     public function categories()
     {
         return $this->belongsToMany("Category", "posts_categories", "post_id", "category_id");
