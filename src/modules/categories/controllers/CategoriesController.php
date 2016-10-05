@@ -45,6 +45,7 @@ class CategoriesController extends Dot\Controller {
             $category->slug = Request::get('slug');
             $category->image_id = Request::get('image_id');
             $category->parent = Request::get('parent');
+            $category->user_id = Auth::user()->id;
             $category->lang = LANG;
 
             // fire category saving action

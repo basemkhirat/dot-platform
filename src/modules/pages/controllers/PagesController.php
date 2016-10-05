@@ -60,6 +60,7 @@ class PagesController extends Dot\Controller
         $page = new Page();
         if (Request::isMethod("post")) {
 
+
             $page->title = Request::get('title');
             $page->slug = Request::get('slug');
             $page->excerpt = Request::get('excerpt');
@@ -68,6 +69,7 @@ class PagesController extends Dot\Controller
             $page->user_id = Auth::user()->id;
             $page->status = Request::get("status", 0);
             $page->lang = LANG;
+
 
             // fire page saving action
             Action::fire("page.saving", $page);

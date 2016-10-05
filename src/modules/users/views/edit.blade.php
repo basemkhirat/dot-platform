@@ -83,7 +83,7 @@
 
                                 <input type="hidden" value="<?php if ($user and $user->photo) {
                                     echo $user->photo->id;
-                                } ?>" id="user_photo_id" name="photo_id"/>
+                                } else { echo 0;} ?>" id="user_photo_id" name="photo_id"/>
 
                                 <img class="col-lg-12" id="user_photo" style="width: 100%"
                                      src="<?php if ($user and $user->photo) { ?> <?php echo thumbnail($user->photo->path); ?> <?php } else { ?> <?php echo assets("admin::images/user.png"); ?><?php } ?>"/>

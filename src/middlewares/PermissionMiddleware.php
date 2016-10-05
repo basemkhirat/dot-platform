@@ -17,8 +17,12 @@ class PermissionMiddleware
 
         if (!Gate::allows($permission)) {
             if ($request->is(API . "/*")) {
+
+                return $next($request);
+
                 $response = new \DotResponse();
                 return $response->json(NULL, "Authorization error", 403);
+
             } else {
                 Dot::forbidden();
             }

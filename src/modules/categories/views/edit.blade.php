@@ -97,8 +97,10 @@
                 <div class="panel-body form-group">
                     <div class="row post-image-block">
                         <input type="hidden" name="image_id" class="post-image-id" value="<?php
-                        if ($category and @ $category->image->path != "") {
+                        if  ($category and @ $category->image->path != "") {
                             echo @$category->image->id;
+                        }else {
+                            echo 0;
                         }
                         ?>">
                         <a class="change-post-image label" href="javascript:void(0)">
