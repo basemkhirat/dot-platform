@@ -1,6 +1,6 @@
 <?php
 
-class #related_model|ucfirst# extends Model {
+class #related_model|ucfirst# extends Dot\Model {
     
     protected $table = "#table#";
     

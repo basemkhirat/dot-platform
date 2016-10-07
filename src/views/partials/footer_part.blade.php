@@ -2,6 +2,18 @@
 <script type="text/javascript" src="<?php echo assets('admin::js/app.js') ?>"></script>
 <script>
 
+    /**
+     * check cms is loaded in iframe.
+     */
+    $(document).ready(function(){
+        if(window.self !== window.top){
+            $("#page-wrapper").css("margin", 0);
+            $("#page-wrapper nav").remove();
+            $("#wrapper .main-nav").remove();
+            $("ol.breadcrumb li").first().remove();
+        }
+    });
+
     var confirm_box = function (message, callback) {
 
         if(message === undefined){

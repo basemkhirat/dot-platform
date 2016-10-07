@@ -21,7 +21,7 @@
 <body class="<?php if (Auth::user()->color == "blue") { ?>dark-theme<?php } ?> <?php if (DIRECTION == "rtl") { ?>rtls<?php } ?> <?php if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") { ?>mini-navbar<?php } ?>">
 
 <div class="loadingWrapper">
-<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
 </div>
 
 <div class="bodyWrapper">
