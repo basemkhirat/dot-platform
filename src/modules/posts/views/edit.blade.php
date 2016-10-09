@@ -33,15 +33,17 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
-        <?php if ($post) { ?>
+
+        <a href="<?php echo route("admin.posts.show"); ?>" class="btn btn-primary btn-labeled btn-main">
+            <i class="fa fa-bars"></i>
+            <?php echo trans("posts::posts.back_to_posts") ?>
+        </a>
+
+        <?php if ($post->id) { ?>
             <a href="<?php echo route("admin.posts.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
                     class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("posts::posts.add_new") ?></a>
-        <?php } else { ?>
-            <a href="<?php echo route("admin.posts.show"); ?>" class="btn btn-primary btn-labeled btn-main">
-                <?php echo trans("posts::posts.back_to_posts") ?>
-                &nbsp; <i class="fa fa-chevron-left"></i>
-            </a>
         <?php } ?>
+
     </div>
 </div>
 @stop
@@ -260,6 +262,26 @@
                         </ul>
                     <?php } else { ?>
                         <?php echo trans("categories::categories.no_records"); ?>
+                    <?php } ?>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-th-large"></i>
+                    <?php echo trans("posts::posts.add_block"); ?>
+                </div>
+                <div class="panel-body">
+                    <?php if (block::count()) { ?>
+                        <ul class='tree-views'>
+                            <?php foreach(Block::all() as $block){ ?>
+                                    <li><div class='tree-row checkbox i-checks'> <label><input type='checkbox'
+                                    <?php if ($post and in_array($block->id, $post->blocks()->pluck("id")->toArray())) { echo 'checked="checked"'; } ?>
+                                    name='blocks[]' value='<?php echo $block->id; ?>'> &nbsp; <?php echo $block->name ?></label></div>
+                                <?php } ?>
+                        </ul>
+                    <?php } else { ?>
+                        <?php echo trans("posts::posts.no_blocks"); ?>
                     <?php } ?>
                 </div>
             </div>

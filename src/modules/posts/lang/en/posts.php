@@ -65,9 +65,12 @@ return [
     "custom_value" => "Value",
     "sure_delete_field" => "Are you sure to delete custom field ?",
 
+    "add_block" => "Add to blocks",
+    "no_blocks" => "No blocks found",
+
 
     'attributes' => [
-        'title' => 'title',
+        'title' => 'Title',
         'excerpt' => 'Excerpt',
         'content' => 'Content',
         'created_at' => 'Created date',

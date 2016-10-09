@@ -33,13 +33,16 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
+
+        <a href="<?php echo route("admin.tags.show"); ?>" class="btn btn-primary btn-labeled btn-main">
+            <i class="fa fa-bars"></i>
+            <?php echo trans("tags::tags.back_to_tags") ?>
+        </a>
+
         <?php if ($tag) { ?>
             <a href="<?php echo route("admin.tags.create"); ?>" class="btn btn-primary btn-labeled btn-main pull-right"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("tags::tags.add_new") ?></a>
         <?php } ?>
-        <a href="<?php echo route("admin.tags.show"); ?>" class="btn btn-primary btn-labeled btn-main pull-right">
-            <?php echo trans("tags::tags.back_to_tags") ?>
-            &nbsp;  <i class="fa fa-chevron-left"></i>
-        </a>
+
     </div>
 </div>
 @stop

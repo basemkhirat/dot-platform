@@ -17,6 +17,12 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
+
+        <a href="<?php echo route("admin.users.show"); ?>" class="btn btn-primary btn-labeled btn-main">
+            <i class="fa fa-bars"></i>
+            <?php echo trans("users::users.back_to_users") ?>
+        </a>
+
         <?php if (Gate::allows("users.create")) { ?>
             <a href="<?php echo route("admin.users.create"); ?>" class="btn btn-primary btn-labeled btn-main">
                 <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("users::users.add_new") ?>

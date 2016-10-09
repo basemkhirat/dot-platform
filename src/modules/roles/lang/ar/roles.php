@@ -22,6 +22,8 @@ return array(
     "of" => "من",
     "bulk_actions" => "اختر أمر",
 
+    "back_to_roles" => "العودة إلي الصلاحيات",
+
     "no_records" => "لا توجد صلاحيات",
     "role_created" => "تم إضافة الصلاحية بنجاح",
     "role_updated" => "تم تعديل الصلاحية بنجاح",

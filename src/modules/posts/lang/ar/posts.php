@@ -62,6 +62,9 @@ return [
     "custom_value" => "القيمة",
     "sure_delete_field" => "هل أنت متأكد من الحذف ؟",
 
+    "add_block" => "أضف إلي أماكن الأخبار",
+    "no_blocks" => "لا توجد أماكن للأخبار",
+
     'attributes' => [
         'title' => 'العنوان',
         'excerpt' => 'المقتطف',
@@ -73,6 +76,7 @@ return [
         'default' => 'إفتراضى',
         "format" => "نوع الخبر"
     ],
+
     "events" => [
         'created' => 'تم إضافة الخبر بنجاح',
         'updated' => 'تم تحديث الخبر بنجاح',

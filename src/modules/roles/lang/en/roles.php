@@ -22,6 +22,8 @@ return array(
 
     "no_records" => "No roles found",
 
+    "back_to_roles" => "Back to roles",
+
     "role_created" => "Role created successfully",
     "role_updated" => "Role updated successfully",
     "role_deleted" => "Role deleted successfully",

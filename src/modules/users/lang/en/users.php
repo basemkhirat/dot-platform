@@ -61,6 +61,7 @@ return [
     'activated' => 'Activated',
 
 
+    "back_to_users" => "Back to users",
 
     "color" => "Color",
     "color_green" => "Green",

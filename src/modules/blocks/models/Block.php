@@ -19,11 +19,13 @@ class Block extends Dot\Model
     ];
 
     protected $creatingRules = [
-        "name" => "required"
+        "name" => "required",
+        "limit" => "required|numeric"
     ];
 
     protected $updatingRules = [
-        "name" => "required"
+        "name" => "required",
+        "limit" => "required|numeric"
     ];
 
     function setValidation($v)
@@ -65,6 +67,10 @@ class Block extends Dot\Model
 
     public function categories() {
         return $this->belongsToMany("Category", "blocks_categories", "block_id", "category_id");
+    }
+
+    public function posts() {
+        return $this->belongsToMany("Post", "posts_blocks", "block_id", "post_id");
     }
 
     /**

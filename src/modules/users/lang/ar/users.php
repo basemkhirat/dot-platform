@@ -58,6 +58,7 @@ return [
     "color_green" => "أخضر",
     "color_blue" => "أزرق",
 
+    "back_to_users" => "العودة إلي الأعضاء",
     "no_records" => "لا يوجد أعضاء",
 
     "permissions" => [

@@ -5,7 +5,7 @@
         <h2>
             <i class="fa fa-file-text-o"></i>
             <?php
-            if ($page) {
+            if ($page->id) {
                 echo trans("pages::pages.edit");
             } else {
                 echo trans("pages::pages.add_new");
@@ -22,7 +22,7 @@
             <li class="active">
                 <strong>
                     <?php
-                    if ($page) {
+                    if ($page->id) {
                         echo trans("pages::pages.edit");
                     } else {
                         echo trans("pages::pages.add_new");
@@ -33,14 +33,16 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
-        <?php if ($page) { ?>
+
+        <a href="<?php echo route("admin.pages.show"); ?>" class="btn btn-primary btn-labeled btn-main">
+            <i class="fa fa-bars"></i>
+            <?php echo trans("pages::pages.back_to_pages") ?>
+        </a>
+
+        <?php if ($page->id) { ?>
             <a href="<?php echo route("admin.pages.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("pages::pages.add_new") ?></a>
-        <?php } else { ?>
-            <a href="<?php echo route("admin.pages.show"); ?>" class="btn btn-primary btn-labeled btn-main">
-                <?php echo trans("pages::pages.back_to_pages") ?>
-                &nbsp;  <i class="fa fa-chevron-left"></i>
-            </a>
         <?php } ?>
+
     </div>
 </div>
 @stop

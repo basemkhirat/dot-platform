@@ -20,10 +20,18 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 text-right">
-        <?php if (!Gate::allows("roles.create")) { ?>
-            <a href="<?php echo route("admin.roles.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
-                    class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("roles::roles.add_new") ?></a>
+
+        <a href="<?php echo route("admin.roles.show"); ?>" class="btn btn-primary btn-labeled btn-main">
+            <i class="fa fa-bars"></i>
+            <?php echo trans("roles::roles.back_to_roles") ?>
+        </a>
+
+        <?php if ($role) { ?>
+            <a href="<?php echo route("admin.roles.create"); ?>" class="btn btn-primary btn-labeled btn-main">
+                <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("roles::roles.add_new") ?>
+            </a>
         <?php } ?>
+
     </div>
 </div>
 @stop

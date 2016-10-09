@@ -96,6 +96,7 @@ class PostsController extends Dot\Controller
             $post->save();
             $post->syncTags(Request::get("tags", []));
             $post->categories()->sync(Request::get("categories", []));
+            $post->syncBlocks(Request::get("blocks", []));
 
             // saving meta
             $custom_fields = array_filter(array_combine(Request::get("custom_names", []), Request::get("custom_values", [])));
@@ -145,9 +146,9 @@ class PostsController extends Dot\Controller
             }
 
             $post->save();
-
-            $post->syncTags(Request::get("tags", []));
             $post->categories()->sync(Request::get("categories", []));
+            $post->syncTags(Request::get("tags", []));
+            $post->syncBlocks(Request::get("blocks", []));
 
             // saving meta
             PostMeta::where("post_id", $post->id)->delete();
@@ -186,6 +187,7 @@ class PostsController extends Dot\Controller
 
             $post->tags()->detach();
             $post->categories()->detach();
+            $post->blocks()->detach();
 
             $post->delete();
 

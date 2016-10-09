@@ -33,13 +33,16 @@
         </ol>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
+
+        <a href="<?php echo route("admin.blocks.show"); ?>" class="btn btn-primary btn-labeled btn-main">
+            <i class="fa fa-bars"></i>
+            <?php echo trans("blocks::blocks.back_to_blocks") ?>
+        </a>
+
         <?php if ($block) { ?>
             <a href="<?php echo route("admin.blocks.create"); ?>" class="btn btn-primary btn-labeled btn-main pull-right"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("blocks::blocks.add_new") ?></a>
         <?php } ?>
-        <a href="<?php echo route("admin.blocks.show"); ?>" class="btn btn-primary btn-labeled btn-main pull-right">
-            <?php echo trans("blocks::blocks.back_to_blocks") ?>
-            &nbsp;  <i class="fa fa-chevron-left"></i>
-        </a>
+
     </div>
 </div>
 @stop
@@ -68,7 +71,7 @@
 
                     <div class="form-group">
                         <label for="input-limit"><?php echo trans("blocks::blocks.attributes.limit") ?></label>
-                        <input name="limit" min="0" type="number" value="<?php echo @Request::old("limit", $block->limit); ?>" class="form-control" id="input-limit" placeholder="<?php echo trans("blocks::blocks.attributes.limit") ?>">
+                        <input name="limit" min="0" type="number" value="<?php echo @Request::old("limit", $block->limit, 0); ?>" class="form-control" id="input-limit" placeholder="<?php echo trans("blocks::blocks.attributes.limit") ?>">
                     </div>
 
 

@@ -13,9 +13,9 @@ class CreateBlocksPostsTable extends Migration
     public function up()
     {
 
-        Schema::create("blocks_posts", function ($table) {
-            $table->integer('block_id')->index();
+        Schema::create("posts_blocks", function ($table) {
             $table->integer('post_id')->index();
+            $table->integer('block_id')->index();
             $table->integer('order')->index();
         });
 
@@ -28,6 +28,6 @@ class CreateBlocksPostsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('blocks_posts');
+        Schema::drop('posts_blocks');
     }
 }

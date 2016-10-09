@@ -37,8 +37,8 @@
             <a href="<?php echo route("admin.groups.create"); ?>" class="btn btn-primary btn-labeled btn-main pull-right"> <span class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("groups::groups.add_new") ?></a>
         <?php } ?>
         <a href="<?php echo route("admin.groups.show"); ?>" class="btn btn-primary btn-labeled btn-main pull-right">
+            <i class="fa fa-bars"></i>
             <?php echo trans("groups::groups.back_to_groups") ?>
-            &nbsp;  <i class="fa fa-chevron-left"></i>
         </a>
     </div>
 </div>

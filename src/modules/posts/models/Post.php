@@ -73,7 +73,7 @@ class Post extends Dot\Model
 
     public function blocks()
     {
-        return $this->belongsToMany("Block", "blocks_posts", "post_id", "block_id");
+        return $this->belongsToMany("Block", "posts_blocks", "post_id", "block_id");
     }
 
     public function categories()
@@ -91,6 +91,36 @@ class Post extends Dot\Model
         }
 
         $this->tags()->sync($tag_ids);
+    }
+
+    function syncBlocks($blks){
+
+        $blocks = Block::with("posts")->get();
+
+        foreach ($blocks as $block) {
+
+            $post_ids = $block->posts->pluck("id");
+
+            if (!$post_ids->has($this->id)) {
+                $post_ids->prepend($this->id);
+            }
+
+            $post_ids = $post_ids->unique()->toArray();
+
+            $sync = [];
+
+            $i = 0;
+            foreach($post_ids as $post_id){
+                $sync[$post_id] = ['order' => $i];
+                $i++;
+            }
+
+            $block->posts()->sync($sync);
+
+        }
+
+        DB::table("posts_blocks")->where("post_id", $this->id)->whereNotIn("block_id", $blks)->delete();
+
     }
 
     /**
