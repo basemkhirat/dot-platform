@@ -47,9 +47,11 @@ class AuthApiController extends Dot\ApiController
 
             $user = User::where("username", $username)->first();
 
-            // update user API token
-            $user->api_token = $user->newApiToken();
-            $user->save();
+            if($username != "guest") {
+                // update user API token
+                $user->api_token = $user->newApiToken();
+                $user->save();
+            }
 
             return $this->response($user);
 
