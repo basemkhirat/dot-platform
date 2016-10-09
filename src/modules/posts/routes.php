@@ -24,7 +24,7 @@ Route::group([
     "prefix" => API,
     "middleware" => ["auth:api"]
 ], function ($route) {
-    $route->get("/posts/show/{id?}", "PostsApiController@show");
+    $route->get("/posts/show", "PostsApiController@show");
     $route->post("/posts/create", "PostsApiController@create");
     $route->post("/posts/update", "PostsApiController@update");
     $route->post("/posts/destroy", "PostsApiController@destroy");

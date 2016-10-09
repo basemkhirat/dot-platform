@@ -21,15 +21,18 @@ class CategoriesApiController extends Dot\ApiController
     /**
      * List categories
      * @param string $api_token (required) The access token.
-     * @param string $q (required) The search query string.
+     * @param int $id (optional) The object identifier.
+     * @param string $q (optional) The search query string.
      * @param int $limit (default: 10) The number of retrieved records.
      * @param int $page (default: 1) The page number.
      * @param string $order_by (default: id) The column you wish to sort by.
      * @param string $order_direction (default: DESC) The sort direction ASC or DESC.
      * @return \Illuminate\Http\JsonResponse
      */
-    function show(Request $request, $id = NULL)
+    function show(Request $request)
     {
+
+        $id = $request->get("id");
 
         $limit = $request->get("limit", 10);
         $sort_by = $request->get("sort_by", "id");
@@ -46,6 +49,7 @@ class CategoriesApiController extends Dot\ApiController
         } else {
             $categories = $query->paginate($limit)->appends($request->all());
         }
+
 
         return $this->response($categories);
 

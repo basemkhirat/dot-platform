@@ -35,10 +35,6 @@
                 </div>
                 <ul id="navigation">
 
-                    <?php /*
-                    <li><a href="#introduction">Introduction</a></li>
-                    */ ?>
-
 
                     <li>
                         <a href="#AuthApi">AuthApi</a>
@@ -169,93 +165,6 @@
 
             <div class="column-content">
 
-                <?php /* ?>
-                <a href="#" class="waypoint" name="introduction"></a>
-                <h1>Introduction</h1>
-                <p>This RESTful JSON API uses HTTP GET, POST, PUT, DELETE Requests to communicate with the System.</p>
-
-                <p>HTTP/1.1 Status Codes:</p>
-                <div>
-                    <ul class="three-col-special">
-                        <li>200  OK</li>
-                        <li>201  Created</li>
-                        <li>202  Accepted</li>
-                        <li>204  No Content</li>
-                        <li>301  Moved Permanently</li>
-                        <li>302  Found</li>
-                        <li>303  See Other</li>
-                        <li>304  Not Modified</li>
-                        <li>400  Bad Request</li>
-                        <li>401  Unauthorized</li>
-                        <li>402  Payment Required</li>
-                        <li>403  Forbidden</li>
-                        <li>404  Not Found</li>
-                        <li>405  Method Not Allowed</li>
-                        <li>406  Not Acceptable</li>
-                        <li>408  Request Time-out</li>
-                        <li>409  Conflict</li>
-                        <li>410  Gone</li>
-                        <li>411  Length Required</li>
-                        <li>412  Precondition Failed</li>
-                        <li>414  Request-URI Too Large</li>
-                        <li>415  Unsupported Media Type</li>
-                        <li>416  Requested range not satisfiable</li>
-                        <li>500  Internal Server Error</li>
-                        <li>501  Not Implemented</li>
-                        <li>502  Bad Gateway</li>
-                        <li>505  HTTP Version not supported</li>
-                    </ul>
-                </div>
-                </BR></BR></BR>
-                <p>JSON Errors (HTTP/1.1 STATUS CODES 4xx &amp; 5xx)</p>
-                        <pre class="prettyprint linenums">
-{
-  "success": false,
-  "error": {
-    "message": "The email field is required.",
-    "code": 400
-  }
-}
-                     </pre>
-
-                <p>Single Response (HTTP/1.1 STATUS CODES 2xx)</p>
-                       <pre class="prettyprint linenums">
-{
-    "success": true,
-    "data": {
-        "id": 1,
-    }
-}
-
-                       </pre>
-
-                <p>Collection Response (HTTP/1.1 STATUS CODES 2xx)</p>
-                    <pre class="prettyprint linenums">
-{
-  "success": true,
-  "items" : {
-    "per_page" : 15,
-    "from" : 1,
-    "data" : [
-      {
-        "id" : 1,
-      }
-    ],
-    "total" : 1,
-    "current_page" : 1,
-    "last_page" : 1,
-    "to" : 1
-  }
-}
-                    </pre>
-
-
-                <hr />
-
-
-
-  */ ?>
-
 
 
                 <a href="#" class="waypoint" name="AuthApi"></a>
@@ -368,7 +277,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/categories/show/{id?}</li>
+                        <li>api/categories/show</li>
                     </ul>
                 </div>
 
@@ -378,7 +287,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/categories/show/{id?}" type="GET">
+                <form class="api-explorer-form" uri="api/categories/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -397,9 +306,17 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>
@@ -634,7 +551,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/galleries/show/{id?}</li>
+                        <li>api/galleries/show</li>
                     </ul>
                 </div>
 
@@ -644,7 +561,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/galleries/show/{id?}" type="GET">
+                <form class="api-explorer-form" uri="api/galleries/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -663,6 +580,14 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">lang</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(default: user locale) The lang code.</div>
@@ -673,7 +598,7 @@
                             <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>
@@ -956,7 +881,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/media/show/{id?}</li>
+                        <li>api/media/show</li>
                     </ul>
                 </div>
 
@@ -966,7 +891,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/media/show/{id?}" type="GET">
+                <form class="api-explorer-form" uri="api/media/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -985,9 +910,17 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>
@@ -1262,7 +1195,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/options/show/{name?}</li>
+                        <li>api/options/show</li>
                     </ul>
                 </div>
 
@@ -1272,7 +1205,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/options/show/{name?}" type="GET">
+                <form class="api-explorer-form" uri="api/options/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -1291,9 +1224,17 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">name</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The option name.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="name">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>
@@ -1520,7 +1461,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/pages/show/{id?}</li>
+                        <li>api/pages/show</li>
                     </ul>
                 </div>
 
@@ -1530,7 +1471,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/pages/show/{id?}" type="GET">
+                <form class="api-explorer-form" uri="api/pages/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -1549,6 +1490,14 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">lang</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(default: user locale) The lang code.</div>
@@ -1559,7 +1508,7 @@
                             <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>
@@ -1922,7 +1871,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/posts/show/{id?}</li>
+                        <li>api/posts/show</li>
                     </ul>
                 </div>
 
@@ -1932,7 +1881,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/posts/show/{id?}" type="GET">
+                <form class="api-explorer-form" uri="api/posts/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -1951,6 +1900,14 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">lang</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(default: user locale) The lang code.</div>
@@ -1961,7 +1918,7 @@
                             <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>
@@ -2364,7 +2321,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/tags/show/{id?}</li>
+                        <li>api/tags/show</li>
                     </ul>
                 </div>
 
@@ -2374,7 +2331,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/tags/show/{id?}" type="GET">
+                <form class="api-explorer-form" uri="api/tags/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -2393,9 +2350,17 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>
@@ -2614,7 +2579,7 @@
                     <ul>
                         <li><h2>GET</h2></li>
                         <li><h3>show</h3></li>
-                        <li>api/users/show/{id?}</li>
+                        <li>api/users/show</li>
                     </ul>
                 </div>
 
@@ -2624,7 +2589,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/users/show/{id?}" type="GET">
+                <form class="api-explorer-form" uri="api/users/show" type="GET">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
@@ -2643,9 +2608,17 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">q</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The search query string.</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
                                 </div>

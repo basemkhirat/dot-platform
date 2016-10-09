@@ -21,16 +21,18 @@ class OptionsApiController extends Dot\ApiController
     /**
      * List posts
      * @param string $api_token (required) The access token.
-     * @param string $q (required) The search query string.
+     * @param string $name (optional) The option name.
+     * @param string $q (optional) The search query string.
      * @param int $limit (default: 10) The number of retrieved records.
      * @param int $page (default: 1) The page number.
      * @param string $order_by (default: id) The column you wish to sort by.
      * @param string $order_direction (default: DESC) The sort direction ASC or DESC.
      * @return \Illuminate\Http\JsonResponse
      */
-    function show(Request $request, $name = NULL)
+    function show(Request $request)
     {
 
+        $name = $request->get("name");
         $limit = $request->get("limit", 10);
         $sort_by = $request->get("sort_by", "id");
         $sort_direction = $request->get("sort_direction", "DESC");

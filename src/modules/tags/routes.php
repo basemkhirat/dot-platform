@@ -35,7 +35,7 @@ Route::group([
     "prefix" => API,
     "middleware" => ["auth:api"]
 ], function ($route) {
-    $route->get("/tags/show/{id?}", "TagsApiController@show");
+    $route->get("/tags/show", "TagsApiController@show");
     $route->post("/tags/create", "TagsApiController@create");
     $route->post("/tags/update", "TagsApiController@update");
     $route->post("/tags/destroy", "TagsApiController@destroy");

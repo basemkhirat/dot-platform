@@ -32,7 +32,7 @@ Route::group([
     "prefix" => API,
     "middleware" => ["auth:api"]
 ], function ($route) {
-        $route->get("/media/show/{id?}", "MediaApiController@show");
+        $route->get("/media/show", "MediaApiController@show");
         $route->post("/media/create/{type}", "MediaApiController@create");
         $route->post("/media/update", "MediaApiController@update");
         $route->post("/media/destroy", "MediaApiController@destroy");

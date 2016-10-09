@@ -24,7 +24,6 @@ class BlocksController extends Dot\Controller
             }
         }
 
-
         $this->data["sort"] = $sort = (Request::has("sort")) ? Request::get("sort") : "id";
         $this->data["order"] = $order = (Request::has("order")) ? Request::get("order") : "DESC";
         $this->data['per_page'] = (Request::has("per_page")) ? (int)Request::get("per_page") : 40;

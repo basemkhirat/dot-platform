@@ -21,8 +21,9 @@ class PostsApiController extends Dot\ApiController
     /**
      * List posts
      * @param string $api_token (required) The access token.
+     * @param int $id (optional) The object identifier.
      * @param string $lang (default: user locale) The lang code.
-     * @param string $q (required) The search query string.
+     * @param string $q (optional) The search query string.
      * @param array $with (optional) extra related post components [user, image, media, tags, categories].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param array $category_ids (optional) The list of categories ids.
@@ -33,9 +34,10 @@ class PostsApiController extends Dot\ApiController
      * @param string $order_direction (default: DESC) The sort direction ASC or DESC.
      * @return \Illuminate\Http\JsonResponse
      */
-    function show(Request $request, $id = NULL)
+    function show(Request $request)
     {
 
+        $id = $request->get("id");
         $limit = $request->get("limit", 10);
         $sort_by = $request->get("sort_by", "id");
         $sort_direction = $request->get("sort_direction", "DESC");

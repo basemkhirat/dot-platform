@@ -21,8 +21,9 @@ class PagesApiController extends Dot\ApiController
     /**
      * List pages
      * @param string $api_token (required) The access token.
+     * @param int $id (optional) The object identifier.
      * @param string $lang (default: user locale) The lang code.
-     * @param string $q (required) The search query string.
+     * @param string $q (optional) The search query string.
      * @param array $with (optional) extra related page components [user, image, media, tags].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param int $page (default: 1) The page number.
@@ -30,9 +31,10 @@ class PagesApiController extends Dot\ApiController
      * @param string $order_direction (default: DESC) The sort direction ASC or DESC.
      * @return \Illuminate\Http\JsonResponse
      */
-    function show(Request $request, $id = NULL)
+    function show(Request $request)
     {
 
+        $id = $request->get("id");
         $limit = $request->get("limit", 10);
         $sort_by = $request->get("sort_by", "id");
         $sort_direction = $request->get("sort_direction", "DESC");

@@ -22,7 +22,7 @@ Route::group([
     "prefix" => API,
     "middleware" => ["auth:api"]
 ], function ($route) {
-    $route->get("/categories/show/{id?}", "CategoriesApiController@show");
+    $route->get("/categories/show", "CategoriesApiController@show");
     $route->post("/categories/create", "CategoriesApiController@create");
     $route->post("/categories/update", "CategoriesApiController@update");
     $route->post("/categories/destroy", "CategoriesApiController@destroy");

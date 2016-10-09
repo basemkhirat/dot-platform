@@ -25,7 +25,7 @@ Route::group([
     "prefix" => API,
     "middleware" => ["auth:api"]
 ], function ($route) {
-    $route->get("/galleries/show/{id?}", "GalleriesApiController@show");
+    $route->get("/galleries/show", "GalleriesApiController@show");
     $route->post("/galleries/create", "GalleriesApiController@create");
     $route->post("/galleries/update", "GalleriesApiController@update");
     $route->post("/galleries/destroy", "GalleriesApiController@destroy");
