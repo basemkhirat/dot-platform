@@ -20,7 +20,6 @@ class MediaApiController extends Dot\ApiController
 
     /**
      * List media resources
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
      * @param int $limit (default: 10) The number of retrieved records.
@@ -55,7 +54,6 @@ class MediaApiController extends Dot\ApiController
 
     /**
      * Create a new media resource
-     * @param string $api_token (required) The access token.
      * @param string $source (required) The media source [data, url, youtube, soundcloud].
      * @param string $title (optional) The media title.
      * @param string $description (optional) The media description.
@@ -129,7 +127,6 @@ class MediaApiController extends Dot\ApiController
 
     /**
      * Update media resource by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The media resource id.
      * @param string $title (optional) The media title.
      * @param string $description (optional) The media description.
@@ -159,7 +156,6 @@ class MediaApiController extends Dot\ApiController
 
     /**
      * Delete media resource by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The media resource id.
      * @return \Illuminate\Http\JsonResponse
      */

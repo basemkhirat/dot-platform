@@ -30,6 +30,8 @@ class MakeUsersTable extends Migration
             $table->string('first_name')->nullable()->index();
             $table->string('last_name')->nullable()->index();
             $table->timestamps();
+            $table->string('provider')->nullable()->index();
+            $table->string('provider_id')->nullable()->index();
             $table->string('api_token', 60)->nullable()->unique();
             $table->string('code')->nullable()->index();
             $table->string('remember_token')->nullable()->index();

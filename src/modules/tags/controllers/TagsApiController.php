@@ -20,7 +20,6 @@ class TagsApiController extends Dot\ApiController
 
     /**
      * List tags
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
      * @param int $limit (default: 10) The number of retrieved records.
@@ -56,7 +55,6 @@ class TagsApiController extends Dot\ApiController
 
     /**
      * Create a new tag
-     * @param string $api_token (required) The access token.
      * @param string $name (required) The tag name.
      * @return \Illuminate\Http\JsonResponse
      */
@@ -84,7 +82,6 @@ class TagsApiController extends Dot\ApiController
 
     /**
      * Update tag by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The user id.
      * @param string $name (required) The tag name.
      * @return \Illuminate\Http\JsonResponse
@@ -113,7 +110,6 @@ class TagsApiController extends Dot\ApiController
 
     /**
      * Delete tag by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The tag id.
      * @return \Illuminate\Http\JsonResponse
      */

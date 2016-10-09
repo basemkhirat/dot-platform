@@ -20,7 +20,6 @@ class UsersApiController extends Dot\ApiController
 
     /**
      * List users
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
      * @param int $limit (default: 10) The number of retrieved records.
@@ -66,7 +65,6 @@ class UsersApiController extends Dot\ApiController
 
     /**
      * Create a new user
-     * @param string $api_token (required) The access token.
      * @param string $username (required) The user name.
      * @param string $password (required) The user password.
      * @param string $email (required) The user email.
@@ -109,6 +107,7 @@ class UsersApiController extends Dot\ApiController
         $user->photo_id = $request->get("photo_id", 0);
         $user->api_token = $user->newApiToken();
 
+
         // Validate and save requested user
         if (!$user->validate()) {
 
@@ -131,7 +130,6 @@ class UsersApiController extends Dot\ApiController
 
     /**
      * Update user by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The user id.
      * @param string $username (optional) The user name.
      * @param string $password (optional) The user password.
@@ -165,22 +163,39 @@ class UsersApiController extends Dot\ApiController
         }
 
         $user->username = $request->get("username", $user->username);
-        $user->password = $request->get("password", $user->password);
-        $user->repassword = $user->password;
+
+        if ($request->get("password")) {
+            $user->password = $request->get("password");
+            $user->repassword = $user->password;
+        }
+
         $user->first_name = $request->get("first_name", $user->first_name);
         $user->last_name = $request->get("last_name", $user->last_name);
         $user->email = $request->get("email", $user->email);
-        $user->backend = $request->get("backend", 0);
-        $user->status = $request->get("status", 1);
-        $user->lang = $request->get("lang", "ar");
-        $user->color = $request->get("color", "blue");
+        $user->backend = $request->get("backend", $user->backend);
+        $user->status = $request->get("status", $user->status);
+        $user->lang = $request->get("lang", $user->lang);
+        $user->role_id = $request->get("role_id", $user->role_id);
+        $user->color = $request->get("color", $user->color);
         $user->about = $request->get("about", $user->about);
         $user->facebook = $request->get("facebook", $user->facebook);
         $user->twitter = $request->get("twitter", $user->twitter);
         $user->linked_in = $request->get("linked_in", $user->linked_in);
         $user->google_plus = $request->get("google_plus", $user->google_plus);
-        $user->role_id = $request->get("role_id", 0);
-        $user->photo_id = $request->get("photo_id", 0);
+        $user->photo_id = $request->get("photo_id", $user->photo_id);
+
+        // Validate and save requested user
+        if (!$user->validate()) {
+
+            // Exception for repassword field
+            $validation_errors = $user->errors()->toArray();
+            if (isset($validation_errors["repassword"])) {
+                unset($validation_errors["repassword"]);
+            }
+            // return validation error
+            return $this->response($validation_errors, "validation error");
+
+        }
 
         if ($user->save()) {
             return $this->response($user);
@@ -191,7 +206,6 @@ class UsersApiController extends Dot\ApiController
 
     /**
      * Delete user by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The user id.
      * @return \Illuminate\Http\JsonResponse
      */

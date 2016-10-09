@@ -20,7 +20,6 @@ class PostsApiController extends Dot\ApiController
 
     /**
      * List posts
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $lang (default: user locale) The lang code.
      * @param string $q (optional) The search query string.
@@ -81,7 +80,6 @@ class PostsApiController extends Dot\ApiController
 
     /**
      * Create a new post
-     * @param string $api_token (required) The access token.
      * @param string $title (required) The post title.
      * @param string $content (optional) The post content.
      * @param string $excerpt (optional) The post excerpt.
@@ -140,7 +138,6 @@ class PostsApiController extends Dot\ApiController
 
     /**
      * Update post by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The user id.
      * @param string $title (optional) The post title.
      * @param string $content (optional) The post content.
@@ -196,7 +193,6 @@ class PostsApiController extends Dot\ApiController
 
     /**
      * Delete post by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The post id.
      * @return \Illuminate\Http\JsonResponse
      */

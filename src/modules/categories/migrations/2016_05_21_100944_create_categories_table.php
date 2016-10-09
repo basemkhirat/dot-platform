@@ -14,11 +14,11 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function ($table) {
             $table->increments('id');
-            $table->integer("parent")->index();
+            $table->integer("parent")->default(0)->index();
             $table->string("name")->index();
             $table->string("slug")->index();
-            $table->integer("image_id")->index();
-            $table->integer("user_id")->index();
+            $table->integer("image_id")->default(0)->index();
+            $table->integer("user_id")->default(0)->index();
             $table->string("lang")->index();
             $table->timestamps();
         });

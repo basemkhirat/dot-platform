@@ -67,7 +67,7 @@ class Category extends Dot\Model
      * @var array
      */
     protected $creatingRules = [
-        "name" => "required",
+        "name" => "required|unique:categories,name",
         "slug" => "unique:categories,slug"
     ];
 
@@ -75,7 +75,7 @@ class Category extends Dot\Model
      * @var array
      */
     protected $updatingRules = [
-        "name" => "required",
+        "name" => "required|unique:categories,name",
         "slug" => "required|unique:categories,slug,[id],id"
     ];
 
@@ -94,26 +94,6 @@ class Category extends Dot\Model
     function scopeParent($query, $parent = 0)
     {
         $query->where("categories.parent", $parent);
-    }
-
-    /**
-     * @param array $options
-     */
-    function save(array $options = array())
-    {
-        if (parent::save($options)) {
-            /*
-              // saving translations
-              $lang = Request::get("lang");
-              CategoryLang::where("lang", $lang)->where("category_id", $this->id)->delete();
-              CategoryLang::insert([
-              "category_id" => $this->id,
-              "lang" => $lang,
-              "name" => $this->attributes["name"],
-              ]);
-             *
-             */
-        }
     }
 
     /**

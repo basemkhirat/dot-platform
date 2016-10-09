@@ -20,7 +20,6 @@ class GalleriesApiController extends Dot\ApiController
 
     /**
      * List galleries
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $lang (default: user locale) The lang code.
      * @param string $q (optional) The search query string.
@@ -60,7 +59,6 @@ class GalleriesApiController extends Dot\ApiController
 
     /**
      * Create a new gallery
-     * @param string $api_token (required) The access token.
      * @param string $name (required) The gallery name.
      * @param string $slug (optional) The gallery slug.
      * @param string $author (optional) The gallery author name.
@@ -99,7 +97,6 @@ class GalleriesApiController extends Dot\ApiController
 
     /**
      * Update gallery by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The gallery id.
      * @param string $name (required) The gallery name.
      * @param string $slug (optional) The gallery slug.
@@ -137,7 +134,6 @@ class GalleriesApiController extends Dot\ApiController
 
     /**
      * Delete gallery by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The gallery id.
      * @return \Illuminate\Http\JsonResponse
      */

@@ -34,16 +34,17 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
 
     protected $table = 'users';
 
-    protected $guarded = array('id', "repassword", "permission");
+    protected $guarded = array('id', "permission");
 
     protected $hidden = array();
 
     function setUpdateValidation($v)
     {
 
-        $v->sometimes("password", "required|same:repassword", function ($input) {
+        /*$v->sometimes("password", "required|same:repassword", function ($input) {
             return $input->password != "";
-        });
+        });*/
+
 
         $v->sometimes("repassword", "required", function ($input) {
             return $input->password != "";

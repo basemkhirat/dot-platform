@@ -20,7 +20,6 @@ class PagesApiController extends Dot\ApiController
 
     /**
      * List pages
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $lang (default: user locale) The lang code.
      * @param string $q (optional) The search query string.
@@ -60,7 +59,6 @@ class PagesApiController extends Dot\ApiController
 
     /**
      * Create a new page
-     * @param string $api_token (required) The access token.
      * @param string $title (required) The page title.
      * @param string $content (optional) The page content.
      * @param string $excerpt (optional) The page excerpt.
@@ -114,7 +112,6 @@ class PagesApiController extends Dot\ApiController
 
     /**
      * Update page by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The user id.
      * @param string $title (optional) The page title.
      * @param string $content (optional) The page content.
@@ -160,7 +157,6 @@ class PagesApiController extends Dot\ApiController
 
     /**
      * Delete page by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The page id.
      * @return \Illuminate\Http\JsonResponse
      */

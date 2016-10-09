@@ -48,7 +48,7 @@ class Tag extends Dot\Model
      * @var array
      */
     protected $updatingRules = [
-        "name" => "required|unique:tags"
+        "name" => "required|unique:tags,name"
     ];
 
     /**

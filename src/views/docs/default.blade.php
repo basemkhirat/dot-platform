@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,14 +17,22 @@
     <link rel="stylesheet" href="<?php echo assets("admin::docs"); ?>/css/prettify.css">
     <link rel="stylesheet" href="<?php echo assets("admin::docs"); ?>/css/f2m2-grid.css">
 
+    <script>
+        baseURL = "/";
+    </script>
+    <?php /*
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="//code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+    */ ?>
+    <script src="<?php echo assets("admin::js/app.js"); ?>"></script>
+    <script>
+        $.ajaxSetup({headers: {'Authorization': 'Bearer <?php echo $user->api_token; ?>'}});
+    </script>
     <script src="<?php echo assets("admin::docs"); ?>/js/prettify.js"></script>
     <script src="<?php echo assets("admin::docs"); ?>/js/waypoints.min.js"></script>
     <script src="<?php echo assets("admin::docs"); ?>/js/highlight.js"></script>
     <script src="<?php echo assets("admin::docs"); ?>/js/main.js"></script>
-
 </head>
 <body>
 
@@ -29,11 +41,13 @@
         <div class="col-3" id="sidebar">
             <div class="column-content">
                 <div class="search-header">
-                    <img src="/admin/images/dot.png" class="logo" alt="Logo" />
-
+                    <img src="/admin/images/dot.png" class="logo" alt="Logo"/>
                     <input id="search" type="text" placeholder="Search">
                 </div>
                 <ul id="navigation">
+
+                    <li><a href="#introduction">Introduction</a></li>
+
 
 
                     <li>
@@ -164,6 +178,10 @@
         <div class="col-9" id="main-content">
 
             <div class="column-content">
+
+                @include('admin::docs.introduction')
+
+                <hr />
 
 
 
@@ -298,14 +316,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(optional) The object identifier.</div>
@@ -389,14 +399,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">name</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(required) The category name.</div>
@@ -446,14 +448,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -515,14 +509,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The category id.</div>
@@ -570,14 +556,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -679,14 +657,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">name</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(required) The gallery name.</div>
@@ -760,14 +730,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -845,14 +807,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The gallery id.</div>
@@ -900,14 +854,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -991,14 +937,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">source</div>
@@ -1092,14 +1030,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The media resource id.</div>
@@ -1159,14 +1089,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The media resource id.</div>
@@ -1214,14 +1136,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">name</div>
@@ -1307,14 +1221,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">name</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(required) The option name.</div>
@@ -1364,14 +1270,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">name</div>
@@ -1425,14 +1323,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">name</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The option name.</div>
@@ -1480,14 +1370,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -1587,14 +1469,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">title</div>
@@ -1712,14 +1586,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The user id.</div>
@@ -1835,14 +1701,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The page id.</div>
@@ -1890,14 +1748,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -2023,14 +1873,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">title</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(required) The post title.</div>
@@ -2152,14 +1994,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -2285,14 +2119,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The post id.</div>
@@ -2340,14 +2166,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -2433,14 +2251,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">name</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(required) The tag name.</div>
@@ -2482,14 +2292,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -2543,14 +2345,6 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
-                            </li>
-                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The tag id.</div>
@@ -2598,14 +2392,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -2689,14 +2475,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">username</div>
@@ -2860,14 +2638,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -3039,14 +2809,6 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
-                            </li>
-                            <li>
-                                <div class="parameter-name">api_token</div>
-                                <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required) The access token.</div>
-                                <div class="parameter-value">
-                                    <input type="text" class="parameter-value-text" name="api_token">
-                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>

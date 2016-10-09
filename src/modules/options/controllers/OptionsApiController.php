@@ -20,7 +20,6 @@ class OptionsApiController extends Dot\ApiController
 
     /**
      * List posts
-     * @param string $api_token (required) The access token.
      * @param string $name (optional) The option name.
      * @param string $q (optional) The search query string.
      * @param int $limit (default: 10) The number of retrieved records.
@@ -57,7 +56,6 @@ class OptionsApiController extends Dot\ApiController
 
     /**
      * Create a new option
-     * @param string $api_token (required) The access token.
      * @param string $name (required) The option name.
      * @param string $value (required) The post value.
      * @return \Illuminate\Http\JsonResponse
@@ -83,7 +81,6 @@ class OptionsApiController extends Dot\ApiController
 
     /**
      * Update an option
-     * @param string $api_token (required) The access token.
      * @param string $name (required) The option name.
      * @param string $value (optional) The option value.
      * @return \Illuminate\Http\JsonResponse
@@ -115,7 +112,6 @@ class OptionsApiController extends Dot\ApiController
 
     /**
      * Delete post by id
-     * @param string $api_token (required) The access token.
      * @param int $name (required) The option name.
      * @return \Illuminate\Http\JsonResponse
      */
