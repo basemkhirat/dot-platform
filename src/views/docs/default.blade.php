@@ -16,16 +16,9 @@
     <link rel="stylesheet" href="<?php echo assets("admin::docs"); ?>/css/main.css">
     <link rel="stylesheet" href="<?php echo assets("admin::docs"); ?>/css/prettify.css">
     <link rel="stylesheet" href="<?php echo assets("admin::docs"); ?>/css/f2m2-grid.css">
-
-    <script>
-        baseURL = "/";
-    </script>
-    <?php /*
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="//code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
-    */ ?>
-    <script src="<?php echo assets("admin::js/app.js"); ?>"></script>
     <script>
         $.ajaxSetup({headers: {'Authorization': 'Bearer <?php echo $user->api_token; ?>'}});
     </script>
