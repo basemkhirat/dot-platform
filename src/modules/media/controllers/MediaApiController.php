@@ -63,8 +63,10 @@ class MediaApiController extends Dot\ApiController
      * @param string $soundcloud_url (required if source=soundcloud) The soundcloud video url.
      * @return \Illuminate\Http\JsonResponse
      */
-    function create($source = NULL, Request $request)
+    function create(Request $request)
     {
+
+        $source = $request->get("source");
 
         if (!$source || !in_array($source, ["data", "url", "youtube", "soundcloud"])) {
             return $this->error("Missing media source. select source within [data, url, youtube, soundcloud]");

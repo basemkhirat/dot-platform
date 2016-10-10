@@ -435,7 +435,7 @@ class Media extends Dot\Model
     {
 
         if ($content = @file_get_contents($link)) {
-            return $this->saveData($content);
+            return $this->saveData($content, NULL, $guard);
         }
 
     }

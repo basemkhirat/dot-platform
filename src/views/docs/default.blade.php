@@ -44,6 +44,12 @@
 
 
                     <li>
+                        <a href="#Closure">Closure</a>
+                        <ul></ul>
+                    </li>
+
+
+                    <li>
                         <a href="#AuthApi">AuthApi</a>
                         <ul>
                             <li><a href="#AuthApi_access">access</a></li>
@@ -175,6 +181,12 @@
                 @include('admin::docs.introduction')
 
                 <hr />
+
+
+
+                <a href="#" class="waypoint" name="Closure"></a>
+                <h2>Closure</h2>
+                <p></p>
 
 
 
@@ -911,7 +923,7 @@
                     <ul>
                         <li><h2>POST</h2></li>
                         <li><h3>create</h3></li>
-                        <li>api/media/create/{type}</li>
+                        <li>api/media/create</li>
                     </ul>
                 </div>
 
@@ -921,7 +933,7 @@
                 <!--  <div class="parameter-header">
                       <p class="endpoint-long-desc"></p>
                  </div> -->
-                <form class="api-explorer-form" uri="api/media/create/{type}" type="POST">
+                <form class="api-explorer-form" uri="api/media/create" type="POST">
                     <div class="endpoint-paramenters">
                         <h4>Parameters</h4>
                         <ul>
