@@ -41,14 +41,6 @@
 
                     <li><a href="#introduction">Introduction</a></li>
 
-
-
-                    <li>
-                        <a href="#Closure">Closure</a>
-                        <ul></ul>
-                    </li>
-
-
                     <li>
                         <a href="#AuthApi">AuthApi</a>
                         <ul>
@@ -181,13 +173,6 @@
                 @include('admin::docs.introduction')
 
                 <hr />
-
-
-
-                <a href="#" class="waypoint" name="Closure"></a>
-                <h2>Closure</h2>
-                <p></p>
-
 
 
                 <a href="#" class="waypoint" name="AuthApi"></a>
