@@ -70,8 +70,12 @@ class UsersApiController extends Dot\ApiController
      * @param string $email (required) The user email.
      * @param string $first_name (required) The user first name.
      * @param string $last_name (optional) The user last name.
+     * @param string $provider (optional) The Auth provider.
+     * @param string $provider_id (optional) The Auth provider id.
      * @param int $role_id (default:0) The user role id.
      * @param int $photo_id (default:0) The user photo id.
+     * @param int $photo_data (default:0) The user base64 photo data.
+     * @param int $photo_url (default:0) The user photo external url.
      * @param bool $status (default:0) The user status.
      * @param bool $backend (default:0) The user backend access status.
      * @param string $lang (default:'en') The user default lang.
@@ -94,6 +98,8 @@ class UsersApiController extends Dot\ApiController
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
+        $user->provider = $request->provider;
+        $user->provider_id = $request->provider_id;
         $user->status = $request->get("status", 1);
         $user->backend = $request->get("backend", 0);
         $user->lang = $request->get("lang", "ar");
@@ -107,6 +113,17 @@ class UsersApiController extends Dot\ApiController
         $user->photo_id = $request->get("photo_id", 0);
         $user->api_token = $user->newApiToken();
 
+        if($request->has("photo_data")) {
+            $media = new Media();
+            $media = $media->saveContent($request->get("photo_data"), NULL, "api");
+            $user->photo_id = $media->id;
+        }
+
+        if($request->has("photo_url")) {
+            $media = new Media();
+            $media = $media->saveLink($request->get("photo_url"), "api");
+            $user->photo_id = $media->id;
+        }
 
         // Validate and save requested user
         if (!$user->validate()) {
@@ -138,6 +155,8 @@ class UsersApiController extends Dot\ApiController
      * @param string $last_name (optional) The user last name.
      * @param int $role_id (default:0) The user role id.
      * @param int $photo_id (default:0) The user photo id.
+     * @param int $photo_data (default:0) The user base64 photo data.
+     * @param int $photo_url (default:0) The user photo external url.
      * @param bool $status (default:0) The user status.
      * @param bool $backend (default:0) The user backend access status.
      * @param string $lang (default:'en') The user default lang.
@@ -172,6 +191,8 @@ class UsersApiController extends Dot\ApiController
         $user->first_name = $request->get("first_name", $user->first_name);
         $user->last_name = $request->get("last_name", $user->last_name);
         $user->email = $request->get("email", $user->email);
+        $user->provider = $request->get("provider", $request->provider);
+        $user->provider_id = $request->get("provider_id", $request->provider_id);
         $user->backend = $request->get("backend", $user->backend);
         $user->status = $request->get("status", $user->status);
         $user->lang = $request->get("lang", $user->lang);
@@ -183,6 +204,18 @@ class UsersApiController extends Dot\ApiController
         $user->linked_in = $request->get("linked_in", $user->linked_in);
         $user->google_plus = $request->get("google_plus", $user->google_plus);
         $user->photo_id = $request->get("photo_id", $user->photo_id);
+
+        if($request->has("photo_data")) {
+            $media = new Media();
+            $media = $media->saveContent($request->get("photo_data"), NULL, "api");
+            $user->photo_id = $media->id;
+        }
+
+        if($request->has("photo_url")) {
+            $media = new Media();
+            $media = $media->saveLink($request->get("photo_url"), "api");
+            $user->photo_id = $media->id;
+        }
 
         // Validate and save requested user
         if (!$user->validate()) {
