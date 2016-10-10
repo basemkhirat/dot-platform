@@ -74,8 +74,8 @@ class UsersApiController extends Dot\ApiController
      * @param string $provider_id (optional) The Auth provider id.
      * @param int $role_id (default:0) The user role id.
      * @param int $photo_id (default:0) The user photo id.
-     * @param int $photo_data (default:0) The user base64 photo data.
-     * @param int $photo_url (default:0) The user photo external url.
+     * @param int $photo_data (optional) The user base64 photo data.
+     * @param int $photo_url (optional) The user photo external url.
      * @param bool $status (default:0) The user status.
      * @param bool $backend (default:0) The user backend access status.
      * @param string $lang (default:'en') The user default lang.
@@ -155,8 +155,8 @@ class UsersApiController extends Dot\ApiController
      * @param string $last_name (optional) The user last name.
      * @param int $role_id (default:0) The user role id.
      * @param int $photo_id (default:0) The user photo id.
-     * @param int $photo_data (default:0) The user base64 photo data.
-     * @param int $photo_url (default:0) The user photo external url.
+     * @param int $photo_data (optional) The user base64 photo data.
+     * @param int $photo_url (optional) The user photo external url.
      * @param bool $status (default:0) The user status.
      * @param bool $backend (default:0) The user backend access status.
      * @param string $lang (default:'en') The user default lang.

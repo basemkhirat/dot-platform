@@ -174,7 +174,6 @@
 
                 <hr />
 
-
                 <a href="#" class="waypoint" name="AuthApi"></a>
                 <h2>AuthApi</h2>
                 <p>Class AuthApiController</p>
@@ -306,6 +305,14 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
+                                <div class="parameter-name">api_token</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(required) The access token.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="api_token">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(optional) The object identifier.</div>
@@ -389,6 +396,14 @@
                                 <div class="parameter-value">VALUE</div>
                             </li>
                             <li>
+                                <div class="parameter-name">api_token</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(required) The access token.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="api_token">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">name</div>
                                 <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(required) The category name.</div>
@@ -438,6 +453,14 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">api_token</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(required) The access token.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="api_token">
+                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -497,6 +520,14 @@
                                 <div class="parameter-type">TYPE</div>
                                 <div class="parameter-desc">DESCRIPTION</div>
                                 <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">api_token</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(required) The access token.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="api_token">
+                                </div>
                             </li>
                             <li>
                                 <div class="parameter-name">id</div>
@@ -2507,6 +2538,22 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">provider</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The Auth provider.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="provider">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">provider_id</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The Auth provider id.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="provider_id">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">role_id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(default:0) The user role id.</div>
@@ -2520,6 +2567,22 @@
                                 <div class="parameter-desc">(default:0) The user photo id.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="photo_id">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">photo_data</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The user base64 photo data.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="photo_data">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">photo_url</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The user photo external url.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="photo_url">
                                 </div>
                             </li>
                             <li>
@@ -2694,6 +2757,22 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">photo_data</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The user base64 photo data.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="photo_data">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">photo_url</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The user photo external url.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="photo_url">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">status</div>
                                 <div class="parameter-type">bool</div>
                                 <div class="parameter-desc">(default:0) The user status.</div>
@@ -2823,7 +2902,3 @@
         </div>
     </div>
 </div>
-
-
-</body>
-</html>
