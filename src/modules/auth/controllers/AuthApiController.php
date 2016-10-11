@@ -53,6 +53,8 @@ class AuthApiController extends Dot\ApiController
                 $user->save();
             }
 
+            $user->load("photo");
+
             return $this->response($user);
 
         }

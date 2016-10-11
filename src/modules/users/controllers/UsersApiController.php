@@ -22,6 +22,7 @@ class UsersApiController extends Dot\ApiController
      * List users
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
+     * @param array $with (optional) extra related user components [photo].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param int $page (default: 1) The page number.
      * @param string $order_by (default: id) The column you wish to sort by.
@@ -36,7 +37,9 @@ class UsersApiController extends Dot\ApiController
         $sort_by = $request->get("sort_by", "id");
         $sort_direction = $request->get("sort_direction", "DESC");
 
-        $query = User::orderBy($sort_by, $sort_direction);
+        $components = $request->get("with", []);
+
+        $query = User::with($components)->orderBy($sort_by, $sort_direction);
 
         if ($request->has("q")) {
             $query->search($request->get("q"));

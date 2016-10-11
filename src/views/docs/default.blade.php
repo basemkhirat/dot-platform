@@ -35,6 +35,8 @@
             <div class="column-content">
                 <div class="search-header">
                     <img src="/admin/images/dot.png" class="logo" alt="Logo"/>
+
+
                     <input id="search" type="text" placeholder="Search">
                 </div>
                 <ul id="navigation">
@@ -986,7 +988,7 @@
                             <li>
                                 <div class="parameter-name">data</div>
                                 <div class="parameter-type">string</div>
-                                <div class="parameter-desc">(required if source=data) The Raw/base64 file content.</div>
+                                <div class="parameter-desc">(required if source=data) The base64 file content.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="data">
                                 </div>
@@ -2431,6 +2433,14 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="parameter-name">with[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(optional) extra related user components [photo].</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="with[]">
+                                </div>
+                            </li>
+                            <li>
                                 <div class="parameter-name">limit</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(default: 10) The number of retrieved records.</div>
@@ -2902,3 +2912,7 @@
         </div>
     </div>
 </div>
+
+
+</body>
+</html>
