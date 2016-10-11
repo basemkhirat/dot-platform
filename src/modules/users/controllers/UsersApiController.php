@@ -98,7 +98,7 @@ class UsersApiController extends Dot\ApiController
 
         if ($request->has("provider") and $request->has("provider_id")) {
 
-            $user = User::with("image")
+            $user = User::with("photo")
                 ->where("provider", $request->get("provider"))
                 ->where("provider_id", $request->get("provider_id"))
                 ->first();
