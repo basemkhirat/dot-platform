@@ -441,7 +441,7 @@ class Media extends Dot\Model
     }
 
     /**
-     * Saving raw/base64 data filesystem
+     * Saving base64 data filesystem
      * @param $content
      * @param null $extension
      * @param string $guard
@@ -449,13 +449,8 @@ class Media extends Dot\Model
      */
     function saveContent($content, $extension = NULL, $guard = "web")
     {
-
-        if ($this->isBase64($content)) {
-            $content = base64_decode($content);
-        }
-
+        $content = base64_decode($content);
         return $this->saveData($content, $extension, $guard);
-
     }
 
     /**
@@ -499,7 +494,6 @@ class Media extends Dot\Model
             $mime = strtolower(mime_content_type($path));
 
             if (!$extension) {
-
                 $extension = get_extension($mime);
             }
 

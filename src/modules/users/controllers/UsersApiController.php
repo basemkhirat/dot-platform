@@ -90,6 +90,23 @@ class UsersApiController extends Dot\ApiController
     function create(Request $request)
     {
 
+        /*
+            check if social user
+        */
+
+        if ($request->has("provider") and $request->has("provider_id")) {
+
+            $user = User::with("image")
+                ->where("provider", $request->get("provider"))
+                ->where("provider_id", $request->get("provider_id"))
+                ->first();
+
+            if(count($user)) {
+                return $this->response($user);
+            }
+
+        }
+
         $user = new User();
 
         $user->username = $request->username;
@@ -113,13 +130,13 @@ class UsersApiController extends Dot\ApiController
         $user->photo_id = $request->get("photo_id", 0);
         $user->api_token = $user->newApiToken();
 
-        if($request->has("photo_data")) {
+        if ($request->has("photo_data")) {
             $media = new Media();
             $media = $media->saveContent($request->get("photo_data"), NULL, "api");
             $user->photo_id = $media->id;
         }
 
-        if($request->has("photo_url")) {
+        if ($request->has("photo_url")) {
             $media = new Media();
             $media = $media->saveLink($request->get("photo_url"), "api");
             $user->photo_id = $media->id;
@@ -139,6 +156,7 @@ class UsersApiController extends Dot\ApiController
         }
 
         if ($user->save()) {
+            $user->load("photo");
             return $this->response($user);
         }
 
@@ -205,13 +223,13 @@ class UsersApiController extends Dot\ApiController
         $user->google_plus = $request->get("google_plus", $user->google_plus);
         $user->photo_id = $request->get("photo_id", $user->photo_id);
 
-        if($request->has("photo_data")) {
+        if ($request->has("photo_data")) {
             $media = new Media();
             $media = $media->saveContent($request->get("photo_data"), NULL, "api");
             $user->photo_id = $media->id;
         }
 
-        if($request->has("photo_url")) {
+        if ($request->has("photo_url")) {
             $media = new Media();
             $media = $media->saveLink($request->get("photo_url"), "api");
             $user->photo_id = $media->id;
@@ -231,6 +249,7 @@ class UsersApiController extends Dot\ApiController
         }
 
         if ($user->save()) {
+            $user->load("photo");
             return $this->response($user);
         }
 

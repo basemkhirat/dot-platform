@@ -57,7 +57,7 @@ class MediaApiController extends Dot\ApiController
      * @param string $source (required) The media source [data, url, youtube, soundcloud].
      * @param string $title (optional) The media title.
      * @param string $description (optional) The media description.
-     * @param string $data (required if source=data) The Raw/base64 file content.
+     * @param string $data (required if source=data) The base64 file content.
      * @param string $url (required if source=url) The external file url.
      * @param string $youtube_url (required if source=youtube) The youtube video url.
      * @param string $soundcloud_url (required if source=soundcloud) The soundcloud video url.
@@ -80,7 +80,6 @@ class MediaApiController extends Dot\ApiController
                 if (!$request->has("data")) {
                     return $this->error("Missing media data");
                 }
-
 
                 $media = $media->saveContent($request->get("data"), NULL, "api");
 
