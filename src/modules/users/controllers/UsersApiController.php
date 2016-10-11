@@ -38,7 +38,6 @@ class UsersApiController extends Dot\ApiController
         $sort_direction = $request->get("sort_direction", "DESC");
 
         $components = array_filter($request->get("with", []));
-
         $query = User::with($components)->orderBy($sort_by, $sort_direction);
 
         if ($request->has("q")) {
