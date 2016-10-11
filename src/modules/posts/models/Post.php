@@ -2,32 +2,66 @@
 
 use Carbon\Carbon;
 
+/**
+ * Class Post
+ */
 class Post extends Dot\Model
 {
 
+    /**
+     * @var string
+     */
     protected $module = 'posts';
 
+    /**
+     * @var string
+     */
     protected $table = 'posts';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
+    /**
+     * @var bool
+     */
     public $timestamps = true;
 
+    /**
+     * @var array
+     */
     protected $searchable = ['title', 'excerpt', 'content'];
 
+    /**
+     * @var int
+     */
     protected $perPage = 20;
 
+    /**
+     * @var array
+     */
     protected $sluggable = [
         'slug' => 'title',
     ];
 
+    /**
+     * @var array
+     */
     protected $creatingRules = [
         'title' => 'required'
     ];
 
+    /**
+     * @var array
+     */
     protected $updatingRules = [
         'title' => 'required'
     ];
 
 
+    /**
+     * @param $query
+     * @param $status
+     */
     public function scopeStatus($query, $status)
     {
         switch ($status) {
@@ -41,46 +75,75 @@ class Post extends Dot\Model
         }
     }
 
+    /**
+     * @param $query
+     * @param $format
+     */
     public function scopeFormat($query, $format)
     {
         $query->where("format", $format);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function meta()
     {
         return $this->hasMany("PostMeta");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function image()
     {
         return $this->hasOne("Media", "id", "image_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function media()
     {
         return $this->hasOne("Media", "id", "media_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function user()
     {
         return $this->hasOne("User", "id", "user_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function tags()
     {
         return $this->belongsToMany("Tag", "posts_tags", "post_id", "tag_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function blocks()
     {
         return $this->belongsToMany("Block", "posts_blocks", "post_id", "block_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany("Category", "posts_categories", "post_id", "category_id");
     }
 
+    /**
+     * Sync tags
+     * @param $tags
+     */
     public function syncTags($tags)
     {
         $tag_ids = array();
@@ -93,33 +156,27 @@ class Post extends Dot\Model
         $this->tags()->sync($tag_ids);
     }
 
-    function syncBlocks($blks){
+    /**
+     * Sync blocks
+     * @param $blks
+     */
+    function syncBlocks($blks)
+    {
 
-        $blocks = Block::with("posts")->get();
+        $new_blocks = collect($blks);
+        $old_blocks = $this->blocks->pluck("id");
 
-        foreach ($blocks as $block) {
+        $added = $new_blocks->diff($old_blocks)->toArray();
 
-            $post_ids = $block->posts->pluck("id");
-
-            if (!$post_ids->has($this->id)) {
-                $post_ids->prepend($this->id);
-            }
-
-            $post_ids = $post_ids->unique()->toArray();
-
-            $sync = [];
-
-            $i = 0;
-            foreach($post_ids as $post_id){
-                $sync[$post_id] = ['order' => $i];
-                $i++;
-            }
-
-            $block->posts()->sync($sync);
-
+        foreach (Block::whereIn("id", $added)->get() as $block) {
+            $block->addPost($this);
         }
 
-        DB::table("posts_blocks")->where("post_id", $this->id)->whereNotIn("block_id", $blks)->delete();
+        $removed = $old_blocks->diff($new_blocks)->toArray();
+
+        foreach (Block::whereIn("id", $removed)->get() as $block) {
+            $block->removePost($this);
+        }
 
     }
 

@@ -17,10 +17,10 @@ class CreateGalleriesTable extends Migration
             $table->increments('id');
             $table->string("name")->index();
             $table->string("slug")->index();
-            $table->string("author")->index();
+            $table->string("author")->nullable()->index();
             $table->string("lang")->index();
             $table->timestamps();
-            $table->integer("user_id")->index();
+            $table->integer("user_id")->default(0)->index();
 
         });
 

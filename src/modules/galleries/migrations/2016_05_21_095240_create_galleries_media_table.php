@@ -16,7 +16,7 @@ class CreateGalleriesMediaTable extends Migration
 
             $table->integer("gallery_id")->index();
             $table->integer("media_id")->index();
-            $table->integer("order")->index();
+            $table->integer("order")->default(0)->index();
 
         });
     }
