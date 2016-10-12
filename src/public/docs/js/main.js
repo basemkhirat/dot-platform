@@ -84,6 +84,7 @@ $(function(){
 
 		var url = api_base_url + uri;
 		var type = self.attr('type');
+
 		var data =	self.serialize().replace(/[^&]+=\.?(?:&|$)/g, '');
 
 	 	$.ajax({
