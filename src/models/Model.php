@@ -374,11 +374,10 @@ trait ModelTraits
      * @param array $options
      * @return string
      */
-    public
-    function scopeTree($query, $options = array())
+    public function scopeTree($query, $options = array())
     {
 
-        static $template = " ";
+        $template = " ";
         static $index = 0;
 
         if (!isset($options['table'])) {
@@ -401,6 +400,10 @@ trait ModelTraits
             $options['row'] = false;
         }
 
+        if (!isset($options['li'])) {
+            $options['li'] = false;
+        }
+
         if (!isset($options['query'])) {
             $options['query'] = false;
         }
@@ -411,6 +414,10 @@ trait ModelTraits
 
         if (!isset($options['count'])) {
             $options['count'] = 0;
+        }
+
+        if (!isset($options['ul'])) {
+            $options['ul'] = false;
         }
 
         $rows = DB::table($options['table']);
@@ -424,15 +431,35 @@ trait ModelTraits
         if (count($rows)) {
 
             $options['count']++;
+
             if ($options['count'] >= 2) {
-                $template .= "<ul>";
+                if ($options['ul']) {
+                    $template .= call_user_func($options['ul'], $options['count']);
+                } else {
+                    $template .= "<ul>";
+                }
             }
+
             foreach ($rows as $row) {
+
                 $index++;
 
+                /* deprecated */
                 if ($options['row']) {
 
                     $list_row = call_user_func($options['row'], $row, $options['count']);
+
+                    if (isset($options['callback'])) {
+                        $list_row = call_user_func($options['callback'], $row, $list_row);
+                    }
+
+                    $template .= $list_row;
+                }
+
+                /* new */
+                if ($options['li']) {
+
+                    $list_row = call_user_func($options['li'], $row, $options['count']);
 
                     if (isset($options['callback'])) {
                         $list_row = call_user_func($options['callback'], $row, $list_row);
@@ -456,7 +483,6 @@ trait ModelTraits
         } else {
             $options['count']--;
         }
-
 
         return $template;
     }

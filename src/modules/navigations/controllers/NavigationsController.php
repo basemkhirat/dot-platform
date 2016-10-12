@@ -173,6 +173,7 @@ class NavigationsController extends Dot\Controller
                 $nav = new Nav();
 
                 $nav->name = $item->name;
+                $nav->link = $item->link;
                 $nav->type = $item->type;
                 $nav->type_id = $item->type_id;
                 $nav->parent = 0;

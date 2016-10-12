@@ -319,7 +319,7 @@
 
                                         <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-link"></i></span>
-                                            <input type="url" required autocomplete="off" name="link" value=""
+                                            <input type="text" required autocomplete="off" name="link" value=""
                                                    class="form-control input-lg forign-box"
                                                    placeholder="http://example.com"/>
                                         </div>

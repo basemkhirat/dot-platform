@@ -43,6 +43,7 @@ class Nav extends Dot\Model
 
                 $nav = new self();
                 $nav->name = $item->name;
+                $nav->link = $item->link;
                 $nav->type = $item->type;
                 $nav->type_id = $item->type_id;
                 $nav->parent = $this->id;
@@ -63,6 +64,10 @@ class Nav extends Dot\Model
         }
     }
 
+    public function items()
+    {
+        return $this->hasMany(\App\Models\Nav::class, 'menu');
+    }
 
     /**
      * The "booting" method of the model.
