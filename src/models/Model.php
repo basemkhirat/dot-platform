@@ -377,7 +377,7 @@ trait ModelTraits
     public function scopeTree($query, $options = array())
     {
 
-        $template = " ";
+        static $template = " ";
         static $index = 0;
 
         if (!isset($options['table'])) {
