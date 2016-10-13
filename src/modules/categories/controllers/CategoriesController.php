@@ -46,6 +46,7 @@ class CategoriesController extends Dot\Controller {
             $category->image_id = Request::get('image_id');
             $category->parent = Request::get('parent');
             $category->user_id = Auth::user()->id;
+            $category->status = 1;
             $category->lang = LANG;
 
             // fire category saving action
@@ -77,6 +78,7 @@ class CategoriesController extends Dot\Controller {
             $category->slug = Request::get('slug');
             $category->image_id = Request::get('image_id');
             $category->parent = Request::get('parent');
+            $category->status = 1;
             $category->lang = LANG;
 
             // fire category saving action
