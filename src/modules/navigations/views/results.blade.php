@@ -28,9 +28,9 @@
             data-type_id="<?php echo $item->type_id ?>">
             <div class="dd-handle">
                 <i class="fa <?php echo $icon ?>"></i> &nbsp;
-                <a href="javascript:void(0)" class=" pull-right" remove-item"> <i class="fa fa-times"></i> </a>
                 <?php echo $item->name ?>
             </div>
+            <a href="javascript:void(0)" class="pull-right remove-item"> <i class="fa fa-times"></i> </a>
         </li>
 
     <?php } ?>
