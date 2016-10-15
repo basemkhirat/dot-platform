@@ -157,11 +157,7 @@ class GalleriesController extends Dot\Controller
 
         $limit = 20;
 
-        $ob = Gallery::select(array("media.*", "galleries.*", "name", DB::raw('(select COUNT(*) from galleries_media where galleries_media.gallery_id = galleries.id) as media_count')))
-            ->leftJoin("galleries_media", "galleries.id", "=", "galleries_media.gallery_id")
-            ->leftJoin("media", "media.id", "=", "galleries_media.media_id")
-            ->groupBy("galleries.id")
-            ->orderBy("galleries.id", "DESC");
+        $ob = Gallery::orderBy("id", "DESC");
 
         if (Request::has("q")) {
             $ob->where('name', 'LIKE', '%' . Request::get("q") . '%');
@@ -180,26 +176,6 @@ class GalleriesController extends Dot\Controller
             <?php foreach ($galleries as $gallery) { ?>
                 <div class="col-md-12 gallery_row" gallery-type="<?php echo $gallery->type; ?>"
                      gallery-id="<?php echo $gallery->id; ?>">
-                    <?php /*
-                      <div class="gallery_image">
-
-                      <?php if ($gallery->media_path != "") { ?>
-                      <?php if ($gallery->media_provider == "") { ?>
-                      <img class="img-rounded" src="<?php echo thumbnail($gallery->media_path); ?>">
-                      <?php } else { ?>
-                      <?php if ($gallery->media_provider_image != "") { ?>
-                      <img class="img-rounded" src="<?php echo $gallery->media_provider_image; ?>" />
-                      <?php } else { ?>
-                      <img class="img-rounded" src="<?php echo assets("default/soundcloud.png"); ?>" />
-                      <?php } ?>
-                      <?php } ?>
-                      <?php }else{ ?>
-                      <img class="img-rounded" src="<?php echo assets("admin::default/post.png"); ?>" />
-                      <?php } ?>
-
-                      </div>
-                     *
-                     */ ?>
                     <div class="gallery_details">
                         <div class="gallery_details_name"><?php echo $gallery->name; ?></div>
                         <div style="display: none" class="gallery_details_author"><?php echo $gallery->author; ?></div>

@@ -165,9 +165,8 @@
             radioClass: 'iradio_square-green',
         });
 
-
-
         $(".change-post-image").filemanager({
+            panel: "media",
             types: "image",
             done: function (result, base) {
                 if (result.length) {

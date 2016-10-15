@@ -554,10 +554,9 @@
                                 </div>
 
                                 <div class="hidden-lg hidden-md hidden-sm col-xs-3 text-left">
-                                    <button class="btn btn-icon btn-primary btn-flat"
+                                    <button class="btn btn-icon gallery-select btn-primary btn-flat"
                                             data-loading-text="<?php echo trans("media::media.please_wait"); ?>"
-                                            type="button"
-                                            class="select_gallery"><i class="fa fa-check-square-o"></i></button>
+                                            type="button"><i class="fa fa-check-square-o"></i></button>
                                 </div>
 
                             </form>

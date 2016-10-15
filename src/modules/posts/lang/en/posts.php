@@ -53,12 +53,14 @@ return [
     'templates' => 'Templates',
 
     'all_categories' => "All categories",
-
+    'all_blocks' => "All blocks",
+    'all_formats' => "All formats",
     'add_category' => "Add to category",
 
     "format_post" => "Post",
     "format_article" => "Article",
     "format_video" => "Video",
+    "format_album" => "Album",
 
     "add_fields" => "Add custom fields",
     "custom_name" => "Name",
@@ -68,6 +70,9 @@ return [
     "add_block" => "Add to blocks",
     "no_blocks" => "No blocks found",
 
+
+    "add_gallery" => "Add gallery",
+    "no_galleries_found" => "No galleries found",
 
     'attributes' => [
         'title' => 'Title',

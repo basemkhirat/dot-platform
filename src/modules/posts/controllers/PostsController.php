@@ -45,6 +45,16 @@ class PostsController extends Dot\Controller
             });
         }
 
+        if (Request::has("block_id") and Request::get("block_id") != 0) {
+            $query->whereHas("blocks", function ($query) {
+                $query->where("blocks.id", Request::get("block_id"));
+            });
+        }
+
+        if (Request::has("format")) {
+            $query->where("format", Request::get("format"));
+        }
+
         if (Request::has("from")) {
             $query->where("updated_at", ">=", Request::get("from"));
         }
@@ -96,6 +106,7 @@ class PostsController extends Dot\Controller
             $post->save();
             $post->syncTags(Request::get("tags", []));
             $post->categories()->sync(Request::get("categories", []));
+            $post->galleries()->sync(Request::get("galleries", []));
             $post->syncBlocks(Request::get("blocks", []));
 
             // saving meta
@@ -117,6 +128,7 @@ class PostsController extends Dot\Controller
 
         $this->data["post_tags"] = array();
         $this->data["post_categories"] = collect([]);
+        $this->data["post_galleries"] = collect([]);
         $this->data["post"] = $post;
 
         return View::make("posts::edit", $this->data);
@@ -147,6 +159,7 @@ class PostsController extends Dot\Controller
 
             $post->save();
             $post->categories()->sync(Request::get("categories", []));
+            $post->galleries()->sync(Request::get("galleries", []));
             $post->syncTags(Request::get("tags", []));
             $post->syncBlocks(Request::get("blocks", []));
 
@@ -168,6 +181,7 @@ class PostsController extends Dot\Controller
 
         $this->data["post_tags"] = $post->tags->pluck("name")->toArray();
         $this->data["post_categories"] = $post->categories;
+        $this->data["post_galleries"] = $post->galleries;
         $this->data["post"] = $post;
 
         return View::make("posts::edit", $this->data);
@@ -187,6 +201,7 @@ class PostsController extends Dot\Controller
 
             $post->tags()->detach();
             $post->categories()->detach();
+            $post->galleries()->detach();
             $post->blocks()->detach();
 
             $post->delete();

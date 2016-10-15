@@ -142,6 +142,7 @@
         //$('.chosen-select').chosen();
 
         $(".change-post-image").filemanager({
+            panel: "media",
             types: "image",
             done: function (result, base) {
                 if (result.length) {

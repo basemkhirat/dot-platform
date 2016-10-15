@@ -1342,7 +1342,7 @@ $(".filter-bar a").click(function () {
 
                 } else if (settings.panel == "galleries" || settings.gallery_id() != null) {
 
-                    if (settings.gallery_id() != null) {
+                    if (settings.gallery_id() != null && settings.gallery_id() != 0) {
                         $(".media_loader").css("display", "inline");
                         $.post(baseURL + "galleries/get/1", {gallery_id: settings.gallery_id()}, function (data) {
                             if (data != "") {
@@ -1405,18 +1405,21 @@ $(".filter-bar a").click(function () {
                 show_file_manager();
                // $(".file_manager").fadeIn();
 
-                $("#select_gallery").bind("click", function () {
+                $(".gallery-select").bind("click", function () {
 
                     if ($(".gallery_row.active").length) {
-                        var galleries = []
+
+                        var galleries = [];
+
                         $(".gallery_row.active").each(function (i) {
                             var base = $(this);
                             var gallery = {};
-                            gallery.gallery_id = base.attr("gallery-id");
-                            gallery.gallery_type = base.attr("gallery-type");
-                            gallery.gallery_name = base.find(".gallery_details_name").first().text();
+                            gallery.id = base.attr("gallery-id");
+                            gallery.type = base.attr("gallery-type");
+                            gallery.name = base.find(".gallery_details_name").first().text();
                             galleries[i] = gallery;
                         });
+
                         settings.galleries(galleries);
 
                         hide_file_manager(function () {
@@ -1428,8 +1431,11 @@ $(".filter-bar a").click(function () {
                             $(".dz-preview").removeClass("active");
                             $(".cinema").hide();
                             $("#select_media").unbind("click");
-                            $("#select_gallery").unbind("click");
+
+                            $(".gallery-select").unbind("click");
+
                             $(".galleries-home").unbind("click");
+
                         });
 
                     } else {

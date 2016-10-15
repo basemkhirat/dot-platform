@@ -287,6 +287,7 @@
         $("select").chosen();
 
         $("#change_photo").filemanager({
+            panel: "media",
             types: "png|jpg|jpeg|gif|bmp|image",
             done: function (result, base) {
                 if (result.length) {

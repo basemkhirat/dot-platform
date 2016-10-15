@@ -141,6 +141,14 @@ class Post extends Dot\Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function galleries()
+    {
+        return $this->belongsToMany("Gallery", "posts_galleries", "post_id", "gallery_id");
+    }
+
+    /**
      * Sync tags
      * @param $tags
      */

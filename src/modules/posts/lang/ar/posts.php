@@ -41,7 +41,8 @@ return [
     'add_media' => 'أضف فيديو',
 
     'all_categories' => "كل التصنيفات",
-
+    'all_formats' => "كل أنواع الأخبار",
+    'all_blocks' => "كل أماكن الأخبار",
     'not_image_file' => 'ملف غير مسموح به',
     'not_media_file' => 'ملف غير مسموح به',
 
@@ -56,6 +57,7 @@ return [
     "format_post" => "خبر",
     "format_article" => "مقال",
     "format_video" => "فيديو",
+    "format_album" => "ألبوم",
 
     "add_fields" => "أضف بيانات أخري",
     "custom_name" => "الإسم",
@@ -64,6 +66,10 @@ return [
 
     "add_block" => "أضف إلي أماكن الأخبار",
     "no_blocks" => "لا توجد أماكن للأخبار",
+
+    "add_gallery" => "أضف ألبوم",
+    "no_galleries_found" => "لا توجد ألبومات",
+
 
     'attributes' => [
         'title' => 'العنوان',
