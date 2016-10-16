@@ -518,7 +518,7 @@ class Media extends Dot\Model
 
                 $media->type = $type;
                 $media->path = date("Y/m/") . $filename;
-                $media->user_id = Auth::guard($guard)->user()->id;
+                $media->user_id = isset(Auth::guard($guard)->user()->id) ? Auth::guard($guard)->user()->id : 0;
                 $media->created_at = date("Y-m-d H:i:s");
                 $media->updated_at = date("Y-m-d H:i:s");
                 $media->hash = $file_hash;
