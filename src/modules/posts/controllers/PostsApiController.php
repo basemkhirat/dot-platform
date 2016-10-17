@@ -23,6 +23,7 @@ class PostsApiController extends Dot\ApiController
      * @param int $id (optional) The object identifier.
      * @param string $lang (default: user locale) The lang code.
      * @param string $q (optional) The search query string.
+     * @param String $format (default: all formats) The post format [post, article, video, album].
      * @param array $with (optional) extra related post components [user, image, media, tags, categories].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param array $category_ids (optional) The list of categories ids.
@@ -47,6 +48,10 @@ class PostsApiController extends Dot\ApiController
 
         if ($request->has("q")) {
             $query->search($request->get("q"));
+        }
+
+        if ($request->has("format")) {
+            $query->where("format", $request->get("format"));
         }
 
         if ($request->has("category_ids") and count($request->get("category_ids"))) {

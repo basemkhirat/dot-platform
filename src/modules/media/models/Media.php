@@ -30,9 +30,9 @@ class Media extends Dot\Model
     public function validateFile($file, $types = [])
     {
 
-        if(count($types)) {
+        if (count($types)) {
             $allowed_types = $types;
-        }else{
+        } else {
             $allowed_types = Config("media.allowed_file_types");
         }
 
@@ -106,7 +106,7 @@ class Media extends Dot\Model
         $media->path = date("Y/m") . "/" . $filename;
         $media->type = $mime_type;
         $media->title = basename(strtolower($file->getClientOriginalName()), "." . $extension);
-        $media->user_id = Auth::user()->id;
+        $media->user_id = isset(Auth::user()->id) ? Auth::user()->id : 0;
         $media->created_at = date("Y-m-d H:i:s");
         $media->updated_at = date("Y-m-d H:i:s");
         $media->hash = sha1_file($file_directory . "/" . $filename);

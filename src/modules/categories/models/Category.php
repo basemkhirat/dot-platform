@@ -87,6 +87,11 @@ class Category extends Dot\Model
         return $this->hasOne("Media", "id", "image_id");
     }
 
+    function categories()
+    {
+        return $this->hasMany(Category::class, 'parent');
+    }
+
     /**
      * @param $query
      * @param int $parent
@@ -222,8 +227,7 @@ class Category extends Dot\Model
      */
     public function posts()
     {
-        return $this->belongsToMany('Post', 'posts_categories', 'category_id', 'post_id')->select(DB::raw('count(posts_categories.id) as counts'))
-            ->groupBy('posts_categories.id')->orderBy('counts', 'desc');
+        return $this->belongsToMany('Post', 'posts_categories', 'category_id', 'post_id');
     }
 
     /**

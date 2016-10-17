@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->integer("image_id")->default(0)->index();
             $table->integer("user_id")->default(0)->index();
             $table->string("lang")->index();
+            $table->string("status")->default(0)->index();
             $table->timestamps();
         });
 
