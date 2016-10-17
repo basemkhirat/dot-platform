@@ -24,15 +24,20 @@ class Media extends Dot\Model
     /**
      * Validating file before upload
      * @param $file
+     * @param array $types
      * @return mixed
      */
-    public function validateFile($file)
+    public function validateFile($file, $types = [])
     {
 
-        $allowed_types = Config("media.allowed_file_types");
+        if(count($types)) {
+            $allowed_types = $types;
+        }else{
+            $allowed_types = Config("media.allowed_file_types");
+        }
 
         if (is_array($allowed_types)) {
-            $allowed_types = join(",", Config("media.allowed_file_types"));
+            $allowed_types = join(",", $allowed_types);
         }
 
         $rules = array(
