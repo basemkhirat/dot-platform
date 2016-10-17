@@ -36,7 +36,6 @@
                 <div class="search-header">
                     <img src="/admin/images/dot.png" class="logo" alt="Logo"/>
 
-
                     <input id="search" type="text" placeholder="Search">
                 </div>
                 <ul id="navigation">
@@ -328,6 +327,14 @@
                                 <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">with[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(optional) extra related category components [user, image, posts, categories].</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="with[]">
                                 </div>
                             </li>
                             <li>
@@ -1794,6 +1801,14 @@
                                 <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">format</div>
+                                <div class="parameter-type">String</div>
+                                <div class="parameter-desc">(default: all formats) The post format [post, article, video, album].</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="format">
                                 </div>
                             </li>
                             <li>

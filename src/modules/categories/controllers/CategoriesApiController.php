@@ -23,7 +23,7 @@ class CategoriesApiController extends Dot\ApiController
      * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
-     * @param array $with (optional) extra related category components [user, image, media, tags, categories].
+     * @param array $with (optional) extra related category components [user, image, posts, categories].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param int $page (default: 1) The page number.
      * @param string $order_by (default: id) The column you wish to sort by.
@@ -52,7 +52,6 @@ class CategoriesApiController extends Dot\ApiController
         } else {
             $categories = $query->paginate($limit)->appends($request->all());
         }
-
 
         return $this->response($categories);
 

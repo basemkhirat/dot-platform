@@ -75,7 +75,7 @@ class Category extends Dot\Model
      * @var array
      */
     protected $updatingRules = [
-        "name" => "required|unique:categories,name",
+        "name" => "required|unique:categories,name,[id],id",
         "slug" => "required|unique:categories,slug,[id],id"
     ];
 
@@ -84,7 +84,15 @@ class Category extends Dot\Model
      */
     function image()
     {
-        return $this->hasOne("Media", "id", "image_id");
+        return $this->hasOne(Media::class, "id", "image_id");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    function user()
+    {
+        return $this->hasOne(User::class, "id", "user_id");
     }
 
     function categories()
