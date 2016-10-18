@@ -297,7 +297,7 @@ trait ModelTraits
                     }
 
                     if (is_numeric($this->attributes[$field])) {
-                        $this->attributes[$field] = (int)$this->attributes[$field];
+                        //$this->attributes[$field] = (int)$this->attributes[$field];
                     }
 
                     $rule = str_replace("[" . $field . "]", $this->attributes[$field], $rule);
