@@ -96,6 +96,8 @@ class PostsController extends Dot\Controller
             $post->format = Request::get("format", "post");
             $post->lang = LANG;
 
+            $post->published_at = Request::get('published_at', date("Y-m-d H:i:s"));
+
             // fire post saving action
             Action::fire("post.saving", $post);
 
@@ -148,6 +150,7 @@ class PostsController extends Dot\Controller
             $post->media_id = Request::get('media_id', 0);
             $post->status = Request::get("status", 0);
             $post->format = Request::get("format", "post");
+            $post->published_at = Request::get('published_at') != "" ? Request::get('published_at') : date("Y-m-d H:i:s");
             $post->lang = LANG;
 
             // fire post saving action

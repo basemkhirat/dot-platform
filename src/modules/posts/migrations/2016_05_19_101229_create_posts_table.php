@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->string("format")->default("post")->index();
             $table->string("lang")->nullable()->index();
             $table->timestamps();
+            $table->dateTime('published_at')->nullable()->index();
         });
 
     }

@@ -61,6 +61,7 @@ return [
     "format_article" => "Article",
     "format_video" => "Video",
     "format_album" => "Album",
+    "format_event" => "Event",
 
     "add_fields" => "Add custom fields",
     "custom_name" => "Name",
@@ -69,7 +70,6 @@ return [
 
     "add_block" => "Add to blocks",
     "no_blocks" => "No blocks found",
-
 
     "add_gallery" => "Add gallery",
     "no_galleries_found" => "No galleries found",
@@ -80,11 +80,13 @@ return [
         'content' => 'Content',
         'created_at' => 'Created date',
         'updated_at' => 'Updated date',
+        'published_at' => 'Event date',
         'status' => 'Status',
         'template' => 'Template',
         'default' => 'Default',
         "format" => "Post format"
     ],
+
     "events" => [
         'created' => 'Post created successfully',
         'updated' => 'Post updated successfully',

@@ -17,14 +17,18 @@ class Post extends Dot\Model
      * @var string
      */
     protected $table = 'posts';
+
     /**
      * @var string
      */
     protected $primaryKey = 'id';
+
     /**
      * @var bool
      */
     public $timestamps = true;
+
+    public $dates = ["published_at"];
 
     /**
      * @var array

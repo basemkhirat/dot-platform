@@ -58,6 +58,7 @@ return [
     "format_article" => "مقال",
     "format_video" => "فيديو",
     "format_album" => "ألبوم",
+    "format_event" => "حدث",
 
     "add_fields" => "أضف بيانات أخري",
     "custom_name" => "الإسم",
@@ -77,6 +78,7 @@ return [
         'content' => 'المحتوى',
         'created_at' => 'تاريخ الإضافة',
         'updated_at' => 'تاريخ التعديل',
+        'published_at' => 'تاريخ الحدث',
         'status' => 'الحالة',
         'template' => 'القالب',
         'default' => 'إفتراضى',

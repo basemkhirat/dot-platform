@@ -214,6 +214,19 @@
                                 class="status-switcher switcher-sm">
                             </div>
                         </div>
+
+                        <div class="form-group format-area event-format-area">
+                            <?php /* ?>
+                            <label for="input-published_at"><?php echo trans("posts::posts.attributes.published_at") ?></label>
+                            <?php */ ?>
+                            <div class="input-group date datetimepick">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input name="published_at" type="text"
+                                       value="<?php echo @Request::old('published_at', $post->published_at); ?>"
+                                       class="form-control" id="input-published_at"
+                                       placeholder="<?php echo trans("posts::posts.attributes.published_at") ?>">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -225,7 +238,7 @@
                     <div class="panel-body">
                         <div class="form-group" style="margin-bottom:0px">
 
-                            <?php foreach (["post" => "fa-newspaper-o", "article" => "fa-newspaper-o", "video" => "fa-video-camera", "album" => "fa-camera"] as $format => $icon) { ?>
+                            <?php foreach (config("posts.formats") as $format => $icon) { ?>
                             <div class="radio" style="margin-top: 0;">
                                 <label>
                                     <input type="radio" name="format" value="<?php echo $format; ?>" class="i-checks"
@@ -293,7 +306,7 @@
                 </div>
 
 
-                <div class="panel panel-default">
+                <div class="panel panel-default format-area album-format-area">
                     <div class="panel-heading">
                         <i class="fa fa-camera"></i>
                         <?php echo trans("posts::posts.add_gallery"); ?>
@@ -361,6 +374,9 @@
     <link href="<?php echo assets("admin::tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="<?php echo assets("admin::tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 
+    <link href="<?php echo assets('admin::css/plugins/datetimepicker/bootstrap-datetimepicker.min.css'); ?>"
+          rel="stylesheet" type="text/css">
+
 
     <style>
         .custom-field-name {
@@ -396,11 +412,37 @@
     @parent
     <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
     <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo assets('admin::js/plugins/moment/moment.min.js') ?>"></script>
+    <script type="text/javascript"
+            src="<?php echo assets('admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js') ?>"></script>
 
 
     <script>
 
         $(document).ready(function () {
+
+
+            $('.datetimepick').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss',
+            });
+
+
+            $("[name=format]").on('ifChecked', function () {
+                $(this).iCheck('check');
+                $(this).change();
+                switch_format($(this));
+            });
+
+            switch_format($("[name=format]:checked"));
+
+            function switch_format(radio) {
+
+                var format = radio.val();
+
+                $(".format-area").hide();
+                $("." + format + "-format-area").show();
+            }
+
 
             var elems = Array.prototype.slice.call(document.querySelectorAll('.status-switcher'));
             elems.forEach(function (html) {

@@ -86,8 +86,7 @@
 
                     <select name="format" class="form-control chosen-select chosen-rtl" >
                         <option value=""><?php echo trans("posts::posts.all_formats"); ?></option>
-                        <?php foreach (["post" => "fa-newspaper-o", "article" => "fa-newspaper-o", "video" => "fa-video-camera", "album" => "fa-camera"] as $format => $icon) { ?>
-
+                        <?php foreach (config("posts.formats") as $format => $icon) { ?>
                         <option <?php if (Request::get("format") == $format) { ?> selected='selected' <?php } ?>
                         value="<?php echo $format; ?>">
                             <?php echo trans("posts::posts.format_".$format); ?></option>
@@ -295,10 +294,7 @@
 
 <script>
 
-
-
     $(document).ready(function () {
-
 
         $('.datetimepick').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss',
