@@ -293,7 +293,7 @@
                             <?php foreach(Block::all() as $block){ ?>
                             <li>
                                 <div class='tree-row checkbox i-checks'><label><input type='checkbox'
-                                                                                      <?php if ($post and in_array($block->id, $post->blocks()->pluck("id")->toArray())) { echo 'checked="checked"'; } ?>
+                                                                                      <?php if ($post and in_array($block->id, $post_blocks->pluck("id")->toArray())) { echo 'checked="checked"'; } ?>
                                                                                       name='blocks[]'
                                                                                       value='<?php echo $block->id; ?>'>
                                         &nbsp; <?php echo $block->name ?></label></div>
@@ -411,7 +411,7 @@
 @section("footer")
     @parent
     <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
-    <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo assets('admin::js/plugins/moment/moment.min.js') ?>"></script>
     <script type="text/javascript"
             src="<?php echo assets('admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js') ?>"></script>

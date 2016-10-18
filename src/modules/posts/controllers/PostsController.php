@@ -131,6 +131,7 @@ class PostsController extends Dot\Controller
         $this->data["post_tags"] = array();
         $this->data["post_categories"] = collect([]);
         $this->data["post_galleries"] = collect([]);
+        $this->data["post_blocks"] = collect([]);
         $this->data["post"] = $post;
 
         return View::make("posts::edit", $this->data);
@@ -185,6 +186,7 @@ class PostsController extends Dot\Controller
         $this->data["post_tags"] = $post->tags->pluck("name")->toArray();
         $this->data["post_categories"] = $post->categories;
         $this->data["post_galleries"] = $post->galleries;
+        $this->data["post_blocks"] = $post->blocks;
         $this->data["post"] = $post;
 
         return View::make("posts::edit", $this->data);
