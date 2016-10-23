@@ -16,8 +16,6 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
 
     protected $creatingRules = [
         'username' => 'required|unique:users',
-        //"password" => "required|same:repassword",
-        //"repassword" => "required",
         "email" => "required|email|unique:users",
         "first_name" => "required"
     ];
@@ -42,8 +40,8 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
     function setCreateValidation($v)
     {
 
-        $v->sometimes("repassword", "required", function ($input) {
-            return $input->password != "";
+        $v->sometimes(["password", "repassword"], "required|same:repassword", function ($input) {
+            return $input->provider == NULL;
         });
 
         return $v;
@@ -53,16 +51,11 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
     function setUpdateValidation($v)
     {
 
-        $v->sometimes("repassword", "required", function ($input) {
-            return $input->password != "";
-        });
-
-        $v->sometimes("password", "required|same:repassword", function ($input) {
-            return $input->provider != "";
+        $v->sometimes(["password", "repassword"], "required|same:repassword", function ($input) {
+            return $input->provider == NULL and $input->password != "";
         });
 
         return $v;
-
     }
 
     function setPasswordAttribute($password)
