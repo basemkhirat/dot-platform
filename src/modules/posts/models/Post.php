@@ -28,8 +28,6 @@ class Post extends Dot\Model
      */
     public $timestamps = true;
 
-    public $dates = ["published_at"];
-
     /**
      * @var array
      */

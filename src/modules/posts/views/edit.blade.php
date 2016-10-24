@@ -222,7 +222,7 @@
                             <div class="input-group date datetimepick">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 <input name="published_at" type="text"
-                                       value="<?php echo @Request::old('published_at', $post->published_at); ?>"
+                                       value="<?php echo (!$post->id) ? date("Y-m-d H:i:s") : @Request::old('published_at', $post->published_at); ?>"
                                        class="form-control" id="input-published_at"
                                        placeholder="<?php echo trans("posts::posts.attributes.published_at") ?>">
                             </div>

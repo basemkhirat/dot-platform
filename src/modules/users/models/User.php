@@ -39,18 +39,15 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
 
     function setCreateValidation($v)
     {
-
         $v->sometimes(["password", "repassword"], "required|same:repassword", function ($input) {
             return $input->provider == NULL;
         });
 
         return $v;
-
     }
 
     function setUpdateValidation($v)
     {
-
         $v->sometimes(["password", "repassword"], "required|same:repassword", function ($input) {
             return $input->provider == NULL and $input->password != "";
         });
@@ -189,7 +186,8 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         return false;
     }
 
-    function newApiToken(){
+    function newApiToken()
+    {
         return str_random(60);
     }
 

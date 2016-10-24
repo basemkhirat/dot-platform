@@ -96,7 +96,10 @@ class PostsController extends Dot\Controller
             $post->format = Request::get("format", "post");
             $post->lang = LANG;
 
-            $post->published_at = Request::get('published_at', date("Y-m-d H:i:s"));
+            $post->published_at = Request::get('published_at');
+            if(in_array($post->published_at, [NULL, ""])){
+                $post->published_at = date("Y-m-d H:i:s");
+            }
 
             // fire post saving action
             Action::fire("post.saving", $post);
