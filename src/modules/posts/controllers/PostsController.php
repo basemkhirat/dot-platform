@@ -56,11 +56,11 @@ class PostsController extends Dot\Controller
         }
 
         if (Request::has("from")) {
-            $query->where("updated_at", ">=", Request::get("from"));
+            $query->where("created_at", ">=", Request::get("from"));
         }
 
         if (Request::has("to")) {
-            $query->where("updated_at", "<=", Request::get("to"));
+            $query->where("created_at", "<=", Request::get("to"));
         }
 
         if (Request::has("user_id")) {
