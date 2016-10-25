@@ -35,8 +35,8 @@ class GalleriesApiController extends Dot\ApiController
 
         $id = $request->get("id");
         $limit = $request->get("limit", 10);
-        $sort_by = $request->get("sort_by", "id");
-        $sort_direction = $request->get("sort_direction", "DESC");
+        $sort_by = $request->get("order_by", "id");
+        $sort_direction = $request->get("order_direction", "DESC");
 
         $components = $request->get("with", []);
 
