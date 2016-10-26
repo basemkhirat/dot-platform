@@ -8,3 +8,16 @@
         "Authorization" : "Bearer <?php echo $user->api_token ?>"
     }
 </pre>
+
+
+<p>For Relations Endpoint 'with[{relation_string}]', you can provider these parameters as example:
+<pre class="prettyprint linenums">
+    {
+        with[{relation_string}] : {
+            "limit"             :   3,
+            "offset"            :   0,
+            "order_by"          :   "id",
+            "order_direction"   :   "ASC"
+        }
+    }
+</pre>

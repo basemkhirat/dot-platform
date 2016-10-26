@@ -175,6 +175,7 @@
 
                 <hr />
 
+
                 <a href="#" class="waypoint" name="AuthApi"></a>
                 <h2>AuthApi</h2>
                 <p>Class AuthApiController</p>
@@ -327,6 +328,14 @@
                                 <div class="parameter-desc">(optional) The search query string.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="q">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">parent</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(default: 0) The parent object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="parent">
                                 </div>
                             </li>
                             <li>

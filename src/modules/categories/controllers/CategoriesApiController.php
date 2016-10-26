@@ -23,6 +23,7 @@ class CategoriesApiController extends Dot\ApiController
      * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
+     * @param string $parent (default: 0) The parent object identifier.
      * @param array $with (optional) extra related category components [user, image, posts, categories].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param int $page (default: 1) The page number.
@@ -34,18 +35,28 @@ class CategoriesApiController extends Dot\ApiController
     {
 
         $id = $request->get("id");
-
+        $parent = $request->get("parent", 0);
         $limit = $request->get("limit", 10);
         $sort_by = $request->get("order_by", "id");
         $sort_direction = $request->get("order_direction", "DESC");
 
         $components = $request->get("with", []);
 
+        foreach($components as $relation => $data){
+            $components[$relation] = function($query) use ($data){
+                return $query->take(array_get($data, 'limit', 3))
+                    ->skip(array_get($data, 'offset', 0))
+                    ->orderBy(array_get($data, 'order_by', "id"), array_get($data, 'order_direction', "DESC"));
+            };
+        }
+
         $query = Category::with($components)->orderBy($sort_by, $sort_direction);
 
         if ($request->has("q")) {
             $query->search($request->get("q"));
         }
+
+        $query->where("parent", $parent);
 
         if ($id) {
             $categories = $query->where("id", $id)->first();
