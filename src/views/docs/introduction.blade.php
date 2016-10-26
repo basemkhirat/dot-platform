@@ -13,8 +13,6 @@
 <pre class="prettyprint linenums">
     {
         with[{relation_string}] : {
-            "limit"             :   3,
-            "offset"            :   0,
             "order_by"          :   "id",
             "order_direction"   :   "ASC"
         }
