@@ -112,7 +112,7 @@ class CategoriesApiController extends Dot\ApiController
         }
 
         $categories->each(function ($category) {
-            $category->load("samples.image");
+            $category->load("samples.image", "samples.tags", "samples.categories", "samples.media");
             return $category;
         });
 
