@@ -235,7 +235,12 @@ class Category extends Dot\Model
      */
     public function posts()
     {
-        return $this->belongsToMany('Post', 'posts_categories', 'category_id', 'post_id');
+        return $this->belongsToMany('Post', 'posts_categories', 'category_id', 'post_id')->take(10);
+    }
+
+    public function samples()
+    {
+        return $this->posts()->orderBy("created_at", "DESC")->take(3);
     }
 
     /**

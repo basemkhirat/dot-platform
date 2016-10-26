@@ -42,6 +42,7 @@
 
                     <li><a href="#introduction">Introduction</a></li>
 
+
                     <li>
                         <a href="#AuthApi">AuthApi</a>
                         <ul>
@@ -56,6 +57,8 @@
                         <a href="#CategoriesApi">CategoriesApi</a>
                         <ul>
                             <li><a href="#CategoriesApi_show">show</a></li>
+
+                            <li><a href="#CategoriesApi_samples">samples</a></li>
 
                             <li><a href="#CategoriesApi_create">create</a></li>
 
@@ -332,7 +335,114 @@
                             </li>
                             <li>
                                 <div class="parameter-name">parent</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: 0) The parent object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="parent">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">with[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(optional) extra related category components [user, image, posts, categories].</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="with[]">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">limit</div>
                                 <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(default: 10) The number of retrieved records.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="limit">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">page</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(default: 1) The page number.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="page">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">order_by</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: id) The column you wish to sort by.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="order_by">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">order_direction</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: DESC) The sort direction ASC or DESC.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="order_direction">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="GET"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="CategoriesApi_samples"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>GET</h2></li>
+                        <li><h3>samples</h3></li>
+                        <li>api/categories/samples</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">List categories with sample posts</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/categories/samples" type="GET">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">api_token</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(required) The access token.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="api_token">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">q</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="q">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">parent</div>
+                                <div class="parameter-type">string</div>
                                 <div class="parameter-desc">(default: 0) The parent object identifier.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="parent">
