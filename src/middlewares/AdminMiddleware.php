@@ -8,17 +8,23 @@ class AdminMiddleware
         // setting the time zone;
         date_default_timezone_set(Config::get("app.timezone"));
 
-        // setting default locale
-        try {
-            if (Session::has('locale')) {
-                App::setLocale(Session::get('locale'));
-            } else {
-                App::setLocale(Config::get('app.locale'));
+        if (!defined("LANG")) {
+
+            // setting default locale
+            try {
+                if (session()->has('locale')) {
+                    app()->setLocale(session()->get('locale'));
+                } else {
+                    app()->setLocale(config()->get('app.locale'));
+                }
+                define("LANG", app()->getLocale());
+                define("DIRECTION", config()->get("admin.locales")[LANG]["direction"]);
+
+
+            } catch (Exception $error) {
+                abort(500, "System locales is not configured successfully");
             }
-            define("LANG", App::getLocale());
-            define("DIRECTION", Config::get("admin.locales")[LANG]["direction"]);
-        } catch (Exception $error) {
-            abort(500, "System locales is not configured successfully");
+
         }
 
         // getting site status
