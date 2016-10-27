@@ -420,7 +420,7 @@ trait ModelTraits
             $options['ul'] = false;
         }
 
-        $rows = DB::table($options['table']);
+        $rows = self::orderBy($this->primaryKey);
 
         if ($options['query']) {
             $rows = call_user_func($options['query'], $rows);
