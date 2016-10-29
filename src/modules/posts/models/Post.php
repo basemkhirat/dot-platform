@@ -176,15 +176,15 @@ class Post extends Dot\Model
         $new_blocks = collect($blks);
         $old_blocks = $this->blocks->pluck("id");
 
-        $added = $new_blocks->diff($old_blocks)->toArray();
+        $added_blocks = $new_blocks->diff($old_blocks)->toArray();
 
-        foreach (Block::whereIn("id", $added)->get() as $block) {
+        foreach (Block::whereIn("id", $added_blocks)->get() as $block) {
             $block->addPost($this);
         }
 
-        $removed = $old_blocks->diff($new_blocks)->toArray();
+        $removed_blocks = $old_blocks->diff($new_blocks)->toArray();
 
-        foreach (Block::whereIn("id", $removed)->get() as $block) {
+        foreach (Block::whereIn("id", $removed_blocks)->get() as $block) {
             $block->removePost($this);
         }
 
@@ -201,5 +201,16 @@ class Post extends Dot\Model
 
         static::addGlobalScope(new LangScope);
     }
+
+
+    function save(array $options = array())
+    {
+        $return = parent::save($options);
+
+        Cache::flush();
+
+        return $return;
+    }
+
 
 }
