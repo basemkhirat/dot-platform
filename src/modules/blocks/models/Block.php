@@ -123,7 +123,7 @@ class Block extends Dot\Model
      */
     public function posts()
     {
-        return $this->belongsToMany("Post", "posts_blocks", "block_id", "post_id")->orderBy('order')->withPivot('order');;
+        return $this->belongsToMany("Post", "posts_blocks", "block_id", "post_id")->orderBy('order')->withPivot('order');
     }
 
     /**
@@ -160,11 +160,15 @@ class Block extends Dot\Model
             $i = 0;
 
             foreach ($posts_ids as $post_id) {
-                $sync[$post_id] = ['order' => $i];
+                $sync[$post_id] = [
+                    'lang' => LANG,
+                    'order' => $i,
+                ];
                 $i++;
             }
 
-            $this->posts()->sync($sync);
+            DB::table("posts_blocks")->where("block_id", $this->id)->where("lang", LANG)->delete();
+            $this->posts()->attach($sync);
         }
 
     }

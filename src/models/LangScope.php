@@ -9,6 +9,6 @@ class LangScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->where('lang', LANG);
+        return $builder->where('posts.lang', LANG);
     }
 }

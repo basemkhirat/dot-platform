@@ -47,7 +47,7 @@ class Gallery extends Dot\Model {
     {
         parent::boot();
 
-        static::addGlobalScope(new LangScope);
+        //static::addGlobalScope(new LangScope);
     }
 
 }

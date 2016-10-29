@@ -17,6 +17,7 @@ class CreateBlocksPostsTable extends Migration
             $table->integer('post_id')->index();
             $table->integer('block_id')->index();
             $table->integer('order')->index();
+            $table->string('lang')->index();
         });
 
     }
