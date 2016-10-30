@@ -1,6 +1,7 @@
 <?php
 
 namespace Dot;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
