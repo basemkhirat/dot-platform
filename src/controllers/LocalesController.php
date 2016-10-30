@@ -20,7 +20,7 @@ class LocalesController extends Controller
             Session::put('locale', $lang);
         }
 
-        return Redirect::back();
+        return Request::get("redirect_url") ? redirect(Request::get("redirect_url")) : redirect()->back();
 
     }
 
