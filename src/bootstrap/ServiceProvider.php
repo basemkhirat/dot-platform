@@ -72,6 +72,10 @@ class CmsServiceProvider extends ServiceProvider
         // Initializing admin
         $this->loadAdmin();
 
+        $this->mergeConfigFrom(
+            ADMIN_PATH .'/config/apidocs.php', 'apidocs'
+        );
+
         // Initializing modules
         foreach ($this->modules as $module) {
             $this->loadModule($module);
@@ -117,6 +121,12 @@ class CmsServiceProvider extends ServiceProvider
                 Config::set($option->name, $option->value);
             }
         }
+
+        $this->app->singleton('apidocs.generate', function ($app) {
+            return $app['ApiDocsGeneratorCommand'];
+        });
+
+        $this->commands('apidocs.generate');
 
         // Binging dot classes
         $this->bindDotClasses();

@@ -136,6 +136,8 @@ class DotInstallCommand extends Dot\Command
             '--quiet' => true
         ]);
 
+        $this->call("dot:api");
+
         $this->call('optimize', [
             '--quiet' => true
         ]);

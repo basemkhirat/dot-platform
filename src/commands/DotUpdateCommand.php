@@ -91,6 +91,8 @@ class DotUpdateCommand extends Dot\Command
 
         }
 
+        $this->call("dot:api");
+
         $this->call('optimize', [
             '--quiet' => true
         ]);

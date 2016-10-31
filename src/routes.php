@@ -24,6 +24,6 @@ Route::group(["middleware" => ["web", "auth"]], function ($route) {
             return app()->abort(500, "Missing 'guest' user. please create it first.");
         }
 
-        return view('admin::docs.default', ["user" => $guest_user]);
+        return view('docs.api.index', ["user" => $guest_user]);
     });
 });

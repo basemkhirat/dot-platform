@@ -20,7 +20,6 @@ class CategoriesApiController extends Dot\ApiController
 
     /**
      * List categories
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
      * @param string $parent (default: 0) The parent object identifier.
@@ -68,7 +67,6 @@ class CategoriesApiController extends Dot\ApiController
 
     /**
      * List categories with sample posts
-     * @param string $api_token (required) The access token.
      * @param int $id (optional) The object identifier.
      * @param string $q (optional) The search query string.
      * @param string $parent (default: 0) The parent object identifier.
@@ -123,7 +121,6 @@ class CategoriesApiController extends Dot\ApiController
 
     /**
      * Create a new category
-     * @param string $api_token (required) The access token.
      * @param string $name (required) The category name.
      * @param string $slug (optional) The category slug.
      * @return \Illuminate\Http\JsonResponse
@@ -135,7 +132,7 @@ class CategoriesApiController extends Dot\ApiController
 
         $category->name = $request->name;
      //   $category->slug = $request->slug;
-        $category->lang = $this->user->lang;
+      //  $category->lang = $this->user->lang;
       //  $category->user_id = $this->user->id;
 
         // Validate and save requested user
@@ -154,7 +151,6 @@ class CategoriesApiController extends Dot\ApiController
 
     /**
      * Update category by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The category id.
      * @param string $name (required) The category name.
      * @param string $slug (optional) The category slug.
@@ -184,7 +180,6 @@ class CategoriesApiController extends Dot\ApiController
 
     /**
      * Delete category by id
-     * @param string $api_token (required) The access token.
      * @param int $id (required) The category id.
      * @return \Illuminate\Http\JsonResponse
      */
