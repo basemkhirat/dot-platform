@@ -32,6 +32,7 @@ return [
     'assets_path' => "../templates/api/assets/",
     'logo_path' => '/assets/docs/{prefix}/img/f2m2_logo.svg',
 
+
     /*
     |--------------------------------------------------------------------------
     | Where the generated HTML Files will be saved...
