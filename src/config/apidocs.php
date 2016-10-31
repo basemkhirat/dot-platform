@@ -10,16 +10,16 @@ return [
     */
 
     // head
-    'index_template_path' => templates_path("api/docs/index.blade.php"),
-    'head_template_path' => templates_path("api/includes/head.blade.php"),
-    'introduction_template_path' => templates_path("api/includes/introduction.blade.php"),
-    'body_content_template_path' => templates_path("api/includes/body_content.blade.php"),
-    'compile_content_template_path' => templates_path("api/includes/compile_content.blade.php"),
-    'nav_items_template_path' => templates_path("api/includes/nav_items.blade.php"),
-    'navigation_template_path' => templates_path("api/includes/navigation.blade.php"),
-    'parameters_template_path' => templates_path("api/includes/parameters.blade.php"),
-    'section_header_template_path' => templates_path("api/includes/section_header.blade.php"),
-    'default_layout_template_path' => templates_path("api/layouts/default.blade.php"),
+    'index_template_path' => "../templates/api/docs/index.blade.php",
+    'head_template_path' => "../templates/api/includes/head.blade.php",
+    'introduction_template_path' => "../templates/api/includes/introduction.blade.php",
+    'body_content_template_path' => "../templates/api/includes/body_content.blade.php",
+    'compile_content_template_path' => "../templates/api/includes/compile_content.blade.php",
+    'nav_items_template_path' => "../templates/api/includes/nav_items.blade.php",
+    'navigation_template_path' => "../templates/api/includes/navigation.blade.php",
+    'parameters_template_path' => "../templates/api/includes/parameters.blade.php",
+    'section_header_template_path' => "../templates/api/includes/section_header.blade.php",
+    'default_layout_template_path' => "../templates/api/layouts/default.blade.php",
 
 
     /*
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'assets_path' => templates_path("api/assets/"),
+    'assets_path' => "../templates/api/assets/",
     'logo_path' => '/assets/docs/{prefix}/img/f2m2_logo.svg',
 
     /*
