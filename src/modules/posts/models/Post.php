@@ -107,7 +107,7 @@ class Post extends Dot\Model
      */
     public function media()
     {
-        return $this->hasOne("Media", "id", "media_id");
+        return $this->hasOne("Media", "id", "media_id")->where("type", "video");
     }
 
     /**

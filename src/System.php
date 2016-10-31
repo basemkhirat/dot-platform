@@ -106,8 +106,8 @@ class System
 
         define("AMAZON", 1);
         define("ADMIN", Config::get("admin.prefix"));
-        define("API", "api");
-        define("UPLOADS", "uploads");
+        define("API", Config::get("admin.api"));
+        define("UPLOADS", Config::get("admin.uploads_path"));
         define("UPLOADS_PATH", public_path(UPLOADS));
         define("AMAZON_URL", "https://" . Config::get("media.s3.bucket") . ".s3-" . Config::get("media.s3.region") . ".amazonaws.com/");
 

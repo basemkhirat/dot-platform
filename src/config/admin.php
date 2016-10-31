@@ -19,6 +19,23 @@ return [
     'default_path' => env("DEFAULT_PATH", "users"),
 
     /**
+     * | Media uploads path
+     * |
+     * | @var string
+     */
+
+    'upload_path' => env("UPLOADS_PATH", "uploads"),
+
+    /**
+     * | API prefix
+     * | As ex (api/v1)
+     * |
+     * | @var string
+     */
+
+    'api' => env("API_PREFIX", "api"),
+
+    /**
      * | All system Locales
      * |
      * | @var array
