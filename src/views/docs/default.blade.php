@@ -30,18 +30,19 @@
 <body>
 
 <div class="container">
+
     <div class="row">
         <div class="col-3" id="sidebar">
             <div class="column-content">
                 <div class="search-header">
                     <img src="/admin/images/dot.png" class="logo" alt="Logo"/>
 
+
                     <input id="search" type="text" placeholder="Search">
                 </div>
                 <ul id="navigation">
 
                     <li><a href="#introduction">Introduction</a></li>
-
 
                     <li>
                         <a href="#AuthApi">AuthApi</a>
@@ -167,6 +168,28 @@
                     </li>
 
 
+                    <li>
+                        <a href="#TopicsApi">TopicsApi</a>
+                        <ul>
+                            <li><a href="#TopicsApi_show">show</a></li>
+
+                            <li><a href="#TopicsApi_samples">samples</a></li>
+
+                            <li><a href="#TopicsApi_create">create</a></li>
+
+                            <li><a href="#TopicsApi_follow">follow</a></li>
+
+                            <li><a href="#TopicsApi_unfollow">unfollow</a></li>
+
+                            <li><a href="#TopicsApi_save">save</a></li>
+
+                            <li><a href="#TopicsApi_update">update</a></li>
+
+                            <li><a href="#TopicsApi_destroy">destroy</a></li>
+                        </ul>
+                    </li>
+
+
                 </ul>
             </div>
         </div>
@@ -177,7 +200,6 @@
                 @include('admin::docs.introduction')
 
                 <hr />
-
 
                 <a href="#" class="waypoint" name="AuthApi"></a>
                 <h2>AuthApi</h2>
@@ -3027,6 +3049,492 @@
                                 <div class="parameter-name">id</div>
                                 <div class="parameter-type">int</div>
                                 <div class="parameter-desc">(required) The user id.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="POST"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+
+                <a href="#" class="waypoint" name="TopicsApi"></a>
+                <h2>TopicsApi</h2>
+                <p>Class TopicsApiController</p>
+
+
+                <a href="#" class="waypoint" name="TopicsApi_show"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>GET</h2></li>
+                        <li><h3>show</h3></li>
+                        <li>api/topics/show</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">List topics</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/show" type="GET">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">q</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="q">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">parent</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: 0) The parent object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="parent">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">with[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(optional) extra related topic components [user, image, posts, topics].</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="with[]">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">limit</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(default: 10) The number of retrieved records.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="limit">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">page</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(default: 1) The page number.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="page">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">order_by</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: count) The column you wish to sort by.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="order_by">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">order_direction</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: DESC) The sort direction ASC or DESC.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="order_direction">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="GET"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="TopicsApi_samples"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>GET</h2></li>
+                        <li><h3>samples</h3></li>
+                        <li>api/topics/samples</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">List topics with sample posts</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/samples" type="GET">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(optional) The object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">q</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The search query string.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="q">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">parent</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: 0) The parent object identifier.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="parent">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">with[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(optional) extra related topic components [user, image, posts, topics].</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="with[]">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">limit</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(default: 10) The number of retrieved records.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="limit">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">page</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(default: 1) The page number.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="page">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">order_by</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: id) The column you wish to sort by.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="order_by">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">order_direction</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(default: DESC) The sort direction ASC or DESC.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="order_direction">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="GET"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="TopicsApi_create"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>POST</h2></li>
+                        <li><h3>create</h3></li>
+                        <li>api/topics/create</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">Create a new topic</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/create" type="POST">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">name</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(required) The topic name.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="name">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">slug</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The topic slug.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="slug">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="POST"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="TopicsApi_follow"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>POST</h2></li>
+                        <li><h3>follow</h3></li>
+                        <li>api/topics/follow</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">Follow topics</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/follow" type="POST">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">topics[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(required) The topic ids.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="topics[]">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="POST"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="TopicsApi_unfollow"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>POST</h2></li>
+                        <li><h3>unfollow</h3></li>
+                        <li>api/topics/unfollow</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">Unfollow topics</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/unfollow" type="POST">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">topics[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(required) The topic ids.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="topics[]">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="POST"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="TopicsApi_save"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>POST</h2></li>
+                        <li><h3>save</h3></li>
+                        <li>api/topics/save</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">Saving sorted topics</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/save" type="POST">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">topics[]</div>
+                                <div class="parameter-type">array</div>
+                                <div class="parameter-desc">(required) The topic ids.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="topics[]">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="POST"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="TopicsApi_update"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>POST</h2></li>
+                        <li><h3>update</h3></li>
+                        <li>api/topics/update</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">Update topic by id</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/update" type="POST">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(required) The topic id.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="id">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">name</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(required) The topic name.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="name">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">slug</div>
+                                <div class="parameter-type">string</div>
+                                <div class="parameter-desc">(optional) The topic slug.</div>
+                                <div class="parameter-value">
+                                    <input type="text" class="parameter-value-text" name="slug">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="generate-response" >
+                        <!-- <input type="hidden" name="_method" value="POST"> -->
+                        <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                    </div>
+                </form>
+                <hr>
+
+                <a href="#" class="waypoint" name="TopicsApi_destroy"></a>
+                <div class="endpoint-header">
+                    <ul>
+                        <li><h2>POST</h2></li>
+                        <li><h3>destroy</h3></li>
+                        <li>api/topics/destroy</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="endpoint-short-desc">Delete topic by id</p>
+                </div>
+                <!--  <div class="parameter-header">
+                      <p class="endpoint-long-desc"></p>
+                 </div> -->
+                <form class="api-explorer-form" uri="api/topics/destroy" type="POST">
+                    <div class="endpoint-paramenters">
+                        <h4>Parameters</h4>
+                        <ul>
+                            <li class="parameter-header">
+                                <div class="parameter-name">PARAMETER</div>
+                                <div class="parameter-type">TYPE</div>
+                                <div class="parameter-desc">DESCRIPTION</div>
+                                <div class="parameter-value">VALUE</div>
+                            </li>
+                            <li>
+                                <div class="parameter-name">id</div>
+                                <div class="parameter-type">int</div>
+                                <div class="parameter-desc">(required) The topic id.</div>
                                 <div class="parameter-value">
                                     <input type="text" class="parameter-value-text" name="id">
                                 </div>
