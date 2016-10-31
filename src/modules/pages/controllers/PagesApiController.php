@@ -42,9 +42,7 @@ class PagesApiController extends Dot\ApiController
 
         foreach($components as $relation => $data){
             $components[$relation] = function($query) use ($data){
-                return $query->take(array_get($data, 'limit', 3))
-                    ->skip(array_get($data, 'offset', 0))
-                    ->orderBy(array_get($data, 'order_by', "id"), array_get($data, 'order_direction', "ASC"));
+                return $query->orderBy(array_get($data, 'order_by', "id"), array_get($data, 'order_direction', "DESC"));
             };
         }
 
