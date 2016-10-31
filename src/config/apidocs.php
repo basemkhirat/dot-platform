@@ -19,7 +19,7 @@ return [
     'navigation_template_path' => templates_path("api/includes/navigation.blade.php"),
     'parameters_template_path' => templates_path("api/includes/parameters.blade.php"),
     'section_header_template_path' => templates_path("api/includes/section_header.blade.php"),
-    'default_layout_template_path' => templates_path("packages/dot/platform/src/templates/api/layouts/default.blade.php"),
+    'default_layout_template_path' => templates_path("api/layouts/default.blade.php"),
 
 
     /*
