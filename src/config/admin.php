@@ -24,7 +24,7 @@ return [
      * | @var string
      */
 
-    'upload_path' => env("UPLOADS_PATH", "uploads"),
+    'uploads_path' => env("UPLOADS_PATH", "uploads"),
 
     /**
      * | API prefix
