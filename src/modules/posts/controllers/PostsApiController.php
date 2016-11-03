@@ -24,6 +24,7 @@ class PostsApiController extends Dot\ApiController
      * @param string $lang (default: user locale) The lang code.
      * @param string $q (optional) The search query string.
      * @param String $format (default: all formats) The post format [post, article, video, album].
+     * @param bool $status (default: all) The post status [1, 0].
      * @param array $with (optional) extra related post components [user, image, media, tags, categories].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param array $category_ids (optional) The list of categories ids.
@@ -58,6 +59,10 @@ class PostsApiController extends Dot\ApiController
 
         if ($request->has("format")) {
             $query->where("format", $request->get("format"));
+        }
+
+        if ($request->has("status")) {
+            $query->where("status", $request->get("status"));
         }
 
         if ($request->has("category_ids") and count($request->get("category_ids"))) {
@@ -197,6 +202,32 @@ class PostsApiController extends Dot\ApiController
                 $post->tags()->sync($tags);
             }
 
+            return $this->response($post);
+        }
+
+    }
+
+    /**
+     * Update post views by id
+     * @param int $id (required) The post id.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    function views(Request $request)
+    {
+
+        if (!$request->id) {
+            return $this->error("Missing post id");
+        }
+
+        $post = Post::find($request->id);
+
+        if (!$post) {
+            return $this->error("Post #" . $request->id . " is not exists");
+        }
+
+        $post->views = $post->views + 1;
+
+        if ($post->save()) {
             return $this->response($post);
         }
 

@@ -27,6 +27,7 @@ Route::group([
     $route->get("/posts/show", "PostsApiController@show");
     $route->post("/posts/create", "PostsApiController@create");
     $route->post("/posts/update", "PostsApiController@update");
+    $route->post("/posts/views", "PostsApiController@views");
     $route->post("/posts/destroy", "PostsApiController@destroy");
 });
 

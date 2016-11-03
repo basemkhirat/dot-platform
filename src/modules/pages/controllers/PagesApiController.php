@@ -24,6 +24,7 @@ class PagesApiController extends Dot\ApiController
      * @param string $lang (default: user locale) The lang code.
      * @param string $q (optional) The search query string.
      * @param array $with (optional) extra related page components [user, image, media, tags].
+     * @param bool $status (default: all) The page status [1, 0].
      * @param int $limit (default: 10) The number of retrieved records.
      * @param int $page (default: 1) The page number.
      * @param string $order_by (default: id) The column you wish to sort by.
@@ -50,6 +51,10 @@ class PagesApiController extends Dot\ApiController
 
         if ($request->has("q")) {
             $query->search($request->get("q"));
+        }
+
+        if ($request->has("status")) {
+            $query->where("status", $request->get("status"));
         }
 
         if ($id) {
