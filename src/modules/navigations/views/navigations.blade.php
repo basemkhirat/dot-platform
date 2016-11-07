@@ -278,7 +278,8 @@
 
 
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                                 href="#collapse<?php echo $type ?>" style="cursor: pointer">
                                 <h5 class="panel-title">
 
                                     <i class="fa <?php echo $icon; ?>"></i>
@@ -321,13 +322,13 @@
                         <?php } ?>
 
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                                 href="#collapselink" style="cursor: pointer">
                                 <h5 class="panel-title">
 
                                     <i class="fa fa-link"></i>
 
-                                    <a data-toggle="collapse" data-parent="#accordion"
-                                       href="#collapselink"><?php echo trans("navigations::navigations.links") ?></a>
+                                    <a><?php echo trans("navigations::navigations.links") ?></a>
                                 </h5>
                             </div>
                             <div id="collapselink"
@@ -483,6 +484,11 @@
                     base.find(".search-items").first().html(data);
 
                     loader.button("reset");
+
+                    // reload parent window if iframe
+                    if(window.self !== window.top) {
+                        window.parent.location.reload()
+                    }
 
                 }).fail(function () {
                     loader.button("reset");

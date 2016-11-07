@@ -11,6 +11,9 @@
             $("#page-wrapper nav").remove();
             $("#wrapper .main-nav").remove();
             $("ol.breadcrumb li").first().remove();
+            $(".btn-main").remove();
+
+
         }
     });
 
