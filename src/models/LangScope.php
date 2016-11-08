@@ -9,6 +9,13 @@ class LangScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->where('posts.lang', LANG);
+
+        if(GUARD == "api"){
+            $lang = Auth::guard("api")->user()->lang;
+        }else{
+            $lang = LANG;
+        }
+
+        return $builder->where('posts.lang', $lang);
     }
 }

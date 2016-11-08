@@ -9,6 +9,12 @@ class PageScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->where('pages.lang', LANG);
+        if(GUARD == "api"){
+            $lang = Auth::guard("api")->user()->lang;
+        }else{
+            $lang = LANG;
+        }
+
+        return $builder->where('pages.lang', $lang);
     }
 }
