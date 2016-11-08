@@ -138,12 +138,14 @@ class NavigationsController extends Dot\Controller
 
         $name = Request::get("name");
         $link = Request::get("link");
+        $image_id = Request::get("image_id");
 
         $item = new stdClass();
 
         $item->type = "url";
         $item->type_id = 0;
         $item->name = $name;
+        $item->image_id = $image_id;
         $item->link = $link;
 
         $this->data["type"] = $item->type;
@@ -175,6 +177,7 @@ class NavigationsController extends Dot\Controller
                 $nav->name = $item->name;
                 $nav->link = $item->link;
                 $nav->type = $item->type;
+                $nav->image_id = isset($item->image_id) ? $item->image_id : 0;
                 $nav->type_id = $item->type_id;
                 $nav->parent = 0;
                 $nav->order = $order;

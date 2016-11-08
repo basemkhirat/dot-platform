@@ -35,6 +35,7 @@ return [
     "loading" => "جاري الحفظ",
 
 
+    'no_image' => "لا توجد صورة",
     'module' => 'القوائم',
 
     'events' => [

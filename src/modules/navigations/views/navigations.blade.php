@@ -207,7 +207,7 @@
                                         $icon = "fa-link";
                                     }
 
-                                    $html = '<li class="dd-item" data-link="' . $row->link . '" data-id="' . $row->id . '" data-name="' . $name . '" data-type="' . $row->type . '" data-type_id="' . $row->type_id . '">
+                                    $html = '<li class="dd-item" data-link="' . $row->link . '" data-id="' . $row->id . '" data-image_id="' . $row->image_id . '" data-name="' . $name . '" data-type="' . $row->type . '" data-type_id="' . $row->type_id . '">
                                         <div class="dd-handle">
 
                                           <i class="fa ' . $icon . '"></i> &nbsp;' . $row->name
@@ -355,25 +355,41 @@
 
                                         <div class="dd-handle" style="overflow: hidden">
 
+
+                                            <span class="pull-left" style="margin-top: 3px">
+
+                                                <button type="button" class="btn btn-default nav-image-selector">
+                                                    <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                                </button>
+
+                                                <input type="hidden" class="nav_image_id" name="image_id" value="0"/>
+
+                                                <span class="nav-image-viewer">
+                                                    <?php echo trans("navigations::navigations.no_image"); ?>
+                                                </span>
+
+                                            </span>
+
+
                                             <button type="submit" class="btn btn-primary pull-right">
                                                 <?php echo trans("navigations::navigations.add_item"); ?>
                                             </button>
 
+
                                         </div>
+
+                                    </form>
+
                                 </div>
-
-                                </form>
-
                             </div>
                         </div>
+
+
                     </div>
 
-
                 </div>
-
             </div>
         </div>
-    </div>
 
     </div>
     <?php } ?>
@@ -384,12 +400,22 @@
 @section("header")
 
 
-    <link href="<?php echo assets("admin::css/plugins/nestable/nestable.ltr.css"); ?>" type="text/css" rel="stylesheet" />
+    <link href="<?php echo assets("admin::css/plugins/nestable/nestable.ltr.css"); ?>" type="text/css"
+          rel="stylesheet"/>
 
     <style>
 
         .dd-placeholder, .dd-empty {
             background: none;
+        }
+
+        a.nav-image-remove {
+            position: relative;
+            left: -10px;
+            background: #111;
+            color: #fff;
+            width: 19px;
+            top: -16px;
         }
 
 
@@ -399,7 +425,7 @@
 
 @section("footer")
 
-    <script src="<?php echo assets("admin::js/plugins/nestable/jquery.nestable.".DIRECTION.".js"); ?>"></script>
+    <script src="<?php echo assets("admin::js/plugins/nestable/jquery.nestable." . DIRECTION . ".js"); ?>"></script>
 
     <script>
         $(document).ready(function () {
@@ -471,6 +497,30 @@
             });
 
 
+            $("body").on("click", ".nav-image-remove", function(){
+                $(".nav_image_id").val(0);
+                $(".nav-image-viewer").html("<?php echo trans("navigations::navigations.no_image"); ?>");
+
+                return false;
+            });
+
+            $(".nav-image-selector").filemanager({
+
+                panel: "upload",
+
+                done: function (files) {
+                    if(files.length){
+                        file = files[0];
+
+                        $(".nav_image_id").val(file.id);
+                        $(".nav-image-viewer").html("<img style='max-width: 300px;max-height: 51px;' src='" + file.url + "' /><a href='' class='nav-image-remove'><i class='fa fa-times'></i></a>");
+
+                    }
+                }
+
+            });
+
+
             $(".nav-items-form").submit(function () {
 
                 var base = $(this);
@@ -486,7 +536,7 @@
                     loader.button("reset");
 
                     // reload parent window if iframe
-                    if(window.self !== window.top) {
+                    if (window.self !== window.top) {
                         window.parent.location.reload()
                     }
 
@@ -516,6 +566,7 @@
 
                     base.find("[name=name]").first().val("");
                     base.find("[name=link]").first().val("");
+                    base.find("[name=image_id]").first().val("");
 
                     loader.button("reset");
 

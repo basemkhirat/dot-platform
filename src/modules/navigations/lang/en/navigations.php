@@ -35,6 +35,8 @@ return [
     "links" => "Links",
 
 
+    'no_image' => "No image",
+
     'module' => 'Navigations',
 
     'events' => [

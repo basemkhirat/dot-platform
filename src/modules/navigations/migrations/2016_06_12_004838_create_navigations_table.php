@@ -20,6 +20,7 @@ class CreateNavigationsTable extends Migration
             $table->integer("order")->default(0);
             $table->string("type")->index()->nullable();
             $table->integer("type_id")->index()->default(0);
+            $table->integer("image_id")->index()->default(0);
             $table->integer("menu")->index()->default(0);
             $table->string("lang")->index();
             $table->timestamps();
