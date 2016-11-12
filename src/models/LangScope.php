@@ -19,9 +19,8 @@ class LangScope implements Scope
         }
 
         if($lang){
-            return $builder->where('posts.lang', $lang)->where("posts.status", 1);
+            return $builder->where('posts.lang', $lang);
         }
 
-        return $builder->where('posts.lang', $lang);
     }
 }
