@@ -24,7 +24,7 @@ class Carbon extends \Carbon\Carbon{
 
         if($date_format == "relative"){
 
-            if(LANG == "ar"){
+            if(app()->getLocale() == "ar"){
                 return $this->ago();
             }else{
                 return $this->diffForHumans();
