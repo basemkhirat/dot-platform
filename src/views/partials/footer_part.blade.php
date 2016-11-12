@@ -10,7 +10,7 @@
             $("#page-wrapper").css("margin", 0);
             $("#page-wrapper nav").remove();
             $("#wrapper .main-nav").remove();
-            $("ol.breadcrumb li").first().remove();
+            //$("ol.breadcrumb li").first().remove();
             $(".btn-main").remove();
 
 
