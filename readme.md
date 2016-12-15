@@ -10,7 +10,7 @@ To be able to run Dotcms you have to meet the following requirements:
 - PHP 5.5.9 or higher and work perfectly with php7
 - PDO PHP Extension
 - Mcrypt PHP Extension
-- GD PHP Library
+- GD PHP Library       
 - MySql 5.5
 
 
