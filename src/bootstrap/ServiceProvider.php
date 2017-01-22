@@ -2,15 +2,14 @@
 
 namespace Dot\Platform;
 
+use DB;
 use Dot;
-use Illuminate\Support\Facades\Auth;
-use System;
+use Loader;
+use Module;
 use Plugin;
-use Illuminate\Support\Facades\Schema;
-use \Loader;
-use \DB;
-use \Module;
+use System;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -73,7 +72,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->loadAdmin();
 
         $this->mergeConfigFrom(
-            ADMIN_PATH .'/config/apidocs.php', 'apidocs'
+            ADMIN_PATH . '/config/apidocs.php', 'apidocs'
         );
 
         // Initializing modules
@@ -164,8 +163,8 @@ class CmsServiceProvider extends ServiceProvider
         foreach ($this->modules as $module) {
 
 
-            foreach($module->loader as $path){
-                Loader::add($module->root."/".$path);
+            foreach ($module->loader as $path) {
+                Loader::add($module->root . "/" . $path);
             }
 
 
@@ -196,7 +195,7 @@ class CmsServiceProvider extends ServiceProvider
         // loading system directories and plugins directories
         Loader::register();
 
-        foreach ($this->modules as $module){
+        foreach ($this->modules as $module) {
             $module->register();
         }
 

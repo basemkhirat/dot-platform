@@ -2,10 +2,10 @@
 
 namespace Dot;
 
-use Dot\Carbon;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class Model
@@ -22,10 +22,9 @@ class Model extends BaseModel
  */
 trait ModelTraits
 {
+
     /**
-     * Error message bag
-     *
-     * @var Illuminate\Support\MessageBag
+     * @var array
      */
     protected $errors;
 
@@ -66,23 +65,16 @@ trait ModelTraits
      */
     protected $params = [];
 
-    /**
-     * Validator instance
-     *
-     * @var Illuminate\Validation\Validators
-     */
-    public $validator;
 
     /**
      * ModelTraits constructor.
      * @param array $attributes
-     * @param Validator|null $validator
      */
-    public function __construct(array $attributes = array(), Validator $validator = null)
+    public function __construct(array $attributes = array())
     {
         $this->params = $attributes;
         parent::__construct($attributes);
-        $this->validator = $validator ?: \App::make('validator');
+
     }
 
     /**
@@ -285,6 +277,7 @@ trait ModelTraits
      */
     public function validate()
     {
+
         if ($this->exists) {
 
             //update
@@ -313,7 +306,7 @@ trait ModelTraits
         $attributes = $this->setValidationAttributes();
         $attributes = array_merge($attributes, $this->pendingAttributes);
 
-        $v = $this->validator->make($this->params, $rules, $messages, $attributes);
+        $v = Validator::make($this->params, $rules, $messages, $attributes);
 
         // getting custom validation
         if (method_exists($this, 'setValidation')) {
@@ -488,6 +481,10 @@ trait ModelTraits
     }
 
 
+    /**
+     * @param $query
+     * @param array $rest_query
+     */
     function scopeBuild($query, $rest_query = [])
     {
         $q = new \RestQueryBuilder($rest_query);

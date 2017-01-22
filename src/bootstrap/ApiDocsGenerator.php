@@ -56,24 +56,22 @@ class ApiDocsGenerator {
     public function make($prefix)
     {
         $this->prefix = $prefix;
+
         $this->dotPrefix = str_replace('/', '.', $this->prefix);
 
         $this->routes = $this->getRoutes();
 
         if (count($this->routes) == 0) {
-            return;
+            return false;
         }
-
-
 
         $endpoints = $this->getEndpoints();
 
-
-
         $this->generateDirectoryStructure();
+
         $this->generateHTMLCode($endpoints);
 
-        return;
+        return true;
     }
 
     /**

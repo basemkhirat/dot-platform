@@ -37,8 +37,8 @@ class Option extends Dot\Model
 
         foreach ($attributes as $name => $value) {
 
-            if($module != ""){
-                $name = $module.".".$name;
+            if ($module != "") {
+                $name = $module . "." . $name;
             }
 
             if (Option::where("name", $name)->count()) {

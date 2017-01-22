@@ -67,7 +67,7 @@ class Nav extends Dot\Model
 
     public function items()
     {
-        return $this->hasMany(\App\Models\Nav::class, 'menu');
+        return $this->hasMany(self::class, 'menu');
     }
 
     /**

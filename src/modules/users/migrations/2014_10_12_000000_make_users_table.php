@@ -17,11 +17,6 @@ class MakeUsersTable extends Migration
 
         // delete original users table
 
-        /*
-        if (Schema::hasTable("users")) {
-            Schema::drop('users');
-        }*/
-
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
@@ -29,7 +24,8 @@ class MakeUsersTable extends Migration
             $table->string('email')->nullable()->unique();
             $table->string('first_name')->nullable()->index();
             $table->string('last_name')->nullable()->index();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
             $table->string('provider')->nullable()->index();
             $table->string('provider_id')->nullable()->index();
             $table->string('api_token', 60)->nullable()->unique();
@@ -61,6 +57,7 @@ class MakeUsersTable extends Migration
             $user->first_name = "admin";
             $user->last_name = "";
             $user->lang = App::getLocale();
+            $user->api_token = $user->newApiToken();
             $user->status = 1;
             $user->role_id = 1;
             $user->backend = 1;

@@ -23,7 +23,8 @@ class CreatePagesTable extends Migration
             $table->integer('user_id')->index();
             $table->integer('status')->index();
             $table->string("lang")->index();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
         });
 
     }

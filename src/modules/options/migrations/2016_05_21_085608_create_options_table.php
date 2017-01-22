@@ -14,7 +14,7 @@ class CreateOptionsTable extends Migration
      */
     var $defaults = [
         "site_status" => "1",
-        "site_email" => "dot@cms.com",
+        "site_email" => "dot@platform.dev",
         "site_title" => "Dot cms",
         "site_description" => "just a laravel cms",
         "site_keywords" => "",
@@ -39,7 +39,7 @@ class CreateOptionsTable extends Migration
         "sitemap_status" => "1",
         "sitemap_ping" => "1",
         "sitemap_google_ping" => "1",
-        "sitemap_path" => "sitemaps",
+        "sitemap_path" => "",
         "sitemap_limit" => "30",
         "sitemap_xml_status" => "1",
         "sitemap_html_status" => "0",

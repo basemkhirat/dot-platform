@@ -19,6 +19,7 @@ class CreateRolesTable extends Migration
         });
 
         // create superadmin role
+
         $role = new Role();
         $role->name = "superadmin";
         $role->save();

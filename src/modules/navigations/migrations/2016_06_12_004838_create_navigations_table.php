@@ -23,7 +23,8 @@ class CreateNavigationsTable extends Migration
             $table->integer("image_id")->index()->default(0);
             $table->integer("menu")->index()->default(0);
             $table->string("lang")->index();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
         });
     }
 

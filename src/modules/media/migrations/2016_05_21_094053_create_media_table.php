@@ -19,13 +19,14 @@ class CreateMediaTable extends Migration
             $table->string("path")->nullable()->index();
             $table->string("title")->nullable()->index();
             $table->text("description")->nullable();
-            $table->timestamps();
             $table->string("provider", 50)->nullable()->index();
             $table->string("provider_id")->nullable()->index();
             $table->string("provider_image")->nullable()->index();
             $table->integer("user_id")->default(0)->index();
             $table->integer("length")->nullable()->index();
             $table->string("hash")->nullable()->index();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
 
         });
 

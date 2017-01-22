@@ -100,10 +100,10 @@
                                                 name="date_format">
                                             <?php foreach (array("Y-m-d H:i A", "Y-m-d", "d/m/Y", "H:i A") as $format) { ?>
                                                 <option
-                                                    value="<?php echo $format; ?>" <?php if (Config::get("date_format") == $format) { ?> selected="selected" <?php } ?>><?php echo date($format); ?></option>
+                                                    value="<?php echo $format; ?>" <?php if (Config::get("date_format") == $format) { ?> selected="selected" <?php } ?>><?php echo date($format, time() - 2 * 60 * 60); ?></option>
                                             <?php } ?>
                                             <option
-                                                value="relative" <?php if (Config::get("date_format") == "relative") { ?> selected="selected" <?php } ?>><?php echo time_ago(time()); ?></option>
+                                                value="relative" <?php if (Config::get("date_format") == "relative") { ?> selected="selected" <?php } ?>><?php echo time_ago(time() - 2 * 60 * 60); ?></option>
                                         </select>
                                     </div>
 

@@ -36,10 +36,6 @@ return [
     'type_category' => "تصنيف",
     'type_tag' => "وسم",
 
-    'type_program' => "برنامج",
-    'type_presenter' => "مقدم برامج",
-    'type_live' => "بث مباشر",
-
     'attributes' => [
         'name' => 'إسم المكان',
         "type" => "النوع",

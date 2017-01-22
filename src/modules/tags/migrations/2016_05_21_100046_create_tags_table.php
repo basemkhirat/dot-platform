@@ -16,7 +16,8 @@ class CreateTagsTable extends Migration
             $table->increments('id');
             $table->string("name")->index();
             $table->string("slug")->index();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
 
         });
     }

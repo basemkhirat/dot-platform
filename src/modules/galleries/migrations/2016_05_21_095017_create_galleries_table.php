@@ -19,8 +19,9 @@ class CreateGalleriesTable extends Migration
             $table->string("slug")->index();
             $table->string("author")->nullable()->index();
             $table->string("lang")->index();
-            $table->timestamps();
             $table->integer("user_id")->default(0)->index();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
 
         });
 

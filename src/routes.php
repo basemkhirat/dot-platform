@@ -16,14 +16,16 @@ Route::group(["prefix" => ADMIN, "middleware" => ["web", "auth"], "namespace" =>
 });
 
 Route::group(["middleware" => ["web", "auth"]], function ($route) {
+
     $route->get('docs', function () {
 
-        $guest_user = User::where("username", "guest")->first();
+        $user = Auth::user();
 
-        if (count($guest_user) == 0) {
-            return app()->abort(500, "Missing 'guest' user. please create it first.");
+        if(is_null($user->api_token)){
+            return app()->abort(500, "No API Token assigned to the current user.");
         }
 
-        return view('docs.api.index', ["user" => $guest_user]);
+        return view('docs.api.index', ["user" => $user]);
     });
+
 });

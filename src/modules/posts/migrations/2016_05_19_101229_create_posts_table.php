@@ -24,8 +24,10 @@ class CreatePostsTable extends Migration
             $table->integer('status')->default(0)->index();
             $table->string("format")->default("post")->index();
             $table->string("lang")->nullable()->index();
-            $table->timestamps();
-            $table->dateTime('published_at')->nullable()->index();
+            $table->string("views")->default(0)->index();
+            $table->timestamp('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->nullable()->index();
+            $table->timestamp('published_at')->nullable()->index();
         });
 
     }

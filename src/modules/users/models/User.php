@@ -126,6 +126,10 @@ class User extends Dot\Model implements AuthenticatableContract, AuthorizableCon
         return $this->hasOne('Role', "id", 'role_id');
     }
 
+    public function scopeRoot($query){
+        $query->where("root", 1);
+    }
+
 
     public function hasRole($role = "")
     {

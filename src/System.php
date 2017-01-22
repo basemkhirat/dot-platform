@@ -10,7 +10,6 @@ class System
      */
     public $providers = [
         Collective\Html\HtmlServiceProvider::class,
-        //'CeesVanEgmond\Minify\MinifyServiceProvider',
     ];
 
     /**
@@ -18,11 +17,16 @@ class System
      */
     public $aliases = [
 
+        /**
+         * Laravel aliases
+         */
         'Str' => Illuminate\Support\Str::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
-        // System aliases
+        /**
+         * Dot aliases
+         */
         'Dot' => Dot\Platform\Facades\Dot::class,
         'Module' => Dot\Platform\Facades\Module::class,
         'Navigation' => Dot\Platform\Facades\Navigation::class,
@@ -32,7 +36,6 @@ class System
         'Schedule' => Dot\Platform\Facades\Schedule::class,
         'User' => Dot\Platform\Facades\User::class,
 
-        //'Auth' => Dot\Platform\Facades\Auth::class,
     ];
 
     /**
