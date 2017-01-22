@@ -1,0 +1,31 @@
+{
+    "fields": {
+        "id": "increments",
+        "parent": "integer",
+        "title": "string",
+        "slug": "string",
+        "lang": "string:3",
+        "votes": "integer"
+    },
+    "grid": [
+        "title",
+        "votes"
+    ],
+    "form": {
+        "title" : "text"
+    },
+    "require": [
+        "image",
+        "user",
+        "tags"
+    ],
+    "relations": {
+    
+    },
+    "options": {
+        "icon" : "fa-pie-chart",
+        "timestamps" : true,
+        "status" : true,
+        "per_page" : 10
+    }
+}

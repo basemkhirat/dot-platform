@@ -97,8 +97,8 @@ class DotUpdateCommand extends Dot\Command
             '--quiet' => true
         ]);
 
-        $this->info("Congratulations, DOTCMS is now up to date!");
-        $this->info("Dot platform version: " . Dot::version());
+        $this->info("Congratulations, Dot platform is now up to date!");
+        $this->info("Platform version: " . Dot::version());
 
     }
 

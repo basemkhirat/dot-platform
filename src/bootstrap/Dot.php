@@ -13,7 +13,7 @@ class DotPlatform
     /**
      *  Dot platform version
      */
-    const VERSION = '0.1.13';
+    const VERSION = '0.2.1';
 
     /**
      * The current globally available container.
@@ -31,8 +31,7 @@ class DotPlatform
         "action" => DotAction::class,
         "navigation" => DotNavigation::class,
         "sitemap" => DotSitemap::class,
-        "schedule" => DotSchedule::class,
-        //"dauth" => DotAuth::class,
+        "schedule" => DotSchedule::class
     ];
 
     /**

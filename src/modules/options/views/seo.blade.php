@@ -277,8 +277,8 @@
             done: function (result, base) {
                 if (result.length) {
                     var file = result[0];
-                    $("#site_logo_path").val(file.path);
-                    $("#site_logo").attr("src", file.thumbnail);
+                    $("#site_logo_path").val(file.url.split("uploads/")[1]);
+                    $("#site_logo").attr("src", file.url);
 
                     base.hide();
                     $("#remove_logo").show();
