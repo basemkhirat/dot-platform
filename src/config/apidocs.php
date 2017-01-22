@@ -9,7 +9,7 @@ return [
     |
     */
 
-    // head
+
     'index_template_path' => "vendor/dot/platform/src/templates/api/docs/index.blade.php",
     'head_template_path' => "vendor/dot/platform/src/templates/api/includes/head.blade.php",
     'introduction_template_path' => "vendor/dot/platform/src/templates/api/includes/introduction.blade.php",
