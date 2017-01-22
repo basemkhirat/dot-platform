@@ -155,10 +155,9 @@ class DotInstallCommand extends Dot\Command
         $user->first_name = $name;
         $user->save();
 
-        $this->info("Congratulations, DOTCMS is now installed!");
-
-        $this->info("Navigate to /" . Config::get("admin.prefix") . " to browse admin interface.");
-        $this->info("Don't forget to send your feedback.");
+        $this->info("Congratulations, Dot platform ".\Dot\Platform\Facades\Dot::version()." is now installed!");
+        $this->info("Navigate to " . admin_url() . " to browse admin interface.");
+        $this->info("Enjoy :)");
 
     }
 
