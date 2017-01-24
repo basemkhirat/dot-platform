@@ -1,8 +1,5 @@
 <?php
 
-// Dot helper functions.
-
-
 /**
  * @return Dot instance
  */
@@ -53,6 +50,16 @@ function plugins_path($path = "")
 }
 
 /**
+ * @param string $file
+ * @return mixed
+ */
+function admin_url($file = "")
+{
+    return URL::to(ADMIN . "/" . $file);
+}
+
+
+/**
  * @param string $path
  * @return string
  */
@@ -71,36 +78,7 @@ function assets($path = "")
 
     }
 
-    /*$path_parts = explode("/", $path);
-    $extension = end($path_parts);
-
-    if($extension == "js"){
-        return Minify::javascript('/js/jquery.js');
-    }
-
-    if($extension == "css"){
-
-    }*/
-
     return asset($prefix . "/" . $path);
-}
-
-/**
- * @param string $file
- * @return mixed
- */
-function admin_url($file = "")
-{
-    return URL::to(ADMIN . "/" . $file);
-}
-
-/**
- * @param string $file
- * @return string
- */
-function uploads_path($file = "")
-{
-    return public_path(UPLOADS . "/" . $file);
 }
 
 /**
@@ -120,7 +98,6 @@ function get_locales()
 {
     return Config::get("admin.locales");
 }
-
 
 /**
  * Since Post Date

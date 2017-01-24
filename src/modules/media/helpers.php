@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * @param string $file
+ * @return string
+ */
+function uploads_path($file = "")
+{
+    return UPLOADS_PATH . "/" . $file;
+}
+
+
 if (!function_exists("s3_save")) {
 
     function s3_save($filename = "")
@@ -54,11 +64,13 @@ if (!function_exists("uploads_url")) {
 
     function uploads_url($file = "")
     {
-        if (Config::get("media.s3.status")) {
-            $url = "https://" . Config::get("media.s3.bucket") . ".s3-" . Config::get("media.s3.region") . ".amazonaws.com/" . $file;
+
+        if (config("media.s3.status")) {
+            $url = "https://" . config("media.s3.bucket") . ".s3-" . config("media.s3.region") . ".amazonaws.com/" . $file;
         } else {
-            $url = URL::to(UPLOADS . "/" . $file);
+            $url = config::get("media.drivers.local.url") . "/" . $file;
         }
+
         return $url;
     }
 
@@ -80,7 +92,7 @@ if (!function_exists("thumbnail")) {
         }
 
         if (in_array(strtolower($ext), array("jpg", "jpeg", "png", "bmp", "gif"))) {
-            $file_path = $parts[0]."/". $parts[1]. "/".$size . "-" . $parts[2];
+            $file_path = $parts[0] . "/" . $parts[1] . "/" . $size . "-" . $parts[2];
             return uploads_url($file_path);
         }
 
@@ -325,3 +337,5 @@ if (!function_exists("format_file_size")) {
     }
 
 }
+
+

@@ -102,29 +102,31 @@ class System
     {
 
         define("DOT_VERSION", Dot::version());
+        define("ADMIN", config("admin.prefix"));
+        define("API", config("admin.api"));
+
+        /*
+         * Auto detecting website domain.
+         */
 
         if (Config::get("app.url") == "http://localhost") {
             Config::set("app.url", Request::root());
         }
 
-        define("AMAZON", 1);
-        define("ADMIN", Config::get("admin.prefix"));
-        define("API", Config::get("admin.api"));
-        define("UPLOADS", Config::get("admin.uploads_path"));
-        define("UPLOADS_PATH", public_path(UPLOADS));
-        define("AMAZON_URL", "https://" . Config::get("media.s3.bucket") . ".s3-" . Config::get("media.s3.region") . ".amazonaws.com/");
+        /*
+         * Debugging
+         */
 
         if (Config::get("app.debug")) {
-
             error_reporting(E_ALL);
-
             app()->register(Barryvdh\Debugbar\ServiceProvider::class);
             DB::connection('mysql')->enableQueryLog();
         }
 
         /*
-         * Getting the request auth guard
+         * Detecting guard
          */
+
         if (Request::is(API . "/*")) {
             define("GUARD", "api");
         } else {
