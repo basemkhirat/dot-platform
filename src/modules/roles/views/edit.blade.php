@@ -104,7 +104,8 @@
 
 @stop
 
-@section("footer")
+@push("footer")
+
 
 <script>
     $(document).ready(function () {
@@ -115,4 +116,4 @@
     });
 </script>
 
-@stop
+@endpush
