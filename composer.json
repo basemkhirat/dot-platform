@@ -1,4 +1,5 @@
 {
+
     "name": "dot/platform",
     "description": "The core platform of dot/cms",
     "keywords": ["dotcms", "framework", "laravel", "cms", "modules", "plugins"],
