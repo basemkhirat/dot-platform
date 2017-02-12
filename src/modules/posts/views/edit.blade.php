@@ -69,8 +69,7 @@
                         </div>
 
                         <div class="form-group">
-                            @include("admin::partials.editor", ["name" => "content", "id" => "postcontent", "value" =>
-                            @$post->content])
+                            @include("admin::partials.editor", ["name" => "content", "id" => "postcontent", "value" => $post->content])
                         </div>
 
                     </div>
@@ -415,7 +414,6 @@
 @push("footer")
 
     <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
-    <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo assets('admin::js/plugins/moment/moment.min.js') ?>"></script>
     <script type="text/javascript"
             src="<?php echo assets('admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js') ?>"></script>

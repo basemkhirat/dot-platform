@@ -21,7 +21,8 @@ $id = isset($id) ? $id : "post-content";
 
 
 </div>
-<textarea style="display: none" name="<?php echo $name; ?>" id="<?php echo $id; ?>"><?php echo $value; ?></textarea>
+
+<textarea name="<?php echo $name; ?>" id="<?php echo $id; ?>"><?php echo $value; ?></textarea>
 
 
 <?php /*
@@ -50,9 +51,9 @@ $id = isset($id) ? $id : "post-content";
 </div> <!-- / .modal -->
 */ ?>
 
-@section("footer")
-@parent
+@push("footer")
 
+<script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js'); ?>"></script>
 <script src="<?php echo assets('admin::js/voice.js') ?>"></script>
 <script>
 
@@ -131,4 +132,5 @@ $id = isset($id) ? $id : "post-content";
 
     });
 </script>
-@stop
+
+@endpush
