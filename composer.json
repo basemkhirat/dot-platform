@@ -5,13 +5,13 @@
     "license": "MIT",
     "type": "cms",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": ">=5.3",
-        "barryvdh/laravel-debugbar": "^2.0",
-        "roumen/sitemap": "^2.5",
-        "intervention/image": "2.3",
-        "aws/aws-sdk-php-laravel": "^2.0",
-        "laravelcollective/html": "^5.2",
+        "php": ">=5.6.4",
+        "laravel/framework": ">=5.4",
+        "barryvdh/laravel-debugbar": "2.3.2",
+        "roumen/sitemap": "2.5",
+        "intervention/image": "2.*",
+        "aws/aws-sdk-php-laravel": "2.0",
+        "laravelcollective/html": "5.2",
         "phpdocumentor/reflection-docblock": "2.0@dev"
     },
     "autoload": {
