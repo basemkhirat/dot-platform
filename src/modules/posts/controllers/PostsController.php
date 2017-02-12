@@ -94,7 +94,7 @@ class PostsController extends Dot\Controller
             $post->user_id = Auth::user()->id;
             $post->status = Request::get("status", 0);
             $post->format = Request::get("format", "post");
-            $post->lang = LANG;
+            $post->lang = app()->getLocale();
 
             $post->published_at = Request::get('published_at');
             if(in_array($post->published_at, [NULL, ""])){
@@ -155,7 +155,7 @@ class PostsController extends Dot\Controller
             $post->status = Request::get("status", 0);
             $post->format = Request::get("format", "post");
             $post->published_at = Request::get('published_at') != "" ? Request::get('published_at') : date("Y-m-d H:i:s");
-            $post->lang = LANG;
+            $post->lang = app()->getLocale();
 
             // fire post saving action
             Action::fire("post.saving", $post);

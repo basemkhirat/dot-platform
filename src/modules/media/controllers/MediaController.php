@@ -240,14 +240,12 @@ class MediaController extends Dot\Controller
 
         $validator = $media->validateFile($file);
 
-
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
             return \Response::json(array(
                 "error" => join("<br />", str_replace("files.0", $file->getClientOriginalName(), $errors["files.0"]))
             ), 200);
         }
-
 
         $id = $media->saveFile($file);
 
@@ -465,7 +463,7 @@ class MediaController extends Dot\Controller
             $gallery->name = Request::get("name");
             $gallery->author = Request::get("author");
             $gallery->user_id = Auth::user()->id;
-            $gallery->lang = LANG;
+            $gallery->lang = app()->getLocale();
 
             $gallery->save();
 

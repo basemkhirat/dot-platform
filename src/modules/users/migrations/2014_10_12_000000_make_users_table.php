@@ -53,7 +53,7 @@ class MakeUsersTable extends Migration
             $user = new User();
             $user->username = "admin";
             $user->password = "admin";
-            $user->email = "info@example.com";
+            $user->email = "dot@platform.com";
             $user->first_name = "admin";
             $user->last_name = "";
             $user->lang = App::getLocale();

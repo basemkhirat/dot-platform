@@ -4,43 +4,44 @@ namespace Dot\Platform;
 
 use DB;
 use Dot;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 use Loader;
 use Module;
 use Plugin;
 use System;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\ServiceProvider;
 
 
-/**
+/*
  * Class AdminServiceProvider
  */
+
 class CmsServiceProvider extends ServiceProvider
 {
 
-    /**
+    /*
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = false;
 
-    /**
+    /*
      * Modules list.
      *
      * @var array
      */
     protected $modules = [];
 
-    /**
+    /*
      * Options list.
      *
      * @var array
      */
     protected $options = [];
 
-    /**
+    /*
      * AdminServiceProvider constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
      */
@@ -59,8 +60,35 @@ class CmsServiceProvider extends ServiceProvider
     function boot(\Illuminate\Routing\Router $router)
     {
 
-        if (Config::get("app.key") == "") {
-            return false;
+        // Check localization in backend urls.
+
+        if (config("admin.locale_driver") == "url") {
+
+            $request = app()->make('request');
+
+            /* Redirect backend urls have no locale code */
+
+            if ($request->is(config('admin.prefix') . "/*")) {
+
+                $url = implode('/', array_prepend($request->segments(), app()->getLocale()));
+
+                if ($request->getQueryString()) {
+                    $url .= "?" . $request->getQueryString();
+                }
+
+                redirect($url)->send();
+
+            }
+
+            Config::set("admin.prefix", $request->segment(1) . "/" . config("admin.prefix"));
+
+            app()->bind('url', function () {
+                return new \DotUrlGenerator(
+                    app()->make('router')->getRoutes(),
+                    app()->make('request')
+                );
+            });
+
         }
 
         // Extend Auth class
@@ -98,7 +126,7 @@ class CmsServiceProvider extends ServiceProvider
 
     }
 
-    /**
+    /*
      * Register the service provider.
      *
      * @return void
@@ -204,7 +232,7 @@ class CmsServiceProvider extends ServiceProvider
 
     }
 
-    /**
+    /*
      * Get the services provided by the provider.
      *
      * @return array
@@ -215,7 +243,7 @@ class CmsServiceProvider extends ServiceProvider
     }
 
 
-    /**
+    /*
      *  Loading Admin
      */
     protected function loadAdmin()
@@ -225,7 +253,7 @@ class CmsServiceProvider extends ServiceProvider
         }
 
         foreach ($this->system->route_middlewares as $alias => $middleware) {
-            $this->router->middleware($alias, $middleware);
+            $this->router->aliasMiddleware($alias, $middleware);
         }
 
         $this->commands($this->system->commands);
@@ -249,7 +277,7 @@ class CmsServiceProvider extends ServiceProvider
 
     }
 
-    /**
+    /*
      * Load specific module
      * @param $module
      */
@@ -261,7 +289,7 @@ class CmsServiceProvider extends ServiceProvider
         }
 
         foreach ($module->route_middlewares as $alias => $middleware) {
-            $this->router->middleware($alias, $middleware);
+            $this->router->aliasMiddleware($alias, $middleware);
         }
 
         $commands = $module->commands;
@@ -304,7 +332,7 @@ class CmsServiceProvider extends ServiceProvider
 
     }
 
-    /**
+    /*
      * List modules
      * @return array
      */
@@ -327,7 +355,7 @@ class CmsServiceProvider extends ServiceProvider
 
 }
 
-/**
+/*
  * @param $module
  * @return string
  * Helper function to get module path

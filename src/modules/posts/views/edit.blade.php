@@ -369,8 +369,13 @@
         </div>
 
     </form>
-@section("header")
-    @parent
+
+
+
+@stop
+
+@push("header")
+
     <link href="<?php echo assets("admin::tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="<?php echo assets("admin::tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 
@@ -405,11 +410,10 @@
 
     </style>
 
+@endpush
 
-@stop
+@push("footer")
 
-@section("footer")
-    @parent
     <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
     <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo assets('admin::js/plugins/moment/moment.min.js') ?>"></script>
@@ -654,5 +658,4 @@
 
     </script>
 
-@stop
-@stop
+@endpush

@@ -10,12 +10,11 @@ class LangScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
 
-        $lang = false;
 
         if(GUARD == "api"){
             $lang = Auth::guard("api")->user()->lang;
-        }elseif(defined("LANG")){
-            $lang = LANG;
+        }else{
+            $lang = app()->getLocale();
         }
 
         if($lang){

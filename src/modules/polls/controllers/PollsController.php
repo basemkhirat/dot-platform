@@ -61,7 +61,7 @@ class PollsController extends Dot\Controller
 
             $poll->parent = 0;
             $poll->title = Request::get('title');
-            $poll->lang = LANG;
+            $poll->lang = app()->getLocale();
             $poll->image_id = Request::get('image_id', 0);
             $poll->user_id = Auth::user()->id;
             $poll->status = Request::get("status", 0);
@@ -85,7 +85,7 @@ class PollsController extends Dot\Controller
 
                 $answer->parent = $poll->id;
                 $answer->title = $answer_title;
-                $answer->lang = LANG;
+                $answer->lang = app()->getLocale();
                 $answer->user_id = Auth::user()->id;
                 $answer->status = Request::get('status', 0);
 
@@ -116,7 +116,7 @@ class PollsController extends Dot\Controller
 
             $poll->parent = 0;
             $poll->title = Request::get('title');
-            $poll->lang = LANG;
+            $poll->lang = app()->getLocale();
             $poll->image_id = Request::get('image_id', 0);
             $poll->status = Request::get("status", 0);
 
@@ -143,7 +143,7 @@ class PollsController extends Dot\Controller
 
                 $answer->parent = $poll->id;
                 $answer->title = $answer_title;
-                $answer->lang = LANG;
+                $answer->lang = app()->getLocale();
                 $answer->user_id = Auth::user()->id;
                 $answer->image_id = $answers_images[$i];
                 $answer->status = Request::get('status', 0);

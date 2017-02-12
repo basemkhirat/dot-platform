@@ -50,7 +50,7 @@ class Nav extends Dot\Model
                 $nav->parent = $this->id;
                 $nav->order = $order;
                 $nav->menu = $this->menu;
-                $nav->lang = LANG;
+                $nav->lang = app()->getLocale();
 
                 $nav->save();
 

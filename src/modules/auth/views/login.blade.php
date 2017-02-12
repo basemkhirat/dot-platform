@@ -43,8 +43,8 @@
 
 @stop
 
-@section("footer")
-@parent
+@push("footer")
+
 
 <script src="<?php echo assets("admin::") ?>/js/plugins/switchery/switchery.js"></script>
 
@@ -57,4 +57,4 @@
 
 </script>
 
-@stop
+@endpush

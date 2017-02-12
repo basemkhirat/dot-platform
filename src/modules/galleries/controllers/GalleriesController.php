@@ -50,7 +50,7 @@ class GalleriesController extends Dot\Controller
             $gallery->name = Request::get("name");
             $gallery->author = Request::get("author");
             $gallery->user_id = Auth::user()->id;
-            $gallery->lang = LANG;
+            $gallery->lang = app()->getLocale();
 
             // fire gallery saving action
             Action::fire("gallery.saving", $gallery);
@@ -82,7 +82,7 @@ class GalleriesController extends Dot\Controller
 
             $gallery->name = Request::get("name");
             $gallery->author = Request::get("author");
-            $gallery->lang = LANG;
+            $gallery->lang = app()->getLocale();
 
             // fire gallery saving action
             Action::fire("gallery.saving", $gallery);

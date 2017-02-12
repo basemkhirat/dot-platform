@@ -161,13 +161,13 @@ class Block extends Dot\Model
 
             foreach ($posts_ids as $post_id) {
                 $sync[$post_id] = [
-                    'lang' => LANG,
+                    'lang' => app()->getLocale(),
                     'order' => $i,
                 ];
                 $i++;
             }
 
-            DB::table("posts_blocks")->where("block_id", $this->id)->where("lang", LANG)->delete();
+            DB::table("posts_blocks")->where("block_id", $this->id)->where("lang", app()->getLocale())->delete();
             $this->posts()->attach($sync);
         }
 

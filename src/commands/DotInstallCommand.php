@@ -1,8 +1,5 @@
 <?php
 
-use Symfony\Component\Console\Input\InputArgument;
-use Illuminate\Support\Facades\Hash;
-
 /**
  * Class DotInstallCommand
  */
@@ -95,12 +92,6 @@ class DotInstallCommand extends Dot\Command
             $server_messages[] = "Cache path $cache_path is writable.";
         }
 
-        if (!is_writable($cache_path2 = $this->root . "/bootstrap/cache/services.php")) {
-            $server_errors[] = "Cache path $cache_path2 is not writable";
-        } else {
-            $server_messages[] = "Cache path $cache_path2 is writable.";
-        }
-
         if (!is_writable($uploads_path = $this->root . "/public/uploads")) {
             $server_errors[] = "Uploads path $uploads_path is not writable.";
         } else {
@@ -126,7 +117,7 @@ class DotInstallCommand extends Dot\Command
             return false;
         }
 
-        $this->info("Installing migration files");
+        $this->info("\nInstalling migration files");
 
         $this->call('dot:migrate', [
             '--quiet' => true
@@ -136,7 +127,17 @@ class DotInstallCommand extends Dot\Command
             '--quiet' => true
         ]);
 
-        $this->call("dot:api");
+        try {
+
+            $this->call("dot:api", [
+                '--quiet' => true
+            ]);
+
+        }catch (Exception $exception){
+
+            $this->warn($exception->getMessage());
+
+        }
 
         $this->call('optimize', [
             '--quiet' => true
@@ -144,16 +145,10 @@ class DotInstallCommand extends Dot\Command
 
         $this->info("\n");
 
-        $this->info("Creating Administrator account:");
-        $username = $this->ask("Username");
-        $password = $this->secret("Password");
-        $name = $this->ask("Full name");
-
-        $user = User::where("root", 1)->first();
-        $user->username = $username;
-        $user->password = $password;
-        $user->first_name = $name;
-        $user->save();
+        $this->call("dot:user", [
+            '--quiet' => true,
+            '--root'  => true
+        ]);
 
         $this->info("Congratulations, Dot platform ".\Dot\Platform\Facades\Dot::version()." is now installed!");
         $this->info("Navigate to " . admin_url() . " to browse admin interface.");

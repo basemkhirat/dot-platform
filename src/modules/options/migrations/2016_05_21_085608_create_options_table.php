@@ -15,26 +15,27 @@ class CreateOptionsTable extends Migration
     var $defaults = [
         "site_status" => "1",
         "site_email" => "dot@platform.dev",
-        "site_title" => "Dot cms",
+        "site_title" => "Dot Platform",
         "site_description" => "just a laravel cms",
         "site_keywords" => "",
         "site_robots" => "INDEX, FOLLOW",
-        "site_author" => "dotcms",
+        "site_author" => "dotplatform",
         "offline_message" => "",
         "app.timezone" => "Etc/GMT",
         "date_format" => "relative",
         "site_logo" => "",
         "media.allowed_file_types" => "jpg,png,jpeg,bmp,gif,zip,doc,docx,rar,zip,pdf,txt,csv,xls",
-        "media.max_file_size" => "23444344",
-        "media.max_width" => "1200222",
+        "media.max_file_size" => "512000",  // 500 MB
+        "media.max_width" => "2500",     // 2500px
         "media.cropping" => "0",
+        "media.resize_mode" => "resize_crop",
         "media.watermarking" => "0",
         "media.thumbnails" => "1",
         "media.s3_status" => "0",
         "media.s3.bucket" => "",
         "media.s3.region" => "",
         "media.s3.delete_locally" => "1",
-        "site_copyrights" => "All Rights reserved © 2016",
+        "site_copyrights" => "All Rights reserved © 2017",
         "site_slogan" => "",
         "sitemap_status" => "1",
         "sitemap_ping" => "1",
@@ -57,7 +58,6 @@ class CreateOptionsTable extends Migration
         "linkedin_page" => "",
         "soundcloud_page" => "",
         "sidebar" => "",
-
     ];
 
     /**
@@ -71,7 +71,7 @@ class CreateOptionsTable extends Migration
         Schema::create("options", function ($table) {
             $table->increments('id');
             $table->string('name')->index();
-            $table->text("value");
+            $table->text("value")->nullable();
         });
 
         $this->saveOptions();

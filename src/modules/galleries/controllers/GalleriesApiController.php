@@ -81,7 +81,7 @@ class GalleriesApiController extends Dot\ApiController
         $gallery->slug = $request->slug;
         $gallery->author = $request->author;
         $gallery->user_id = $this->user->id;
-        $gallery->lang = LANG;
+        $gallery->lang = app()->getLocale();
 
         // Validate and save requested user
         if (!$gallery->validate()) {

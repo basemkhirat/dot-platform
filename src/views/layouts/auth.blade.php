@@ -8,7 +8,7 @@
     <?php if (DIRECTION == "rtl") { ?>
         <link href="<?php echo assets("admin::") ?>/css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
     <?php } ?>
-    @yield("header")
+    @stack("header")
 </head>
 <body class="dark-theme gray-bg rtls">
 <div class="middle-box text-center loginscreen animated fadeInDown">
@@ -24,6 +24,6 @@
     </div>
 </div>
 <script src="<?php echo assets("admin::js/auth.js") ?>"></script>
-@yield("footer")
+@stack("footer")
 </body>
 </html>

@@ -15,7 +15,7 @@
         baseURL = "<?php echo Config::get("app.url") . "/" . ADMIN . '/' ?>";
     </script>
     <meta name="csrf-token" content="<?php echo csrf_token(); ?>"/>
-    @yield("header")
+    @stack("header")
 </head>
 
 <body class="<?php if (Auth::user()->color == "blue") { ?>dark-theme<?php } ?> <?php if (DIRECTION == "rtl") { ?>rtls<?php } ?> <?php if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") { ?>mini-navbar<?php } ?>">

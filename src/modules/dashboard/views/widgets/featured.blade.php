@@ -51,8 +51,7 @@
 
 
 
-@section("footer")
-@parent
+@push("footer")
 
 <script src="<?php echo assets("admin::") ?>/js/plugins/chartJs/Chart.min.js"></script>
 
@@ -97,4 +96,4 @@
     });
 </script>
 
-@stop
+@endpush

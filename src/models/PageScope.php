@@ -12,7 +12,7 @@ class PageScope implements Scope
         if(GUARD == "api"){
             $lang = Auth::guard("api")->user()->lang;
         }else{
-            $lang = LANG;
+            $lang = app()->getLocale();
         }
 
         return $builder->where('pages.lang', $lang);

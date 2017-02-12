@@ -30,7 +30,7 @@ class DashboardController extends Dot\Controller
 
         $cats = Category::with(['postViews', 'postStats'])->where('site', $this->conn)->orderBy('name', 'desc');
 
-        $articlesViews = Post::where('site', LANG)->where('type', 'article');
+        $articlesViews = Post::where('site', app()->getLocale())->where('type', 'article');
         $articlesStats = PostStat::whereHas('posts', function ($q) {
             $q->where('site', $this->conn)->where('type', 'article');
         })->select(DB::raw('sum(facebook) as facebook'), DB::raw('sum(twitter) as twitter'), DB::raw('sum(youtube) as youtube'));

@@ -190,7 +190,8 @@
 
     </div>
 </form>
-@section("header")
+
+@push("header")
 <link href="<?php echo assets("admin::tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
 <link href="<?php echo assets("admin::tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 <link href="<?php echo assets("admin::css") ?>/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
@@ -203,8 +204,8 @@
 
 </style>
 
-@stop
-@section("footer")
+@endpush
+@push("footer")
 <script src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
 <script src="<?php echo assets("admin::js") ?>/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 
@@ -270,5 +271,5 @@
 
     });
 </script>
-@stop
+@endpush
 @stop

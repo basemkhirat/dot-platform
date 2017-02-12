@@ -138,7 +138,7 @@
 
 <?php echo Widget::render("admin.footer"); ?>
 
-@yield("footer")
+@stack("footer")
 
 </body>
 </html>

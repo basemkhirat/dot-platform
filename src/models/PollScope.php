@@ -9,6 +9,6 @@ class PollScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->where('lang', LANG);
+        return $builder->where('lang', app()->getLocale());
     }
 }

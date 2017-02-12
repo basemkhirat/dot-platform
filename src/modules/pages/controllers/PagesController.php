@@ -68,7 +68,7 @@ class PagesController extends Dot\Controller
             $page->image_id = Request::get('image_id');
             $page->user_id = Auth::user()->id;
             $page->status = Request::get("status", 0);
-            $page->lang = LANG;
+            $page->lang = app()->getLocale();
 
 
             // fire page saving action
@@ -112,7 +112,7 @@ class PagesController extends Dot\Controller
             $page->content = Request::get('content');
             $page->image_id = Request::get('image_id');
             $page->status = Request::get("status", 0);
-            $page->lang = LANG;
+            $page->lang = app()->getLocale();
 
             // fire page saving action
             Action::fire("page.saving", $page);

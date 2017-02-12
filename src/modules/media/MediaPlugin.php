@@ -37,7 +37,13 @@ class MediaPlugin extends Plugin
     function boot()
     {
 
-        define("UPLOADS_PATH", config("media.drivers.local.path"));
+        $media_path = config("media.drivers.local.path");
+
+        if(!$media_path){
+            $media_path = public_path("uploads");
+        }
+
+        define("UPLOADS_PATH", $media_path);
 
         define("AMAZON", 1);
         define("AMAZON_URL", "https://" . Config::get("media.s3.bucket") . ".s3-" . config("media.s3.region") . ".amazonaws.com/");

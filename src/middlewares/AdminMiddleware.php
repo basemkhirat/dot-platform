@@ -1,25 +1,57 @@
 <?php
 
+
 class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
 
         // setting the time zone;
-        date_default_timezone_set(Config::get("app.timezone"));
 
-        if (!defined("LANG")) {
+        @date_default_timezone_set(config("app.timezone"));
 
-            // setting default locale
+
+        // setting default locale
+
+        if (config("admin.locale_driver") == "url") {
+
+            // Getting current locale from the first url segment.
+
+            if (!$request->is(config('admin.prefix') . "/*")) {
+
+                if (!array_key_exists($request->segment(1), config('admin.locales'))) {
+
+                    $url = implode('/', $request->segments());
+
+                    if ($request->getQueryString()) {
+                        $url .= "?" . $request->getQueryString();
+                    }
+
+                    $url = $url ? $url : "/";
+
+                    return redirect(url($url));
+                }
+
+            }
+
+
+
+            app()->setLocale($request->segment(1));
+
+            define("DIRECTION", config()->get("admin.locales")[app()->getLocale()]["direction"]);
+
+        } else {
+
+            // Getting current url from session.
+
             try {
                 if (session()->has('locale')) {
                     app()->setLocale(session()->get('locale'));
                 } else {
                     app()->setLocale(config()->get('app.locale'));
                 }
-                define("LANG", app()->getLocale());
-                define("DIRECTION", config()->get("admin.locales")[LANG]["direction"]);
 
+                define("DIRECTION", config()->get("admin.locales")[app()->getLocale()]["direction"]);
 
             } catch (Exception $error) {
                 abort(500, "System locales is not configured successfully");
@@ -27,13 +59,13 @@ class AdminMiddleware
 
         }
 
-        // getting site status
+        // Getting frontend status.
+
         if (!$request->is(ADMIN . '/*')) {
-            if (!Config::get("site_status")) {
-                return response(Config::get("offline_message"));
+            if (!config("site_status")) {
+                return response(config("offline_message"));
             }
         }
-
 
         return $next($request);
     }

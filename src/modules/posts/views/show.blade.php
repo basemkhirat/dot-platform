@@ -279,15 +279,13 @@
 </div>
 
 
-@section("header")
-@parent
+@push("header")
 
 <link href="<?php echo assets('admin::css/plugins/datetimepicker/bootstrap-datetimepicker.min.css') ?>" rel="stylesheet" type="text/css">
 
-@stop
+@endpush
 
-@section("footer")
-@parent
+@push("footer")
 
 <script type="text/javascript" src="<?php echo assets('admin::js/plugins/moment/moment.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo assets('admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js') ?>"></script>
@@ -340,5 +338,6 @@
         });
     });
 </script>
-@stop
+@endpush
+
 @stop

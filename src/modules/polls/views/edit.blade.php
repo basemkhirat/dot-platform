@@ -191,8 +191,8 @@
         </div>
     </div>
 </form>
-@section("header")
-@parent
+@push("header")
+
 <link href="<?php echo assets("admin::tagit") ?>/jquery.tagit.css" rel="stylesheet" type="text/css">
 <link href="<?php echo assets("admin::tagit") ?>/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 <style>
@@ -203,11 +203,13 @@
 
 </style>
 
-@stop
-@section("footer")
-@parent
+@endpush
+
+@push("footer")
+
 <script type="text/javascript" src="<?php echo assets("admin::tagit") ?>/tag-it.js"></script>
 <script>
+
     $(document).ready(function () {
 
 
@@ -344,5 +346,6 @@
 
     });
 </script>
-@stop
+@endpush
+
 @stop

@@ -39,14 +39,14 @@ class ApiController extends LaravelController
         $this->request = $request;
         $this->response = new \DotResponse();
 
-        if (!defined("LANG")) {
+      //  if (!defined("LANG")) {
             if (Auth::guard("api")->check()) {
                 $this->user = Auth::guard(GUARD)->user();
-                define("LANG", $request->get("lang", $this->user->lang));
+               // define("LANG", $request->get("lang", $this->user->lang));
             } else {
-                define("LANG", $request->get("lang", app()->getLocale()));
+               // define("LANG", $request->get("lang", app()->getLocale()));
             }
-        }
+       // }
 
     }
 

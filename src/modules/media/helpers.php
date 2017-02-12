@@ -68,7 +68,14 @@ if (!function_exists("uploads_url")) {
         if (config("media.s3.status")) {
             $url = "https://" . config("media.s3.bucket") . ".s3-" . config("media.s3.region") . ".amazonaws.com/" . $file;
         } else {
-            $url = config::get("media.drivers.local.url") . "/" . $file;
+
+            $media_url = config("media.drivers.local.url");
+
+            if(!$media_url){
+                $media_url = url("uploads");
+            }
+
+            $url = $media_url . "/" . $file;
         }
 
         return $url;

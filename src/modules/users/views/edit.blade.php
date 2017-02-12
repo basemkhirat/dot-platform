@@ -267,7 +267,7 @@
 
 @stop
 
-@section("header")
+@push("header")
 
 <style>
 
@@ -277,9 +277,9 @@
 
 </style>
 
-@stop
+@endpush
 
-@section("footer")
+@push("footer")
 
 <script>
     $(document).ready(function () {
@@ -318,4 +318,4 @@
 
 </script>
 
-@stop
+@endpush

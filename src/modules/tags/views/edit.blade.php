@@ -78,13 +78,11 @@
     </div>
 
 </form>
-@section("header")
-@parent
+@push("header")
 
-@stop
+@endpush
 
-@section("footer")
-@parent
+@push("footer")
 
 <script>
     $(document).ready(function () {
@@ -115,5 +113,7 @@
 
     });
 </script>
-@stop
+
+@endpush
+
 @stop

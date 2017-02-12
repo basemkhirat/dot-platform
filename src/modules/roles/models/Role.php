@@ -36,4 +36,8 @@ class Role extends Dot\Model {
         }
     }
 
+    public function scopeSuperAdmin($query){
+        $query->where("name", "superadmin");
+    }
+
 }

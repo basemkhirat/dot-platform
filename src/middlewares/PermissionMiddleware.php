@@ -15,6 +15,8 @@ class PermissionMiddleware
     public function handle($request, Closure $next, $permission = null)
     {
 
+
+
         if (!Gate::allows($permission)) {
             if ($request->is(API . "/*")) {
 

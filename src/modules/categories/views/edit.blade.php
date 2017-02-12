@@ -130,12 +130,11 @@
     </div>
 
 </form>
-@section("header")
-@parent
+@push("header")
 
-@stop
-@section("footer")
-@parent
+@endpush
+
+@push("footer")
 
 <script>
     $(document).ready(function () {
@@ -157,5 +156,5 @@
         });
     });
 </script>
-@stop
+@endpush
 @stop

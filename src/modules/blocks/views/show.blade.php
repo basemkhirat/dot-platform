@@ -187,13 +187,11 @@
     </form>
 </div>
 
-@section("header")
-@parent
+@push("header")
 
-@stop
+@endpush
 
-@section("footer")
-@parent
+@push("footer")
 
 <script>
 
@@ -228,5 +226,5 @@
         });
     });
 </script>
-@stop
+@endpush
 @stop

@@ -213,8 +213,8 @@
         </div>
     </form>
 </div>
-@section("footer")
-@parent
+@push("footer")
+
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
@@ -244,5 +244,7 @@
         });
     });
 </script>
-@stop
+
+@endpush
+
 @stop

@@ -51,7 +51,7 @@ class BlocksController extends Dot\Controller
             $block->name = Request::get("name");
             $block->type = Request::get("type");
             $block->limit = Request::get("limit", 0);
-            $block->lang = LANG;
+            $block->lang = app()->getLocale();
 
             // fire saving block
             Action::fire("block.saving", $block);
@@ -87,7 +87,7 @@ class BlocksController extends Dot\Controller
             $block->name = Request::get("name");
             $block->type = Request::get("type");
             $block->limit = Request::get("limit", 0);
-            $block->lang = LANG;
+            $block->lang = app()->getLocale();
 
             // fire saving action
             Action::fire("block.saving", $block);

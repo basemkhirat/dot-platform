@@ -61,6 +61,7 @@ class Media extends Dot\Model
     public function saveFile($file)
     {
 
+
         $media = Media::where("hash", sha1_file($file->getRealPath()))->first();
 
         if (count($media)) {
@@ -84,16 +85,21 @@ class Media extends Dot\Model
         try {
 
             $this->checkImageDimensions($filename);
+
             $file->move($file_directory, $filename);
+
             s3_save(date("Y/m/") . $filename);
 
         } catch (Exception $exception) {
+
             $error = array(
                 'name' => $file->getClientOriginalName(),
                 'size' => $size,
                 'error' => $exception->getMessage(),
             );
+
             return \Response::json($error, 400);
+
         }
 
         if ($this->isImage($extension)) {
@@ -182,6 +188,7 @@ class Media extends Dot\Model
         }
 
         $file_directory = UPLOADS_PATH . date("/Y/m");
+
 
         if (file_exists($file_directory . "/" . $filename)) {
 

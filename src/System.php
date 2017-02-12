@@ -49,6 +49,7 @@ class System
         DotPublishCommand::class,
         DotAutoloadCommand::class,
         DotMigrateCommand::class,
+        DotUserCommand::class,
 
         // Modules commands
         ModuleMigrationCommand::class,
@@ -136,6 +137,7 @@ class System
         include __DIR__ . '/overrides.php';
         include __DIR__ . '/helpers.php';
         include __DIR__ . '/routes.php';
+
     }
 
 }

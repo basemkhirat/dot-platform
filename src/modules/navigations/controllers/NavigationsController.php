@@ -112,7 +112,7 @@ class NavigationsController extends Dot\Controller
         }
 
         $nav->name = Request::get("name");
-        $nav->lang = LANG;
+        $nav->lang = app()->getLocale();
 
         if (!$nav->validate()) {
             return json_encode($nav->errors());
@@ -182,7 +182,7 @@ class NavigationsController extends Dot\Controller
                 $nav->parent = 0;
                 $nav->order = $order;
                 $nav->menu = $menu_id;
-                $nav->lang = LANG;
+                $nav->lang = app()->getLocale();
 
                 $nav->save();
 
