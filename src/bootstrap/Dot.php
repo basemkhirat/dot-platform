@@ -13,7 +13,7 @@ class DotPlatform
     /**
      *  Dot platform version
      */
-    const VERSION = '0.2.6.2';
+    const VERSION = '0.2.8';
 
     /**
      * The current globally available container.

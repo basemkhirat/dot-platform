@@ -397,7 +397,7 @@
 @stop
 
 
-@section("header")
+@push("header")
 
 
     <link href="<?php echo assets("admin::css/plugins/nestable/nestable.ltr.css"); ?>" type="text/css"
@@ -421,9 +421,9 @@
 
     </style>
 
-@stop
+@endpush
 
-@section("footer")
+@push("footer")
 
     <script src="<?php echo assets("admin::js/plugins/nestable/jquery.nestable." . DIRECTION . ".js"); ?>"></script>
 
@@ -647,4 +647,4 @@
         });
     </script>
 
-@stop
+@endpush
