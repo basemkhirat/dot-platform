@@ -145,7 +145,9 @@
 </form>
 </div>
 
-@section("header")
+@stop
+
+@push("header")
 <style>
 
     .file-box .file{
@@ -153,9 +155,9 @@
     }
 
 </style>
-@stop
+@endpush
 
-@section("footer")
+@push("footer")
 <script>
     $(document).ready(function () {
         $("#add_media").filemanager({
@@ -227,5 +229,4 @@
 
     });
 </script>
-@stop
-@stop
+@endpush

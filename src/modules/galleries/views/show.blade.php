@@ -167,7 +167,12 @@
 
 </div>
 
-@section("footer")
+
+@stop
+
+
+@push("footer")
+
 <script>
     $(document).ready(function () {
 
@@ -206,6 +211,5 @@
 
 
 </script>
-@stop
 
-@stop
+@endpush
