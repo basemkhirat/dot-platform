@@ -3,6 +3,7 @@
 namespace Dot\Platform;
 
 use Illuminate\Events\Dispatcher;
+use Illuminate\View\View;
 
 
 /**
@@ -28,7 +29,13 @@ class DotAction extends Dispatcher
         }
 
         foreach ($output as $value) {
-           echo $value;
+
+            if ($value instanceof View) {
+                echo $value->render();
+            } else {
+                echo $value;
+            }
+
         }
 
         return true;

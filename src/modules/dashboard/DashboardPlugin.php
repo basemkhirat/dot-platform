@@ -31,9 +31,9 @@ class DashboardPlugin extends Plugin
 
             $menu->item('dashboard.general', trans("admin::common.general_statistics"), URL::to(ADMIN . '/dashboard'));
 
-            if (Gate::allows("categories.stats")) {
-                $menu->item('dashboard.general', trans("admin::common.categories_statistics"), URL::to(ADMIN . '/stats'));
-            }
+            //if (Gate::allows("categories.stats")) {
+            //    $menu->item('dashboard.general', trans("admin::common.categories_statistics"), URL::to(ADMIN . '/stats'));
+            //}
         });
 
 

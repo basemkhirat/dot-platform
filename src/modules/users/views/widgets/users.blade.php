@@ -38,7 +38,7 @@
                             </td>
 
                             <td class="text-right">
-                                <small><?php echo $user->role->name; ?></small>
+                                <small><?php echo !$user->role ?: $user->role->name; ?></small>
                             </td>
                         </tr>
                         <?php } ?>

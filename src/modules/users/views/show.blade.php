@@ -66,6 +66,7 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="form-group">
+
                     <select name="status" class="form-control chosen-select chosen-rtl">
                         <option value=""><?php echo trans("users::users.all"); ?></option>
                         <option <?php if (Request::get("status") == "1") { ?> selected='selected' <?php } ?>

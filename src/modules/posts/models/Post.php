@@ -95,6 +95,14 @@ class Post extends Dot\Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seo()
+    {
+        return $this->hasOne("SEO");
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function image()
