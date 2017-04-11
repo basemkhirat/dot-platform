@@ -1,4 +1,4 @@
-# DotCms
+# DotPlatform
 
 #### 
 > A modular multilingual CMS built with Laravel 5 introduce a full-featured modular multilingual CMS built on top of the Laravel framework.
