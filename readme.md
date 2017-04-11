@@ -1,7 +1,7 @@
 # DotCms
 
 #### 
-> A modular multilingual CMS built with Laravel 5.2 introduce a full-featured modular multilingual CMS built on top of the Laravel framework.
+> A modular multilingual CMS built with Laravel 5 introduce a full-featured modular multilingual CMS built on top of the Laravel framework.
 
 ### Minimum System Requirements:
 
@@ -40,16 +40,6 @@ Then add service provider in app config
 Then Run this artisan command to install
 
 	php artisan dot:install
-
----
-
-#####3) Clone the repo:
-
-	git clone https://bitbucket.org/basemkhirat/dot-cms.git folder-name
-
-Then,
-	
-	composer install
 
 
 Enjoy :)
