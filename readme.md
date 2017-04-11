@@ -18,17 +18,6 @@ To be able to run Dotcms you have to meet the following requirements:
 
 It's very easy, you can choose one of three installation methods:
 
-
-#####1) Installation as a project (recommended):
-
-	composer create-project dot/cms --prefer-dist your-project-name
-
-After you have a fresh installation, you will not be able to proceed beyond this point until the installation directory has been removed. This is a security feature.
-
----
-
-#####2) Installation as a laravel package:
-
 First, you must have a laravel 5 project you can install dot/platform package
 
 	composer require dot/platform
