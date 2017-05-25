@@ -1,7 +1,8 @@
-# DotCms
+# DotPlatform
+
 
 #### 
-> A modular multilingual CMS built with Laravel 5.2 introduce a full-featured modular multilingual CMS built on top of the Laravel framework.
+> A modular multilingual CMS built with Laravel 5 introduce a full-featured modular multilingual CMS built on top of the Laravel framework.
 
 ### Minimum System Requirements:
 
@@ -18,17 +19,6 @@ To be able to run Dotcms you have to meet the following requirements:
 
 It's very easy, you can choose one of three installation methods:
 
-
-#####1) Installation as a project (recommended):
-
-	composer create-project dot/cms --prefer-dist your-project-name
-
-After you have a fresh installation, you will not be able to proceed beyond this point until the installation directory has been removed. This is a security feature.
-
----
-
-#####2) Installation as a laravel package:
-
 First, you must have a laravel 5 project you can install dot/platform package
 
 	composer require dot/platform
@@ -40,16 +30,6 @@ Then add service provider in app config
 Then Run this artisan command to install
 
 	php artisan dot:install
-
----
-
-#####3) Clone the repo:
-
-	git clone https://bitbucket.org/basemkhirat/dot-cms.git folder-name
-
-Then,
-	
-	composer install
 
 
 Enjoy :)
