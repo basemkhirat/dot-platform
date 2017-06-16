@@ -30,7 +30,7 @@ class DotPlatform
         "widget" => DotWidget::class,
         "action" => DotAction::class,
         "navigation" => DotNavigation::class,
-        "sitemap" => DotSitemap::class,
+        //"sitemap" => DotSitemap::class,
         "schedule" => DotSchedule::class
     ];
 
