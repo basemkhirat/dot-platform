@@ -1,11 +1,11 @@
 <?php
 
-class Mapss extends Dot\Model {
+class Sitemap {
+
     /*
      * Update sitemap links
      *
      */
-
     public static function refresh() {
 
         if (Config::get("sitemap_status") != 1) {

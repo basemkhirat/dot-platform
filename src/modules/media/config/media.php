@@ -20,9 +20,9 @@ return [
 
         "local" => [
 
-            "url" => env("MEDIA_URL", url("uploads")),
+            "url" => env("MEDIA_URL"),
 
-            "path" => env("MEDIA_PATH", public_path("uploads")),
+            "path" => env("MEDIA_PATH"),
 
         ]
 
@@ -39,8 +39,7 @@ return [
     'sizes' => [
         'medium' => array(460, 307),
         'small' => array(234, 156),
-        'thumbnail' => array(165, 108),
-        'free' => array(725, 300)
+        'thumbnail' => array(165, 108)
     ],
 
     /*

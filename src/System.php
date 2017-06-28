@@ -32,7 +32,7 @@ class System
         'Navigation' => Dot\Platform\Facades\Navigation::class,
         'Action' => Dot\Platform\Facades\Action::class,
         'Widget' => Dot\Platform\Facades\Widget::class,
-        //'Sitemap' => Dot\Platform\Facades\Sitemap::class,
+        'Sitemap' => Dot\Platform\Facades\Sitemap::class,
         'Schedule' => Dot\Platform\Facades\Schedule::class,
         'User' => Dot\Platform\Facades\User::class,
 
