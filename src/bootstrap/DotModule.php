@@ -100,7 +100,7 @@ class DotModule
                 $module = self::get($folder_name);
 
                 if ($module and $module->path != "") {
-                    $modules[] = $module;
+                    $modules[$module->path] = $module;
                 }
 
             }

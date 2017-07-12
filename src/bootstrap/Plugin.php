@@ -179,7 +179,7 @@ class Plugin
                 $plugin = self::get($folder_name);
 
                 if ($plugin and $plugin->path != "") {
-                    $plugins[] = $plugin;
+                    $plugins[$plugin->path] = $plugin;
                 }
 
             }

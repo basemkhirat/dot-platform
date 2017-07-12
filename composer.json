@@ -15,7 +15,8 @@
         "intervention/image": "2.*",
         "aws/aws-sdk-php-laravel": "2.0",
         "laravelcollective/html": "5.4.*",
-        "phpdocumentor/reflection-docblock": "*"
+        "phpdocumentor/reflection-docblock": "*",
+        "sunra/php-simple-html-dom-parser": "^1.5"
     },
 
     "autoload": {

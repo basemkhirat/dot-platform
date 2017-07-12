@@ -8,9 +8,9 @@ class DotUrlGenerator extends UrlGenerator
     /**
      * Generate an absolute URL to the given path.
      *
-     * @param  string  $path
-     * @param  mixed  $extra
-     * @param  bool|null  $secure
+     * @param  string $path
+     * @param  mixed $extra
+     * @param  bool|null $secure
      * @return string
      */
     public function to($path, $extra = [], $secure = null)
@@ -23,7 +23,7 @@ class DotUrlGenerator extends UrlGenerator
         }
 
         $tail = implode('/', array_map(
-                'rawurlencode', (array) $this->formatParameters($extra))
+                'rawurlencode', (array)$this->formatParameters($extra))
         );
 
         // Once we have the scheme we will compile the "tail" by collapsing the values
@@ -33,7 +33,7 @@ class DotUrlGenerator extends UrlGenerator
 
         $p = explode("/", $path);
 
-        if (!array_key_exists($p[0], config("admin.locales"))) {
+        if (!array_key_exists($p[0], config("admin.locales")) and !strstr($path, "uploads")) {
             if (!strstr($path, ".")) {
                 $root .= "/" . app()->getLocale();
             }
@@ -42,8 +42,8 @@ class DotUrlGenerator extends UrlGenerator
         list($path, $query) = $this->extractQueryString($path);
 
         return $this->format(
-                $root, '/'.trim($path.'/'.$tail, '/')
-            ).$query;
+                $root, '/' . trim($path . '/' . $tail, '/')
+            ) . $query;
     }
 
 }

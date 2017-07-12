@@ -5,7 +5,6 @@ namespace Dot\Platform;
 use DB;
 use Dot;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Loader;
 use Module;
@@ -143,10 +142,8 @@ class CmsServiceProvider extends ServiceProvider
         define("MODULES_PATH", ADMIN_PATH . "/modules");
         define("PLUGINS_PATH", ROOT_PATH . "/plugins");
 
-        if (Schema::hasTable("options")) {
-            foreach (DB::table("options")->get() as $option) {
-                Config::set($option->name, $option->value);
-            }
+        foreach (DB::table("options")->get() as $option) {
+            Config::set($option->name, $option->value);
         }
 
         $this->app->singleton('apidocs.generate', function ($app) {
@@ -241,7 +238,6 @@ class CmsServiceProvider extends ServiceProvider
     {
         return [];
     }
-
 
     /*
      *  Loading Admin
@@ -340,17 +336,15 @@ class CmsServiceProvider extends ServiceProvider
     {
         $components = [];
 
-        foreach (Module::installed() as $module) {
-            $components[] = $module;
-            Module::set($module->path, "modules/" . $module->path);
-        }
-
-        foreach (Plugin::installed() as $plugin) {
-            $components[] = $plugin;
-            Module::set($plugin->path, "plugins/" . $plugin->path);
+        foreach (array_merge(Module::installed(), Plugin::installed()) as $component) {
+            if (!in_array($component, $components, true)) {
+                $components[] = $component;
+                Module::set($component->path, $component->type . "s/" . $component->path);
+            }
         }
 
         return $components;
+
     }
 
 }

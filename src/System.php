@@ -67,6 +67,8 @@ class System
         PluginMigrateDownCommand::class,
         pluginInstallCommand::class,
         PluginUninstallCommand::class,
+        PluginEnableCommand::class,
+        PluginDisableCommand::class,
         PluginListCommand::class,
         PluginPublishCommand::class,
         PluginUpdateCommand::class

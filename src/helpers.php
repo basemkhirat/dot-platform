@@ -23,6 +23,17 @@ function cms_version()
 }
 
 /**
+ * get root path
+ * @param string $path
+ * @return string
+ */
+function root_path($path = "")
+{
+    return ROOT_PATH . $path;
+}
+
+/**
+ * get ad
  * @param string $path
  * @return string
  */
@@ -58,7 +69,6 @@ function admin_url($file = "")
     return URL::to(ADMIN . "/" . $file);
 }
 
-
 /**
  * @param string $path
  * @return string
@@ -69,13 +79,11 @@ function assets($path = "")
 
     if (strstr($path, "::")) {
         list($namespace, $path) = explode("::", $path);
-
         if ($namespace == "admin") {
             $prefix = "admin";
         } else {
             $prefix = Module::path($namespace);
         }
-
     }
 
     return asset($prefix . "/" . $path);

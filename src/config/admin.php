@@ -73,7 +73,9 @@ return [
         "pages",
         "posts",
         "blocks",
-        "navigations"
+        "navigations",
+        "dashboard",
+        "seo"
     ]
 
 ];
