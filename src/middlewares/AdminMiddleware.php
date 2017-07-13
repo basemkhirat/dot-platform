@@ -17,7 +17,7 @@ class AdminMiddleware
 
             // Getting current locale from the first url segment.
 
-            if (!$request->is(config('admin.prefix') . "/*")) {
+            if (!$request->is(config('admin.prefix') . "/*") and strstr(config("app.url"), $request->header('host'))) {
 
                 if (!array_key_exists($request->segment(1), config('admin.locales'))) {
 
@@ -30,13 +30,11 @@ class AdminMiddleware
                     $url = $url ? $url : "/";
 
                     return redirect(url($url));
+                } else {
+                    app()->setLocale($request->segment(1));
                 }
 
             }
-
-
-
-            app()->setLocale($request->segment(1));
 
             define("DIRECTION", config()->get("admin.locales")[app()->getLocale()]["direction"]);
 
