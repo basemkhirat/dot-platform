@@ -1,13 +1,20 @@
 <?php
 
+/**
+ * Class PostsPlugin
+ */
 class PostsPlugin extends Plugin
 {
 
+    /**
+     * @var array
+     */
     public $permissions = [
         "manage"
     ];
 
     /**
+     * plugin info
      * @return array
      */
     function info()
@@ -20,6 +27,10 @@ class PostsPlugin extends Plugin
 
     }
 
+
+    /**
+     *  initialize plugin
+     */
     function boot()
     {
 
@@ -37,12 +48,18 @@ class PostsPlugin extends Plugin
 
     }
 
+    /**
+     * install plugin
+     */
     function install()
     {
         parent::install();
     }
 
 
+    /**
+     *  uninstall plugin
+     */
     function uninstall()
     {
         parent::uninstall();

@@ -37,7 +37,12 @@ class AdminMiddleware
             }
 
             app()->setLocale($request->segment(1));
-            define("DIRECTION", config()->get("admin.locales")[app()->getLocale()]["direction"]);
+
+            dd(config()->get("admin.locales")[app()->getLocale()]["direction"]);
+
+            if(isset(config()->get("admin.locales")[app()->getLocale()]["direction"])){
+                define("DIRECTION", config()->get("admin.locales")[app()->getLocale()]["direction"]);
+            }
 
         } else {
 

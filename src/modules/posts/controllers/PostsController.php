@@ -1,16 +1,30 @@
 <?php
 
+/**
+ * Class PostsController
+ */
 class PostsController extends Dot\Controller
 {
 
+    /**
+     * @var array
+     */
     protected $data = [];
 
+
+    /**
+     * PostsController constructor.
+     */
     function __construct()
     {
         parent::__construct();
         $this->middleware("permission:pages.manage");
     }
 
+    /**
+     * list all posts
+     * @return mixed
+     */
     function index()
     {
 
@@ -81,6 +95,10 @@ class PostsController extends Dot\Controller
         return View::make("posts::show", $this->data);
     }
 
+    /**
+     * create new post
+     * @return mixed
+     */
     public function create()
     {
         $post = new Post();
@@ -140,6 +158,11 @@ class PostsController extends Dot\Controller
         return View::make("posts::edit", $this->data);
     }
 
+    /**
+     * edit post
+     * @param $id
+     * @return mixed
+     */
     public function edit($id)
     {
 
@@ -195,6 +218,10 @@ class PostsController extends Dot\Controller
         return View::make("posts::edit", $this->data);
     }
 
+    /**
+     * delete posts
+     * @return mixed
+     */
     public function delete()
     {
         $ids = Request::get("id");
@@ -220,6 +247,11 @@ class PostsController extends Dot\Controller
         return Redirect::back()->with("message", trans("posts::posts.events.deleted"));
     }
 
+    /**
+     * activating posts
+     * @param $status
+     * @return mixed
+     */
     public function status($status)
     {
         $ids = Request::get("id");

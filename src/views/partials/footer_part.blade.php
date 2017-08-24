@@ -138,6 +138,8 @@
 
 <?php echo Widget::render("admin.footer"); ?>
 
+<?php Action::render("admin.footer"); ?>
+
 @stack("footer")
 
 </body>
