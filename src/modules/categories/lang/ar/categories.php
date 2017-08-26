@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     'categories' => 'التصنيفات',
     'category' => 'تصنيف',
     'add_new' => 'أضف تصنيف جديد',
@@ -12,9 +12,9 @@ return [
     'search' => 'البحث',
     'search_categories' => 'البحث فى التصنيفات',
     'per_page' => 'لكل صفحة',
-    'bulk_actions' => 'إختر أمر',
+    'bulk_actions' => 'اختر أمر',
     'delete' => 'حذف',
-    'apply' => 'حقظ',
+    'apply' => 'حفظ',
     'page' => 'الصفحة',
     'of' => 'من',
     'order' => 'ترتيب',
@@ -39,10 +39,10 @@ return [
         'created' => 'تم إنشاء تصنيف بنجاح',
         'updated' => 'تم حفظ التصنيف بنجاح',
         'deleted' => 'تم الحذف بنجاح',
-        
+
     ],
     "permissions" => [
         "manage" => "التحكم بالتصنيفات"
     ]
-    
+
 ];

@@ -61,6 +61,10 @@ return [
     "back_to_users" => "العودة إلي الأعضاء",
     "no_records" => "لا يوجد أعضاء",
 
+    "recent_users" => "آخر الأعضاء",
+    "show_all" => "عرض الكل",
+
+
     "permissions" => [
         "manage" => "التحكم بالأعضاء"
     ],

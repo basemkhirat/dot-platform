@@ -1,24 +1,24 @@
 <?php
 
 return [
-    
+
     "module" => "options",
-    
+
     'options' => 'Options',
 
-    'main' => 'Main settings',
+    'main' => 'Main Settings',
     'seo' => 'SEO',
     'modules' => 'Modules',
-    'social' => 'Social pages',
+    'social' => 'Social Pages',
     'media' => 'Media',
     'plugins' => 'Plugins',
     'change_logo' => 'Change site logo',
     'remove_logo' => 'Remove site logo',
     'chane_logo_help' => 'appears when sharing',
-    'amazon_integration' => 'Amazon integration',
+    'amazon_integration' => 'Amazon Integration',
     'kilobytes' => 'KB',
     'pixels' => 'Pixels',
-    'save_options' => 'Save options',
+    'save_options' => 'Save Options',
     'sitemap' => 'Sitemap',
     'update_sitemap' => 'Update',
     'updating_sitemap' => 'Updating',
@@ -82,7 +82,7 @@ return [
         'sitemap_bing_ping' => 'Bing',
         'sitemap_yahoo_ping' => 'Yahoo',
         'sitemap_ask_ping' => 'Ask',
-        
+
         'facebook_page' => 'Facebook',
         'twitter_page' => 'Twitter',
         'googleplus_page' => 'Google plus',

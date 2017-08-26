@@ -287,4 +287,18 @@ LG
 
 
 
+.page-heading.fixed-heading {
+    left: 0;
+    right: 220px;
 
+}
+
+body.body-small.fixed-heading .page-heading.fixed-heading {
+    right: 0px;
+}
+
+
+body.mini-navbar.fixed-heading .page-heading.fixed-heading {
+    right: 70px;
+    left: 0;
+}

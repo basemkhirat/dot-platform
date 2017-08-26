@@ -3,19 +3,19 @@ return [
 
     'module' => 'polls',
 
-    'polls' => 'polls',
+    'polls' => 'Polls',
     'poll' => 'poll',
-    'add_new' => 'Add new poll',
-    'edit' => 'Edit poll',
-    'back_to_polls' => 'Back to polls',
-    'no_records' => 'No polls found',
-    'save_poll' => 'Save poll',
+    'add_new' => 'Add New Poll',
+    'edit' => 'Edit Poll',
+    'back_to_polls' => 'Back To Polls',
+    'no_records' => 'No Polls Found',
+    'save_poll' => 'Save Poll',
     'search' => 'Search',
-    'search_polls' => 'Search polls',
-    'per_page' => 'Per page',
-    'bulk_actions' => 'Bulk actions',
+    'search_polls' => 'Search Polls',
+    'per_page' => 'Per Page',
+    'bulk_actions' => 'Bulk Actions',
     'delete' => 'Delete',
-    'apply' => 'Apply',
+    'apply' => 'Save',
     'page' => 'Page',
     'of' => 'of',
     'order' => 'Order',
@@ -24,8 +24,8 @@ return [
     'desc' => 'Descending',
     'actions' => 'Actions',
     'filter' => 'Filter',
-    
-    'poll_status' => 'Poll status',
+
+    'poll_status' => 'Poll Status',
     'activate' => 'Activate',
     'activated' => 'Activated',
     'all' => 'All',
@@ -34,7 +34,7 @@ return [
     'sure_activate' => "Are you sure to activate poll ?",
     'sure_deactivate' => "Are you sure to deactivate poll ?",
     'sure_delete' => 'Are you sure to delete ?',
-    
+
     'add_image' => 'Add image',
     'change_image' => 'change image',
     'not_allowed_file' => 'File is not allowed',
@@ -46,7 +46,7 @@ return [
     "min_two_answers" => "You must insert two answers minimium",
 
     'attributes' => [
-        
+
         'parent' => 'Parent',
         'title' => 'Title',
         'slug' => 'Slug',
@@ -63,5 +63,5 @@ return [
         'activated' => 'Poll activated successfully',
         'deactivated' => 'Poll deactivated successfully'
     ]
-    
+
 ];

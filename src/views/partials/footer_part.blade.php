@@ -67,16 +67,35 @@
 
 </script>
 
+<link rel="stylesheet" href="<?php echo assets('admin::css/plugins/selectpicker/bootstrap-select.css') ?>">
+
+<script src="<?php echo assets('admin::js/plugins/selectpicker/bootstrap-select.js') ?>"></script>
+
+
 <script>
 
     $(document).ready(function(){
-        resizeChosen();
+
+        $('.chosen-select').chosen();
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+        if(!$(this).parent().hasClass("action-box")){
+            $(this).attr('style', 'width: 100%');
+        }
+
+       resizeChosen();
         jQuery(window).on('resize', resizeChosen);
     });
 
     function resizeChosen() {
         $(".chosen-container").each(function() {
-            $(this).attr('style', 'width: 100%');
+
+            if(!$(this).parent().hasClass("action-box")){
+                $(this).attr('style', 'width: 100%');
+            }
+
+
         });
     }
 
@@ -87,8 +106,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
-        $('.chosen-select').chosen();
 
         var url = window.location.href;
         $("#side-menu li a[href='" + url + "']").parents("li").addClass("active");

@@ -83,6 +83,7 @@ class DotUpdateCommand extends Dot\Command
         foreach ($modules as $module) {
 
             // Exception for core modules
+
             if(in_array($module->path, ["users", "options"])) {
                 $module->doInstall($module->path, "module");
             }else{

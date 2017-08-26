@@ -7,7 +7,7 @@ return array(
     "add_new" => "أضف جديد",
     "edit" => "تحرير صلاحية",
     "role_name" => "الصلاحية",
-    "search_roles" => "البحث فى الصلاحيات ..",
+    "search_roles" => "البحث فى الصلاحيات",
     "per_page" => "لكل صفحة",
     "bulk_actions" => "إختر أمر",
     "delete" => "حذف",

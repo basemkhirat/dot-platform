@@ -21,8 +21,8 @@ class CategoriesController extends Dot\Controller {
             }
         }
 
-        $this->data["sort"] = (Request::has("sort")) ? Request::get("sort") : "id";
-        $this->data["order"] = (Request::has("order")) ? Request::get("order") : "DESC";
+        $this->data["sort"] = (Request::has("sort")) ? Request::get("sort") : "name";
+        $this->data["order"] = (Request::has("order")) ? Request::get("order") : "ASC";
         $this->data['per_page'] = (Request::has("per_page")) ? Request::get("per_page") : NULL;
 
         $query = Category::parent($parent)->orderBy($this->data["sort"], $this->data["order"]);

@@ -2,22 +2,22 @@
 
 return [
 
-
     'posts' => 'Posts',
-    'search_posts' => "Search posts",
+
+    'search_posts' => "Search Posts",
     'pages' => 'Pages',
-    'search_pages' => "Search pages",
+    'search_pages' => "Search Pages",
     'categories' => 'Categories',
-    'search_categories' => "Search categories",
+    'search_categories' => "Search Categories",
     'tags' => 'Tags',
-    'search_tags' => "Search tags",
-    'save_items' => 'Save items',
+    'search_tags' => "Search Tags",
+    'save_items' => 'Save Items',
 
-    "add_new" => "Add new menu",
-    "edit_menu" => "Edit menu",
-    "delete_menu" => "Delete menu",
+    "add_new" => "Add New Menu",
+    "edit_menu" => "Edit Menu",
+    "delete_menu" => "Delete Menu",
 
-    "no_menus" => "No menus found",
+    "no_menus" => "No Menus Found",
 
     "confirm_menu_delete" => "Are you sure to delete menu ?",
     "confirm_item_delete" => "Are you sure to delete item ?",
@@ -33,7 +33,6 @@ return [
     "name" => "Name",
     "add_item" => "Add item",
     "links" => "Links",
-
 
     'no_image' => "No image",
 

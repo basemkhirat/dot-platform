@@ -17,13 +17,13 @@ return [
     'apply' => 'تطبيق ',
     'page' => 'الصفحة',
     'of' => 'من',
-    'order' => 'الترتيب',
+    'order' => 'ترتيب',
     'sort_by' => 'ترتيب حسب',
     'asc' => 'تصاعدي',
     'desc' => 'تنازلي',
     'actions' => 'الحدث',
     'filter' => 'عرض',
-    
+
     'poll_status' => 'الحالة',
     'activate' => 'تفعيل',
     'activated' => 'مفعل',
@@ -33,7 +33,7 @@ return [
     'sure_activate' => "هل تريد تفعيل الإستفتاء ؟",
     'sure_deactivate' => "هل تريد إلغاء تفعيل الإستفتاء ؟",
     'sure_delete' => 'هل تريد حذف الإستفتاء ؟',
-    
+
     'add_image' => 'إضف صورة',
     'change_image' => 'تغيير الصورة',
     'not_allowed_file' => 'الملف غير مسموح به',
@@ -45,7 +45,7 @@ return [
     "min_two_answers" => "لابد من إدخال إجابتين علي الأقل",
 
     'attributes' => [
-        
+
         'parent' => 'Parent',
         'title' => 'العنوان',
         'slug' => 'Slug',
@@ -61,5 +61,5 @@ return [
         'activated' => 'تم تقعيل الإستفتاء بنجاح',
         'deactivated' => 'تم إلغاء تفعيل الإستفتاء بنجاح'
     ]
-    
+
 ];

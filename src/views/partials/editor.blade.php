@@ -6,7 +6,7 @@ $id = isset($id) ? $id : "post-content";
 
 <div style="margin-bottom:5px;">
     <a id="add_files" class="btn btn-default" href="#">
-        <span class="btn-label icon fa fa-camera"></span>
+        <i class="btn-label icon fa fa-camera"></i>
         &nbsp;{!!Lang::get('admin::editor.add_media')!!}</a>
 
 

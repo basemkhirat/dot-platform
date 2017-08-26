@@ -1,9 +1,9 @@
 <?php
 return [
-    
+
     'posts' => 'الأخبار',
     'post' => 'خبر',
-    'add_new' => 'أضف جديد',
+    'add_new' => 'أضف خبر جديد',
     'edit' => 'تعديل خبر',
     'back_to_posts' => 'العودة للأخبار',
     'no_records' => 'لا توجد أخبار',
@@ -11,10 +11,10 @@ return [
     'search' => 'بحث',
     'search_posts' => 'بحث عن خبر',
     'per_page' => 'لكل صفحة',
-    'bulk_actions' => 'تنفيذ الأمر',
+    'bulk_actions' => 'اختر أمر',
     'delete' => 'حذف',
-    'apply' => 'تنفيذ',
-    'post' => 'خبر',
+    'apply' => 'حفظ',
+    'page' => 'الصفحة',
     'of' => 'من',
     'order' => 'ترتيب',
     'sort_by' => 'ترتيب بــ',
@@ -22,7 +22,6 @@ return [
     'desc' => 'تنازلى',
     'actions' => 'تعديل',
     'filter' => 'عرض',
-    
     'post_status' => 'حالة الخبر',
     'activate' => 'تفعيل',
     'activated' => 'مفعل',
@@ -96,5 +95,5 @@ return [
     "permissions" => [
         "manage" => "التحكم بالأخبار"
     ]
-    
+
 ];

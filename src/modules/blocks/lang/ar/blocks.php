@@ -13,7 +13,7 @@ return [
     'per_page' => 'لكل صفحة',
     'bulk_actions' => 'إختر أمر',
     'delete' => 'حذف',
-    'apply' => 'تطبيق',
+    'apply' => 'حفظ',
     'page' => 'الصفحة',
     'of' => 'من',
     'order' => 'ترتيب',

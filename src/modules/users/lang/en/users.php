@@ -5,12 +5,12 @@ return [
     "module" => "Users",
 
     "users" => "Users",
-    "add_new" => "Add new",
-    "search_users" => "Search users",
+    "add_new" => "Add New User",
+    "search_users" => "Search Users",
     "per_page" => "Per page",
     "bulk_actions" => "Bulk actions",
     "delete" => "Delete",
-    "apply" => "Apply",
+    "apply" => "Save",
     "photo" => "Photo",
     "name" => "Name",
     "email" => "Email",
@@ -45,6 +45,9 @@ return [
     "googleplus" => "Google plus",
     "linkedin" => "Linked in",
     "search" => "search",
+
+    "recent_users" => "Latest Users",
+    "show_all" => "show all",
 
 
     'sort_by' => 'Sort by',

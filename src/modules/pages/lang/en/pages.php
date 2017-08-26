@@ -5,17 +5,17 @@ return [
 
     'pages' => 'Pages',
     'page' => 'page',
-    'add_new' => 'Add new page',
-    'edit' => 'Edit page',
-    'back_to_pages' => 'Back to pages',
-    'no_records' => 'No pages found',
-    'save_page' => 'save page',
+    'add_new' => 'Add New Page',
+    'edit' => 'Edit Page',
+    'back_to_pages' => 'Back To Pages',
+    'no_records' => 'No Pages Found',
+    'save_page' => 'Save Page',
     'search' => 'search',
     'search_pages' => 'Search pages',
-    'per_page' => 'Per page',
-    'bulk_actions' => 'Bulk actions',
+    'per_page' => 'Per Page',
+    'bulk_actions' => 'Bulk Actions',
     'delete' => 'delete',
-    'apply' => 'apply',
+    'apply' => 'Save',
     'page' => 'Page',
     'of' => 'of',
     'order' => 'Order',
@@ -24,17 +24,17 @@ return [
     'desc' => 'Descending',
     'actions' => 'Actions',
     'filter' => 'Filter',
-    
+
     'page_status' => 'Page status',
     'activate' => 'activate',
     'activated' => 'activated',
-    'all' => 'All',
+    'all' => 'All Pages',
     'deactivate' => 'deactivate',
     'deactivated' => 'deactivated',
     'sure_activate' => "Are you sure to activate page ?",
     'sure_deactivate' => "Are you sure to deactivate page ?",
     'sure_delete' => 'Are you sure to delete ?',
-    
+
     'add_image' => 'Add image',
     'change_image' => 'change image',
     'not_allowed_file' => 'File is not allowed',
@@ -66,5 +66,5 @@ return [
     "permissions" => [
         "manage" => "Manage pages"
     ]
-    
+
 ];

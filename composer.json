@@ -1,8 +1,11 @@
 {
 
     "name": "dot/platform",
+
     "description": "The core platform of dot/cms",
+
     "keywords": ["dotcms", "framework", "laravel", "cms", "modules", "plugins"],
+
     "license": "MIT",
 
     "type": "package",
@@ -22,6 +25,12 @@
     "autoload": {
         "classmap": [
             "src/bootstrap"
+        ]
+    },
+
+    "scripts": {
+        "post-package-update": [
+            "php artisan dot:update"
         ]
     },
 

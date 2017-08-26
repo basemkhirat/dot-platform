@@ -24,7 +24,7 @@
 
         ?>
         <li class="dd-item" data-id="<?php echo str_random(10); ?>" data-name="<?php echo $name ?>"
-            data-link="<?php echo $item->link ?>" data-image_id="<?php echo $item->image_id ?>" data-type="<?php echo $item->type ?>"
+            data-link="<?php echo $item->link ?>" data-image_id="<?php echo isset($item->image_id) ? $item->image_id : 0 ?>" data-type="<?php echo $item->type ?>"
             data-type_id="<?php echo $item->type_id ?>">
             <div class="dd-handle">
                 <i class="fa <?php echo $icon ?>"></i> &nbsp;

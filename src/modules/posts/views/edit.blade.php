@@ -1,377 +1,367 @@
 @extends("admin::layouts.master")
-@section("breadcrumb")
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
-            <h2>
-                <i class="fa fa-newspaper-o"></i>
-                <?php
-                if ($post->id) {
-                    echo trans("posts::posts.edit");
-                } else {
-                    echo trans("posts::posts.add_new");
-                }
-                ?>
-            </h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
-                </li>
-                <li>
-                    <a href="<?php echo URL::to(ADMIN . "/posts"); ?>"><?php echo trans("posts::posts.posts"); ?></a>
-                </li>
-                <li class="active">
-                    <strong>
-                        <?php
-                        if ($post->id) {
-                            echo trans("posts::posts.edit");
-                        } else {
-                            echo trans("posts::posts.add_new");
-                        }
-                        ?>
-                    </strong>
-                </li>
-            </ol>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7 text-right">
 
-            <a href="<?php echo route("admin.posts.show"); ?>" class="btn btn-primary btn-labeled btn-main">
-                <i class="fa fa-bars"></i>
-                <?php echo trans("posts::posts.back_to_posts") ?>
-            </a>
-
-            <?php if ($post->id) { ?>
-            <a href="<?php echo route("admin.posts.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
-                        class="btn-label icon fa fa-plus"></span> &nbsp; <?php echo trans("posts::posts.add_new") ?></a>
-            <?php } ?>
-
-        </div>
-    </div>
-@stop
 @section("content")
-    @include("admin::partials.messages")
-    <form action="" method="post">
-        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-body">
 
-                        <div class="form-group">
+    <form action="" method="post">
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <h2>
+                    <i class="fa fa-newspaper-o"></i>
+                    <?php echo $post->id ? trans("posts::posts.edit") : trans("posts::posts.add_new"); ?>
+                </h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo route("admin.posts.show"); ?>"><?php echo trans("posts::posts.posts"); ?></a>
+                    </li>
+                    <li class="active">
+                        <strong>
+                            <?php echo $post->id ? trans("posts::posts.edit") : trans("posts::posts.add_new"); ?>
+                        </strong>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
+
+                <?php if ($post->id) { ?>
+                <a href="<?php echo route("admin.posts.create"); ?>" class="btn btn-primary btn-labeled btn-main"> <span
+                        class="btn-label icon fa fa-plus"></span>
+                    <?php echo trans("posts::posts.add_new") ?></a>
+                <?php } ?>
+
+                <button type="submit" class="btn btn-flat btn-danger btn-main">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    <?php echo trans("posts::posts.save_post") ?>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content fadeInRight">
+
+            @include("admin::partials.messages")
+
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div class="form-group">
                         <textarea name="title" class="form-control input-lg" rows="1" id="post_title"
                                   placeholder="<?php echo trans("posts::posts.attributes.title") ?>"><?php echo @Request
-                            ::old("title", $post->title); ?></textarea>
-                        </div>
+                                ::old("title", $post->title); ?></textarea>
+                            </div>
 
-                        <div class="form-group">
+                            <div class="form-group">
                         <textarea name="excerpt" class="form-control" id="post_excerpt"
                                   placeholder="<?php echo trans("posts::posts.attributes.excerpt") ?>"><?php echo @Request
-                            ::old("excerpt", $post->excerpt); ?></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            @include("admin::partials.editor", ["name" => "content", "id" => "postcontent", "value" => $post->content])
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-
-                    <div class="panel-heading">
-                        <i class="fa fa-camera"></i>
-                        <?php echo trans("posts::posts.add_fields"); ?>
-                        <a class="add-custom-field pull-right" href="javascript:void(0)">
-                            <i class="fa fa-plus text-navy"></i>
-                        </a>
-
-                    </div>
-
-                    <div class="panel-body">
-
-                        <div class="form-group meta-rows">
-
-
-                            <?php foreach ($post->meta as $meta) { ?>
-                            <div class="meta-row">
-
-                                <input type="text" name="custom_names[]" value="<?php echo $meta->name; ?>"
-                                       class="form-control input-md pull-left custom-field-name"
-                                       placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
-
-                            <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"
-                                      rows="1"
-                                      placeholder="<?php echo trans("posts::posts.custom_value") ?>"><?php echo $meta->value; ?></textarea>
-
-                                <a class="remove-custom-field pull-right" href="javascript:void(0)">
-                                    <i class="fa fa-times text-navy"></i>
-                                </a>
-
-                            </div>
-                            <?php } ?>
-
-                            <div class="meta-row">
-
-                                <input type="text" name="custom_names[]"
-                                       class="form-control input-md pull-left custom-field-name"
-                                       placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
-
-                            <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"
-                                      rows="1"
-                                      placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>
-
-                                <a class="remove-custom-field pull-right" href="javascript:void(0)">
-                                    <i class="fa fa-times text-navy"></i>
-                                </a>
-
+                                ::old("excerpt", $post->excerpt); ?></textarea>
                             </div>
 
+                            <div class="form-group">
+                                @include("admin::partials.editor", ["name" => "content", "id" => "postcontent", "value" => $post->content])
+                            </div>
 
                         </div>
                     </div>
 
-                </div>
+                    <div class="panel panel-default">
 
+                        <div class="panel-heading">
+                            <i class="fa fa-camera"></i>
+                            <?php echo trans("posts::posts.add_fields"); ?>
+                            <a class="add-custom-field pull-right" href="javascript:void(0)">
+                                <i class="fa fa-plus text-navy"></i>
+                            </a>
 
-                <div class="row">
+                        </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-camera"></i>
-                                <?php echo trans("posts::posts.add_image"); ?>
-                                <a class="remove-post-image pull-right" href="javascript:void(0)">
-                                    <i class="fa fa-times text-navy"></i>
-                                </a>
-                            </div>
-                            <div class="panel-body form-group">
-                                <div class="row post-image-block">
-                                    <input type="hidden" name="image_id" class="post-image-id"
-                                           value="<?php echo ($post->image) ? $post->image->id : 0; ?>">
+                        <div class="panel-body">
 
-                                    <a class="change-post-image label" href="javascript:void(0)">
-                                        <i class="fa fa-pencil text-navy"></i>
-                                        <?php echo trans("posts::posts.change_image"); ?>
+                            <div class="form-group meta-rows">
+
+                                <?php foreach ($post->meta as $meta) { ?>
+                                <div class="meta-row">
+
+                                    <input type="text" name="custom_names[]" value="<?php echo $meta->name; ?>"
+                                           class="form-control input-md pull-left custom-field-name"
+                                           placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
+
+                                    <textarea name="custom_values[]"
+                                              class="form-control input-lg pull-left custom-field-value"
+                                              rows="1"
+                                              placeholder="<?php echo trans("posts::posts.custom_value") ?>"><?php echo $meta->value; ?></textarea>
+
+                                    <a class="remove-custom-field pull-right" href="javascript:void(0)">
+                                        <i class="fa fa-times text-navy"></i>
                                     </a>
 
-                                    <a class="post-media-preview" href="javascript:void(0)">
-                                        <img width="100%" height="130px" class="post-image"
-                                             src="<?php if ($post and @ $post->image) { ?> <?php echo thumbnail($post->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/image.png"); ?><?php } ?>">
+                                </div>
+                                <?php } ?>
+
+                                <div class="meta-row">
+
+                                    <input type="text" name="custom_names[]"
+                                           class="form-control input-md pull-left custom-field-name"
+                                           placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>
+
+                                    <textarea name="custom_values[]"
+                                              class="form-control input-lg pull-left custom-field-value"
+                                              rows="1"
+                                              placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>
+
+                                    <a class="remove-custom-field pull-right" href="javascript:void(0)">
+                                        <i class="fa fa-times text-navy"></i>
                                     </a>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-camera"></i>
+                                    <?php echo trans("posts::posts.add_image"); ?>
+                                    <a class="remove-post-image pull-right" href="javascript:void(0)">
+                                        <i class="fa fa-times text-navy"></i>
+                                    </a>
+                                </div>
+                                <div class="panel-body form-group">
+                                    <div class="row post-image-block">
+                                        <input type="hidden" name="image_id" class="post-image-id"
+                                               value="<?php echo ($post->image) ? $post->image->id : 0; ?>">
+
+                                        <a class="change-post-image label" href="javascript:void(0)">
+                                            <i class="fa fa-pencil text-navy"></i>
+                                            <?php echo trans("posts::posts.change_image"); ?>
+                                        </a>
+
+                                        <a class="post-media-preview" href="javascript:void(0)">
+                                            <img width="100%" height="130px" class="post-image"
+                                                 src="<?php if ($post and @ $post->image) { ?> <?php echo thumbnail($post->image->path); ?> <?php } else { ?> <?php echo assets("admin::default/image.png"); ?><?php } ?>">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-camera"></i>
-                                <?php echo trans("posts::posts.add_media"); ?>
-                                <a class="remove-post-media pull-right" href="javascript:void(0)">
-                                    <i class="fa fa-times text-navy"></i>
-                                </a>
-                            </div>
-                            <div class="panel-body form-group">
-                                <div class="row post-media-block">
-                                    <input type="hidden" name="media_id" class="post-media-id"
-                                           value="<?php echo ($post->media) ? $post->media->id : 0; ?>">
-
-
-                                    <a class="change-post-media label" href="javascript:void(0)">
-                                        <i class="fa fa-pencil text-navy"></i>
-                                        <?php echo trans("posts::posts.change_media"); ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-camera"></i>
+                                    <?php echo trans("posts::posts.add_media"); ?>
+                                    <a class="remove-post-media pull-right" href="javascript:void(0)">
+                                        <i class="fa fa-times text-navy"></i>
                                     </a>
+                                </div>
+                                <div class="panel-body form-group">
+                                    <div class="row post-media-block">
+                                        <input type="hidden" name="media_id" class="post-media-id"
+                                               value="<?php echo ($post->media) ? $post->media->id : 0; ?>">
 
-                                    <a class="post-media-preview" href="javascript:void(0)">
-                                        <img width="100%" height="130px" class="post-media"
-                                             src="<?php if ($post and @ $post->media) { ?> <?php echo($post->media->provider_image); ?> <?php } else { ?> <?php echo assets("admin::default/video.png"); ?><?php } ?>">
-                                    </a>
+
+                                        <a class="change-post-media label" href="javascript:void(0)">
+                                            <i class="fa fa-pencil text-navy"></i>
+                                            <?php echo trans("posts::posts.change_media"); ?>
+                                        </a>
+
+                                        <a class="post-media-preview" href="javascript:void(0)">
+                                            <img width="100%" height="130px" class="post-media"
+                                                 src="<?php if ($post and @ $post->media) { ?> <?php echo($post->media->provider_image); ?> <?php } else { ?> <?php echo assets("admin::default/video.png"); ?><?php } ?>">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+                    <?php Action::render("post.form.featured", $post); ?>
 
                 </div>
-
-                <?php Action::render("post.form.featured", $post); ?>
-
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-check-square"></i>
-                        <?php echo trans("posts::posts.post_status"); ?>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group switch-row">
-                            <label class="col-sm-9 control-label"
-                                   for="input-status"><?php echo trans("posts::posts.attributes.status") ?></label>
-                            <div class="col-sm-3">
-                                <input <?php if (@Request::old("status", $post->status)) { ?>
-                                checked="checked" <?php } ?>
-                                type="checkbox" id="input-status" name="status" value="1"
-                                class="status-switcher switcher-sm">
-                            </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-check-square"></i>
+                            <?php echo trans("posts::posts.post_status"); ?>
                         </div>
+                        <div class="panel-body">
+                            <div class="form-group switch-row">
+                                <label class="col-sm-9 control-label"
+                                       for="input-status"><?php echo trans("posts::posts.attributes.status") ?></label>
+                                <div class="col-sm-3">
+                                    <input <?php if (@Request::old("status", $post->status)) { ?>
+                                           checked="checked" <?php } ?>
+                                           type="checkbox" id="input-status" name="status" value="1"
+                                           class="status-switcher switcher-sm">
+                                </div>
+                            </div>
 
-                        <div class="form-group format-area event-format-area">
-                            <?php /* ?>
+                            <div class="form-group format-area event-format-area">
+                                <?php /* ?>
                             <label for="input-published_at"><?php echo trans("posts::posts.attributes.published_at") ?></label>
                             <?php */ ?>
-                            <div class="input-group date datetimepick">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input name="published_at" type="text"
-                                       value="<?php echo (!$post->id) ? date("Y-m-d H:i:s") : @Request::old('published_at', $post->published_at); ?>"
-                                       class="form-control" id="input-published_at"
-                                       placeholder="<?php echo trans("posts::posts.attributes.published_at") ?>">
+                                <div class="input-group date datetimepick">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input name="published_at" type="text"
+                                           value="<?php echo (!$post->id) ? date("Y-m-d H:i:s") : @Request::old('published_at', $post->published_at); ?>"
+                                           class="form-control" id="input-published_at"
+                                           placeholder="<?php echo trans("posts::posts.attributes.published_at") ?>">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-folder"></i>
-                        <?php echo trans("posts::posts.attributes.format"); ?>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group" style="margin-bottom:0px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-folder"></i>
+                            <?php echo trans("posts::posts.attributes.format"); ?>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group" style="margin-bottom:0px">
 
-                            <?php foreach (config("posts.formats") as $format => $icon) { ?>
-                            <div class="radio" style="margin-top: 0;">
-                                <label>
-                                    <input type="radio" name="format" value="<?php echo $format; ?>" class="i-checks"
-                                           <?php if ((!$post->id and $format == "post") or ($post and $post->format == $format)) { ?>checked<?php } ?>>&nbsp;
-                                    <i class="fa <?php echo $icon ?>"></i>&nbsp;
-                                    <span class="lbl"><?php echo trans('posts::posts.format_' . $format); ?></span>
-                                </label>
+                                <?php foreach (config("posts.formats") as $format => $icon) { ?>
+                                <div class="radio" style="margin-top: 0;">
+                                    <label>
+                                        <input type="radio" name="format" value="<?php echo $format; ?>"
+                                               class="i-checks"
+                                               <?php if ((!$post->id and $format == "post") or ($post and $post->format == $format)) { ?>checked<?php } ?>>&nbsp;
+                                        <i class="fa <?php echo $icon ?>"></i>&nbsp;
+                                        <span class="lbl"><?php echo trans('posts::posts.format_' . $format); ?></span>
+                                    </label>
+                                </div>
+                                <?php } ?>
                             </div>
-                            <?php } ?>
+
                         </div>
 
                     </div>
 
-                </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-folder"></i>
+                            <?php echo trans("posts::posts.add_category"); ?>
+                        </div>
+                        <div class="panel-body">
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-folder"></i>
-                        <?php echo trans("posts::posts.add_category"); ?>
-                    </div>
-                    <div class="panel-body">
-
-                        <?php if (Category::count()) { ?>
-                        <ul class='tree-views'>
-                            <?php
-                            echo Category::tree(array(
-                            "row" => function ($row, $depth) use ($post, $post_categories) {
-                            $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a> <label><input type='checkbox' ";
-                            if ($post and in_array($row->id, $post_categories->pluck("id")->toArray())) {
-                            $html .= 'checked="checked"';
-                            }
-                            $html .= "name='categories[]' value='" . $row->id . "'> &nbsp;" . $row->name . "</label></div>";
-                            return $html;
-                            }
-                            ));
-                            ?>
-                        </ul>
-                        <?php } else { ?>
-                        <?php echo trans("categories::categories.no_records"); ?>
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-th-large"></i>
-                        <?php echo trans("posts::posts.add_block"); ?>
-                    </div>
-                    <div class="panel-body">
-                        <?php if (block::count()) { ?>
-                        <ul class='tree-views'>
-                            <?php foreach(Block::all() as $block){ ?>
-                            <li>
-                                <div class='tree-row checkbox i-checks'><label><input type='checkbox'
-                                                                                      <?php if ($post and in_array($block->id, $post_blocks->pluck("id")->toArray())) { echo 'checked="checked"'; } ?>
-                                                                                      name='blocks[]'
-                                                                                      value='<?php echo $block->id; ?>'>
-                                        &nbsp; <?php echo $block->name ?></label></div>
+                            <?php if (Category::count()) { ?>
+                            <ul class='tree-views'>
+                                <?php
+                                echo Category::tree(array(
+                                "row" => function ($row, $depth) use ($post, $post_categories) {
+                                $html = "<li><div class='tree-row checkbox i-checks'><a class='expand' href='javascript:void(0)'>+</a> <label><input type='checkbox' ";
+                                if ($post and in_array($row->id, $post_categories->pluck("id")->toArray())) {
+                                $html .= 'checked="checked"';
+                                }
+                                $html .= "name='categories[]' value='" . $row->id . "'> &nbsp;" . $row->name . "</label></div>";
+                                return $html;
+                                }
+                                ));
+                                ?>
+                            </ul>
+                            <?php } else { ?>
+                            <?php echo trans("categories::categories.no_records"); ?>
                             <?php } ?>
-                        </ul>
-                        <?php } else { ?>
-                        <?php echo trans("posts::posts.no_blocks"); ?>
-                        <?php } ?>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-th-large"></i>
+                            <?php echo trans("posts::posts.add_block"); ?>
+                        </div>
+                        <div class="panel-body">
+                            <?php if (block::count()) { ?>
+                            <ul class='tree-views'>
+                                <?php foreach(Block::all() as $block){ ?>
+                                <li>
+                                    <div class='tree-row checkbox i-checks'><label><input type='checkbox'
+                                                                                          <?php if ($post and in_array($block->id, $post_blocks->pluck("id")->toArray())) { echo 'checked="checked"'; } ?>
+                                                                                          name='blocks[]'
+                                                                                          value='<?php echo $block->id; ?>'>
+                                            &nbsp; <?php echo $block->name ?></label></div>
+                                <?php } ?>
+                            </ul>
+                            <?php } else { ?>
+                            <?php echo trans("posts::posts.no_blocks"); ?>
+                            <?php } ?>
+                        </div>
+                    </div>
 
 
-                <div class="panel panel-default format-area album-format-area">
-                    <div class="panel-heading">
-                        <i class="fa fa-camera"></i>
-                        <?php echo trans("posts::posts.add_gallery"); ?>
-                        <a href="javascript:void(0)" class="add_gallery pull-right text-navy"><i
-                                    class="fa fa-plus"></i></a>
-                    </div>
-                    <div class="panel-body">
-                        <div class="iwell add_gallery"
-                             <?php if ($post and count($post_galleries->toArray()) > 0) { ?>style="display:none"<?php } ?>>
-                            <?php echo trans("posts::posts.no_galleries_found"); ?>
+                    <div class="panel panel-default format-area album-format-area">
+                        <div class="panel-heading">
+                            <i class="fa fa-camera"></i>
+                            <?php echo trans("posts::posts.add_gallery"); ?>
                             <a href="javascript:void(0)" class="add_gallery pull-right text-navy"><i
+                                    class="fa fa-plus"></i></a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="iwell add_gallery"
+                                 <?php if ($post and count($post_galleries->toArray()) > 0) { ?>style="display:none"<?php } ?>>
+                                <?php echo trans("posts::posts.no_galleries_found"); ?>
+                                <a href="javascript:void(0)" class="add_gallery pull-right text-navy"><i
                                         class="fa fa-info-circle"></i></a>
-                        </div>
+                            </div>
 
-                        <div class="post_galleries">
-                            <?php if ($post) { ?>
-                            <?php foreach ($post_galleries->toArray() as $gallery) { ?>
-                            <div class="iwell post_gallery"
-                                 data-gallery-id="<?php echo $gallery["id"] ?>"><?php echo $gallery["name"]; ?>
-                                <input type="hidden" name="galleries[]"
-                                       value="<?php echo $gallery["id"]; ?>"/>
-                                <a href="javascript:void(0)"
-                                   class="remove_gallery pull-right text-navy"><i
+                            <div class="post_galleries">
+                                <?php if ($post) { ?>
+                                <?php foreach ($post_galleries->toArray() as $gallery) { ?>
+                                <div class="iwell post_gallery"
+                                     data-gallery-id="<?php echo $gallery["id"] ?>"><?php echo $gallery["name"]; ?>
+                                    <input type="hidden" name="galleries[]"
+                                           value="<?php echo $gallery["id"]; ?>"/>
+                                    <a href="javascript:void(0)"
+                                       class="remove_gallery pull-right text-navy"><i
                                             class="fa fa-times"></i></a></div>
-                            <?php } ?>
-                            <?php } ?>
+                                <?php } ?>
+                                <?php } ?>
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-tags"></i>
-                        <?php echo trans("posts::posts.add_tag"); ?>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group" style="position:relative">
-                            <input type="hidden" name="tags" id="tags_names"
-                                   value="<?php echo join(",", $post_tags); ?>">
-                            <ul id="mytags"></ul>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-tags"></i>
+                            <?php echo trans("posts::posts.add_tag"); ?>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group" style="position:relative">
+                                <input type="hidden" name="tags" id="tags_names"
+                                       value="<?php echo join(",", $post_tags); ?>">
+                                <ul id="mytags"></ul>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <?php Action::render("post.form.sidebar", $post); ?>
+                    <?php Action::render("post.form.sidebar", $post); ?>
+
+                </div>
 
             </div>
 
-        </div>
-
-        <div>
-            <div class="container-fluid">
-                <div class="form-group">
-                    <input type="submit" class="pull-left btn btn-flat btn-primary"
-                           value="<?php echo trans("posts::posts.save_post") ?>"/>
-                </div>
-            </div>
         </div>
 
     </form>
 
-
-
 @stop
+
 
 @push("header")
 
@@ -418,11 +408,9 @@
     <script type="text/javascript"
             src="<?php echo assets('admin::js/plugins/datetimepicker/bootstrap-datetimepicker.min.js') ?>"></script>
 
-
     <script>
 
         $(document).ready(function () {
-
 
             $('.datetimepick').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss',
@@ -463,16 +451,16 @@
             $(".add-custom-field").click(function () {
 
                 var html = ' <div class="meta-row">'
-                        + '<input type="text" name="custom_names[]"'
-                        + 'class="form-control input-md pull-left custom-field-name"'
-                        + ' placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>'
-                        + '   <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"'
-                        + '   rows="1"'
-                        + '   placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>'
-                        + '   <a class="remove-custom-field pull-right" href="javascript:void(0)">'
-                        + '   <i class="fa fa-times text-navy"></i>'
-                        + '   </a>'
-                        + '   </div>';
+                    + '<input type="text" name="custom_names[]"'
+                    + 'class="form-control input-md pull-left custom-field-name"'
+                    + ' placeholder="<?php echo trans("posts::posts.custom_name") ?>"/>'
+                    + '   <textarea name="custom_values[]" class="form-control input-lg pull-left custom-field-value"'
+                    + '   rows="1"'
+                    + '   placeholder="<?php echo trans("posts::posts.custom_value") ?>"></textarea>'
+                    + '   <a class="remove-custom-field pull-right" href="javascript:void(0)">'
+                    + '   <i class="fa fa-times text-navy"></i>'
+                    + '   </a>'
+                    + '   </div>';
 
                 $(".meta-rows").append(html);
 
@@ -603,8 +591,8 @@
                     result.forEach(function (row) {
                         if ($(".post_galleries [data-gallery-id=" + row.id + "]").length == 0) {
                             var html = '<div class="iwell post_gallery" data-gallery-id="' + row.id + '">' + row.name
-                                    + '<input type="hidden" name="galleries[]" value="' + row.id + '" />'
-                                    + '<a href="javascript:void(0)" class="remove_gallery pull-right text-navy"><i class="fa fa-times"></i></a></div>';
+                                + '<input type="hidden" name="galleries[]" value="' + row.id + '" />'
+                                + '<a href="javascript:void(0)" class="remove_gallery pull-right text-navy"><i class="fa fa-times"></i></a></div>';
                             $(".post_galleries").html(html);
                         }
                     });
@@ -648,7 +636,6 @@
                     },
                     className: "bootbox-sm"
                 });
-                //alert(data_gallery_id);
             });
 
         });

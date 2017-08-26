@@ -5,9 +5,9 @@
         @include("admin::partials.sidebar")
         @include("admin::partials.topnav")
         @yield("breadcrumb")
-        <div class="wrapper wrapper-content fadeInRight">
+
             @yield("content")
-        </div>
+
         <?php echo Widget::render("admin.content.end"); ?>
         @include("admin::partials.footer")
     </div>

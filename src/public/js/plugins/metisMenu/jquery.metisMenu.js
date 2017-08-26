@@ -6,6 +6,16 @@
  * Made by Osman Nuri Okumus
  * Under MIT License
  */
+
+
+$("#side-menu .fa.arrow").click(function(e){
+    e.preventDefault();
+
+    $(this).parents("li").toggleClass("active").children("ul").collapse("toggle");
+
+    return false;
+})
+
 ;(function($, window, document, undefined) {
 
     var pluginName = "metisMenu",

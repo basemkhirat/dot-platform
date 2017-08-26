@@ -3,9 +3,6 @@
 class DashboardPlugin extends Plugin
 {
 
-    /**
-     * @return array
-     */
     function info()
     {
 
@@ -18,24 +15,14 @@ class DashboardPlugin extends Plugin
 
     function boot()
     {
+
         Navigation::menu("sidebar", function ($menu) {
 
-
             $menu->item('home_dashboard', trans("dashboard::dashboard.dashboard"), URL::to(ADMIN . '/dashboard'))
-                ->order(1)
+                ->order(0)
                 ->icon("fa-info-circle");
 
-            $menu->item('dashboard', trans("admin::common.statistics"), "javascript:void(0)")
-                ->order(17)
-                ->icon("fa-info-circle");
-
-            $menu->item('dashboard.general', trans("admin::common.general_statistics"), URL::to(ADMIN . '/dashboard'));
-
-            //if (Gate::allows("categories.stats")) {
-            //    $menu->item('dashboard.general', trans("admin::common.categories_statistics"), URL::to(ADMIN . '/stats'));
-            //}
         });
-
 
 
         Action::listen("dashboard.featured", function () {
@@ -98,8 +85,6 @@ class DashboardPlugin extends Plugin
             return view("dashboard::widgets.featured", $data);
 
         });
-
-
 
         include __DIR__ . "/routes.php";
 

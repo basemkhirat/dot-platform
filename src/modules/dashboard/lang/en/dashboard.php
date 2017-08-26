@@ -27,7 +27,7 @@ return [
     "no_pending_posts" => "No pending posts",
     "no_reviewed_posts" => "No Reviewed posts",
     "no_tasks" => "No tasks",
-    "recent_users" => "Recent users",
+
     "tasks" => "Tasks",
     "all_categories" => "All categories",
     "title" => "Title",

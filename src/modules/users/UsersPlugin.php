@@ -26,7 +26,7 @@ class UsersPlugin extends Plugin
         Navigation::menu("sidebar", function ($menu) {
 
             if (Gate::allows('users')) {
-                $menu->item('users', trans("admin::common.users"), route("admin.users.show"))
+                $menu->item('users', trans("admin::common.users"), "#")
                     ->order(16)
                     ->icon("fa-users");
 
@@ -34,7 +34,7 @@ class UsersPlugin extends Plugin
             }
         });
 
-        Action::listen("dashboard.middle", function () {
+        Action::listen("dashboard.featured", function () {
 
             $users = User::orderBy("created_at", "DESC")->limit(5)->get();
 

@@ -5,40 +5,35 @@ return [
     "edit" => "Edit Gallery",
     "search" => "search",
     "no_media_on" => "No media on ",
-    "add_new" => "Add new",
-    "per_page" => "Per page",
-    "bulk_actions" => "Bulk actions",
-    "apply" => "Apply",
+    "add_new" => "Add New Gallery",
+    "per_page" => "Per Page",
+    "bulk_actions" => "Bulk Actions",
+    "apply" => "Save",
     "delete" => "Delete",
-    "name" => "Gallery name",
+    "name" => "Gallery Name",
     "actions" => "Action",
-    "sure_delete" => "you are about to delete ... continue?",
+    "sure_delete" => "You are about to delete ... continue?",
     "page" => "Page",
-    "add_new_gallery" => "Add new gallery",
-    "add_media" => "Add media",
-    "author" => "Gallery author",
+    "add_new_gallery" => "Add New Gallery",
+    "add_media" => "Add Media",
+    "author" => "Gallery Author",
     "no_media" => "No media has been added",
     "save_gallery" => "Save gallery",
     "is_not_valid_image" => "is not an image",
     "of" => "of",
-    "search_galleries" => "Seach galleries",
+    "search_galleries" => "Search Galleries",
     "files" => "files",
-    "bulk_actions" => "Bulk actions",
 
     "media_row_delete" => "Are you sure to delete this file",
     "delete_gallery" => "Are you sure to delete this gallery",
 
-
-    "media_count" => "Files length",
+    "media_count" => "Gallery Items",
     "no_galleries" => "No galleries",
-
-
 
     "attributes" => [
         "name" => "Name",
         "author" => "Author"
     ],
-
 
     "events" => [
         "created" => "Gallery created successfully",
