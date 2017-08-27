@@ -769,7 +769,7 @@ LG
     height: 100%;
 }
 
-.ibox-content *:not(i):not(.glyphicon), .wrapper-content *:not(i):not(.glyphicon) {
+.ibox-content *:not(.fa):not(.glyphicon), .wrapper-content *:not(.fa):not(.glyphicon) {
     font-family: tahoma;
     font-size: 13px;
 }

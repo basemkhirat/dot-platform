@@ -29,7 +29,7 @@
     },
 
     "scripts": {
-        "post-package-update": [
+        "post-update-cmd": [
             "php artisan dot:update"
         ]
     },

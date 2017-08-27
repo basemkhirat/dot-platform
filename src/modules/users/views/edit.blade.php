@@ -12,7 +12,7 @@
                         <a href="<?php echo route("admin"); ?>"><?php echo trans("admin::common.admin") ?></a>
                     </li>
                     <li>
-                        <a href="<?php echo route("admin.posts.show"); ?>"><?php echo trans("users::users.users") ?></a>
+                        <a href="<?php echo route("admin.users.show"); ?>"><?php echo trans("users::users.users") ?></a>
                     </li>
                     <li class="active">
                         <strong><?php echo trans("users::users.edit") ?></strong>
