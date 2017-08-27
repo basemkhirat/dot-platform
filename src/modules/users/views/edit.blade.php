@@ -29,7 +29,7 @@
 
                 <button type="submit" class="btn btn-flat btn-danger btn-main">
                     <i class="fa fa-download" aria-hidden="true"></i>
-                    <?php echo trans("posts::posts.save_post") ?>
+                    <?php echo trans("users::users.save_user") ?>
                 </button>
 
             </div>
