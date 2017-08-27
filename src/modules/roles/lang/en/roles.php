@@ -17,7 +17,7 @@ return array(
     "page" => "Page",
     "add_new_role" => "Add new role",
     "add_new" => "Add new",
-    "save" => "Save",
+    "save" => "Save Role",
     "of" => "of",
 
     "no_records" => "No roles found",

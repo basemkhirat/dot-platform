@@ -18,7 +18,7 @@ return array(
     "page" => "الصفحة",
     "add_new_role" => "أضف صلاحية",
     "add_new" => "أضف جديد",
-    "save" => "حفظ",
+    "save" => "حفظ الصلاحية",
     "of" => "من",
     "bulk_actions" => "اختر أمر",
 
