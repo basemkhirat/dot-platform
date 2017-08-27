@@ -5,6 +5,7 @@ namespace Dot\Platform;
 use DB;
 use Dot;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Loader;
 use Module;
@@ -142,8 +143,10 @@ class CmsServiceProvider extends ServiceProvider
         define("MODULES_PATH", ADMIN_PATH . "/modules");
         define("PLUGINS_PATH", ROOT_PATH . "/plugins");
 
-        foreach (DB::table("options")->get() as $option) {
-            Config::set($option->name, $option->value);
+        if (Schema::has("options")) {
+            foreach (DB::table("options")->get() as $option) {
+                Config::set($option->name, $option->value);
+            }
         }
 
         $this->app->singleton('apidocs.generate', function ($app) {
