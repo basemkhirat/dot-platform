@@ -143,7 +143,7 @@ class CmsServiceProvider extends ServiceProvider
         define("MODULES_PATH", ADMIN_PATH . "/modules");
         define("PLUGINS_PATH", ROOT_PATH . "/plugins");
 
-        if (Schema::has("options")) {
+        if (Schema::hasTable("options")) {
             foreach (DB::table("options")->get() as $option) {
                 Config::set($option->name, $option->value);
             }
