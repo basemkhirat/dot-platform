@@ -71,7 +71,7 @@ if (!function_exists("uploads_url")) {
 
             $media_url = config("media.drivers.local.url");
 
-            if(!$media_url){
+            if (!$media_url) {
                 $media_url = url("uploads");
             }
 
@@ -174,33 +174,7 @@ if (!function_exists("get_extension")) {
     function get_extension($mime = "")
     {
 
-        $types = array(
-            'csv' => array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel'),
-            'pdf' => array('application/pdf', 'application/x-download'),
-            'ai' => 'application/postscript',
-            'eps' => 'application/postscript',
-            'xls' => array('application/excel', 'application/vnd.ms-excel', 'application/msexcel'),
-            'ppt' => array('application/powerpoint', 'application/vnd.ms-powerpoint'),
-            'swf' => 'application/x-shockwave-flash',
-            'zip' => array('application/x-zip', 'application/zip', 'application/x-zip-compressed'),
-            'mp3' => array('audio/mpeg', 'audio/mpg', 'audio/mpeg3', 'audio/mp3'),
-            'wav' => array('audio/x-wav', 'audio/wave', 'audio/wav'),
-            'bmp' => array('image/bmp', 'image/x-windows-bmp'),
-            'gif' => 'image/gif',
-            'jpg' => array('image/jpeg', 'image/pjpeg'),
-            'png' => array('image/png', 'image/x-png'),
-            'txt' => 'text/plain',
-            'rtx' => 'text/richtext',
-            'rtf' => 'text/rtf',
-            'mpg' => 'video/mpeg',
-            'mov' => 'video/quicktime',
-            'avi' => 'video/x-msvideo',
-            'doc' => 'application/msword',
-            'docx' => array('application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/zip'),
-            'xlsx' => array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/zip'),
-            'word' => array('application/msword', 'application/octet-stream'),
-            'xl' => 'application/excel'
-        );
+        $types = config("media.mimes");
 
         foreach ($types as $extension => $mimes) {
             if ((is_array($mimes) and in_array($mime, $mimes)) or (!is_array($mimes) and $mime == $mimes)) {

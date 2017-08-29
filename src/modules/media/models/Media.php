@@ -447,7 +447,18 @@ class Media extends Dot\Model
     {
 
         if ($content = @file_get_contents($link)) {
-            return $this->saveData($content, NULL, $guard);
+
+            $extension = null;
+
+            if(strstr($link, ".")){
+
+                $link_parts = @explode(".", $link);
+
+                $extension = end($link_parts);
+
+            }
+
+            return $this->saveData($content, $extension, $guard);
         }
 
     }
@@ -493,6 +504,7 @@ class Media extends Dot\Model
         $path = storage_path("temp/" . str_random(20));
 
         File::put($path, $data);
+
         $file_hash = sha1_file($path);
 
         $media = Media::where("hash", $file_hash)->first();
@@ -505,8 +517,10 @@ class Media extends Dot\Model
 
             $mime = strtolower(mime_content_type($path));
 
-            if (!$extension) {
-                $extension = get_extension($mime);
+            $mime_extension = get_extension($mime);
+
+            if ($mime_extension) {
+                $extension = $mime_extension;
             }
 
             if (!$extension) {
