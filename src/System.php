@@ -8,9 +8,7 @@ class System
     /**
      * @var array
      */
-    public $providers = [
-        Collective\Html\HtmlServiceProvider::class,
-    ];
+    public $providers = [];
 
     /**
      * @var array
@@ -21,8 +19,6 @@ class System
          * Laravel aliases
          */
         'Str' => Illuminate\Support\Str::class,
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
 
         /**
          * Dot aliases
