@@ -22,7 +22,7 @@ class PluginListCommand extends Dot\Command
     /**
      *
      */
-    public function fire()
+    public function handle()
     {
 
         $plugins = Plugin::all();

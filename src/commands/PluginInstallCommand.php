@@ -28,7 +28,7 @@ class PluginInstallCommand extends Dot\Command
     /**
      *
      */
-    public function fire()
+    public function handle()
     {
 
         $plugin = trim($this->input->getArgument('plugin'));

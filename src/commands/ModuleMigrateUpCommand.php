@@ -27,7 +27,7 @@ class ModuleMigrateUpCommand extends Dot\Command
     /**
      *
      */
-    public function fire()
+    public function handle()
     {
 
         $path = MODULES_PATH . "/" . trim($this->input->getArgument('module')) . "/migrations";

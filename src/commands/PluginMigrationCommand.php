@@ -41,7 +41,7 @@ class PluginMigrationCommand extends Dot\Command
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         // It's possible for the developer to specify the tables to modify in this
         // schema operation. The developer may also specify if this table needs

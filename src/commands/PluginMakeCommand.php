@@ -244,7 +244,7 @@ class PluginMakeCommand extends Dot\Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
 
         if ($this->argument("module") == "") {

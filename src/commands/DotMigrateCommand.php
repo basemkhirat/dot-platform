@@ -23,7 +23,7 @@ class DotMigrateCommand extends Dot\Command
     /**
      *
      */
-    public function fire(Container $app)
+    public function handle(Container $app)
     {
 
           $admin_migration = glob(ADMIN_PATH . "/migrations/*.php");

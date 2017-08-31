@@ -38,7 +38,7 @@ class DotUpdateCommand extends Dot\Command
     /**
      * @return bool
      */
-    public function fire()
+    public function handle()
     {
 
         if ($this->option("force")) {

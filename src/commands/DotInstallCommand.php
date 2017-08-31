@@ -34,7 +34,7 @@ class DotInstallCommand extends Dot\Command
     /**
      * @return bool
      */
-    public function fire()
+    public function handle()
     {
 
         File::makeDirectory(public_path("admin"), 0775, true, true);

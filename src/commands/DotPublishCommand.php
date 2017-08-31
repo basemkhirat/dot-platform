@@ -25,7 +25,7 @@ class DotPublishCommand extends Dot\Command
         parent::__construct();
     }
 
-    public function fire()
+    public function handle()
     {
 
         // Publishing admin public and config files

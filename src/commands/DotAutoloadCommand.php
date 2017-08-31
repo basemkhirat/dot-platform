@@ -19,7 +19,7 @@ class DotAutoloadCommand extends Dot\Command
     /**
      *
      */
-    public function fire()
+    public function handle()
     {
 
         Loader::add(array(

@@ -27,7 +27,7 @@ class PluginMigrateUpCommand extends Dot\Command
     /**
      *
      */
-    public function fire()
+    public function handle()
     {
 
         $path = PLUGINS_PATH . "/" . trim($this->input->getArgument('plugin')) . "/migrations";

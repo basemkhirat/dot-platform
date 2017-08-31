@@ -25,7 +25,7 @@ class PluginPublishCommand extends Dot\Command
         parent::__construct();
     }
 
-    public function fire()
+    public function handle()
     {
 
         $plugin = trim($this->input->getArgument('plugin'));

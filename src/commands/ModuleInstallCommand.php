@@ -28,7 +28,7 @@ class ModuleInstallCommand extends Dot\Command
     /**
      *
      */
-    public function fire()
+    public function handle()
     {
 
         $module = trim($this->input->getArgument('module'));

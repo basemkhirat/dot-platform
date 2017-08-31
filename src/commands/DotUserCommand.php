@@ -22,7 +22,7 @@ class DotUserCommand extends Dot\Command
     /**
      * @return bool
      */
-    public function fire()
+    public function handle()
     {
 
         if ($this->option("root")) {

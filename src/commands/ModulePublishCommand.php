@@ -25,7 +25,7 @@ class ModulePublishCommand extends Dot\Command
         parent::__construct();
     }
 
-    public function fire()
+    public function handle()
     {
 
         $module = trim($this->input->getArgument('module'));
