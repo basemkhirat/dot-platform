@@ -17,7 +17,7 @@
         "roumen/sitemap": "2.*",
         "intervention/image": "2.*",
         "aws/aws-sdk-php-laravel": "2.0",
-        "laravelcollective/html": "5.*",
+        "laravelcollective/html": "dev-master",
         "phpdocumentor/reflection-docblock": "*",
         "sunra/php-simple-html-dom-parser": "^1.5"
     },
