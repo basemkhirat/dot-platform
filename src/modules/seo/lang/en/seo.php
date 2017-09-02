@@ -60,6 +60,12 @@ return [
     'canonical_url_info' => 'The canonical URL that this page should point to, leave empty to default to permalink.',
     'amseo_redirect' => '301 Redirect',
     'amseo_redirect_info' => 'The URL that this page should redirect to.',
+
+    'facebook_title' => "Facebook title",
+    'facebook_description' => "Facebook description",
+    'twitter_title' => "Twitter title",
+    'twitter_description' => "Twitter description",
+
     'facebook_title_info' => 'If you don\'t want to use the post title for sharing the post on Facebook but instead want another title there, write it here.',
     'facebook_descrip_info' => 'If you don\'t want to use the meta description for sharing the post on Facebook but want another description there, write it here.',
     'facebook_image_info' => 'If you want to override the image used on Facebook for this post, upload / choose an image. The recommended image size for Facebook is 1200 x 628px.',

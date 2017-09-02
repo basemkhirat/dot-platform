@@ -104,7 +104,8 @@
                         }
 
                         ?>
-                        {!! Form::text("meta[meta_title]", string_sanitize(Request::old('meta[meta_title]', $meta_title)), array('class' => 'form-control input-lg', 'id' => 'meta_title', 'placeholder' => Lang::get('seo::seo.meta_title'))) !!}
+
+                        <input type="text" name="meta[meta_title]" value="<?php echo string_sanitize(Request::old('meta[meta_title]', $meta_title)) ?>" class="form-control input-lg" id="meta_title" placeholder="<?php echo Lang::get('seo::seo.meta_title'); ?>"/>
 
                     </div>
                 </div>
@@ -282,7 +283,8 @@
 
                         }
                         ?>
-                        {!! Form::text("meta[canonical_url]", string_sanitize(Request::old('meta[canonical_url]', $link)), array('class' => 'form-control input-lg', "style" => "text-align:left; direction:ltr", 'id' => 'canonical_url', 'placeholder' => @get_post_url($post))) !!}
+
+                            <input type="text" name="meta[canonical_url]" value="<?php echo string_sanitize(Request::old('meta[canonical_url]', $link)) ?>" class="form-control input-lg" style="text-align:left; direction:ltr" id="canonical_url" placeholder="<?php echo  @get_post_url($post); ?>"/>
                         <div style="font-size: 14px; margin-top: 2px">
                             {!!trans('seo::seo.canonical_url_info')!!}
                         </div>
@@ -292,7 +294,8 @@
                     <label for="seo_redirect" class="col-sm-4 control-label"
                            style="padding-top: 7px;">{!!Lang::get('seo::seo.seo_redirect')!!}</label>
                     <div class="col-sm-7">
-                        {!! Form::text("meta[seo_redirect]", string_sanitize(Request::old('meta[seo_redirect]', @$post->seo->seo_redirect)), array('class' => 'form-control input-lg', 'id' => 'seo_redirect', 'placeholder' => Lang::get('seo::seo.seo_redirect'))) !!}
+
+                        <input type="text" value="<?php echo string_sanitize(Request::old('meta[seo_redirect]', @$post->seo->seo_redirect)) ?>" class="form-control input-lg" style="text-align:left; direction:ltr" id="seo_redirect" placeholder="<?php echo Lang::get('seo::seo.seo_redirect'); ?>"/>
                         <div style="font-size: 14px; margin-top: 2px">
                             {!!trans('seo::seo.seo_redirect_info')!!}
                         </div>
@@ -302,9 +305,9 @@
             <div class="tab-pane fade" id="facebook-tab">
                 <div class="form-group">
                     <label for="facebook_title" class="col-sm-3 control-label"
-                           style="padding-top: 7px;">{!!Lang::get('seo::seo.meta_title')!!}</label>
+                           style="padding-top: 7px;">{!!Lang::get('seo::seo.facebook_title')!!}</label>
                     <div class="col-sm-8">
-                        {!! Form::text("meta[facebook_title]", string_sanitize(Request::old('meta[facebook_title]', @$post->seo->facebook_title)), array('class' => 'form-control input-lg', 'id' => 'facebook_title', 'placeholder' => Lang::get('seo::seo.meta_title'))) !!}
+                        <input type="text" name="meta[facebook_title]" value="<?php echo string_sanitize(Request::old('meta[facebook_title]', @$post->seo->facebook_title)) ?>" class="form-control input-lg"  id="facebook_title" placeholder="<?php echo Lang::get('seo::seo.facebook_title'); ?>"/>
                         <div style="font-size: 14px; margin-top: 2px">
                             {!!trans('seo::seo.facebook_title_info')!!}
                         </div>
@@ -313,9 +316,9 @@
 
                 <div class="form-group">
                     <label for="facebook_description" class="col-sm-3 control-label"
-                           style="padding-top: 7px;">{!!Lang::get('seo::seo.meta_description')!!}</label>
+                           style="padding-top: 7px;">{!!Lang::get('seo::seo.facebook_description')!!}</label>
                     <div class="col-sm-8">
-                        {!! Form::textarea("meta[facebook_description]", string_sanitize(Request::old('meta[facebook_description]', @$post->seo->facebook_description)), ['class' => 'form-control', 'rows' => 4, 'id' => 'facebook_description', 'style' => 'resize: vertical;', 'placeholder' => Lang::get('seo::seo.meta_description')]) !!}
+                        <textarea class="form-control" rows="4" name="meta[facebook_description]" id="facebook_description" style="resize: vertical" placeholder="<?php echo Lang::get('seo::seo.facebook_description'); ?>"><?php echo string_sanitize(Request::old('meta[facebook_description]', @$post->seo->facebook_description)) ?></textarea>
                         <div style="font-size: 14px; margin-top: 2px">
                             {!!trans('seo::seo.facebook_descrip_info')!!}
                         </div>
@@ -351,9 +354,11 @@
             <div class="tab-pane fade" id="twitter-tab">
                 <div class="form-group">
                     <label for="twitter_title" class="col-sm-3 control-label"
-                           style="padding-top: 7px;">{!!Lang::get('seo::seo.meta_title')!!}</label>
+                           style="padding-top: 7px;">{!!Lang::get('seo::seo.twitter_title')!!}</label>
                     <div class="col-sm-8">
-                        {!! Form::text("meta[twitter_title]", string_sanitize(Request::old('meta[twitter_title]', @$post->seo->twitter_title)), array('class' => 'form-control input-lg', 'id' => 'twitter_title', 'placeholder' => Lang::get('seo::seo.meta_title'))) !!}
+
+                        <input type="text" name="meta[twitter_title]" value="<?php echo string_sanitize(Request::old('meta[twitter_title]', @$post->seo->twitter_title)) ?>" class="form-control input-lg"  id="twitter_title" placeholder="<?php echo Lang::get('seo::seo.twitter_title'); ?>"/>
+
                         <div style="font-size: 14px; margin-top: 2px">
                             {!!trans('seo::seo.twitter_title_info')!!}
                         </div>
@@ -362,9 +367,9 @@
 
                 <div class="form-group">
                     <label for="twitter_description" class="col-sm-3 control-label"
-                           style="padding-top: 7px;">{!!Lang::get('seo::seo.meta_description')!!}</label>
+                           style="padding-top: 7px;">{!!Lang::get('seo::seo.twitter_description')!!}</label>
                     <div class="col-sm-8">
-                        {!! Form::textarea("meta[twitter_description]", string_sanitize(Request::old('meta[twitter_description]', @$post->seo->twitter_description)), ['class' => 'form-control', 'rows' => 4, 'id' => 'twitter_description', 'style' => 'resize: vertical;', 'placeholder' => Lang::get('seo::seo.meta_description')]) !!}
+                        <textarea name="meta[twitter_description]" class="form-control" id="twitter_description" style="resize: vertical" rows="4" placeholder="<?php echo Lang::get('seo::seo.twitter_description'); ?>"><?php echo string_sanitize(Request::old('meta[twitter_description]', @$post->seo->twitter_description)) ?></textarea>
                         <div style="font-size: 14px; margin-top: 2px">
                             {!!trans('seo::seo.twitter_descrip_info')!!}
                         </div>

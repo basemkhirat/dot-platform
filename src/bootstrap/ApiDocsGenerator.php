@@ -119,6 +119,7 @@ class ApiDocsGenerator
             }
 
             $reflector = new ReflectionClass($class);
+
             $docBlock = new DocBlock($reflector);
 
             // remove Controller
