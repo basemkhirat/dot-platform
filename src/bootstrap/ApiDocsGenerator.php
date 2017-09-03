@@ -17,11 +17,9 @@ class ApiDocsGenerator
 
     protected $routes;
     protected $router;
-
     protected $prefix;
     protected $dotPrefix;
     protected $storagePath;
-
     protected $config = [];
 
     /**
@@ -46,23 +44,19 @@ class ApiDocsGenerator
         $this->routes = $router->getRoutes();
 
         $this->config = [
-
-            'index_template_path' => ADMIN_PATH."/templates/api/docs/index.blade.php",
-            'head_template_path' => ADMIN_PATH."/templates/api/includes/head.blade.php",
-            'introduction_template_path' => ADMIN_PATH."/templates/api/includes/introduction.blade.php",
-            'body_content_template_path' => ADMIN_PATH."/templates/api/includes/body_content.blade.php",
-            'compile_content_template_path' => ADMIN_PATH."/templates/api/includes/compile_content.blade.php",
-            'nav_items_template_path' => ADMIN_PATH."/templates/api/includes/nav_items.blade.php",
-            'navigation_template_path' => ADMIN_PATH."/templates/api/includes/navigation.blade.php",
-            'parameters_template_path' => ADMIN_PATH."/templates/api/includes/parameters.blade.php",
-            'section_header_template_path' => ADMIN_PATH."/templates/api/includes/section_header.blade.php",
-            'default_layout_template_path' => ADMIN_PATH."/templates/api/layouts/default.blade.php",
-
-            'assets_path' => ADMIN_PATH."/templates/api/assets/",
+            'index_template_path' => ADMIN_PATH . "/templates/api/docs/index.blade.php",
+            'head_template_path' => ADMIN_PATH . "/templates/api/includes/head.blade.php",
+            'introduction_template_path' => ADMIN_PATH . "/templates/api/includes/introduction.blade.php",
+            'body_content_template_path' => ADMIN_PATH . "/templates/api/includes/body_content.blade.php",
+            'compile_content_template_path' => ADMIN_PATH . "/templates/api/includes/compile_content.blade.php",
+            'nav_items_template_path' => ADMIN_PATH . "/templates/api/includes/nav_items.blade.php",
+            'navigation_template_path' => ADMIN_PATH . "/templates/api/includes/navigation.blade.php",
+            'parameters_template_path' => ADMIN_PATH . "/templates/api/includes/parameters.blade.php",
+            'section_header_template_path' => ADMIN_PATH . "/templates/api/includes/section_header.blade.php",
+            'default_layout_template_path' => ADMIN_PATH . "/templates/api/layouts/default.blade.php",
+            'assets_path' => ADMIN_PATH . "/templates/api/assets/",
             'logo_path' => '/assets/docs/{prefix}/img/f2m2_logo.svg',
-
             'view_target_path' => app_path('views'),
-
         ];
     }
 
@@ -112,10 +106,6 @@ class ApiDocsGenerator
 
             if ($class == "Closure") {
                 continue;
-                // check for api/v1/docs
-                if (strpos($route['uri'], $this->prefix . '/docs') !== false) {
-                    continue;
-                }
             }
 
             $reflector = new ReflectionClass($class);
@@ -508,24 +498,6 @@ class ApiDocsGenerator
     }
 
     /**
-     * Get before filters
-     *
-     * @param  \Illuminate\Routing\Route $route
-     * @return string
-     */
-
-    /*
-    protected function getBeforeFilters($route)
-    {
-        $before = array_keys($route->beforeFilters());
-
-        $before = array_unique(array_merge($before, $this->getPatternFilters($route)));
-
-        return implode(', ', $before);
-    }
-    */
-
-    /**
      * Get all of the pattern filters matching the route.
      *
      * @param  \Illuminate\Routing\Route $route
@@ -562,8 +534,6 @@ class ApiDocsGenerator
             'uri' => $uri,
             'name' => $route->getName(),
             'action' => $route->getActionName(),
-            // 'before' => $this->getBeforeFilters($route),
-            // 'after'  => $this->getAfterFilters($route),
             'prefix' => $route->getPrefix(),
             'method' => $route->methods()[0],
         ));
@@ -596,19 +566,6 @@ class ApiDocsGenerator
     {
         return $this->router->findPatternFilters(Request::create($uri, $method));
     }
-
-    /**
-     * Get after filters
-     *
-     * @param  \Illuminate\Routing\Route $route
-     * @return string
-     */
-    /*
-    protected function getAfterFilters($route)
-    {
-        return implode(', ', array_keys($route->afterFilters()));
-    }
-    */
 
     /**
      * Converts a CamelCase String to Snake Case

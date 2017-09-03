@@ -112,11 +112,6 @@ class DotNavigation {
      * @param array $data
      */
     public function make($view = false, $data = []) {
-        /* if (count(self::$lists)) {
-          $this->currentIndex = count(self::$lists) - 1;
-          } else {
-          $this->currentIndex = 0;
-          } */
 
         $list = [
             "name" => $view,
@@ -124,7 +119,6 @@ class DotNavigation {
         ];
 
         self::$lists[] = $list;
-        //return $this;
     }
 
     /**
@@ -133,23 +127,7 @@ class DotNavigation {
      * @return $this|array
      */
     function with($name, $value) {
-
         return self::$lists;
-        /*
-         *
-          $result = [];
-          foreach(self::$lists as $list){
-          $item = [];
-          $item["name"] = $list["name"];
-          $item["data"] = array_merge($list["data"], array($name, $value));
-          $result[] = $item;
-          }
-
-          self::$lists = $result;
-          print_r(self::$lists);
-
-         */
-        return $this;
     }
 
     /*
@@ -258,12 +236,6 @@ class DotNavigation {
      * @param boolean $level Which level you are currently rendering
      * @return string
      */
-
-    /**
-     * @param null $items
-     * @param int $level
-     * @return string
-     */
     public function render($items = null, $level = 1) {
 
 
@@ -299,8 +271,6 @@ class DotNavigation {
 
                 $classes[] = "lev-" . $level;
 
-                //$menu .= '<li' . HTML::attributes(array('class' => implode(' ', $classes))) . '>';
-
                 $menu .= '<li' . ' class = "' . implode(' ', $classes) .' ">';
 
                 $menu .= $this->createAnchor($item, $level, $has_children);
@@ -323,11 +293,6 @@ class DotNavigation {
     /*
      * Method to render an anchor
      *
-     * @param array $item Item that needs to be turned into a link
-     * @return string
-     */
-
-    /**
      * @param $item
      * @param $level
      * @param $has_children
@@ -369,11 +334,6 @@ class DotNavigation {
     /*
      * Method to render an icon
      *
-     * @param array $item Item that needs to be turned into a icon
-     * @return string
-     */
-
-    /**
      * @param $item
      * @return string
      */
@@ -393,11 +353,6 @@ class DotNavigation {
 
     /*
      * Method to sort through the menu items and put them in order
-     *
-     * @return void
-     */
-
-    /**
      * @return array|mixed
      */
     private function sortItems() {
@@ -450,11 +405,6 @@ class DotNavigation {
      * Method to find the active links
      *
      * @param array $item Item that needs to be checked if active
-     * @return string
-     */
-
-    /**
-     * @param $item
      * @return string
      */
     private function getActive($item) {

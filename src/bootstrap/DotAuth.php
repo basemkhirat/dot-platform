@@ -7,6 +7,7 @@ class DotAuth
 {
 
     public $user = NULL;
+
     public $guard = "web";
 
     function __construct()

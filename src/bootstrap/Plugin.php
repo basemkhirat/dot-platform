@@ -213,10 +213,9 @@ class Plugin
 
         if (class_exists($class)) {
 
-
             $object = new $class();
-            $info = $object->info();
 
+            $info = $object->info();
 
             $plugin = self::instance($plugin_folder);
 

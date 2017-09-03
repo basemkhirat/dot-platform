@@ -75,8 +75,6 @@ class Menu
     {
         $items = self::get($sidebar, $parent);
 
-        // $calls++;
-
         if ($level <= 2) {
             $attr = array(
                 'class' => 'nav nav-second-level collapse level-' . $level
@@ -88,9 +86,8 @@ class Menu
         }
 
         $menu = "";
-        // if ($level != 1) {
+
         $menu = '<ul' . HTML::attributes($attr) . '>';
-        // }
 
         if (count($items)) {
 
@@ -154,9 +151,6 @@ class Menu
             return 'active current';
         }
 
-        /*  if (strpos($this->currentKey, $item->name) === 0) {
-              return 'active';
-          }*/
     }
 
 

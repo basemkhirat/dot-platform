@@ -90,6 +90,7 @@ class DotWidget
     {
 
         if ($callback) {
+
             Event::listen($sidebar . ".widget", function () use ($sidebar, $callback) {
 
                 self::$widget = new self();
@@ -108,7 +109,6 @@ class DotWidget
             });
 
         }
-
 
     }
 

@@ -4,7 +4,6 @@ namespace Dot\Platform;
 
 use Dot;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Class DotModule

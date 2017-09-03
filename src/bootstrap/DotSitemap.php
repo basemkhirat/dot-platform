@@ -2,7 +2,6 @@
 
 namespace Dot\Platform;
 
-
 /**
  * Class DotSitemap
  * @package Dot\Platform
@@ -30,7 +29,6 @@ class DotSitemap
      * @var
      */
     public static $currentSitemap;
-
 
     /**
      * @return array

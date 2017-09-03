@@ -27,7 +27,6 @@ class ApiDocsGeneratorCommand extends Command
      *
      * @var DocsGenerator
      */
-
     protected $generator;
 
 
