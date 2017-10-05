@@ -1,13 +1,12 @@
 {
-
     "name": "dot/platform",
-    "description": "The core platform of dot/cms",
-    "keywords": ["dotcms", "framework", "laravel", "cms", "modules", "plugins"],
+    "description": "Just a laravel cms",
+    "keywords": ["framework", "laravel", "cms", "plugins"],
     "license": "MIT",
     "type": "package",
     "require": {
         "php": ">=7.0",
-        "laravel/framework": ">=5.4",
+        "laravel/framework": ">=5.5",
         "barryvdh/laravel-debugbar": "2.*",
         "dot/auth": "*",
         "dot/roles": "*",
