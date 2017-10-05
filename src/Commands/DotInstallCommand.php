@@ -3,7 +3,6 @@
 namespace Dot\Platform\Commands;
 
 use Dot\Platform\Command;
-use Dot\Platform\Facades\Dot;
 use Dot\Platform\Facades\Plugin;
 use Illuminate\Support\Facades\File;
 
@@ -43,11 +42,8 @@ class DotInstallCommand extends Command
     public function handle()
     {
 
-        File::makeDirectory(public_path("admin"), 0775, true, true);
-        File::makeDirectory($this->root . "/plugins", 0775, true, true);
         File::makeDirectory(public_path("uploads"), 0777, true, true);
         File::makeDirectory(public_path("sitemaps"), 0777, true, true);
-        File::makeDirectory(public_path("modules"), 0775, true, true);
         File::makeDirectory(public_path("plugins"), 0775, true, true);
 
         $this->setPermission($this->root . "/storage", 0777);
@@ -63,7 +59,7 @@ class DotInstallCommand extends Command
 
         if (version_compare(PHP_VERSION, $minimum_php, '>=')) {
             $server_messages[] = "PHP version: " . PHP_VERSION . ".";
-        }else{
+        } else {
             $server_errors[] = "Please update your php to $minimum_php current is " . PHP_VERSION . ".";
         }
 
@@ -73,7 +69,7 @@ class DotInstallCommand extends Command
 
         if (version_compare($laravel_version, $minimum_laravel, '>=')) {
             $server_messages[] = "Laravel version: " . $laravel_version . ".";
-        }else{
+        } else {
             $server_errors[] = "You must have laravel $minimum_laravel or higher." . " Current is " . $laravel_version;
         }
 
@@ -125,25 +121,23 @@ class DotInstallCommand extends Command
 
         $this->info("\nInstalling system");
 
+        $this->info("\r");
 
         $this->call("migrate", [
             '--quiet' => true
         ]);
 
-        foreach (Plugin::all() as $plugin){
+        foreach (Plugin::all() as $plugin) {
             $plugin->install();
         }
-
-        $this->info("\r");
 
         $this->call("dot:user", [
             '--quiet' => true
         ]);
 
-        $this->info("Congratulations, Dot platform ". Dot::version()." is now installed!");
-        $this->info("Navigate to " . admin_url() . " to browse admin interface.");
+        $this->info("Congratulations, Dot platform " . Plugin::get("admin")->getVersion() . " is now installed!");
+        $this->info("Navigate to " . admin_url() . " to browse the backend.");
         $this->info("Enjoy :)");
-
     }
 
 

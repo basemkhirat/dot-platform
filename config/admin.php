@@ -16,11 +16,11 @@ return [
      * @var string
      */
 
-    'default_path' => env("DEFAULT_PATH", "users"),
+    'default_path' => env("DEFAULT_PATH", "dashboard"),
 
     /*
      * API prefix
-     * As ex (api/v1)
+     * example (api/v1)
      *
      * @var string
      */

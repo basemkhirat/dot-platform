@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="<?php echo url("favicon.ico") ?>"/>
     <script>
         base_url = "{{ admin_url() }}/";
-        baseURL = "{{ admin_url() }}";
+        baseURL = "{{ admin_url() }}/";
     </script>
     <meta name="csrf-token" content="<?php echo csrf_token(); ?>"/>
     @stack("header")

@@ -37,18 +37,13 @@ function admin_url($file = "")
  */
 function assets($path = "")
 {
-    $prefix = "";
 
     if (strstr($path, "::")) {
         list($namespace, $path) = explode("::", $path);
-        if ($namespace == "admin") {
-            $prefix = "admin";
-        } else {
-            $prefix = Module::path($namespace);
-        }
+        return asset("plugins/". $namespace."/". $path);
     }
 
-    return asset($prefix . "/" . $path);
+    return asset($path);
 }
 
 /**

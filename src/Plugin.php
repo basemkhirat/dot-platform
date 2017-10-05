@@ -296,7 +296,23 @@ class Plugin extends ServiceProvider
      */
     public function getVersion()
     {
-        return $this->composer()->version ?? NULL;
+
+        $composer_lock_file = base_path("composer.lock");
+
+        if (file_exists($composer_lock_file)) {
+
+            $composer_lock_content = json_decode(file_get_contents($composer_lock_file));
+
+            $packages = $composer_lock_content->packages;
+
+            $package = collect($packages)->where("name", $this->getName())->first();
+
+            if($package){
+                return $package->version;
+            }
+        }
+
+        return NULL;
     }
 
     /**

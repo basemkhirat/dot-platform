@@ -57,7 +57,6 @@ class DotUserCommand extends Command
             if (count($user->errors()->all())) {
                 $this->handle();
             }
-
         }
 
         $user->root = 1;
@@ -91,7 +90,7 @@ class DotUserCommand extends Command
             return $roles[$index - 1]->id;
         }
 
-        $this->error("Invalid selected user role");
+        $this->error("Invalid user role");
 
         $this->info("\n");
 
