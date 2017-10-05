@@ -1,39 +1,36 @@
 {
 
     "name": "dot/platform",
-
     "description": "The core platform of dot/cms",
-
     "keywords": ["dotcms", "framework", "laravel", "cms", "modules", "plugins"],
-
     "license": "MIT",
-
     "type": "package",
-
     "require": {
         "php": ">=7.0",
         "laravel/framework": ">=5.4",
-        "barryvdh/laravel-debugbar": "2.*"
+        "barryvdh/laravel-debugbar": "2.*",
+        "dot/auth": "*",
+        "dot/roles": "*",
+        "dot/users": "*",
+        "dot/options": "*",
+        "dot/media": "*",
+        "dot/galleries": "*",
+        "dot/dashboard": "*"
     },
-
     "autoload": {
         "psr-4" : {
             "Dot\\Platform\\": "src"
         }
     },
-
     "scripts": {
-        "post-update-cmd": [
-            "php artisan dot:update"
+        "post-install-cmd": [
+            "php artisan dot:install"
         ]
     },
-
     "config": {
         "preferred-install": "dist"
     },
-
     "minimum-stability" : "dev",
-
     "extra": {
         "laravel": {
             "providers": [
@@ -41,5 +38,4 @@
             ]
         }
     }
-
 }
