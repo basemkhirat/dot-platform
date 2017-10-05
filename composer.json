@@ -8,13 +8,13 @@
         "php": ">=7.0",
         "laravel/framework": ">=5.5",
         "barryvdh/laravel-debugbar": "2.*",
-        "dot/auth": "*",
-        "dot/roles": "*",
-        "dot/users": "*",
-        "dot/options": "*",
-        "dot/media": "*",
-        "dot/galleries": "*",
-        "dot/dashboard": "*"
+        "dot/auth": "dev-master",
+        "dot/roles": "dev-master",
+        "dot/users": "dev-master",
+        "dot/options": "dev-master",
+        "dot/media": "dev-master",
+        "dot/galleries": "dev-master",
+        "dot/dashboard": "dev-master"
     },
     "autoload": {
         "psr-4" : {

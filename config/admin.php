@@ -65,18 +65,10 @@ return [
         "admin" => Dot\Platform\System::class,
         "auth" => Dot\Auth\Auth::class,
         "users" => Dot\Users\Users::class,
-        "options" => Dot\Options\Options::class,
         "roles" => Dot\Roles\Roles::class,
+        "options" => Dot\Options\Options::class,
         "media" => Dot\Media\Media::class,
-        "categories" => Dot\Categories\Categories::class,
         "galleries" => Dot\Galleries\Galleries::class,
-        "tags" => Dot\Tags\Tags::class,
-        "pages" => Dot\Pages\Pages::class,
-        "posts" => Dot\Posts\Posts::class,
-        "blocks" => Dot\Blocks\Blocks::class,
-        "navigations" => Dot\Navigations\Navigations::class,
-        "dashboard" => Dot\Dashboard\Dashboard::class,
-        "seo" => Dot\Seo\Seo::class,
-        "polls" => Dot\Polls\Polls::class
+        "dashboard" => Dot\Dashboard\Dashboard::class
     ]
 ];

@@ -57,6 +57,10 @@ class ServiceProvider extends LaravelServiceProvider
             });
         }
 
+        $this->mergeConfigFrom(
+            __DIR__. "/../config/admin.php", "admin"
+        );
+
         foreach (Plugin::all() as $plugin) {
             $plugin->register();
         }
