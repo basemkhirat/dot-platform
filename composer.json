@@ -8,6 +8,7 @@
         "php": ">=7.0",
         "laravel/framework": ">=5.5",
         "barryvdh/laravel-debugbar": "2.*",
+        "doctrine/dbal": "^2.5",
         "dot/auth": "dev-master",
         "dot/roles": "dev-master",
         "dot/users": "dev-master",
