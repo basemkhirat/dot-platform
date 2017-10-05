@@ -33,7 +33,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dot\\Platform\\CmsServiceProvider"
+                "Dot\\Platform\\ServiceProvider"
             ]
         }
     }
