@@ -11,13 +11,9 @@
     "type": "package",
 
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.0",
         "laravel/framework": ">=5.4",
-        "barryvdh/laravel-debugbar": "2.*",
-        "roumen/sitemap": "2.*",
-        "intervention/image": "2.*",
-        "aws/aws-sdk-php-laravel": "2.0",
-        "sunra/php-simple-html-dom-parser": "^1.5"
+        "barryvdh/laravel-debugbar": "2.*"
     },
 
     "autoload": {
