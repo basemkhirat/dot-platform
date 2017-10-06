@@ -1,43 +1,33 @@
 <?php
 
-Route::group(
-    [
-        "middleware" => ["web"],
-        "namespace" => "Dot\\Platform\\Controllers"
-    ], function ($route) {
+Route::group([
+    "middleware" => ["web"],
+    "namespace" => "Dot\\Platform\\Controllers"
+], function ($route) {
     $route->get('{lang}/locale', ['uses' => 'LocalesController@index', 'as' => 'admin.languages']);
     $route->get('locale', ['uses' => 'LocalesController@index', 'as' => 'admin.languages']);
 });
 
-Route::group(
-    [
-        "prefix" => ADMIN,
-        "middleware" => ["web", "auth"],
-        "namespace" => "Dot\\Platform\\Controllers"
-    ], function ($route) {
-
+Route::group([
+    "prefix" => ADMIN,
+    "middleware" => ["web", "auth:backend"],
+    "namespace" => "Dot\\Platform\\Controllers"
+], function ($route) {
     // $route->any('sidebar', "SidebarController@index");
-
     $route->any('/', ["as" => "admin", "uses" => function () {
         $redirect_path = config("admin.default_path");
         return redirect(ADMIN . "/" . trim($redirect_path));
     }]);
-
 });
 
-Route::group(
-    [
-        "middleware" => ["web", "auth"]
-    ], function ($route) {
-
+Route::group([
+    "middleware" => ["web", "auth:backend"]
+], function ($route) {
     $route->get('docs', function () {
-
         $user = Auth::user();
-
         if (is_null($user->api_token)) {
             return app()->abort(500, "No API Token assigned to the current user.");
         }
-
         return view('docs.api.index', ["user" => $user]);
     });
 });

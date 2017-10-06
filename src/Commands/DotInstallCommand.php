@@ -136,7 +136,7 @@ class DotInstallCommand extends Command
         ]);
 
         $this->info("Congratulations, Dot platform " . Plugin::get("admin")->getVersion() . " is now installed!");
-        $this->info("Navigate to " . admin_url() . " to browse the backend.");
+        $this->info("Navigate to /" . config("admin.prefix") . " to browse the backend.");
         $this->info("Enjoy :)");
     }
 

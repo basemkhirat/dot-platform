@@ -46,6 +46,8 @@ class AdminMiddleware
             // Getting current url from session.
 
             try {
+
+
                 if (session()->has('locale')) {
                     app()->setLocale(session()->get('locale'));
                 } else {
