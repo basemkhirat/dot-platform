@@ -42,7 +42,7 @@ class PluginMigrationCommand extends Command
 
         $this->call("make:migration", [
             "name" => $this->argument("name"),
-            "--path" => get_relative_path($plugin->getPath()) . "/migrations",
+            "--path" => get_relative_path($plugin->getRootPath()) . "/database/migrations",
             "--create" => $this->option("create"),
             "--table" => $this->option("table"),
         ]);

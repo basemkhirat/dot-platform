@@ -27,11 +27,7 @@ class Dot
      * @var array
      */
     public $defaultBindings = [
-        "widget" => Widget::class,
-        "action" => Action::class,
-        "navigation" => Navigation::class,
-        "sitemap" => Sitemap::class,
-        "schedule" => Schedule::class
+
     ];
 
     /**
@@ -46,11 +42,6 @@ class Dot
     function __construct()
     {
         $this->app = app();
-
-        foreach ($this->defaultBindings as $name => $class) {
-            $this->instances[$name] = new $class;
-        }
-
     }
 
     /**
@@ -134,72 +125,7 @@ class Dot
     }
 
 
-    /**
-     * @return string
-     */
-    public function current_version()
-    {
-        return $this::VERSION;
-    }
 
-    /**
-     * @return mixed
-     */
-    public function latest_version()
-    {
-
-        $objCurl = curl_init();
-
-        curl_setopt($objCurl, CURLOPT_URL, "https://api.bitbucket.org/1.0/repositories/basemkhirat/dot-platform/tags");
-
-        curl_setopt($objCurl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($objCurl, CURLOPT_RETURNTRANSFER, true);
-
-        $response = curl_exec($objCurl);
-        $tags = json_decode($response, true);
-
-        $versions = [];
-
-        foreach ($tags as $version => $data) {
-            $versions[strtotime($data["utctimestamp"])] = [
-                "version" => $version,
-                "message" => $data["message"]
-            ];
-        }
-
-        krsort($versions);
-
-        $vers = [];
-        foreach ($versions as $time => $data) {
-
-            $ver = new stdClass();
-            $ver->version = $data["version"];
-            $ver->message = $data["message"];
-            $ver->timestamp = $time;
-
-            $vers[] = $ver;
-
-        }
-
-        return $vers[0];
-
-    }
-
-    /**
-     * @return bool|mixed
-     */
-    public function check()
-    {
-        $dot_version = $this->current_version();
-
-        $last = $this->latest_version();
-
-        if (version_compare($last->version, $dot_version, ">")) {
-            return $last;
-        }
-
-        return false;
-    }
 
     /**
      * @param $path

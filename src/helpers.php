@@ -219,3 +219,7 @@ function get_relative_path($value = '')
 {
     return str_replace(base_path(), "", $value);
 }
+
+function plugin($name){
+    return \Dot\Platform\Facades\Plugin::get($name);
+}

@@ -2,12 +2,13 @@
 
 namespace Dot\Platform;
 
+use Dot\Options\Facades\Option;
 use Dot\Platform\Classes\DotUrlGenerator;
 use Dot\Platform\Facades\Dot;
+use Dot\Platform\Facades\Navigation;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class System
@@ -37,7 +38,6 @@ class System extends Plugin
         'Menu' => \Dot\Platform\Facades\Menu::class,
         'Action' => \Dot\Platform\Facades\Action::class,
         'Widget' => \Dot\Platform\Facades\Widget::class,
-        'Sitemap' => \Dot\Platform\Facades\Sitemap::class,
         'Schedule' => \Dot\Platform\Facades\Schedule::class,
     ];
 
@@ -119,6 +119,10 @@ class System extends Plugin
         define("ADMIN", config("admin.prefix"));
         define("API", config("admin.api"));
 
+        Navigation::menu("topnav", function ($menu) {
+            $menu->make("options::locales");
+        });
+
         /*
          * Auto detecting website domain.
          */
@@ -151,6 +155,15 @@ class System extends Plugin
         require_once $this->getPath('overrides.php');
         require_once $this->getPath('helpers.php');
 
+        Option::page("general", function ($option) {
+
+            $option->title(trans("admin::options.general_options"))
+                ->icon("fa-sliders")
+                ->order(0)
+                ->view("admin::options");
+
+        });
+
         parent::boot();
     }
 
@@ -162,18 +175,9 @@ class System extends Plugin
 
         @date_default_timezone_set(config("app.timezone"));
 
+
         parent::register();
     }
 
-
-    /**
-     * Install hook
-     */
-    function install(){
-        parent::install();
-
-
-
-    }
 
 }

@@ -29,7 +29,6 @@ class ServiceProvider extends LaravelServiceProvider
         "widget" => \Dot\Platform\Classes\Widget::class,
         "action" => \Dot\Platform\Classes\Action::class,
         "navigation" => \Dot\Platform\Classes\Navigation::class,
-        "sitemap" => \Dot\Platform\Classes\Sitemap::class,
         "schedule" => \Dot\Platform\Classes\Schedule::class,
         "menu" => \Dot\Platform\Classes\Menu::class
     ];
@@ -51,6 +50,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
+
         foreach ($this->bindings as $abstract => $class) {
             $this->app->bind($abstract, function () use ($class) {
                 return new $class();

@@ -81,4 +81,5 @@ return [
 
     "yes" => "Yes",
     "cancel" => "Cancel",
+
 ];

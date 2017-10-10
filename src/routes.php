@@ -31,3 +31,12 @@ Route::group([
         return view('docs.api.index', ["user" => $user]);
     });
 });
+
+
+Route::group([
+    "prefix" => ADMIN,
+    "middleware" => ["web", "auth:backend"],
+    "namespace" => "Dot\\Platform\\Controllers"
+], function ($route) {
+    $route->any('/platform/update', ["as" => "admin.options.check_update", "uses" => "OptionsController@check_update"]);
+});

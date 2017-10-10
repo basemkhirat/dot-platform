@@ -312,7 +312,7 @@ class Plugin extends ServiceProvider
             }
         }
 
-        return NULL;
+        return "dev-master";
     }
 
     /**
