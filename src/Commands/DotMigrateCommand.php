@@ -29,7 +29,7 @@ class DotMigrateCommand extends Command
     {
         foreach (Plugin::all() as $plugin) {
 
-            if (file_exists($plugin->getPath() . "/migrations")) {
+            if (file_exists($plugin->getRootPath() . "/database/migrations")) {
 
                 $this->line("- " . ucfirst($plugin->getKey()) . " Plugin");
 

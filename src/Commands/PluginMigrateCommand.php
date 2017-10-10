@@ -39,7 +39,7 @@ class PluginMigrateCommand extends Command
         }
 
         $this->call('migrate', [
-            '--path' => get_relative_path($plugin->getPath()) . "/migrations",
+            '--path' => get_relative_path($plugin->getRootPath()) . "/database/migrations",
             '--force' => $this->option("force"),
             '--pretend' => $this->option("pretend"),
             '--seed' => $this->option("seed"),
