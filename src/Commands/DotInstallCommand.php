@@ -71,7 +71,7 @@ class DotInstallCommand extends Command
 
         // Check storage is writable
 
-        if (!is_writable($storage_path = $this->root . "/storage")) {
+        if (!is_writable($storage_path = base_path("storage"))) {
             $server_errors[] = "Storage path $storage_path is not writable.";
         } else {
             $server_messages[] = "Storage path $storage_path is writable.";
@@ -79,7 +79,7 @@ class DotInstallCommand extends Command
 
         // Check cache is writable
 
-        if (!is_writable($cache_path = $this->root . "/bootstrap/cache")) {
+        if (!is_writable($cache_path = base_path("bootstrap/cache"))) {
             $server_errors[] = "Cache path $cache_path is not writable";
         } else {
             $server_messages[] = "Cache path $cache_path is writable.";
@@ -87,7 +87,7 @@ class DotInstallCommand extends Command
 
         // Check uploads is writable
 
-        if (!is_writable($uploads_path = $this->root . "/public/uploads")) {
+        if (!is_writable($uploads_path = public_path("uploads"))) {
             $server_errors[] = "Uploads path $uploads_path is not writable.";
         } else {
             $server_messages[] = "Uploads path $uploads_path is writable.";
