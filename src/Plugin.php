@@ -101,10 +101,6 @@ class Plugin extends ServiceProvider
         ], $this->getKey() . ".config");
 
         $this->publishes([
-            $this->getRootPath('database/migrations') => database_path("migrations"),
-        ], $this->getKey() . ".migrations");
-
-        $this->publishes([
             $this->getPath('views') => resource_path('views/vendor/' . $this->getKey())
         ], $this->getKey() . ".views");
 
@@ -149,11 +145,6 @@ class Plugin extends ServiceProvider
         Artisan::call("plugin:publish", [
             "plugin" => $this->getKey(),
             "--config" => true
-        ]);
-
-        Artisan::call("plugin:publish", [
-            "plugin" => $this->getKey(),
-            "--migrations" => true
         ]);
 
         Artisan::call("plugin:migrate", [

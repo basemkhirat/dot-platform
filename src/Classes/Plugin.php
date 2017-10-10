@@ -59,7 +59,6 @@ class Plugin
 
             $plugin = new $class();
 
-
             $plugin->key = $key;
             $plugin->path = dirname($reflection->getFileName());
             $plugin->class = $class;
