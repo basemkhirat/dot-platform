@@ -30,12 +30,5 @@
     "config": {
         "preferred-install": "dist"
     },
-    "minimum-stability" : "dev",
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Dot\\Platform\\ServiceProvider"
-            ]
-        }
-    }
+    "minimum-stability" : "dev"
 }
