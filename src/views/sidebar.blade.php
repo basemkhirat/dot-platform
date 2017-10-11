@@ -80,7 +80,7 @@
                 var items = $('#menu-items').nestedSortable('toHierarchy', {startDepthCount: 0});
 
                 $('#save-order').button('loading');
-                $.post("<?php echo URL::to(ADMIN . "/sidebar"); ?>", {"items": JSON.stringify(items)}, function (result) {
+                $.post("<?php echo admin_url('sidebar'); ?>", {"items": JSON.stringify(items)}, function (result) {
                     $('#save-order').button('reset');
                 }, "json");
             });
@@ -107,7 +107,7 @@
                 }
                 $(this).prop('disabled', true);
                 $.ajax({
-                    url: '{!! URL::to("/".ADMIN."/navigations/reorder") !!}',
+                    url: '{!! admin_url("navigations/reorder") !!}',
                     type: 'GET', dataType: 'html',
                     data: {
                         order: ordered,

@@ -2,30 +2,34 @@
 
 namespace Dot\Platform\Classes;
 
-use Illuminate\Support\Facades\Config;
-
 /**
- * Class DotCarbon
+ * Class Carbon
+ * @package Dot\Platform\Classes
  */
 class Carbon extends \Carbon\Carbon
 {
 
     /**
-     * @return Response
+     * Generate relative time
+     * @return \Response
      */
     function ago()
     {
         return time_ago($this->toDateTimeString());
     }
 
+    /**
+     * Generate date string
+     * @return false|\Response|string
+     */
     function render()
     {
 
-        $date_format = Config::get("date_format");
+        $date_format = option("site_date_format", "relative");
 
         if ($date_format == "relative") {
 
-            if (app()->getLocale() == "ar") {
+            if (option("site_locale", app()->getLocale()) == "ar") {
                 return $this->ago();
             } else {
                 return $this->diffForHumans();
