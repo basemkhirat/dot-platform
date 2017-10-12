@@ -63,12 +63,5 @@ return [
 
     'plugins' => [
         "admin" => Dot\Platform\System::class,
-        "auth" => Dot\Auth\Auth::class,
-        "users" => Dot\Users\Users::class,
-        "roles" => Dot\Roles\Roles::class,
-        "options" => Dot\Options\Options::class,
-        "media" => Dot\Media\Media::class,
-        "galleries" => Dot\Galleries\Galleries::class,
-        "dashboard" => Dot\Dashboard\Dashboard::class
     ]
 ];
