@@ -124,7 +124,9 @@ class DotInstallCommand extends Command
             '--quiet' => true
         ]);
 
-        $this->info("Congratulations, Dot platform " . Plugin::get("admin")->getVersion() . " is now installed!");
+        $this->info("\r");
+
+        $this->info("Congratulations, Dot Platform " . Plugin::get("admin")->getVersion() . " is now installed!");
         $this->info("Navigate to /" . config("admin.prefix") . " to browse the backend.");
         $this->info("Enjoy :)");
     }

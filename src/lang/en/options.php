@@ -8,7 +8,7 @@ return [
     "check_for_update" => "Check for updates",
     "checking" => "Checking..",
     "how_update" => "How to update",
-    "version_available" => "Dot platform <strong style='font-family: sans-serif, Arial, Verdana'>:version</strong> is available !",
+    "version_available" => "Dot Platform <strong style='font-family: sans-serif, Arial, Verdana'>:version</strong> is available!",
     "up_to_date" => "Dot platform is up to date.",
 
     'attributes' => [
