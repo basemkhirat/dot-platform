@@ -1,9 +1,14 @@
 {
     "name": "dot/platform",
+
     "description": "Just a laravel cms",
+
     "keywords": ["framework", "laravel", "cms", "plugins"],
+
     "license": "MIT",
+
     "type": "package",
+
     "require": {
         "php": ">=7.0",
         "laravel/framework": ">=5.5",
@@ -17,18 +22,18 @@
         "dot/galleries": "dev-master",
         "dot/dashboard": "dev-master"
     },
+
     "autoload": {
         "psr-4" : {
             "Dot\\Platform\\": "src"
         }
     },
-    "scripts": {
-        "post-install-cmd": [
-            "php artisan dot:install"
-        ]
-    },
-    "config": {
-        "preferred-install": "dist"
-    },
-    "minimum-stability" : "dev"
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dot\\Platform\\ServiceProvider"
+            ]
+        }
+    }
 }
