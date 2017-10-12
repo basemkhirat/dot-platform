@@ -2,7 +2,7 @@
 
 namespace Dot\Platform;
 
-use Dot\Platform\Facades\Plugin;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 /**
@@ -23,22 +23,41 @@ class ServiceProvider extends LaravelServiceProvider
      * Default bindings
      * @var array
      */
-    public $bindings = [
+    protected $bindings = [
         "dot" => \Dot\Platform\Classes\Dot::class,
         "plugin" => \Dot\Platform\Classes\Plugin::class,
         "widget" => \Dot\Platform\Classes\Widget::class,
         "action" => \Dot\Platform\Classes\Action::class,
         "navigation" => \Dot\Platform\Classes\Navigation::class,
-        "schedule" => \Dot\Platform\Classes\Schedule::class,
-        "menu" => \Dot\Platform\Classes\Menu::class
+        "schedule" => \Dot\Platform\Classes\Schedule::class
     ];
+
+    /**
+     * Platform plugins
+     * @var array
+     */
+    protected $plugins = [];
+
+
+    function __construct(Application $app)
+    {
+        parent::__construct($app);
+
+        foreach ($this->bindings as $abstract => $class) {
+            $app->bind($abstract, function () use ($class, $app) {
+                return new $class($app);
+            });
+        }
+
+        $this->plugins = $app->plugin->all();
+    }
 
     /**
      * Booting plugins
      */
     function boot()
     {
-        foreach (Plugin::all() as $plugin) {
+        foreach ($this->plugins as $plugin) {
             $plugin->boot();
         }
     }
@@ -50,18 +69,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
-
-        foreach ($this->bindings as $abstract => $class) {
-            $this->app->bind($abstract, function () use ($class) {
-                return new $class();
-            });
-        }
-
-        $this->mergeConfigFrom(
-            __DIR__ . "/../config/admin.php", "admin"
-        );
-        
-        foreach (Plugin::all() as $plugin) {
+        foreach ($this->plugins as $plugin) {
             $plugin->register();
         }
     }

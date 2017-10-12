@@ -25,9 +25,10 @@ class Plugin
     /**
      * Plugin constructor.
      */
-    function __construct()
+    function __construct($app)
     {
-        $this->config = config("admin.plugins");
+        $this->app = $app;
+        $this->config = $app->config["admin"]["plugins"];
     }
 
     /**
@@ -75,7 +76,7 @@ class Plugin
 
             $reflection = new ReflectionClass($class);
 
-            $plugin = new $class();
+            $plugin = new $class($this->app);
 
             $plugin->key = $key;
             $plugin->path = dirname($reflection->getFileName());

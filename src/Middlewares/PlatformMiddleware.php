@@ -4,7 +4,7 @@ namespace Dot\Platform\Middlewares;
 
 use Closure;
 
-class AdminMiddleware
+class PlatformMiddleware
 {
     public function handle($request, Closure $next)
     {
@@ -43,10 +43,7 @@ class AdminMiddleware
 
         } else {
 
-            // Getting current url from session.
-
             try {
-
 
                 if (session()->has('locale')) {
                     app()->setLocale(session()->get('locale'));
@@ -65,8 +62,8 @@ class AdminMiddleware
         // Getting frontend status.
 
         if (!$request->is(ADMIN . '/*')) {
-            if (!config("site_status")) {
-//                return response(config("offline_message"));
+            if (option("site_status", "1") != "1") {
+                return response(view("errors.000")->render());
             }
         }
 

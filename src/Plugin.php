@@ -68,12 +68,11 @@ class Plugin extends ServiceProvider
     /**
      * Plugin constructor.
      */
-    public function __construct()
+    public function __construct($app)
     {
-        parent::__construct(app());
-        $this->kernel = $this->app->make(Kernel::class);
-        $this->router = $this->app->make(Router::class);
-        $this->gate = $this->app->make(GateContract::class);
+        parent::__construct($app);
+        $this->router = $app->make(Router::class);
+        $this->gate = $app->make(GateContract::class);
     }
 
     /**
@@ -84,7 +83,7 @@ class Plugin extends ServiceProvider
     {
 
         foreach ($this->getMiddlewares() as $middleware) {
-            $this->kernel->pushMiddleware($middleware);
+            $this->router->pushMiddlewareToGroup("web", $middleware);
         }
 
         foreach ($this->getRouteMiddlewares() as $alias => $middleware) {

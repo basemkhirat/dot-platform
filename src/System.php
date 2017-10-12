@@ -46,7 +46,6 @@ class System extends Plugin
         'Dot' => \Dot\Platform\Facades\Dot::class,
         'Plugin' => \Dot\Platform\Facades\Plugin::class,
         'Navigation' => \Dot\Platform\Facades\Navigation::class,
-        'Menu' => \Dot\Platform\Facades\Menu::class,
         'Action' => \Dot\Platform\Facades\Action::class,
         'Widget' => \Dot\Platform\Facades\Widget::class,
         'Schedule' => \Dot\Platform\Facades\Schedule::class,
@@ -71,9 +70,6 @@ class System extends Plugin
         \Dot\Platform\Commands\PluginMigrateCommand::class,
         \Dot\Platform\Commands\PluginInstallCommand::class,
         \Dot\Platform\Commands\PluginUninstallCommand::class,
-        \Dot\Platform\Commands\PluginUpdateCommand::class,
-        \Dot\Platform\Commands\PluginEnableCommand::class,
-        \Dot\Platform\Commands\PluginDisableCommand::class,
         \Dot\Platform\Commands\PluginPublishCommand::class
 
     ];
@@ -83,7 +79,7 @@ class System extends Plugin
      * @var array
      */
     protected $middlewares = [
-        \Dot\Platform\Middlewares\AdminMiddleware::class
+        \Dot\Platform\Middlewares\PlatformMiddleware::class
     ];
 
     /**
