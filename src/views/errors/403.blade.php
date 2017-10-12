@@ -9,8 +9,7 @@
         <h3 class="font-bold">Access denied</h3>
 
         <div class="error-desc">
-            Sorry you are not authorized to view this page <br/>
-            <a href="{{ admin_url() }}" class="btn btn-primary m-t">Go Back</a>
+            Sorry you are not authorized to view this page
         </div>
 
     </div>

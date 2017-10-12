@@ -6,6 +6,7 @@ use Dot\Options\Facades\Option;
 use Dot\Platform\Classes\DotUrlGenerator;
 use Dot\Platform\Facades\Dot;
 use Dot\Platform\Facades\Navigation;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -92,10 +93,6 @@ class System extends Plugin
     public function boot()
     {
 
-        $this->publishes([
-            $this->getPath('views/errors') => resource_path('views/errors')
-        ], $this->getKey() . ".errors");
-
         if (config("admin.locale_driver") == "url") {
 
             $request = $this->app->make('request');
@@ -121,7 +118,6 @@ class System extends Plugin
                     app()->make('request')
                 );
             });
-
 
         }
 
@@ -166,13 +162,15 @@ class System extends Plugin
         require_once $this->getPath('helpers.php');
 
         Option::page("general", function ($option) {
-
             $option->title(trans("admin::options.general_options"))
                 ->icon("fa-sliders")
                 ->order(0)
                 ->view("admin::options");
-
         });
+
+        $this->publishes([
+            $this->getPath('views/errors') => resource_path('views/errors')
+        ], $this->getKey() . ".errors");
 
         parent::boot();
     }
@@ -186,6 +184,17 @@ class System extends Plugin
         @date_default_timezone_set(config("app.timezone"));
 
         parent::register();
+    }
+
+    function install()
+    {
+
+        parent::install();
+
+        Artisan::call("vendor:publish", [
+            "--tag" => $this->getKey(). ".errors"
+        ]);
+
     }
 
 
