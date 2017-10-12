@@ -18,6 +18,16 @@ use Illuminate\Support\Facades\Request;
 class System extends Plugin
 {
 
+    protected $dependencies = [
+        "auth" => \Dot\Auth\Auth::class,
+        "users" => \Dot\Users\Users::class,
+        "roles" => \Dot\Roles\Roles::class,
+        "options" => \Dot\Options\Options::class,
+        "media" => \Dot\Media\Media::class,
+        "galleries" => \Dot\Galleries\Galleries::class,
+        "dashboard" => \Dot\Dashboard\Dashboard::class
+    ];
+
     /**
      * System providers
      * @var array
@@ -174,7 +184,6 @@ class System extends Plugin
     {
 
         @date_default_timezone_set(config("app.timezone"));
-
 
         parent::register();
     }

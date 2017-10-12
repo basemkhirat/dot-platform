@@ -32,6 +32,8 @@ class PluginUninstallCommand extends Command
             return $this->error("Plugin " . $this->argument('plugin') . " not found");
         }
 
+        // Uninstall the plugin
+
         $plugin->uninstall();
 
         $this->info("Plugin $plugin->getKey() uninstalled successfully");

@@ -2,6 +2,7 @@
 
 namespace Dot\Platform;
 
+use Dot\Platform\Facades\Plugin as PluginFacade;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Foundation\AliasLoader;
@@ -15,6 +16,12 @@ use Illuminate\Support\ServiceProvider;
  */
 class Plugin extends ServiceProvider
 {
+
+    /**
+     * Plugin dependencies
+     * @var array
+     */
+    protected $dependencies = [];
 
     /**
      * Plugin service providers
@@ -92,17 +99,23 @@ class Plugin extends ServiceProvider
         $this->loadTranslationsFrom($this->getPath('lang'), $this->getKey());
         $this->loadMigrationsFrom($this->getRootPath('database/migrations'));
 
-        $this->publishes([
-            $this->getRootPath('public') => public_path("plugins/" . $this->getKey()),
-        ], $this->getKey() . ".public");
+        if (file_exists($this->getRootPath('public'))) {
+            $this->publishes([
+                $this->getRootPath('public') => public_path("plugins/" . $this->getKey()),
+            ], $this->getKey() . ".public");
+        }
 
-        $this->publishes([
-            $this->getRootPath('config') => config_path(),
-        ], $this->getKey() . ".config");
+        if (file_exists($this->getRootPath('config'))) {
+            $this->publishes([
+                $this->getRootPath('config') => config_path(),
+            ], $this->getKey() . ".config");
+        }
 
-        $this->publishes([
-            $this->getPath('views') => resource_path('views/vendor/' . $this->getKey())
-        ], $this->getKey() . ".views");
+        if (file_exists($this->getPath('views'))) {
+            $this->publishes([
+                $this->getPath('views') => resource_path('views/vendor/' . $this->getKey())
+            ], $this->getKey() . ".views");
+        }
 
         $this->loadRoutesFrom($this->getPath("routes.php"));
     }
@@ -210,6 +223,50 @@ class Plugin extends ServiceProvider
     }
 
     /**
+     * Get plugin dependencies
+     * @return mixed
+     */
+    public function getDependencies()
+    {
+        $dependencies = [];
+
+        foreach ($this->dependencies as $key => $class) {
+            $dependencies[$key] = PluginFacade::get($key, $class);
+        }
+
+        return $dependencies;
+    }
+
+    /**
+     * Get recursive plugin dependencies
+     * @return array
+     */
+    public function getRecursiveDependencies()
+    {
+        return array_merge($this->getDependencies(), $this->getRecursive($this));
+    }
+
+    /**
+     * Recursive plugins fetch
+     * @param $plugin
+     * @param array $plugins
+     * @return array
+     */
+    private function getRecursive($plugin, $plugins = [])
+    {
+
+        foreach ($plugin->getDependencies() as $key => $plugin) {
+
+            $plugins[$key] = $plugin;
+
+            return $this->getRecursive($plugin, $plugins);
+
+        }
+
+        return $plugins;
+    }
+
+    /**
      * Get plugin providers
      * @return mixed
      */
@@ -298,7 +355,7 @@ class Plugin extends ServiceProvider
 
             $package = collect($packages)->where("name", $this->getName())->first();
 
-            if($package){
+            if ($package) {
                 return $package->version;
             }
         }

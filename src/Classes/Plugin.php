@@ -2,7 +2,6 @@
 
 namespace Dot\Platform\Classes;
 
-use Illuminate\Foundation\Application;
 use ReflectionClass;
 
 /**
@@ -16,7 +15,20 @@ class Plugin
      * Loaded plugins
      * @var array
      */
-    protected $plugins = [];
+    protected static $plugins = [];
+
+    /**
+     * @var array|\Illuminate\Config\Repository|mixed
+     */
+    protected $config = [];
+
+    /**
+     * Plugin constructor.
+     */
+    function __construct()
+    {
+        $this->config = config("admin.plugins");
+    }
 
     /**
      * Get all plugins
@@ -25,33 +37,39 @@ class Plugin
     public function all()
     {
 
-        if (count($this->plugins)) {
-            return $this->plugins;
-        }
-
-        foreach (config("admin.plugins") as $key => $class) {
+        foreach ($this->config as $key => $class) {
 
             $plugin = $this->get($key, $class);
 
             if ($plugin) {
-                $this->plugins[$key] = $plugin;
-            }
 
+                self::$plugins[$key] = $plugin;
+
+                foreach ($plugin->getRecursiveDependencies() as $key => $plugin) {
+                    self::$plugins[$key] = $plugin;
+                }
+            }
         }
 
-        return $this->plugins;
+        return self::$plugins;
     }
-
 
     /**
      * get plugin details
      * @param $key
+     * @param $class
      * @return mixed
      */
-    public function get($key)
+    public function get($key, $class = false)
     {
 
-        $class = config("admin.plugins.".$key);
+        // Check plugin is already loaded.
+
+        if (array_key_exists($key, self::$plugins)) {
+            return self::$plugins[$key];
+        }
+
+        //  Creating plugin object.
 
         if (class_exists($class)) {
 
@@ -66,7 +84,5 @@ class Plugin
 
             return $plugin;
         }
-
     }
-
 }
