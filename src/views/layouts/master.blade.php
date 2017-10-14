@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="robots" content="noindex, nofollow"/>
     <meta name="viewport" content="width=device-width initial-scale=1.0"/>
-    <title>{{ config("site_title") }}</title>
+    <title>{{ option("site_name") }} - CMS</title>
     <link href="{{ assets("admin::css/app.css") }}" rel="stylesheet"/>
     @if (DIRECTION == "rtl")
         <link href="<?php echo assets("admin::css/app.rtl.css") ?>" rel="stylesheet"/>
