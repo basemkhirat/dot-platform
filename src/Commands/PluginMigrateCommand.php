@@ -38,22 +38,6 @@ class PluginMigrateCommand extends Command
             return $this->error("Plugin " . $this->argument('plugin') . " not found");
         }
 
-        // Migrate plugin dependencies
-
-        foreach ($plugin->getRecursiveDependencies() as $sub_plugin) {
-
-            $this->call('migrate', [
-                '--path' => get_relative_path($sub_plugin->getRootPath()) . "/database/migrations",
-                '--force' => $this->option("force"),
-                '--pretend' => $this->option("pretend"),
-                '--seed' => $this->option("seed"),
-                '--step' => $this->option("step")
-            ]);
-
-        }
-
-        // Migrate the main plugin
-
         $this->call('migrate', [
             '--path' => get_relative_path($plugin->getRootPath()) . "/database/migrations",
             '--force' => $this->option("force"),

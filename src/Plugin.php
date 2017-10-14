@@ -147,15 +147,13 @@ class Plugin extends ServiceProvider
     public function install($command)
     {
 
-        $command->call("plugin:publish", [
-            "plugin" => $this->getKey(),
-            "--public" => true,
+        $command->call("vendor:publish", [
+            "--tag" => [$this->getKey() . ".public"],
             "--force" => true
         ]);
 
-        $command->call("plugin:publish", [
-            "plugin" => $this->getKey(),
-            "--config" => true
+        $command->call("vendor:publish", [
+            "--tag" => [$this->getKey() . ".config"],
         ]);
 
         $command->call("plugin:migrate", [
@@ -185,6 +183,16 @@ class Plugin extends ServiceProvider
     }
 
     /**
+     * Get plugin relative path
+     * @param string $path
+     * @return string
+     */
+    public function getRelativePath($path = NULL)
+    {
+        return str_replace(base_path(), "", $this->getPath($path));
+    }
+
+    /**
      * Get plugin absolute root path
      * @param string $path
      * @return string
@@ -192,6 +200,16 @@ class Plugin extends ServiceProvider
     public function getRootPath($path = NULL)
     {
         return $path ? dirname($this->path) . DIRECTORY_SEPARATOR . $path : dirname($this->path);
+    }
+
+    /**
+     * Get plugin relative root path
+     * @param string $path
+     * @return string
+     */
+    public function getRelativeRootPath($path = NULL)
+    {
+        return str_replace(base_path(), "", $this->getRootPath($path));
     }
 
     /**

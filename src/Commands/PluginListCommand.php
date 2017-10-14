@@ -27,15 +27,24 @@ class PluginListCommand extends Command
     public function handle()
     {
 
-        $this->line("");
-
         $plugins = Plugin::all();
 
+        $rows = [];
+
         foreach ($plugins as $plugin) {
-            $this->info(" - " . $plugin->getKey());
+            $rows[] = [
+                $plugin->getKey(),
+                $plugin->getName(),
+                $plugin->getVersion(),
+                $plugin->getdescription(),
+                $plugin->getLicense(),
+            ];
         }
 
-        $this->line("");
+        $this->table(
+            ["Key", "Name", "Version", "Description", "License"],
+            $rows
+        );
     }
 
 

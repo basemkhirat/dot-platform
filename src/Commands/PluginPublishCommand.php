@@ -34,57 +34,11 @@ class PluginPublishCommand extends Command
             return $this->error("Plugin " . $this->argument('plugin') . " not found");
         }
 
-        // Publishing plugin dependencies
-
-        foreach ($plugin->getRecursiveDependencies() as $sub_plugin) {
-
-            $publish_tags = [
-                $sub_plugin->getKey() . ".config",
-                $sub_plugin->getKey() . ".public"
-            ];
-
-            if ($this->option("config")) {
-                $publish_tags = [$sub_plugin->getKey() . ".config"];
-            } else if ($this->option("public")) {
-                $publish_tags = [$sub_plugin->getKey() . ".public"];
-            } else if ($this->option("migrations")) {
-                $publish_tags = [$sub_plugin->getKey() . ".migrations"];
-            } else if ($this->option("views")) {
-                $publish_tags = [$sub_plugin->getKey() . ".views"];
-            }
-
-            Artisan::call("vendor:publish", [
-                "--tag" => $publish_tags,
-                "--force" => $this->option("force"),
-                "--quiet" => true
-            ]);
-
-        }
-
-        // Publishing the main plugin
-
-        $publish_tags = [
-            $plugin->getKey() . ".config",
-            $plugin->getKey() . ".public"
-        ];
-
-        if ($this->option("config")) {
-            $publish_tags = [$plugin->getKey() . ".config"];
-        } else if ($this->option("public")) {
-            $publish_tags = [$plugin->getKey() . ".public"];
-        } else if ($this->option("migrations")) {
-            $publish_tags = [$plugin->getKey() . ".migrations"];
-        } else if ($this->option("views")) {
-            $publish_tags = [$plugin->getKey() . ".views"];
-        }
-
         Artisan::call("vendor:publish", [
-            "--tag" => $publish_tags,
+            "--tag" => [$plugin->getKey()],
             "--force" => $this->option("force"),
-            "--quiet" => true
         ]);
 
-        return $this->info("Plugin " . $plugin->getKey() . " published successfully");
     }
 
     /**

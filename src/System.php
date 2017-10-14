@@ -19,13 +19,13 @@ class System extends Plugin
 {
 
     protected $dependencies = [
+        "options" => \Dot\Options\Options::class,
         "auth" => \Dot\Auth\Auth::class,
         "users" => \Dot\Users\Users::class,
         "roles" => \Dot\Roles\Roles::class,
-        "options" => \Dot\Options\Options::class,
         "media" => \Dot\Media\Media::class,
         "galleries" => \Dot\Galleries\Galleries::class,
-        "dashboard" => \Dot\Dashboard\Dashboard::class
+        "dashboard" => \Dot\Dashboard\Dashboard::class,
     ];
 
     /**
@@ -59,7 +59,6 @@ class System extends Plugin
         // Dot commands
         \Dot\Platform\Commands\DotInstallCommand::class,
         \Dot\Platform\Commands\DotUpdateCommand::class,
-        \Dot\Platform\Commands\DotPublishCommand::class,
         \Dot\Platform\Commands\DotMigrateCommand::class,
         \Dot\Platform\Commands\DotUserCommand::class,
 
@@ -189,10 +188,6 @@ class System extends Plugin
         $command->call("vendor:publish", [
             "--tag" => $this->getKey() . ".errors"
         ]);
-
-        // Load all options into memory
-
-        Option::load();
 
         $command->info("Setting default options");
 

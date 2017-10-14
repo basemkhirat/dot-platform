@@ -4,7 +4,9 @@ namespace Dot\Platform\Commands;
 
 use Dot\Platform\Command;
 use Dot\Platform\Facades\Plugin;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class DotInstallCommand
@@ -23,11 +25,25 @@ class DotInstallCommand extends Command
      */
     protected $description = "Installing system";
 
+
+    function __construct()
+    {
+        parent::__construct();
+        $this->isInstalled = $this->isInstalled();
+    }
+
     /**
      * @return bool
      */
     public function handle()
     {
+
+        $this->line("\r");
+        $this->line('<fg=black;bg=green> Dot Platform Installation </>');
+        $this->line("\r");
+
+        $this->line('<fg=black;bg=green> Checking system requirements </>');
+        $this->line("\r");
 
         File::makeDirectory(public_path("uploads"), 0777, true, true);
         File::makeDirectory(public_path("plugins"), 0775, true, true);
@@ -45,18 +61,18 @@ class DotInstallCommand extends Command
         $minimum_php = '7.0.0';
 
         if (version_compare(PHP_VERSION, $minimum_php, '>=')) {
-            $server_messages[] = "PHP version: " . PHP_VERSION . ".";
+            $server_messages[] = "PHP: " . PHP_VERSION;
         } else {
             $server_errors[] = "Please update your php to $minimum_php current is " . PHP_VERSION . ".";
         }
 
         // Check laravel version
 
-        $minimum_laravel = '5.0';
+        $minimum_laravel = '5.5';
         $laravel_version = app()->version();
 
         if (version_compare($laravel_version, $minimum_laravel, '>=')) {
-            $server_messages[] = "Laravel version: " . $laravel_version . ".";
+            $server_messages[] = "Laravel: " . $laravel_version . ".";
         } else {
             $server_errors[] = "You must have laravel $minimum_laravel or higher." . " Current is " . $laravel_version;
         }
@@ -94,41 +110,76 @@ class DotInstallCommand extends Command
         }
 
         foreach ($server_messages as $message) {
-            $this->info($message);
+            $this->line("<bg=green;fg=black> Passed: </> " . $message);
         }
 
         if (count($server_errors)) {
 
             foreach ($server_errors as $error) {
-                $this->error($error);
+                $this->line("<bg=red;fg=white> Error:  </> " . $error);
             }
 
-            $this->error("Please fix these error(s) before install.");
+            $this->line("\r");
+
+            $this->line("<fg=red>Please fix these error(s) before install.</>");
+            $this->line("\r");
 
             return false;
         }
 
-        $this->info("\nInstalling system");
+        $this->info("\r");
+
+        $this->line("<fg=black;bg=green>Installing system </>");
+
+        $this->info("\r");
+
+        $this->line("<fg=green>Installing application migrations</>");
 
         $this->info("\r");
 
         $this->call("migrate", [
-            '--quiet' => true
-        ]);
-
-        foreach (Plugin::all() as $plugin) {
-            $plugin->install($this);
-        }
-
-        $this->call("dot:user", [
-            '--quiet' => true
+            '--quiet' => true,
+            '--path' => get_relative_path(database_path("migrations"))
         ]);
 
         $this->info("\r");
 
-        $this->info("Congratulations, Dot Platform " . Plugin::get("admin")->getVersion() . " is now installed!");
-        $this->info("Navigate to /" . config("admin.prefix") . " to browse the backend.");
-        $this->info("Enjoy :)");
+        $this->info("Installing system plugins");
+
+        $this->info("\r");
+
+        foreach (config("admin.plugins") as $key => $class) {
+
+            $plugin = Plugin::get($key);
+
+            $plugins = array_merge($plugin->getRecursiveDependencies(), [$plugin]);
+
+            foreach ($plugins as $plugin) {
+
+                $this->line("<fg=yellow>Installing: </>" . $plugin->getName());
+
+                $plugin->install($this);
+
+                $this->line("<fg=green>Installed: </>" . $plugin->getName());
+                $this->info("\r");
+
+            }
+        }
+
+
+        if (!$this->isInstalled) {
+
+            $this->call("dot:user", [
+                '--quiet' => true
+            ]);
+
+            $this->info("\r");
+
+            $this->info("Congratulations, Dot Platform " . Plugin::get("admin")->getVersion() . " is now installed!");
+            $this->info("Navigate to /" . config("admin.prefix") . " to browse the backend.");
+            $this->info("Enjoy :)");
+
+        }
     }
 
 
@@ -139,6 +190,19 @@ class DotInstallCommand extends Command
     function setPermission($path, $permission)
     {
         @chmod($path, $permission);
+    }
+
+    protected function isInstalled()
+    {
+
+        try {
+
+            return Schema::hasTable("options");
+
+        } catch (QueryException $exception) {
+            return false;
+        }
+
     }
 
 }
