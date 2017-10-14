@@ -4,10 +4,8 @@ namespace Dot\Platform;
 
 use Dot\Platform\Facades\Plugin as PluginFacade;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -144,22 +142,23 @@ class Plugin extends ServiceProvider
     /**
      * Plugin install hook
      * Running plugin migrations and default options
+     * @param $command
      */
-    public function install()
+    public function install($command)
     {
 
-        Artisan::call("plugin:publish", [
+        $command->call("plugin:publish", [
             "plugin" => $this->getKey(),
             "--public" => true,
             "--force" => true
         ]);
 
-        Artisan::call("plugin:publish", [
+        $command->call("plugin:publish", [
             "plugin" => $this->getKey(),
             "--config" => true
         ]);
 
-        Artisan::call("plugin:migrate", [
+        $command->call("plugin:migrate", [
             "plugin" => $this->getKey()
         ]);
     }
@@ -167,10 +166,11 @@ class Plugin extends ServiceProvider
     /**
      * Plugin uninstall hook
      * Rollback plugin installation
+     * @param $command
      */
-    public function uninstall()
+    public function uninstall($command)
     {
-        //
+        // do any thing
     }
 
 

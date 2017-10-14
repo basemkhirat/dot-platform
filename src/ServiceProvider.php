@@ -48,8 +48,6 @@ class ServiceProvider extends LaravelServiceProvider
                 return new $class($app);
             });
         }
-
-        $this->plugins = $app->plugin->all();
     }
 
     /**
@@ -58,7 +56,7 @@ class ServiceProvider extends LaravelServiceProvider
     function boot()
     {
         foreach ($this->plugins as $plugin) {
-            $plugin->boot();
+            $plugin->boot($this);
         }
     }
 
@@ -69,8 +67,13 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
+
+        $this->mergeConfigFrom(__DIR__ . "/../config/admin.php", "admin");
+
+        $this->plugins = $this->app->plugin->all();
+
         foreach ($this->plugins as $plugin) {
-            $plugin->register();
+            $plugin->register($this);
         }
     }
 }

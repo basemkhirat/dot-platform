@@ -182,15 +182,48 @@ class System extends Plugin
         parent::register();
     }
 
-    function install()
+    function install($command)
     {
 
-        parent::install();
+        parent::install($command);
 
-        Artisan::call("vendor:publish", [
+        $command->call("vendor:publish", [
             "--tag" => $this->getKey(). ".errors"
         ]);
 
+
+        $command->info("Setting default options");
+
+        // Set plugin default options
+
+        Option::set("site_name", "Site Name", 1);
+
+
+        Option::set("site_slogan", "Site Slogan", 1);
+        Option::set("site_email", "dot@platform.com", 0);
+        Option::set("site_copyrights", "All rights reserved", 1);
+        Option::set("site_timezone", "Etc/GMT", 0);
+        Option::set("site_date_format", "relative", 0);
+        Option::set("site_status", 1, 0);
+        Option::set("site_offline_message", NULL, 1);
+    }
+
+    function uninstall($command)
+    {
+        parent::uninstall($command);
+
+        $command->info("Deleting default options");
+
+        // Delete plugin options
+
+        Option::delete("site_name");
+        Option::delete("site_slogan");
+        Option::delete("site_email");
+        Option::delete("site_copyrights");
+        Option::delete("site_timezone");
+        Option::delete("site_date_format");
+        Option::delete("site_status");
+        Option::delete("site_offline_message");
     }
 
 

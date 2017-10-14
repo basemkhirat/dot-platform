@@ -117,7 +117,7 @@ class DotInstallCommand extends Command
         ]);
 
         foreach (Plugin::all() as $plugin) {
-            $plugin->install();
+            $plugin->install($this);
         }
 
         $this->call("dot:user", [

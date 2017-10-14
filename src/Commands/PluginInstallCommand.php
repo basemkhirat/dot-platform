@@ -39,14 +39,14 @@ class PluginInstallCommand extends Command
 
         foreach ($plugin->getRecursiveDependencies() as $sub_plugin) {
 
-            $sub_plugin->install();
+            $sub_plugin->install($this);
 
             $this->info("Plugin " . $sub_plugin->getKey() . " installed successfully");
         }
 
         // Install the main plugin
 
-        $plugin->install();
+        $plugin->install($this);
 
         $this->info("Plugin " . $plugin->getKey() . " installed successfully");
 

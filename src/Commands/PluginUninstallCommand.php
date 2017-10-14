@@ -3,8 +3,8 @@
 namespace Dot\Platform\Commands;
 
 use Dot\Platform\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Dot\Platform\Facades\Plugin;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Class MigrateCommand
@@ -34,9 +34,9 @@ class PluginUninstallCommand extends Command
 
         // Uninstall the plugin
 
-        $plugin->uninstall();
+        $plugin->uninstall($this);
 
-        $this->info("Plugin $plugin->getKey() uninstalled successfully");
+        $this->info("Plugin " . $plugin->getKey() . " uninstalled successfully");
 
     }
 
