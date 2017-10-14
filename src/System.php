@@ -6,7 +6,6 @@ use Dot\Options\Facades\Option;
 use Dot\Platform\Classes\DotUrlGenerator;
 use Dot\Platform\Facades\Dot;
 use Dot\Platform\Facades\Navigation;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -188,17 +187,18 @@ class System extends Plugin
         parent::install($command);
 
         $command->call("vendor:publish", [
-            "--tag" => $this->getKey(). ".errors"
+            "--tag" => $this->getKey() . ".errors"
         ]);
 
+        // Load all options into memory
+
+        Option::load();
 
         $command->info("Setting default options");
 
         // Set plugin default options
 
         Option::set("site_name", "Site Name", 1);
-
-
         Option::set("site_slogan", "Site Slogan", 1);
         Option::set("site_email", "dot@platform.com", 0);
         Option::set("site_copyrights", "All rights reserved", 1);
