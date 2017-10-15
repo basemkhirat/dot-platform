@@ -19,26 +19,28 @@ class Action extends Dispatcher
      * @param bool $halt
      * @return bool
      */
-    public function render($event, $payload = [], $halt = false)
+    public function fire($event, $payload = [], $halt = false)
     {
 
-        $output = $this->fire($event, $payload, $halt);
+        $output = $this->dispatch($event, $payload, $halt);
 
         if ($halt) {
-            return true;
+            return [];
         }
+
+        $outputs = [];
 
         foreach ($output as $value) {
 
             if ($value instanceof View) {
-                echo $value->render();
+                $outputs[] =  $value->render();
             } else {
-                echo $value;
+                $outputs[] = $value;
             }
 
         }
 
-        return true;
+        return $outputs;
     }
 
 }

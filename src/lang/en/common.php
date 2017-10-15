@@ -4,6 +4,8 @@ return [
 
     "admin" => "Backend",
 
+    "cms" => "Content Management System",
+
     "ago" => "ago",
     "century" => "century",
     "year" => "year",

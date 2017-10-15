@@ -15,7 +15,7 @@ $id = isset($id) ? $id : "post-content";
 
 <textarea name="<?php echo $name; ?>" id="<?php echo $id; ?>"><?php echo $value; ?></textarea>
 
-@push("footer")
+@section("footer")
 
     <script type="text/javascript" src="<?php echo assets('admin::ckeditor/ckeditor.js'); ?>"></script>
     <script src="<?php echo assets('admin::js/voice.js') ?>"></script>
@@ -94,4 +94,4 @@ $id = isset($id) ? $id : "post-content";
         });
     </script>
 
-@endpush
+@stop

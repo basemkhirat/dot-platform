@@ -2,21 +2,28 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="robots" content="NOINDEX, NOFOLLOW"/>
     <meta name="viewport" content="width=device-width initial-scale=1.0"/>
-    <title>{{ option("site_name") }} - CMS</title>
+    <title>{{ option("site_name") }} - {{ trans("admin::common.cms") }}</title>
+    <link rel="icon" type="image/png" href="{{ assets("admin::favicon.png") }}"/>
     <link href="{{ assets("admin::css/app.css") }}" rel="stylesheet"/>
     @if (DIRECTION == "rtl")
-        <link href="<?php echo assets("admin::css/app.rtl.css") ?>" rel="stylesheet"/>
+        <link href="{{ assets("admin::css/app.rtl.css") }}" rel="stylesheet"/>
     @endif
-    <link rel="icon" type="image/png" href="<?php echo url("favicon.ico") ?>"/>
+
     <script>
         base_url = "{{ admin_url() }}/";
         baseURL = "{{ admin_url() }}/";
     </script>
-    <meta name="csrf-token" content="<?php echo csrf_token(); ?>"/>
-    @stack("header")
-    <?php Action::render("admin.head"); ?>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+
+    @yield("head")
+    @stack("head")
+
+    @foreach(Action::fire("admin.head") as $output)
+        {!! $output !!}
+    @endforeach
 </head>
 
 <body
@@ -42,7 +49,7 @@
                             <div class="dropdown profile-element">
 
                                 <span>
-                                    <img alt="image" class="img-circle" src="<?php echo Auth::user()->photo_url; ?>"/>
+                                    <img alt="image" class="img-circle" src="{{ Auth::user()->photo_url }}"/>
                                 </span>
 
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="">
@@ -51,12 +58,12 @@
 
                                         <span class="block sm-t-xs">
                                             <strong
-                                                class="font-bold"><?php echo ucfirst(Auth::user()->first_name) . " " . ucfirst(Auth::user()->last_name); ?></strong>
+                                                class="font-bold">{{ ucfirst(Auth::user()->first_name) . " " . ucfirst(Auth::user()->last_name) }}</strong>
                                         </span>
 
                                         @if (Auth::user()->role)
                                             <span class="text-muted text-xs block">
-                                                <?php echo Auth::user()->role->name ?>
+                                                {{ Auth::user()->role->name }}
                                                 <b class="caret"></b>
                                             </span>
                                         @endif
@@ -67,11 +74,11 @@
                                 <ul class="dropdown-menu m-t-xs">
 
                                     <li>
-                                        <a href="<?php echo route("admin.users.edit", array("id" => Auth::user()->id)); ?>"><?php echo trans("auth::auth.edit_profile") ?></a>
+                                        <a href="{{ route("admin.users.edit", array("id" => Auth::user()->id)) }}">{{ trans("auth::auth.edit_profile") }}</a>
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a class="ask" message="<?php echo trans("admin::common.sure_logout"); ?>"
-                                           href="<?php echo route("admin.auth.logout"); ?>"><?php echo trans("auth::auth.logout") ?></a>
+                                    <li><a class="ask" message="{{ trans("admin::common.sure_logout") }}"
+                                           href="{{ route("admin.auth.logout") }}">{{ trans("auth::auth.logout") }}</a>
                                     </li>
                                 </ul>
 
@@ -83,7 +90,7 @@
 
                         </li>
 
-                        <?php echo Navigation::get("sidebar")->render(); ?>
+                        {!!  Navigation::get("sidebar")->render() !!}
 
                     </ul>
                 </div>
@@ -100,14 +107,14 @@
 
                             <li>
                                 <span
-                                    class="m-r-sm text-muted welcome-message"><?php echo strtoupper(Config::get("site_title", Config::get("site_name"))); ?></span>
+                                    class="m-r-sm text-muted welcome-message">{{ strtoupper(Config::get("site_title", Config::get("site_name"))) }}</span>
                             </li>
 
-                            <?php echo Navigation::get("topnav")->render(); ?>
+                            {!! Navigation::get("topnav")->render() !!}
 
                             <li>
-                                <a href="<?php echo route("admin.auth.logout"); ?>" class="ask"
-                                   message="<?php echo trans("admin::common.sure_logout"); ?>">
+                                <a href="{{ route("admin.auth.logout") }}" class="ask"
+                                   message="{{ trans("admin::common.sure_logout") }}">
                                     <i class="fa fa-sign-out"></i>
                                 </a>
                             </li>
@@ -118,7 +125,9 @@
 
                 @yield("content")
 
-                <?php echo Widget::render("admin.content.end"); ?>
+                @foreach(Action::fire("admin.content.end") as $output)
+                    {!! $output !!}
+                @endforeach
 
             </div>
 
@@ -128,7 +137,7 @@
 
 </div>
 
-<script type="text/javascript" src="<?php echo assets('admin::js/app.js') ?>"></script>
+<script type="text/javascript" src="{{ assets('admin::js/app.js') }}"></script>
 
 <script>
 
@@ -156,7 +165,7 @@
             message: message,
             buttons: {
                 success: {
-                    label: "<?php echo trans("admin::common.yes"); ?>",
+                    label: "{{ trans("admin::common.yes") }}",
                     className: "btn-primary",
                     callback: function () {
                         if (typeof(callback) == "function") {
@@ -165,7 +174,7 @@
                     }
                 },
                 danger: {
-                    label: "<?php echo trans("admin::common.cancel"); ?>",
+                    label: "{{ trans("admin::common.cancel") }}",
                     className: "btn-default",
                     callback: function () {
                     }
@@ -180,7 +189,7 @@
             message: message,
             buttons: {
                 success: {
-                    label: "<?php echo trans("admin::common.yes"); ?>",
+                    label: "{{ trans("admin::common.yes") }}",
                     className: "btn-primary",
                     callback: function () {
                         if (typeof(callback) == "function") {
@@ -195,11 +204,6 @@
     }
 
 </script>
-
-<link rel="stylesheet" href="<?php echo assets('admin::css/plugins/selectpicker/bootstrap-select.css') ?>">
-
-<script src="<?php echo assets('admin::js/plugins/selectpicker/bootstrap-select.js') ?>"></script>
-
 
 <script>
 
@@ -219,22 +223,15 @@
 
     function resizeChosen() {
         $(".chosen-container").each(function () {
-
             if (!$(this).parent().hasClass("action-box")) {
                 $(this).attr('style', 'width: 100%');
             }
-
-
         });
     }
 
     $(document).ready(function () {
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
         var url = window.location.href;
         $("#side-menu li a[href='" + url + "']").parents("li").addClass("active");
@@ -252,7 +249,6 @@
             }
         });
 
-        // trash page action
         $('a.ask').on('click', function (e) {
             e.preventDefault();
             $this = $(this);
@@ -260,14 +256,14 @@
                 message: $this.attr('message'),
                 buttons: {
                     success: {
-                        label: "<?php echo trans("admin::common.yes"); ?>",
+                        label: "{{ trans("admin::common.yes") }}",
                         className: "btn-primary",
                         callback: function () {
                             location.href = $this.attr('href');
                         }
                     },
                     danger: {
-                        label: "<?php echo trans("admin::common.cancel"); ?>",
+                        label: "{{ trans("admin::common.cancel") }}",
                         className: "btn-default",
                         callback: function () {
                         }
@@ -281,11 +277,11 @@
 
 </script>
 
-{{ Widget::render("admin.footer") }}
-
-<?php Action::render("admin.footer"); ?>
-
+@yield("footer")
 @stack("footer")
 
+@foreach(Action::fire("admin.footer") as $output)
+    {!! $output !!}
+@endforeach
 </body>
 </html>
