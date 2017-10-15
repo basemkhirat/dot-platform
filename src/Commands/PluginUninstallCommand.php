@@ -32,17 +32,17 @@ class PluginUninstallCommand extends Command
             return $this->error("Plugin " . $this->argument('plugin') . " not found");
         }
 
-        $plugins = array_merge($plugin->getRecursiveDependencies() , [$plugin]);
+        $plugins = array_merge($plugin->getRecursiveDependencies(), [$plugin]);
 
         $this->info("\r");
 
         foreach ($plugins as $plugin) {
 
-            $this->line("<fg=yellow>Uninstalling: </>". $plugin->getName());
+            $this->line("<fg=yellow>Uninstalling: </>" . $plugin->getName());
 
             $plugin->uninstall($this);
 
-            $this->line("<fg=green>Uninstalled: </>". $plugin->getName());
+            $this->line("<fg=green>Uninstalled: </>" . $plugin->getName());
 
             $this->info("\r");
         }

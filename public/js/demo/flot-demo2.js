@@ -1,5 +1,5 @@
 //Flot Pie Chart Devices
-$(function() {
+$(function () {
 
     var data = [{
         label: "iPhone",
@@ -42,7 +42,7 @@ $(function() {
 });
 
 //Flot Pie Chart Browsers
-$(function() {
+$(function () {
 
     var data = [{
         label: "Chrome",
@@ -85,7 +85,7 @@ $(function() {
 });
 
 //Flot Pie Chart Sources
-$(function() {
+$(function () {
 
     var data = [{
         label: "Client 1",
@@ -129,7 +129,7 @@ $(function() {
 
 
 //Flot Pie Chart Carriers
-$(function() {
+$(function () {
 
     var data = [{
         label: "Carriers 1",
@@ -172,13 +172,13 @@ $(function() {
 });
 
 //Flot Pie Chart Gender
-$(function() {
+$(function () {
 
     var data = [{
         label: "Male",
         data: 50,
         color: "#d3d3d3",
-    },{
+    }, {
         label: "Female",
         data: 50,
         color: "#1ab394",
@@ -207,7 +207,7 @@ $(function() {
 });
 
 //Flot Pie Chart Age groups
-$(function() {
+$(function () {
 
     var data = [{
         label: "18/24",
@@ -254,7 +254,7 @@ $(function() {
 });
 
 //Flot Pie Chart Spending power
-$(function() {
+$(function () {
 
     var data = [{
         label: "High",
@@ -293,7 +293,7 @@ $(function() {
 });
 
 //Flot Pie Chart User type
-$(function() {
+$(function () {
 
     var data = [{
         label: "Business",
@@ -328,7 +328,7 @@ $(function() {
 });
 
 //Flot Pie Chart Interest
-$(function() {
+$(function () {
 
     var data = [{
         label: "Auto",

@@ -3,16 +3,33 @@
 namespace Dot\Platform\Classes;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Request;
 use View;
 
 /**
  * Class Navigation
  * @package Dot\Platform\Classes
  */
-class Navigation {
+class Navigation
+{
 
+    /**
+     * @var bool
+     */
+    protected static $menu = false;
+    /**
+     * @var array
+     */
+    protected static $lists = [];
+    /**
+     * @var string
+     */
+    protected static $template = "";
+    /**
+     * @var array
+     */
+    protected static $langs = [];
     /**
      * @var
      */
@@ -33,27 +50,12 @@ class Navigation {
      * @var bool
      */
     protected $current_key = false;
-    /**
-     * @var bool
-     */
-    protected static $menu = false;
-    /**
-     * @var array
-     */
-    protected static $lists = [];
-    /**
-     * @var string
-     */
-    protected static $template = "";
-    /**
-     * @var array
-     */
-    protected static $langs = [];
 
     /**
      * Menu constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->current = Request::url();
     }
 
@@ -69,7 +71,8 @@ class Navigation {
      * @param $menu_name
      * @return Menu
      */
-    public static function get($menu_name) {
+    public static function get($menu_name)
+    {
         $menu = new self();
         self::$menu = $menu_name;
         Event::fire($menu_name . '.build', $menu);
@@ -93,13 +96,47 @@ class Navigation {
      * @param $menu
      * @param $callback
      */
-    public static function menu($menu, $callback) {
+
+    private function sortItems()
+    {
+
+        $this->items = $this->items ? $this->items : [];
+
+        $this->items = array_merge_recursive($this->items, $this->waiting_items);
+
+        if (Config::has("sidebar") and Config::get("sidebar") != "") {
+
+            // sorting by database
+
+            $orders = Config::get("sidebar");
+            $orders = json_decode($orders, true);
+            $this->items = $orders;
+        } else {
+
+            // sorting by code
+
+            usort($this->items, function ($a, $b) {
+                if (!isset($a['sort']) or !isset($b['sort'])) {
+                    return 0;
+                }
+                if ($a['sort'] == $b['sort']) {
+                    return 0;
+                }
+                return ($a['sort'] < $b['sort'] ? -1 : 1);
+            });
+        }
+
+        return $this->items;
+    }
+
+    public static function menu($menu, $callback)
+    {
         if ($menu == "sidebar") {
-            Event::listen($menu . '.build', function($menu) use ($callback) {
+            Event::listen($menu . '.build', function ($menu) use ($callback) {
                 $callback($menu);
             });
         } elseif ($menu == "topnav") {
-            Event::listen($menu . '.build', function($menu) use ($callback) {
+            Event::listen($menu . '.build', function ($menu) use ($callback) {
                 $callback(new self);
             });
         }
@@ -109,7 +146,8 @@ class Navigation {
      * @param bool $view
      * @param array $data
      */
-    public function make($view = false, $data = []) {
+    public function make($view = false, $data = [])
+    {
 
         $list = [
             "name" => $view,
@@ -117,15 +155,6 @@ class Navigation {
         ];
 
         self::$lists[] = $list;
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     * @return $this|array
-     */
-    function with($name, $value) {
-        return self::$lists;
     }
 
     /*
@@ -138,7 +167,19 @@ class Navigation {
      * @param string $icon URL to use for the icon
      * @return $this
      */
-    public function item($key, $name, $url, $sort = 0, $icon = null) {
+
+    /**
+     * @param $name
+     * @param $value
+     * @return $this|array
+     */
+    function with($name, $value)
+    {
+        return self::$lists;
+    }
+
+    public function item($key, $name, $url, $sort = 0, $icon = null)
+    {
 
         self::$langs[$key] = $name;
 
@@ -172,13 +213,12 @@ class Navigation {
         return $this;
     }
 
-
-    function permission(){
+    function permission()
+    {
 
 
         unset($this->items[$this->currentKey]);
         unset($this->items[$this->currentKey]);
-
 
 
         return $this;
@@ -188,7 +228,8 @@ class Navigation {
      * @param int $order
      * @return $this
      */
-    public function order($order = 0) {
+    public function order($order = 0)
+    {
         if ($this->current_key) {
             $children = str_replace('.', '.children.', $this->current_key);
             if (array_has($this->waiting_items, $children)) {
@@ -204,7 +245,8 @@ class Navigation {
      * @param null $icon
      * @return $this
      */
-    public function icon($icon = null) {
+    public function icon($icon = null)
+    {
         if ($this->current_key) {
             $children = str_replace('.', '.children.', $this->current_key);
             if (array_has($this->waiting_items, $children)) {
@@ -217,17 +259,10 @@ class Navigation {
     }
 
     /**
-     * @param $key
-     * @return string
-     */
-    public static function lang($key) {
-        return isset(self::$langs[$key]) ? self::$langs[$key] : "-";
-    }
-
-    /**
      * @return mixed
      */
-    public function items() {
+    public function items()
+    {
         return $this->items;
     }
 
@@ -237,18 +272,19 @@ class Navigation {
      * @param boolean $level Which level you are currently rendering
      * @return string
      */
-    public function render($items = null, $level = 1) {
+    public function render($items = null, $level = 1)
+    {
 
         if (self::$menu == "topnav") {
             return self::$template;
         }
 
-        $items = $items ? : $this->items;
+        $items = $items ?: $this->items;
 
         if ($level <= 2) {
-            $attr = 'class="nav nav-second-level collapse level-' . $level.'"';
+            $attr = 'class="nav nav-second-level collapse level-' . $level . '"';
         } else {
-            $attr = 'class="nav nav-third-level collapse level-' . $level.'"';
+            $attr = 'class="nav nav-third-level collapse level-' . $level . '"';
         }
 
         $menu = "";
@@ -271,7 +307,7 @@ class Navigation {
 
                 $classes[] = "lev-" . $level;
 
-                $menu .= '<li' . ' class = "' . implode(' ', $classes) .' ">';
+                $menu .= '<li' . ' class = "' . implode(' ', $classes) . ' ">';
 
                 $menu .= $this->createAnchor($item, $level, $has_children);
 
@@ -297,7 +333,8 @@ class Navigation {
      * @param $has_children
      * @return string
      */
-    private function createAnchor($item, $level, $has_children) {
+    private function createAnchor($item, $level, $has_children)
+    {
 
         if (!isset($item["url"])) {
             $item["url"] = "";
@@ -335,7 +372,8 @@ class Navigation {
      * @param array $item Item that needs to be turned into a icon
      * @return string
      */
-    private function createIcon($item) {
+    private function createIcon($item)
+    {
 
         $output = '';
 
@@ -354,34 +392,13 @@ class Navigation {
      * Method to sort through the menu items and put them in order
      * @return array|mixed
      */
-    private function sortItems() {
 
-        $this->items = $this->items ? $this->items : [];
-
-        $this->items = array_merge_recursive($this->items, $this->waiting_items);
-
-        if (Config::has("sidebar") and Config::get("sidebar") != "") {
-
-            // sorting by database
-
-            $orders = Config::get("sidebar");
-            $orders = json_decode($orders, true);
-            $this->items = $orders;
-        } else {
-
-            // sorting by code
-
-            usort($this->items, function($a, $b) {
-                if (!isset($a['sort']) or ! isset($b['sort'])) {
-                    return 0;
-                }
-                if ($a['sort'] == $b['sort']) {
-                    return 0;
-                }
-                return ($a['sort'] < $b['sort'] ? -1 : 1);
-            });
-        }
-
-        return $this->items;
+    /**
+     * @param $key
+     * @return string
+     */
+    public static function lang($key)
+    {
+        return isset(self::$langs[$key]) ? self::$langs[$key] : "-";
     }
 }

@@ -1,6 +1,5 @@
 CKEDITOR.plugins.add('gallery', {
-    init: function (editor)
-    {
+    init: function (editor) {
         var pluginName = 'gallery';
 
         /*
@@ -13,23 +12,23 @@ CKEDITOR.plugins.add('gallery', {
          }
          */
 
-/*
-    var element = CKEDITOR.document.getById( 'myElement' );
-    element.on( 'click', function( ev )
-    {
-        // The DOM event object is passed by the "data" property.
-        var domEvent = ev.data;
-        // Add a CSS class to the event target.
-        domEvent.getTarget().addClass( 'clicked' );
-    });
-    
-    */
+        /*
+            var element = CKEDITOR.document.getById( 'myElement' );
+            element.on( 'click', function( ev )
+            {
+                // The DOM event object is passed by the "data" property.
+                var domEvent = ev.data;
+                // Add a CSS class to the event target.
+                domEvent.getTarget().addClass( 'clicked' );
+            });
+            
+            */
 
-       /* var element = CKEDITOR.document.getById('p');
-        element.on('click', function (ev) {
-            alert("dddd");
-        });*/
-        
+        /* var element = CKEDITOR.document.getById('p');
+         element.on('click', function (ev) {
+             alert("dddd");
+         });*/
+
         /*
          // The DOM event object is passed by the "data" property.
          var domEvent = ev.data;
@@ -63,21 +62,20 @@ CKEDITOR.plugins.add('gallery', {
 
 
         editor.addCommand('insertGallery',
-                {
-                    exec: function (editor)
-                    {
-                        var timestamp = new Date();
-                        editor.insertHtml(timestamp.toString());
-                    }
-                });
+            {
+                exec: function (editor) {
+                    var timestamp = new Date();
+                    editor.insertHtml(timestamp.toString());
+                }
+            });
 
 
         editor.ui.addButton('Gallery',
-                {
-                    label: 'Insert Gallery',
-                    command: 'insertGallery',
-                    icon: this.path + 'images/gallery.gif'
-                });
+            {
+                label: 'Insert Gallery',
+                command: 'insertGallery',
+                icon: this.path + 'images/gallery.gif'
+            });
 
         //alert("ok");
     }

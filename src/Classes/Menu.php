@@ -3,8 +3,8 @@
 namespace Dot\Platform\Classes;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Request;
 
 /**
  * Class Menu
@@ -30,44 +30,6 @@ class Menu
     public function __construct()
     {
         $this->current = Request::url();
-    }
-
-    /**
-     * @param $sidebar
-     * @return array
-     * get ordered menus of a given sidebar
-     */
-    public static function get($sidebar, $parent = "master", $calls = 0)
-    {
-
-        if ($calls == 0) {
-            Event::fire($sidebar . ".menu");
-            $calls++;
-        }
-
-        $return = [];
-        foreach (self::$menus as $menu) {
-            if ($menu->sidebar == $sidebar) {
-                $return[] = $menu;
-            }
-        }
-
-        $menus_collection = new Collection($return);
-
-        $filtered_items = $menus_collection->filter(function ($item) use ($parent) {
-            return $item->parent == $parent;
-        });
-
-        $sorted_items = $filtered_items->sortBy("order")->toArray();
-
-        $all_widgets = [];
-
-        foreach ($sorted_items as $item) {
-            $item->children = self::get($sidebar, $item->name, $calls);
-            $all_widgets[] = $item;
-        }
-
-        return $all_widgets;
     }
 
     /**
@@ -128,6 +90,57 @@ class Menu
         return $menu;
     }
 
+    /**
+     * @param $sidebar
+     * @return array
+     * get ordered menus of a given sidebar
+     */
+    public static function get($sidebar, $parent = "master", $calls = 0)
+    {
+
+        if ($calls == 0) {
+            Event::fire($sidebar . ".menu");
+            $calls++;
+        }
+
+        $return = [];
+        foreach (self::$menus as $menu) {
+            if ($menu->sidebar == $sidebar) {
+                $return[] = $menu;
+            }
+        }
+
+        $menus_collection = new Collection($return);
+
+        $filtered_items = $menus_collection->filter(function ($item) use ($parent) {
+            return $item->parent == $parent;
+        });
+
+        $sorted_items = $filtered_items->sortBy("order")->toArray();
+
+        $all_widgets = [];
+
+        foreach ($sorted_items as $item) {
+            $item->children = self::get($sidebar, $item->name, $calls);
+            $all_widgets[] = $item;
+        }
+
+        return $all_widgets;
+    }
+
+    private static function getActive($item)
+    {
+        return "";
+        $url = trim($item->url, '/');
+
+        if (self::$current === $url) {
+            return 'active current';
+        }
+
+        /*  if (strpos($this->currentKey, $item->name) === 0) {
+              return 'active';
+          }*/
+    }
 
     private static function createAnchor($item, $level, $has_children)
     {
@@ -148,21 +161,6 @@ class Menu
 
         return $output;
     }
-
-    private static function getActive($item)
-    {
-        return "";
-        $url = trim($item->url, '/');
-
-        if (self::$current === $url) {
-            return 'active current';
-        }
-
-        /*  if (strpos($this->currentKey, $item->name) === 0) {
-              return 'active';
-          }*/
-    }
-
 
     private static function createIcon($item)
     {

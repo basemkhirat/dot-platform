@@ -35,17 +35,17 @@ class PluginInstallCommand extends Command
             return $this->error("Plugin " . $this->argument('plugin') . " not found");
         }
 
-        $plugins = array_merge($plugin->getRecursiveDependencies() , [$plugin]);
+        $plugins = array_merge($plugin->getRecursiveDependencies(), [$plugin]);
 
         $this->info("\r");
 
         foreach ($plugins as $plugin) {
 
-            $this->line("<fg=yellow>Installing: </>". $plugin->getName());
+            $this->line("<fg=yellow>Installing: </>" . $plugin->getName());
 
             $plugin->install($this);
 
-            $this->line("<fg=green>Installed: </>". $plugin->getName());
+            $this->line("<fg=green>Installed: </>" . $plugin->getName());
 
             $this->info("\r");
         }

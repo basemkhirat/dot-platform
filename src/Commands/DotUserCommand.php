@@ -5,7 +5,6 @@ namespace Dot\Platform\Commands;
 use Dot\Platform\Command;
 use Dot\Roles\Models\Role;
 use Dot\Users\Models\User;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class DotUserCommand

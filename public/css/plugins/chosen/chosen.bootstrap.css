@@ -23,20 +23,20 @@
 
 .chosen-container .chosen-drop {
     background: #fff;
-    border: 1px solid rgba(82,168,236,0.8);
+    border: 1px solid rgba(82, 168, 236, 0.8);
     border-top: 0;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
-    -webkit-box-shadow: 0 8px 8px rgba(0,0,0,.25);
-    box-shadow: 0 8px 8px rgba(0,0,0,.25);
+    -webkit-box-shadow: 0 8px 8px rgba(0, 0, 0, .25);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, .25);
     margin-top: -1px;
     position: absolute;
     top: 100%;
     left: -9000px;
     z-index: 1060;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 4px 8px rgba(82,168,236,.6);
-    -webkit-transition: border linear .2s,box-shadow linear .2s;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 4px 8px rgba(82, 168, 236, .6);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
 }
 
 .chosen-container.chosen-with-drop .chosen-drop {
@@ -135,8 +135,8 @@
     background-color: #fff;
     background-repeat: repeat-x;
     border: 1px solid #ccc;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     color: #555;
     display: block;
     height: 34px;
@@ -205,14 +205,14 @@
 }
 
 .chosen-container-single .chosen-search input {
-    background: url("chosen-sprite.png") no-repeat 100% -20px,#fff;
+    background: url("chosen-sprite.png") no-repeat 100% -20px, #fff;
     border: 1px solid #ccc;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     margin: 1px 0;
     padding: 4px 20px 4px 4px;
     width: 100%;
@@ -239,10 +239,10 @@
     border-top-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     cursor: text;
-    height: auto!important;
+    height: auto !important;
     height: 1%;
     margin: 0;
     overflow: hidden;
@@ -262,8 +262,8 @@
 }
 
 .chosen-container-multi .chosen-choices .search-field input {
-    background: transparent!important;
-    border: 0!important;
+    background: transparent !important;
+    border: 0 !important;
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #555;
@@ -288,8 +288,8 @@
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
     background-repeat: repeat-x;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     color: #333;
     cursor: default;
     line-height: 13px;
@@ -331,20 +331,20 @@
 }
 
 .chosen-container-active .chosen-single {
-    border: 1px solid rgba(82,168,236,0.8);
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    -webkit-transition: border linear .2s,box-shadow linear .2s;
-    transition: border linear .2s,box-shadow linear .2s;
+    border: 1px solid rgba(82, 168, 236, 0.8);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
 }
 
 .chosen-container-active.chosen-with-drop .chosen-single {
-    border: 1px solid rgba(82,168,236,0.8);
+    border: 1px solid rgba(82, 168, 236, 0.8);
     border-bottom: 0;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    -webkit-transition: border linear .2s,box-shadow linear .2s;
-    transition: border linear .2s,box-shadow linear .2s;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -359,22 +359,22 @@
 }
 
 .chosen-container-active .chosen-choices {
-    border: 1px solid rgba(82,168,236,0.8);
+    border: 1px solid rgba(82, 168, 236, 0.8);
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    -webkit-transition: border linear .2s,box-shadow linear .2s;
-    transition: border linear .2s,box-shadow linear .2s;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
 }
 
 .chosen-container-active .chosen-choices .search-field input {
-    color: #111!important;
+    color: #111 !important;
 }
 
 .chosen-disabled {
     cursor: default;
-    opacity: .5!important;
+    opacity: .5 !important;
 }
 
 .chosen-disabled .chosen-single {
@@ -444,18 +444,18 @@
 }
 
 .chosen-rtl .chosen-search input {
-    background: url("chosen-sprite.png") no-repeat -28px -20px,#fff;
+    background: url("chosen-sprite.png") no-repeat -28px -20px, #fff;
     direction: rtl;
     padding: 4px 5px 4px 20px;
 }
 
 .chosen-container-active.chosen-with-drop .chosen-container-multi {
-    border: 1px solid rgba(82,168,236,0.8);
+    border: 1px solid rgba(82, 168, 236, 0.8);
     border-bottom: 0;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    box-shadow: 0 1px 1px rgba(0,0,0,.075) inset,0 0 8px rgba(82,168,236,.6);
-    -webkit-transition: border linear .2s,box-shadow linear .2s;
-    transition: border linear .2s,box-shadow linear .2s;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .075) inset, 0 0 8px rgba(82, 168, 236, .6);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }

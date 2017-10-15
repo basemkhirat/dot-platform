@@ -2,7 +2,6 @@
 Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 */
-
 /*
 dialog.css
 ============
@@ -194,8 +193,7 @@ a.cke_dialog_tab:hover {
     text-decoration: none;
 }
 
-a.cke_dialog_tab_selected
-{
+a.cke_dialog_tab_selected {
     background: #fff;
     color: $text-color;
     border-bottom-color: #fff;
@@ -209,14 +207,12 @@ a.cke_dialog_tab_selected:hover {
 }
 
 .cke_hc a.cke_dialog_tab:hover,
-.cke_hc a.cke_dialog_tab_selected
-{
+.cke_hc a.cke_dialog_tab_selected {
     border: 3px solid;
     padding: 2px 6px;
 }
 
-a.cke_dialog_tab_disabled
-{
+a.cke_dialog_tab_disabled {
     color: #bababa;
     cursor: default;
 }
@@ -230,13 +226,11 @@ a.cke_dialog_tab_disabled
 
 /* The .cke_single_page class is appended to the dialog outer element in case
    of dialogs that has no tabs. */
-.cke_single_page .cke_dialog_tabs
-{
+.cke_single_page .cke_dialog_tabs {
     display: none;
 }
 
-.cke_single_page .cke_dialog_contents
-{
+.cke_single_page .cke_dialog_contents {
     padding-top: 5px;
     margin-top: 0;
     border-top: none;
@@ -282,7 +276,6 @@ a.cke_dialog_tab_disabled
     left: 6px;
 }
 
-
 /*
 Dialog UI Elements
 --------------------
@@ -326,9 +319,11 @@ It is possible to have nested V/H-Boxes.
         margin: auto;
     }
 }
+
 .cke_dialog_ui_vbox {
     margin-top: 5px;
 }
+
 .cke_dialog_ui_vbox_child {
     padding: 5px 0px;
 }
@@ -406,6 +401,7 @@ The basic text field to input text.
 .cke_dialog_ui_text {
     margin-bottom: 7px;
 }
+
 .cke_dialog_ui_select {
     height: auto !important;
     margin-bottom: 7px;
@@ -441,7 +437,6 @@ input.cke_dialog_ui_input_password,
 textarea.cke_dialog_ui_input_textarea {
     @extend %input-style;
 }
-
 
 /*
 Button
@@ -575,8 +570,8 @@ select.cke_dialog_ui_input_select {
     outline: none;
     border-radius: $border-radius;
 
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
 .cke_dialog_ui_input_file {
@@ -700,7 +695,7 @@ tendency that these will be moved to the plugins code in the future.
         margin: 2px;
         padding: 2px;
         opacity: 0.9;
-        filter: alpha(opacity = 90);
+        filter: alpha(opacity=90);
 
         background-color: #e4e4e4;
     }
@@ -797,7 +792,6 @@ a.cke_specialchar {
     margin-right: 10px;
 }
 
-
 .cke_dialog_ui_checkbox {
     display: inline-block;
     margin-bottom: 5px;
@@ -816,7 +810,7 @@ a.cke_specialchar {
     top: 0;
     left: 0;
     z-index: -1;
-    filter: alpha(opacity = 0);
+    filter: alpha(opacity=0);
     width: 100%;
     height: 100%;
 }

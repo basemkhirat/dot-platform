@@ -9,17 +9,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Class Model
- * @package Dot\Platform
- */
-class Model extends BaseModel
-{
-    use ModelTraits {
-        ModelTraits::__construct as private traitConstructor;
-    }
-}
-
-/**
  * Trait ModelTraits
  * @package Dot\Platform
  */
@@ -50,24 +39,18 @@ trait ModelTraits
      * @var array
      */
     protected $sluggable = [];
-
-
-    /**
-     * @var array
-     */
-    private $pendingMessages = [];
-
-
-    /**
-     * @var array
-     */
-    private $pendingAttributes = [];
-
     /**
      * @var array
      */
     protected $params = [];
-
+    /**
+     * @var array
+     */
+    private $pendingMessages = [];
+    /**
+     * @var array
+     */
+    private $pendingAttributes = [];
 
     /**
      * ModelTraits constructor.
@@ -78,6 +61,16 @@ trait ModelTraits
         $this->params = $attributes;
         parent::__construct($attributes);
 
+    }
+
+    /**
+     * @param bool $callback
+     */
+    public static function validating($callback = false)
+    {
+        if (is_callable($callback)) {
+            Event::listen(get_called_class() . ".validating", $callback);
+        }
     }
 
     /**
@@ -97,75 +90,6 @@ trait ModelTraits
                 $i++;
             }
         });
-    }
-
-
-    /**
-     * Return a timestamp as DateTime object.
-     *
-     * @param  mixed $value
-     * @return \Dot\Carbon
-     */
-    protected function asDateTime($value)
-    {
-
-        // If this value is already a Carbon instance, we shall just return it as is.
-        // This prevents us having to re-instantiate a Carbon instance when we know
-        // it already is one, which wouldn't be fulfilled by the DateTime check.
-        if ($value instanceof Carbon) {
-            return $value;
-        }
-
-        // If the value is already a DateTime instance, we will just skip the rest of
-        // these checks since they will be a waste of time, and hinder performance
-        // when checking the field. We will just return the DateTime right away.
-        if ($value instanceof DateTimeInterface) {
-            return new Carbon(
-                $value->format('Y-m-d H:i:s.u'), $value->getTimeZone()
-            );
-        }
-
-        // If this value is an integer, we will assume it is a UNIX timestamp's value
-        // and format a Carbon object from this timestamp. This allows flexibility
-        // when defining your date fields as they might be UNIX timestamps here.
-        if (is_numeric($value)) {
-            return Carbon::createFromTimestamp($value);
-        }
-
-        // If the value is in simply year, month, day format, we will instantiate the
-        // Carbon instances from that format. Again, this provides for simple date
-        // fields on the database, while still supporting Carbonized conversion.
-        if (preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value)) {
-            return Carbon::createFromFormat('Y-m-d', $value)->startOfDay();
-        }
-
-        // Finally, we will just assume this date is in the format used by default on
-        // the database connection and use that format to create the Carbon object
-        // that is returned back out to the developers after we convert it here.
-        return Carbon::createFromFormat($this->getDateFormat(), $value);
-    }
-
-    /**
-     * @param $slug
-     * @param $to
-     * @param int $index
-     * @return string
-     */
-    public function slugify($slug, $to, $index = 1)
-    {
-
-        if ($index == 1) {
-            $sluggy = $slug;
-        } else {
-            $sluggy = $slug . "-" . $index;
-        }
-
-        if (DB::table($this->table)->where($to, $sluggy)->count() > 0) {
-            $index = $index + 1;
-            return $this->slugify($slug, $to, $index);
-        }
-
-        return $sluggy;
     }
 
     /**
@@ -205,6 +129,29 @@ trait ModelTraits
     }
 
     /**
+     * @param $slug
+     * @param $to
+     * @param int $index
+     * @return string
+     */
+    public function slugify($slug, $to, $index = 1)
+    {
+
+        if ($index == 1) {
+            $sluggy = $slug;
+        } else {
+            $sluggy = $slug . "-" . $index;
+        }
+
+        if (DB::table($this->table)->where($to, $sluggy)->count() > 0) {
+            $index = $index + 1;
+            return $this->slugify($slug, $to, $index);
+        }
+
+        return $sluggy;
+    }
+
+    /**
      * @param $key
      * @param $value
      */
@@ -221,33 +168,6 @@ trait ModelTraits
     {
         $this->params = $attributes;
         parent::fill($attributes);
-    }
-
-
-    /**
-     * @return array
-     */
-    protected function setValidationMessages()
-    {
-        return (array)trans('admin::validation');
-    }
-
-    /**
-     * @return array
-     */
-    protected function setValidationAttributes()
-    {
-        return (array)trans($this->module . '::' . $this->module . ".attributes");
-    }
-
-    /**
-     * @param bool $callback
-     */
-    public static function validating($callback = false)
-    {
-        if (is_callable($callback)) {
-            Event::listen(get_called_class() . ".validating", $callback);
-        }
     }
 
     /**
@@ -271,7 +191,6 @@ trait ModelTraits
         $this->pendingMessages = array_merge($this->pendingMessages, $messages);
         $this->pendingAttributes = array_merge($this->pendingAttributes, $attributes);
     }
-
 
     /**
      * Validates current attributes against rules
@@ -328,6 +247,22 @@ trait ModelTraits
     }
 
     /**
+     * @return array
+     */
+    protected function setValidationMessages()
+    {
+        return (array)trans('admin::validation');
+    }
+
+    /**
+     * @return array
+     */
+    protected function setValidationAttributes()
+    {
+        return (array)trans($this->module . '::' . $this->module . ".attributes");
+    }
+
+    /**
      * Set error message bag
      *
      * @var Illuminate\Support\MessageBag
@@ -345,7 +280,6 @@ trait ModelTraits
     {
         return $this->errors;
     }
-
 
     /**
      * Check if has errors
@@ -475,5 +409,61 @@ trait ModelTraits
         }
 
         return $template;
+    }
+
+    /**
+     * Return a timestamp as DateTime object.
+     *
+     * @param  mixed $value
+     * @return \Dot\Carbon
+     */
+    protected function asDateTime($value)
+    {
+
+        // If this value is already a Carbon instance, we shall just return it as is.
+        // This prevents us having to re-instantiate a Carbon instance when we know
+        // it already is one, which wouldn't be fulfilled by the DateTime check.
+        if ($value instanceof Carbon) {
+            return $value;
+        }
+
+        // If the value is already a DateTime instance, we will just skip the rest of
+        // these checks since they will be a waste of time, and hinder performance
+        // when checking the field. We will just return the DateTime right away.
+        if ($value instanceof DateTimeInterface) {
+            return new Carbon(
+                $value->format('Y-m-d H:i:s.u'), $value->getTimeZone()
+            );
+        }
+
+        // If this value is an integer, we will assume it is a UNIX timestamp's value
+        // and format a Carbon object from this timestamp. This allows flexibility
+        // when defining your date fields as they might be UNIX timestamps here.
+        if (is_numeric($value)) {
+            return Carbon::createFromTimestamp($value);
+        }
+
+        // If the value is in simply year, month, day format, we will instantiate the
+        // Carbon instances from that format. Again, this provides for simple date
+        // fields on the database, while still supporting Carbonized conversion.
+        if (preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value)) {
+            return Carbon::createFromFormat('Y-m-d', $value)->startOfDay();
+        }
+
+        // Finally, we will just assume this date is in the format used by default on
+        // the database connection and use that format to create the Carbon object
+        // that is returned back out to the developers after we convert it here.
+        return Carbon::createFromFormat($this->getDateFormat(), $value);
+    }
+}
+
+/**
+ * Class Model
+ * @package Dot\Platform
+ */
+class Model extends BaseModel
+{
+    use ModelTraits {
+        ModelTraits::__construct as private traitConstructor;
     }
 }

@@ -7,9 +7,9 @@
 
 $(document).ready(function () {
 
-   // $(window).resize(function() {
-   //     $(".wrapper-content").height("100%");
-   // });
+    // $(window).resize(function() {
+    //     $(".wrapper-content").height("100%");
+    // });
 
     // Add body-small class if window less than 768px
     if ($(this).width() < 769) {
@@ -165,7 +165,7 @@ $(document).ready(function () {
 
 });
 
-$(window).bind('beforeunload', function(){
+$(window).bind('beforeunload', function () {
     $(".loadingWrapper").fadeIn();
     $(".bodyWrapper").fadeOut();
 });

@@ -62,6 +62,7 @@ jQuery(function ($) {
             $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
         }
     });
+
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
         var color = '#';
@@ -118,6 +119,7 @@ jQuery(function ($) {
     $(window).resize(function () {
         check_width();
     });
+
     function check_width() {
         $("div.chat-room").show();
         $("#hidden-chat").hide();

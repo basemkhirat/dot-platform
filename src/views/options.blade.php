@@ -3,7 +3,7 @@
 
         <div class="form-group">
             <label
-                    for="site_name">{{ trans("admin::options.attributes.site_name") }}</label>
+                for="site_name">{{ trans("admin::options.attributes.site_name") }}</label>
             <input name="option[site_name]" type="text" required="required"
                    value="{{ Request::old("option.site_name", option("site_name")) }}"
                    class="form-control" id="site_name"
@@ -12,7 +12,7 @@
 
         <div class="form-group">
             <label
-                    for="site_slogan">{{ trans("admin::options.attributes.site_slogan") }}</label>
+                for="site_slogan">{{ trans("admin::options.attributes.site_slogan") }}</label>
             <input name="option[site_slogan]" type="text" required="required"
                    value="{{ @Request::old("option.site_slogan", option("site_slogan")) }}"
                    class="form-control" id="site_slogan"
@@ -21,7 +21,7 @@
 
         <div class="form-group">
             <label
-                    for="site_email">{{ trans("admin::options.attributes.site_email") }}</label>
+                for="site_email">{{ trans("admin::options.attributes.site_email") }}</label>
             <input name="option[site_email]" type="email" required="required"
                    value="{{ @Request::old("option.site_email", option("site_email")) }}"
                    class="form-control" id="site_email"
@@ -30,7 +30,7 @@
 
         <div class="form-group">
             <label
-                    for="site_copyrights">{{ trans("admin::options.attributes.site_copyrights") }}</label>
+                for="site_copyrights">{{ trans("admin::options.attributes.site_copyrights") }}</label>
             <input name="option[site_copyrights]" type="text" required="required"
                    value="{{ @Request::old("option.site_copyrights", option("site_copyrights")) }}"
                    class="form-control" id="site_copyrights"
@@ -39,7 +39,7 @@
 
         <div class="form-group">
             <label
-                    for="timezone">{{ trans("admin::options.attributes.timezone") }}</label>
+                for="timezone">{{ trans("admin::options.attributes.timezone") }}</label>
             <select id="app_timezone" class="form-control chosen-select chosen-rtl"
                     name="option[site_timezone]">
 
@@ -54,8 +54,8 @@
                     }
                     ?>
                     <option
-                            value="Etc/GMT{{ $zone }}"
-                            @if (option("site_timezone") == "Etc/GMT" . $zone) selected="selected" @endif>
+                        value="Etc/GMT{{ $zone }}"
+                        @if (option("site_timezone") == "Etc/GMT" . $zone) selected="selected" @endif>
                         GMT{{ $zone }}</option>
                 @endfor
             </select>
@@ -63,28 +63,29 @@
 
         <div class="form-group">
             <label
-                    for="date_format">{{ trans("admin::options.attributes.date_format") }}</label>
+                for="date_format">{{ trans("admin::options.attributes.date_format") }}</label>
             <select id="date_format" class="form-control chosen-select chosen-rtl"
                     name="option[site_date_format]">
                 @foreach (array("Y-m-d H:i A", "Y-m-d", "d/m/Y", "H:i A") as $format)
                     <option
-                            value="{{ $format }}"
-                            @if (option("site_date_format") == $format) selected="selected" @endif>{{ date($format, time() - 2 * 60 * 60) }}</option>
+                        value="{{ $format }}"
+                        @if (option("site_date_format") == $format) selected="selected" @endif>{{ date($format, time() - 2 * 60 * 60) }}</option>
                 @endforeach
                 <option
-                        value="relative"
-                        @if (option("site_date_format") == "relative") selected="selected" @endif>{{ time_ago(time() - 2 * 60 * 60) }}</option>
+                    value="relative"
+                    @if (option("site_date_format") == "relative") selected="selected" @endif>{{ time_ago(time() - 2 * 60 * 60) }}</option>
             </select>
         </div>
 
         <div class="form-group">
             <label
-                    for="app_locale">{{ trans("admin::options.attributes.locale") }}</label>
+                for="app_locale">{{ trans("admin::options.attributes.locale") }}</label>
             <select id="app_locale" class="form-control chosen-select chosen-rtl"
                     name="option[site_locale]">
                 @foreach (config("admin.locales") as $code => $lang)
                     <option value="{{ $code }}"
-                            @if (option("site_locale") == $code) { selected="selected" @endif>{{ $lang["title"] }}</option>
+                            @if (option("site_locale") == $code) {
+                            selected="selected" @endif>{{ $lang["title"] }}</option>
                 @endforeach
             </select>
         </div>
@@ -97,17 +98,17 @@
                        for="site_status">{{ trans("admin::options.attributes.site_status") }}</label>
                 <div class="col-sm-2">
                     <input
-                            @if (option("site_status", 1)) checked="checked" @endif
-                            type="checkbox" name="site_status"
-                            value="1"
-                            class="switcher switcher-sm site_status">
+                        @if (option("site_status", 1)) checked="checked" @endif
+                    type="checkbox" name="site_status"
+                        value="1"
+                        class="switcher switcher-sm site_status">
                     <input type="hidden" name="option[site_status]" value="{{ option("site_status", 1) }}"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label
-                        for="offline_message">{{ trans("admin::options.attributes.offline_message") }}</label>
+                    for="offline_message">{{ trans("admin::options.attributes.offline_message") }}</label>
                 <br/>
                 <textarea class="form-control" id="offline_message"
                           name="option[site_offline_message]"
@@ -140,7 +141,7 @@
             <a href="javascript:void(0)"
                data-loading-text="{{ trans("admin::options.checking") }}"
                class="btn btn-primary btn-labeled btn-main check-update"> <span
-                        class="btn-label icon fa fa-life-ring"></span> &nbsp;
+                    class="btn-label icon fa fa-life-ring"></span> &nbsp;
                 {{ trans("admin::options.check_for_update") }}
             </a>
         </div>

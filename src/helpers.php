@@ -40,7 +40,7 @@ function assets($path = "")
 
     if (strstr($path, "::")) {
         list($namespace, $path) = explode("::", $path);
-        return asset("plugins/". $namespace."/". $path);
+        return asset("plugins/" . $namespace . "/" . $path);
     }
 
     return asset($path);
@@ -220,6 +220,7 @@ function get_relative_path($value = '')
     return str_replace(base_path(), "", $value);
 }
 
-function plugin($name){
+function plugin($name)
+{
     return \Dot\Platform\Facades\Plugin::get($name);
 }

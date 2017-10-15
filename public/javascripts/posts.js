@@ -830,6 +830,7 @@ $(function () {
             alert(media_path + " is not an image");
         }
     });
+
     function ytVidId(url) {
         var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
         return (url.match(p)) ? RegExp.$1 : false;
@@ -1021,7 +1022,6 @@ $(function () {
     });
 
 
-
     if (post_id) {
         $("input[name=comment_options][value=" + comment_options + "]").prop('checked', true);
         $("input[name=comment_options]").on('ifChanged', function (event) {
@@ -1038,15 +1038,15 @@ $(function () {
 
     function strip_tags(input, allowed) {
         allowed = (((allowed || '') + '')
-                .toLowerCase()
-                .match(/<[a-z][a-z0-9]*>/g) || [])
-                .join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+            .toLowerCase()
+            .match(/<[a-z][a-z0-9]*>/g) || [])
+            .join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
         var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-                commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+            commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
         return input.replace(commentsAndPhpTags, '')
-                .replace(tags, function ($0, $1) {
-                    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
-                });
+            .replace(tags, function ($0, $1) {
+                return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+            });
     }
 
     function string_sanitize(str) {
@@ -1068,7 +1068,6 @@ $(function () {
             return false;
         }
     }, 'Password and Confirm Password should be same');
-
 
 
     $("#post-form").submit(function (e) {
@@ -1600,37 +1599,37 @@ $(function () {
         e.preventDefault();
         $("#manshet-wrapper").show();
         $(".manshets").prepend('<div class="manshet row feed-element" style="border-bottom: 1px solid #e7eaec; margin:10px 0" data-id="">' +
-                '<div class="row">' +
-                '<div class="panel-group col-md-10" style="margin:0">' +
-                '<div class="form-group input-group">' +
-                '<span class="input-group-addon"><i class="fa fa-newspaper-o"></i></span>' +
-                '<textarea style="resize: vertical;" name="manshet_title" class="form-control manshet_title" placeholder="' + title_lang + '" rows="3"></textarea>' +
-                '</div>' +
-                '<label class="error" for="manshet_title" style="display:none">' + required_lang + '</label>' +
-                '</div>' +
-                '<div class="panel-group col-md-2" style="margin:0">' +
-                '<span class="label label-pa-purple time-div" style="display:none"></span>' +
-                '<a class="remove-manshet" style="margin: 10px">' +
-                '<i class="fa fa-times"></i>' +
-                '</a>' +
-                '</div>' +
-                '</div>' +
-                '<div class="row">' +
-                '<div class="panel-group col-md-10" style="margin:0">' +
-                '<div class="form-group input-group">' +
-                '<span class="input-group-addon"><i class="fa fa-link"></i></span>' +
-                '<input name="manshet_link" value="" class="form-control manshet_link" placeholder="' + link_lang + '">' +
-                '</div>' +
-                '<label class="error" for="manshet_link" style="display:none">' + invalid_lang + '</label>' +
-                '</div>' +
-                '<div class="panel-group col-md-2" style="margin:0">' +
-                '<div>' +
-                '<a class="btn btn-primary save_manshet" style="display: none;">' + save_lang + '</a>' +
-                '<img src="' + assetsURL + 'images/loader.gif" class="manshet_load" style="display:none">' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>');
+            '<div class="row">' +
+            '<div class="panel-group col-md-10" style="margin:0">' +
+            '<div class="form-group input-group">' +
+            '<span class="input-group-addon"><i class="fa fa-newspaper-o"></i></span>' +
+            '<textarea style="resize: vertical;" name="manshet_title" class="form-control manshet_title" placeholder="' + title_lang + '" rows="3"></textarea>' +
+            '</div>' +
+            '<label class="error" for="manshet_title" style="display:none">' + required_lang + '</label>' +
+            '</div>' +
+            '<div class="panel-group col-md-2" style="margin:0">' +
+            '<span class="label label-pa-purple time-div" style="display:none"></span>' +
+            '<a class="remove-manshet" style="margin: 10px">' +
+            '<i class="fa fa-times"></i>' +
+            '</a>' +
+            '</div>' +
+            '</div>' +
+            '<div class="row">' +
+            '<div class="panel-group col-md-10" style="margin:0">' +
+            '<div class="form-group input-group">' +
+            '<span class="input-group-addon"><i class="fa fa-link"></i></span>' +
+            '<input name="manshet_link" value="" class="form-control manshet_link" placeholder="' + link_lang + '">' +
+            '</div>' +
+            '<label class="error" for="manshet_link" style="display:none">' + invalid_lang + '</label>' +
+            '</div>' +
+            '<div class="panel-group col-md-2" style="margin:0">' +
+            '<div>' +
+            '<a class="btn btn-primary save_manshet" style="display: none;">' + save_lang + '</a>' +
+            '<img src="' + assetsURL + 'images/loader.gif" class="manshet_load" style="display:none">' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>');
         scroll_height('manshet-wrapper', 330);
     });
 
@@ -1681,6 +1680,7 @@ $(function () {
     if (mongo_id) {
         scroll_height('note_content', 400)
     }
+
     function scroll_height(id, max, footer, auto) {
         height = 0;
         //console.log(max);
@@ -1697,9 +1697,9 @@ $(function () {
                 $("#" + id).next('.panel-footer').hide();
             }
         } else {
-            if(auto){
+            if (auto) {
                 $("#" + id).css('height', 'auto');
-            }else{
+            } else {
                 $("#" + id).css('height', height + 10);
             }
         }

@@ -10,15 +10,6 @@ class Carbon extends \Carbon\Carbon
 {
 
     /**
-     * Generate relative time
-     * @return \Response
-     */
-    function ago()
-    {
-        return time_ago($this->toDateTimeString());
-    }
-
-    /**
      * Generate date string
      * @return false|\Response|string
      */
@@ -39,6 +30,15 @@ class Carbon extends \Carbon\Carbon
             return date($date_format, strtotime($this->toDateTimeString()));
         }
 
+    }
+
+    /**
+     * Generate relative time
+     * @return \Response
+     */
+    function ago()
+    {
+        return time_ago($this->toDateTimeString());
     }
 
 

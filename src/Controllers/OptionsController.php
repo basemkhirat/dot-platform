@@ -3,8 +3,8 @@
 namespace Dot\Platform\Controllers;
 
 use Dot;
-use Dot\Platform\Controller;
 use Dot\Options\Facades\Option;
+use Dot\Platform\Controller;
 use Dot\Platform\Facades\Plugin;
 use File;
 use Gate;

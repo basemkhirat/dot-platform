@@ -13,7 +13,6 @@ Route::group([
     "middleware" => ["web", "auth:backend"],
     "namespace" => "Dot\\Platform\\Controllers"
 ], function ($route) {
-    // $route->any('sidebar', "SidebarController@index");
     $route->any('/', ["as" => "admin", "uses" => function () {
         $redirect_path = config("admin.default_path");
         return redirect(ADMIN . "/" . trim($redirect_path));

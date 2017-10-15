@@ -45,20 +45,6 @@ class Dot
     }
 
     /**
-     * Set the globally available instance of the container.
-     *
-     * @return static
-     */
-    public static function getInstance()
-    {
-        if (is_null(static::$instance)) {
-            static::$instance = new static;
-        }
-
-        return static::$instance;
-    }
-
-    /**
      * Class Factory
      */
     function loadDotBindings()
@@ -72,29 +58,25 @@ class Dot
 
     /**
      * @param $name
-     * @return null
-     */
-    function has($name)
-    {
-        return array_key_exists($name, $this->instances);
-    }
-
-    /**
-     * @param $name
-     * @return null
-     */
-    function get($name)
-    {
-        return $this->has($name) ? self::getInstance()->instances[$name] : NULL;
-    }
-
-    /**
-     * @param $name
      * @param $callback
      */
     function extend($name, $callback)
     {
         self::getInstance()->instances[$name] = $callback($this);
+    }
+
+    /**
+     * Set the globally available instance of the container.
+     *
+     * @return static
+     */
+    public static function getInstance()
+    {
+        if (is_null(static::$instance)) {
+            static::$instance = new static;
+        }
+
+        return static::$instance;
     }
 
     /**
@@ -115,7 +97,6 @@ class Dot
         return $locales;
     }
 
-
     /**
      * @return string
      */
@@ -123,9 +104,6 @@ class Dot
     {
         return $this::VERSION;
     }
-
-
-
 
     /**
      * @param $path
@@ -150,9 +128,27 @@ class Dot
      * @param $arguments
      * @return null
      */
-    public  function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
         return self::getInstance()->get($name);
+    }
+
+    /**
+     * @param $name
+     * @return null
+     */
+    function get($name)
+    {
+        return $this->has($name) ? self::getInstance()->instances[$name] : NULL;
+    }
+
+    /**
+     * @param $name
+     * @return null
+     */
+    function has($name)
+    {
+        return array_key_exists($name, $this->instances);
     }
 
 

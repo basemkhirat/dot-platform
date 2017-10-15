@@ -46,6 +46,15 @@ class ApiController extends LaravelController
     }
 
     /**
+     * @param null $error
+     * @return \Illuminate\Http\JsonResponse
+     */
+    function error($error = NULL, $code = 500)
+    {
+        return $this->response([], $error, $code);
+    }
+
+    /**
      * @param array $data
      * @param null $error
      * @param int $code
@@ -57,12 +66,14 @@ class ApiController extends LaravelController
     }
 
     /**
-     * @param null $error
-     * @return \Illuminate\Http\JsonResponse
+     * Call internal API using GET
+     * @param null $path
+     * @param array $params
+     * @return mixed
      */
-    function error($error = NULL, $code = 500)
+    function get($path, $params = [])
     {
-        return $this->response([], $error, $code);
+        return $this->call($path, "GET", $params);
     }
 
     /**
@@ -87,17 +98,6 @@ class ApiController extends LaravelController
 
         return json_decode($response->content());
 
-    }
-
-    /**
-     * Call internal API using GET
-     * @param null $path
-     * @param array $params
-     * @return mixed
-     */
-    function get($path, $params = [])
-    {
-        return $this->call($path, "GET", $params);
     }
 
     /**

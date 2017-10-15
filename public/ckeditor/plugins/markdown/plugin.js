@@ -7,12 +7,12 @@
  * HTML to Markdown Parser: 
  */
 'use strict';
-(function() {
+(function () {
     CKEDITOR.plugins.add('markdown', {
         // lang: 'en,zh', // %REMOVE_LINE_CORE%
         icons: 'markdown',
         hidpi: true, // %REMOVE_LINE_CORE%
-        init: function(editor) {
+        init: function (editor) {
             // Source mode in inline editors is only available through the "sourcedialog" plugin.
             if (editor.elementMode == CKEDITOR.ELEMENT_MODE_INLINE)
                 return;
@@ -26,7 +26,7 @@
                 };
             editor.config.markdown = CKEDITOR.tools.extend(defaultConfig, editor.config.markdown || {}, true);
 
-            editor.addMode('markdown', function(callback) {
+            editor.addMode('markdown', function (callback) {
                 var contentsSpace = editor.ui.space('contents'),
                     textarea = contentsSpace.getDocument().createElement('textarea'),
                     config = editor.config.markdown;
@@ -55,7 +55,7 @@
 
                 // Convert to Markdown and Fill the textarea.
                 if (typeof(toMarkdown) == 'undefined') {
-                    CKEDITOR.scriptLoader.load(rootPath + 'js/to-markdown.js', function() {
+                    CKEDITOR.scriptLoader.load(rootPath + 'js/to-markdown.js', function () {
                         editable.setData(toMarkdown(htmlData));
                     });
                 } else {
@@ -64,12 +64,12 @@
 
                 if (typeof (CodeMirror) == 'undefined' || typeof (CodeMirror.modes.gfm) == 'undefined') {
                     CKEDITOR.document.appendStyleSheet(rootPath + 'css/codemirror.min.css');
-                
+
                     if (config.theme.length && config.theme != 'default') {
                         CKEDITOR.document.appendStyleSheet(rootPath + 'theme/' + config.theme + '.css');
                     }
 
-                    CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror-gfm-min.js', function() {
+                    CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror-gfm-min.js', function () {
                         loadCodeMirror(editor, editable);
                     });
                 } else {
@@ -93,7 +93,7 @@
                 callback();
             });
 
-            function loadCodeMirror(editor, editable){
+            function loadCodeMirror(editor, editable) {
                 window["codemirror_" + editor.id] = CodeMirror.fromTextArea(editable.$, editor.config.markdown);
                 window["codemirror_" + editor.id].setSize(null, '100%');
             }
@@ -108,7 +108,7 @@
                 });
             }
             CKEDITOR.document.appendStyleText('.cke_button__markdown_label {display: inline;}'); // display button Label
-            editor.on('mode', function() {
+            editor.on('mode', function () {
                 editor.getCommand('markdown').setState(editor.mode == 'markdown' ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF);
             });
 
@@ -136,27 +136,30 @@
     var sourceEditable = CKEDITOR.tools.createClass({
         base: CKEDITOR.editable,
         proto: {
-            setData: function(data) {
+            setData: function (data) {
                 this.setValue(data);
                 this.status = 'ready';
                 this.editor.fire('dataReady');
             },
 
-            getData: function() {
+            getData: function () {
                 return this.getValue();
             },
 
             // Insertions are not supported in source editable.
-            insertHtml: function() {},
-            insertElement: function() {},
-            insertText: function() {},
+            insertHtml: function () {
+            },
+            insertElement: function () {
+            },
+            insertText: function () {
+            },
 
             // Read-only support for textarea.
-            setReadOnly: function(isReadOnly) {
+            setReadOnly: function (isReadOnly) {
                 this[(isReadOnly ? 'set' : 'remove') + 'Attribute']('readOnly', 'readonly');
             },
 
-            detach: function() {
+            detach: function () {
                 var editor = this.editor;
 
                 window["codemirror_" + editor.id].toTextArea(); // Remove codemirror and restore Data to origin textarea
@@ -182,7 +185,7 @@ CKEDITOR.plugins.markdown = {
             },
             editorFocus: false,
             readOnly: 1,
-            exec: function(editor) {
+            exec: function (editor) {
                 if (editor.mode == 'wysiwyg')
                     editor.fire('saveSnapshot');
                 editor.getCommand('markdown').setState(CKEDITOR.TRISTATE_DISABLED);

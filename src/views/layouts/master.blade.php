@@ -19,7 +19,8 @@
     <?php Action::render("admin.head"); ?>
 </head>
 
-<body class="@if(Auth::user()->color == "blue") dark-theme @endif @if (DIRECTION == "rtl") rtls @endif @if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") mini-navbar @endif">
+<body
+    class="@if(Auth::user()->color == "blue") dark-theme @endif @if (DIRECTION == "rtl") rtls @endif @if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") mini-navbar @endif">
 
 <div class="loadingWrapper">
     <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
@@ -29,7 +30,8 @@
 
     @include("media::manager")
 
-    <div class="main-container @if (isset($_COOKIE["active_container"]) and $_COOKIE["active_container"]) active @endif">
+    <div
+        class="main-container @if (isset($_COOKIE["active_container"]) and $_COOKIE["active_container"]) active @endif">
 
         <div id="wrapper">
 
@@ -48,7 +50,8 @@
                                     <span class="clear">
 
                                         <span class="block sm-t-xs">
-                                            <strong class="font-bold"><?php echo ucfirst(Auth::user()->first_name) . " " . ucfirst(Auth::user()->last_name); ?></strong>
+                                            <strong
+                                                class="font-bold"><?php echo ucfirst(Auth::user()->first_name) . " " . ucfirst(Auth::user()->last_name); ?></strong>
                                         </span>
 
                                         @if (Auth::user()->role)
@@ -91,12 +94,13 @@
                     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                         <div class="navbar-header">
                             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:void(0)"><i
-                                        class="fa fa-bars"></i> </a>
+                                    class="fa fa-bars"></i> </a>
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
 
                             <li>
-                                <span class="m-r-sm text-muted welcome-message"><?php echo strtoupper(Config::get("site_title", Config::get("site_name"))); ?></span>
+                                <span
+                                    class="m-r-sm text-muted welcome-message"><?php echo strtoupper(Config::get("site_title", Config::get("site_name"))); ?></span>
                             </li>
 
                             <?php echo Navigation::get("topnav")->render(); ?>

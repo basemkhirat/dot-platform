@@ -1,7 +1,7 @@
 (function () {
     function require(name) {
         var module = require.modules[name];
-        if (!module)throw new Error('failed to require "' + name + '"');
+        if (!module) throw new Error('failed to require "' + name + '"');
         if (!("exports" in module) && typeof module.definition === "function") {
             module.client = module.component = true;
             module.definition.call(this, module.exports = {}, module);
@@ -21,9 +21,9 @@
             if (aInt === bInt) {
                 var aLex = aArray[i].substr(("" + aInt).length);
                 var bLex = bArray[i].substr(("" + bInt).length);
-                if (aLex === "" && bLex !== "")return 1;
-                if (aLex !== "" && bLex === "")return -1;
-                if (aLex !== "" && bLex !== "")return aLex > bLex ? 1 : -1;
+                if (aLex === "" && bLex !== "") return 1;
+                if (aLex !== "" && bLex === "") return -1;
+                if (aLex !== "" && bLex !== "") return aLex > bLex ? 1 : -1;
                 continue
             } else if (aInt > bInt) {
                 return 1
@@ -40,7 +40,7 @@
 
         var versionRegexp = /(.*)~(.*)@v?(\d+\.\d+\.\d+[^\/]*)$/;
         var remoteRegexp = /(.*)~(.*)/;
-        if (!remoteRegexp.test(name))showError(name);
+        if (!remoteRegexp.test(name)) showError(name);
         var moduleNames = Object.keys(require.modules);
         var semVerCandidates = [];
         var otherCandidates = [];
@@ -83,8 +83,9 @@
     };
     require.register("abpetkov~transitionize@0.0.3", function (exports, module) {
         module.exports = Transitionize;
+
         function Transitionize(element, props) {
-            if (!(this instanceof Transitionize))return new Transitionize(element, props);
+            if (!(this instanceof Transitionize)) return new Transitionize(element, props);
             this.element = element;
             this.props = props || {};
             this.init()
@@ -99,7 +100,7 @@
                 transitions.push(key + " " + this.props[key])
             }
             this.element.style.transition = transitions.join(", ");
-            if (this.isSafari())this.element.style.webkitTransition = transitions.join(", ")
+            if (this.isSafari()) this.element.style.webkitTransition = transitions.join(", ")
         }
     });
     require.register("ftlabs~fastclick@v0.6.11", function (exports, module) {
@@ -161,10 +162,10 @@
                     var adv = Node.prototype.addEventListener;
                     if (type === "click") {
                         adv.call(layer, type, callback.hijacked || (callback.hijacked = function (event) {
-                                if (!event.propagationStopped) {
-                                    callback(event)
-                                }
-                            }), capture)
+                            if (!event.propagationStopped) {
+                                callback(event)
+                            }
+                        }), capture)
                     } else {
                         adv.call(layer, type, callback, capture)
                     }
@@ -501,9 +502,9 @@
     });
     require.register("component~indexof@0.0.3", function (exports, module) {
         module.exports = function (arr, obj) {
-            if (arr.indexOf)return arr.indexOf(obj);
+            if (arr.indexOf) return arr.indexOf(obj);
             for (var i = 0; i < arr.length; ++i) {
-                if (arr[i] === obj)return i
+                if (arr[i] === obj) return i
             }
             return -1
         }
@@ -515,8 +516,9 @@
         module.exports = function (el) {
             return new ClassList(el)
         };
+
         function ClassList(el) {
-            if (!el)throw new Error("A DOM element reference is required");
+            if (!el) throw new Error("A DOM element reference is required");
             this.el = el;
             this.list = el.classList
         }
@@ -528,7 +530,7 @@
             }
             var arr = this.array();
             var i = index(arr, name);
-            if (!~i)arr.push(name);
+            if (!~i) arr.push(name);
             this.el.className = arr.join(" ");
             return this
         };
@@ -542,7 +544,7 @@
             }
             var arr = this.array();
             var i = index(arr, name);
-            if (~i)arr.splice(i, 1);
+            if (~i) arr.splice(i, 1);
             this.el.className = arr.join(" ");
             return this
         };
@@ -584,7 +586,7 @@
         ClassList.prototype.array = function () {
             var str = this.el.className.replace(/^\s+|\s+$/g, "");
             var arr = str.split(re);
-            if ("" === arr[0])arr.shift();
+            if ("" === arr[0]) arr.shift();
             return arr
         };
         ClassList.prototype.has = ClassList.prototype.contains = function (name) {
@@ -592,7 +594,9 @@
         }
     });
     require.register("component~event@0.1.4", function (exports, module) {
-        var bind = window.addEventListener ? "addEventListener" : "attachEvent", unbind = window.removeEventListener ? "removeEventListener" : "detachEvent", prefix = bind !== "addEventListener" ? "on" : "";
+        var bind = window.addEventListener ? "addEventListener" : "attachEvent",
+            unbind = window.removeEventListener ? "removeEventListener" : "detachEvent",
+            prefix = bind !== "addEventListener" ? "on" : "";
         exports.bind = function (el, type, fn, capture) {
             el[bind](prefix + type, fn, capture || false);
             return fn
@@ -616,8 +620,8 @@
             return el.querySelectorAll(selector)
         };
         exports.engine = function (obj) {
-            if (!obj.one)throw new Error(".one callback required");
-            if (!obj.all)throw new Error(".all callback required");
+            if (!obj.one) throw new Error(".one callback required");
+            if (!obj.all) throw new Error(".all callback required");
             one = obj.one;
             exports.all = obj.all;
             return exports
@@ -628,12 +632,13 @@
         var proto = Element.prototype;
         var vendor = proto.matches || proto.webkitMatchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector || proto.oMatchesSelector;
         module.exports = match;
+
         function match(el, selector) {
-            if (!el || el.nodeType !== 1)return false;
-            if (vendor)return vendor.call(el, selector);
+            if (!el || el.nodeType !== 1) return false;
+            if (vendor) return vendor.call(el, selector);
             var nodes = query.all(selector, el.parentNode);
             for (var i = 0; i < nodes.length; ++i) {
-                if (nodes[i] == el)return true
+                if (nodes[i] == el) return true
             }
             return false
         }
@@ -644,8 +649,8 @@
             element = checkYoSelf ? {parentNode: element} : element;
             root = root || document;
             while ((element = element.parentNode) && element !== document) {
-                if (matches(element, selector))return element;
-                if (element === root)return
+                if (matches(element, selector)) return element;
+                if (element === root) return
             }
         }
     });
@@ -655,7 +660,7 @@
             return event.bind(el, type, function (e) {
                 var target = e.target || e.srcElement;
                 e.delegateTarget = closest(target, selector, true, el);
-                if (e.delegateTarget)fn.call(el, e)
+                if (e.delegateTarget) fn.call(el, e)
             }, capture)
         };
         exports.unbind = function (el, type, fn, capture) {
@@ -666,10 +671,11 @@
         var events = require("component~event@0.1.4");
         var delegate = require("component~delegate@0.2.3");
         module.exports = Events;
+
         function Events(el, obj) {
-            if (!(this instanceof Events))return new Events(el, obj);
-            if (!el)throw new Error("element required");
-            if (!obj)throw new Error("object required");
+            if (!(this instanceof Events)) return new Events(el, obj);
+            if (!el) throw new Error("element required");
+            if (!obj) throw new Error("object required");
             this.el = el;
             this.obj = obj;
             this._events = {}
@@ -701,12 +707,12 @@
             return cb
         };
         Events.prototype.unbind = function (event, method) {
-            if (0 == arguments.length)return this.unbindAll();
-            if (1 == arguments.length)return this.unbindAllOf(event);
+            if (0 == arguments.length) return this.unbindAll();
+            if (1 == arguments.length) return this.unbindAllOf(event);
             var bindings = this._events[event];
-            if (!bindings)return;
+            if (!bindings) return;
             var cb = bindings[method];
-            if (!cb)return;
+            if (!cb) return;
             events.unbind(this.el, event, cb)
         };
         Events.prototype.unbindAll = function () {
@@ -716,21 +722,23 @@
         };
         Events.prototype.unbindAllOf = function (event) {
             var bindings = this._events[event];
-            if (!bindings)return;
+            if (!bindings) return;
             for (var method in bindings) {
                 this.unbind(event, method)
             }
         };
+
         function parse(event) {
             var parts = event.split(/ +/);
             return {name: parts.shift(), selector: parts.join(" ")}
         }
     });
     require.register("switchery", function (exports, module) {
-        var transitionize = require("abpetkov~transitionize@0.0.3"), fastclick = require("ftlabs~fastclick@v0.6.11"), classes = require("component~classes@1.2.1"), events = require("component~events@1.0.9");
+        var transitionize = require("abpetkov~transitionize@0.0.3"), fastclick = require("ftlabs~fastclick@v0.6.11"),
+            classes = require("component~classes@1.2.1"), events = require("component~events@1.0.9");
         module.exports = Switchery;
         var defaults = {
-            color: $("body").hasClass("dark-theme")? "#1e8cbe": "#1ab394",
+            color: $("body").hasClass("dark-theme") ? "#1e8cbe" : "#1ab394",
             secondaryColor: "#dfdfdf",
             jackColor: "#fff",
             jackSecondaryColor: null,
@@ -742,7 +750,7 @@
         };
 
         function Switchery(element, options) {
-            if (!(this instanceof Switchery))return new Switchery(element, options);
+            if (!(this instanceof Switchery)) return new Switchery(element, options);
             this.element = element;
             this.options = options || {};
             for (var i in defaults) {
@@ -750,8 +758,8 @@
                     this.options[i] = defaults[i]
                 }
             }
-            if (this.element != null && this.element.type == "checkbox")this.init();
-            if (this.isDisabled() === true)this.disable()
+            if (this.element != null && this.element.type == "checkbox") this.init();
+            if (this.isDisabled() === true) this.disable()
         }
 
         Switchery.prototype.hide = function () {
@@ -774,11 +782,11 @@
         };
         Switchery.prototype.setPosition = function (clicked) {
             var checked = this.isChecked(), switcher = this.switcher, jack = this.jack;
-            if (clicked && checked)checked = false; else if (clicked && !checked)checked = true;
+            if (clicked && checked) checked = false; else if (clicked && !checked) checked = true;
             if (checked === true) {
                 this.element.checked = true;
-                if (window.getComputedStyle)jack.style.left = parseInt(window.getComputedStyle(switcher).width) - parseInt(window.getComputedStyle(jack).width) + "px"; else jack.style.left = parseInt(switcher.currentStyle["width"]) - parseInt(jack.currentStyle["width"]) + "px";
-                if (this.options.color)this.colorize();
+                if (window.getComputedStyle) jack.style.left = parseInt(window.getComputedStyle(switcher).width) - parseInt(window.getComputedStyle(jack).width) + "px"; else jack.style.left = parseInt(switcher.currentStyle["width"]) - parseInt(jack.currentStyle["width"]) + "px";
+                if (this.options.color) this.colorize();
                 this.setSpeed()
             } else {
                 jack.style.left = 0;
@@ -884,16 +892,16 @@
             this.events.unbind()
         };
         Switchery.prototype.enable = function () {
-            if (this.options.disabled)this.options.disabled = false;
-            if (this.element.disabled)this.element.disabled = false;
-            if (this.element.readOnly)this.element.readOnly = false;
+            if (this.options.disabled) this.options.disabled = false;
+            if (this.element.disabled) this.element.disabled = false;
+            if (this.element.readOnly) this.element.readOnly = false;
             this.switcher.style.opacity = 1;
             this.events.bind("click", "bindClick")
         };
         Switchery.prototype.disable = function () {
-            if (this.options.disabled)this.options.disabled = true;
-            if (this.element.disabled)this.element.disabled = true;
-            if (this.element.readOnly)this.element.readOnly = true;
+            if (this.options.disabled) this.options.disabled = true;
+            if (this.element.disabled) this.element.disabled = true;
+            if (this.element.readOnly) this.element.readOnly = true;
             this.switcher.style.opacity = this.options.disabledOpacity;
             this.destroy()
         }

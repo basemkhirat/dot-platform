@@ -2,8 +2,8 @@
 
 namespace Dot\Platform\Classes;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Event;
 
 /**
  * Class DotWidget
@@ -21,6 +21,30 @@ class Widget
      * @var
      */
     public static $widget;
+
+    /**
+     * @param $sidebar
+     * @return string
+     * Render sidebar widgets
+     */
+    public static function render($sidebar)
+    {
+
+        $args = func_get_args();
+        $args = array_splice($args, 1);
+
+        $widgets = self::get($sidebar, $args);
+
+        $output_html = "";
+
+        foreach ($widgets as $widget) {
+            array_unshift($args, $widget);
+            $output_html .= call_user_func_array($widget->output, $args);
+        }
+
+        return $output_html;
+
+    }
 
     /**
      * @param $sidebar
@@ -44,30 +68,6 @@ class Widget
         $sorted_widgets = $widgets_collection->sortBy("order")->toArray();
 
         return $sorted_widgets;
-
-    }
-
-    /**
-     * @param $sidebar
-     * @return string
-     * Render sidebar widgets
-     */
-    public static function render($sidebar)
-    {
-
-        $args = func_get_args();
-        $args = array_splice($args, 1);
-
-        $widgets = self::get($sidebar, $args);
-
-        $output_html = "";
-
-        foreach ($widgets as $widget) {
-            array_unshift($args, $widget);
-            $output_html .= call_user_func_array($widget->output, $args);
-        }
-
-        return $output_html;
 
     }
 

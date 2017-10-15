@@ -10,34 +10,29 @@ class Response
 {
 
     /**
-     * @var Response
-     */
-    private $response;
-
-    /**
      * @var string
      */
     public $responseBody = "response";
-
     /**
      * @var string
      */
     public $errorBody = "error";
-
     /**
      * @var string
      */
     public $messageBody = "message";
-
     /**
      * @var string
      */
     public $statusBody = "status";
-
     /**
      * @var string
      */
     public $codeBody = "code";
+    /**
+     * @var Response
+     */
+    private $response;
 
     /**
      * DotResponse constructor.

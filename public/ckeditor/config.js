@@ -9,14 +9,21 @@ CKEDITOR.editorConfig = function (config) {
     // config.uiColor = '#AADC6E';
 
 
-
-   config.toolbar = [
+    config.toolbar = [
         {name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Source', "Youtube", 'Print']},
-        {name: 'clipboard', groups: ['clipboard', 'undo'], items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+        {
+            name: 'clipboard',
+            groups: ['clipboard', 'undo'],
+            items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+        },
         {name: 'insert', items: ['Table', 'Image', 'HorizontalRule', 'Iframe']},
         '/',
         {name: 'basicstyles', groups: ['basicstyles', 'cleanup'], items: ['Bold', 'Italic', 'Underline', 'Strike']},
-        {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'], items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']},
+        {
+            name: 'paragraph',
+            groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
+            items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+        },
         {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
         '/',
         {name: 'styles', items: ['FontSize']},
@@ -24,11 +31,10 @@ CKEDITOR.editorConfig = function (config) {
         {name: 'tools', items: ['Maximize']},
         {name: 'others', items: ['-']},
     ];
-    
-    
+
 
     // Toolbar groups configuration.
-   config.toolbarGroups = [
+    config.toolbarGroups = [
         {name: 'document', groups: ['mode', 'document', 'doctools']},
         {name: 'clipboard', groups: ['clipboard', 'undo']},
         {name: 'editing', groups: ['find', 'selection', 'spellchecker']},
@@ -44,7 +50,7 @@ CKEDITOR.editorConfig = function (config) {
         {name: 'tools'},
         {name: 'others'},
         {name: 'about'}
-    ]; 
+    ];
 
     config.allowedContent = true;
     //config.forcePasteAsPlainText = true;

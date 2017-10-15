@@ -111,7 +111,6 @@ is its visual representation:
 +-------------------------------------+
 */
 
-
 /* The list of panel items. */
 .cke_panel_list {
     list-style-type: none;
@@ -144,14 +143,14 @@ is its visual representation:
 
 /* IE6 */
 * html .cke_panel_listItem a {
-    width : 100%;
+    width: 100%;
 
     /* IE is not able to inherit the color, so we must force it to black */
     color: #000;
 }
 
 /* IE7 */
-*:first-child+html .cke_panel_listItem a {
+*:first-child + html .cke_panel_listItem a {
     /* IE is not able to inherit the color, so we must force it to black */
     color: #000;
 }

@@ -3,8 +3,8 @@
 namespace Dot\Platform\Commands;
 
 use Dot\Platform\Command;
-use Illuminate\Container\Container;
 use Dot\Platform\Facades\Plugin;
+use Illuminate\Container\Container;
 
 /**
  * Class MigrateCommand

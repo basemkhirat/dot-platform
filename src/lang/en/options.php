@@ -23,7 +23,7 @@ return [
         'offline_message' => 'Offline message'
     ],
 
-    "permissions" =>[
+    "permissions" => [
         "general" => "Manage general options"
     ]
 ];

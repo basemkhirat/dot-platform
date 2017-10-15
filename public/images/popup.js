@@ -21,11 +21,11 @@ $(function () {
 
             if (data.result.error !== undefined) {
                 $(".upload_errors").html(
-                        '<div class="alert alert-danger alert-dark">'
-                        + '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>'
-                        + data.result.error
-                        + '</div>'
-                        );
+                    '<div class="alert alert-danger alert-dark">'
+                    + '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>'
+                    + data.result.error
+                    + '</div>'
+                );
             }
 
             $.each(data.result.files, function (index, file) {
@@ -49,7 +49,6 @@ $(function () {
     }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
 
 
-
     $(function () {
         'use strict';
         // Change this to the location of your server-side upload handler:
@@ -69,26 +68,25 @@ $(function () {
             done: function (e, data) {
 
 
-
                 if (data.result.error !== undefined) {
                     $(".upload_errors").html(
-                            '<div class="alert alert-danger alert-dark">'
-                            + '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>'
-                            + data.result.error
-                            + '</div>'
-                            );
+                        '<div class="alert alert-danger alert-dark">'
+                        + '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>'
+                        + data.result.error
+                        + '</div>'
+                    );
                 }
 
                 $.each(data.result.files, function (index, file) {
 
                     $("#galleries-content .media_rows").prepend('<div class="media_row">'
-                            + '<input type="hidden" value="' + file.id + '" name="media_id[]">'
-                            + '<a href="#" class="media_row_delete">'
-                            + '<i class="fa fa-times"></i>'
-                            + '</a>'
-                            + '<img src="' + file.thumbnail + '">'
-                            + '<label>' + file.title + '</label>'
-                            + '</div>');
+                        + '<input type="hidden" value="' + file.id + '" name="media_id[]">'
+                        + '<a href="#" class="media_row_delete">'
+                        + '<i class="fa fa-times"></i>'
+                        + '</a>'
+                        + '<img src="' + file.thumbnail + '">'
+                        + '<label>' + file.title + '</label>'
+                        + '</div>');
 
                     $('.media-grid').prepend(file.html);
                     $('.current-uploading-file').text(file.name);
@@ -110,7 +108,6 @@ $(function () {
 
 
     });
-
 
 
     // Media link
@@ -175,23 +172,21 @@ $(function () {
         } else {
             $(".details-box-name .file_name").text(media_title);
         }
-        
-        
-        if(media_motive == 1){
-           
-                //$(".motive_switcher").show();
-            
-                
-            
-            
+
+
+        if (media_motive == 1) {
+
+            //$(".motive_switcher").show();
+
+
             $("#file_motive").val(1);
-            if(!$("#file_motive").parent("div").hasClass("checked")) {
+            if (!$("#file_motive").parent("div").hasClass("checked")) {
                 $("#file_motive").parent("div").addClass("checked");
             }
-        }else{
+        } else {
             //$(".motive_switcher").hide();
             $("#file_motive").val(0);
-            if($("#file_motive").parent("div").hasClass("checked")) {
+            if ($("#file_motive").parent("div").hasClass("checked")) {
                 $("#file_motive").parent("div").removeClass("checked");
             }
         }
@@ -206,7 +201,7 @@ $(function () {
         $("#file_provider_id").val(media_provider_id);
         $("#file_url").val(media_url);
         $("#file_title").val(media_title);
-       
+
         $("#file_description").val(media_description);
         $(".media-wrapper").removeClass("non-editable");
 
@@ -255,7 +250,6 @@ $(function () {
 
 
     // galleries
-
 
 
     $("body").on("click", ".media_row_delete", function (e) {
@@ -327,7 +321,6 @@ $(function () {
         });
 
     }
-
 
 
     $("body").on("click", ".gallery_row", function (e) {
@@ -409,12 +402,12 @@ $(function () {
         var type = base.find("[name=type]").eq(0).val();
         if (base.find("input[name=motive]").eq(0).parent("div").hasClass("checked")) {
             var motive = 1;
-        }else{
+        } else {
             var motive = 0;
         }
 
         $(".media_loader").show();
-        $.get(baseURL + "media/get/1/" + type + "/" + q +"?motive="+ motive, function (data) {
+        $.get(baseURL + "media/get/1/" + type + "/" + q + "?motive=" + motive, function (data) {
             if (data == "") {
                 alert("No result for '" + q + "'");
             } else {
@@ -435,10 +428,10 @@ $(function () {
         var file_title = base.find("[name=file_title]").eq(0).val();
         var file_description = base.find("[name=file_description]").eq(0).val();
 
-        if($("#file_motive").parent("div").hasClass("checked")) {
-             var file_motive = 1;
-             base.find("[name=file_motive]").eq(0).val(1);
-        }else{
+        if ($("#file_motive").parent("div").hasClass("checked")) {
+            var file_motive = 1;
+            base.find("[name=file_motive]").eq(0).val(1);
+        } else {
             var file_motive = 2;
             base.find("[name=file_motive]").eq(0).val(0);
         }
@@ -574,10 +567,10 @@ $(".filter-bar a").click(function () {
     $(".search_media").find("[name=type]").eq(0).val(media_type);
     $(".media-grid-type").val(media_type);
 
-    
-    if(media_type == "image" || media_type == "all"){
+
+    if (media_type == "image" || media_type == "all") {
         $(".motive_switcher").show();
-    }else{
+    } else {
         $(".motive_switcher").hide();
     }
 
@@ -596,8 +589,6 @@ $(".filter-bar a").click(function () {
 
     return false;
 });
-
-
 
 
 (function ($) {
@@ -756,7 +747,10 @@ $(".filter-bar a").click(function () {
                                                 ids[i] = file.media_id;
                                             });
 
-                                            $.post(baseURL + "media/save_gallery", {name: name, content: ids}, function (data) {
+                                            $.post(baseURL + "media/save_gallery", {
+                                                name: name,
+                                                content: ids
+                                            }, function (data) {
                                                 var galleries = [];
                                                 galleries[0] = data;
                                                 settings.galleries(galleries);
@@ -791,7 +785,6 @@ $(".filter-bar a").click(function () {
             });
         });
     };
-
 
 
 }(jQuery));

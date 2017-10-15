@@ -8,7 +8,7 @@
  */
 
 
-$("#side-menu .fa.arrow").click(function(e){
+$("#side-menu .fa.arrow").click(function (e) {
     e.preventDefault();
 
     $(this).parents("li").toggleClass("active").children("ul").collapse("toggle");
@@ -16,7 +16,7 @@ $("#side-menu .fa.arrow").click(function(e){
     return false;
 })
 
-;(function($, window, document, undefined) {
+;(function ($, window, document, undefined) {
 
     var pluginName = "metisMenu",
         defaults = {
@@ -33,7 +33,7 @@ $("#side-menu .fa.arrow").click(function(e){
     }
 
     Plugin.prototype = {
-        init: function() {
+        init: function () {
 
             var $this = this.element,
                 $toggle = this.settings.toggle,
@@ -52,9 +52,9 @@ $("#side-menu .fa.arrow").click(function(e){
                 $this.find("li.active").has("ul").children("a").addClass("doubleTapToGo");
             }
 
-            $this.find("li").has("ul").children("a").on("click" + "." + pluginName, function(e) {
+            $this.find("li").has("ul").children("a").on("click" + "." + pluginName, function (e) {
 
-                if($(this).attr("href") !== "#" && $(this).attr("href") !== "" && $(this).attr("href") !== "javascript:void(0)"){
+                if ($(this).attr("href") !== "#" && $(this).attr("href") !== "" && $(this).attr("href") !== "javascript:void(0)") {
                     window.location.href = $(this).attr("href");
                     return;
                 }
@@ -81,7 +81,7 @@ $("#side-menu .fa.arrow").click(function(e){
             });
         },
 
-        isIE: function() { //https://gist.github.com/padolsey/527683
+        isIE: function () { //https://gist.github.com/padolsey/527683
             var undef,
                 v = 3,
                 div = document.createElement("div"),
@@ -96,7 +96,7 @@ $("#side-menu .fa.arrow").click(function(e){
         },
 
         //Enable the link on the second click.
-        doubleTapToGo: function(elem) {
+        doubleTapToGo: function (elem) {
             var $this = this.element;
 
             //if the class "doubleTapToGo" exists, remove it and return
@@ -115,14 +115,14 @@ $("#side-menu .fa.arrow").click(function(e){
             }
         },
 
-        remove: function() {
+        remove: function () {
             this.element.off("." + pluginName);
             this.element.removeData(pluginName);
         }
 
     };
 
-    $.fn[pluginName] = function(options) {
+    $.fn[pluginName] = function (options) {
         this.each(function () {
             var el = $(this);
             if (el.data(pluginName)) {

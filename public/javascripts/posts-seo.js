@@ -149,7 +149,7 @@ function amtRemoveLowerCaseDiacritics(str) {
         }
     ];
     for (var i = 0; i < diacriticsRemovalMap.length; i++) {
-        str = str.replace(diacriticsRemovalMap[ i ].letters, diacriticsRemovalMap[ i ].base);
+        str = str.replace(diacriticsRemovalMap[i].letters, diacriticsRemovalMap[i].base);
     }
     return str;
 }
@@ -169,7 +169,7 @@ function amtTestFocusKw() {
         postname = jQuery('#editable-post-name-full').text();
         url = postURL.replace('http://', '');
     }
-    var p =  new RegExp('(^|[ \\s\n\r\t\\.,\'\\("\\+;!?:\\-])' + amtRemoveLowerCaseDiacritics(focuskw) + '($|[\\s\n\r\t.,\'\\)"\\+!?:;\\-])', 'gim');
+    var p = new RegExp('(^|[ \\s\n\r\t\\.,\'\\("\\+;!?:\\-])' + amtRemoveLowerCaseDiacritics(focuskw) + '($|[\\s\n\r\t.,\'\\)"\\+!?:;\\-])', 'gim');
 
     //remove diacritics of a lower cased focuskw for url matching in foreign lang
     var focuskwNoDiacritics = amtRemoveLowerCaseDiacritics(focuskw);
@@ -527,7 +527,7 @@ function amtBoldKeywords(str, url) {
         keywords = new Array(focuskw);
     }
     for (var i = 0; i < keywords.length; i++) {
-        var kw = amtClean(keywords[ i ]);
+        var kw = amtClean(keywords[i]);
         var kwregex = '';
         if (url) {
             kw = kw.replace(' ', '-').toLowerCase();

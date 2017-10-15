@@ -30,14 +30,14 @@
     // Detect file input support, based on
     // http://viljamis.com/blog/2012/file-upload-support-on-mobile/
     $.support.fileInput = !(new RegExp(
-            // Handle devices which give false positives for the feature detection:
-            '(Android (1\\.[0156]|2\\.[01]))' +
-            '|(Windows Phone (OS 7|8\\.0))|(XBLWP)|(ZuneWP)|(WPDesktop)' +
-            '|(w(eb)?OSBrowser)|(webOS)' +
-            '|(Kindle/(1\\.0|2\\.[05]|3\\.0))'
-            ).test(window.navigator.userAgent) ||
-            // Feature detection for all other devices:
-            $('<input type="file">').prop('disabled'));
+        // Handle devices which give false positives for the feature detection:
+        '(Android (1\\.[0156]|2\\.[01]))' +
+        '|(Windows Phone (OS 7|8\\.0))|(XBLWP)|(ZuneWP)|(WPDesktop)' +
+        '|(w(eb)?OSBrowser)|(webOS)' +
+        '|(Kindle/(1\\.0|2\\.[05]|3\\.0))'
+        ).test(window.navigator.userAgent) ||
+        // Feature detection for all other devices:
+        $('<input type="file">').prop('disabled'));
 
     // The FileReader API is not actually used, but works as feature detection,
     // as some Safari versions (5?) support XHR file uploads via the FormData API,
@@ -49,7 +49,7 @@
 
     // Detect support for Blob slicing (required for chunked uploads):
     $.support.blobSlice = window.Blob && (Blob.prototype.slice ||
-            Blob.prototype.webkitSlice || Blob.prototype.mozSlice);
+        Blob.prototype.webkitSlice || Blob.prototype.mozSlice);
 
     // Helper function to create drag handlers for dragover/dragenter/dragleave:
     function getDragHandler(type) {
@@ -58,10 +58,10 @@
             e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
             var dataTransfer = e.dataTransfer;
             if (dataTransfer && $.inArray('Files', dataTransfer.types) !== -1 &&
-                    this._trigger(
-                            type,
-                            $.Event(type, {delegatedEvent: e})
-                            ) !== false) {
+                this._trigger(
+                    type,
+                    $.Event(type, {delegatedEvent: e})
+                ) !== false) {
                 e.preventDefault();
                 if (isDragOver) {
                     dataTransfer.dropEffect = 'copy';
@@ -296,8 +296,8 @@
         },
         _isXHRUpload: function (options) {
             return !options.forceIframeTransport &&
-                    ((!options.multipart && $.support.xhrFileUpload) ||
-                            $.support.xhrFormDataFileUpload);
+                ((!options.multipart && $.support.xhrFileUpload) ||
+                    $.support.xhrFormDataFileUpload);
         },
         _getFormData: function (options) {
             var formData;
@@ -350,50 +350,50 @@
         _onProgress: function (e, data) {
             if (e.lengthComputable) {
                 var now = ((Date.now) ? Date.now() : (new Date()).getTime()),
-                        loaded;
+                    loaded;
                 if (data._time && data.progressInterval &&
-                        (now - data._time < data.progressInterval) &&
-                        e.loaded !== e.total) {
+                    (now - data._time < data.progressInterval) &&
+                    e.loaded !== e.total) {
                     return;
                 }
                 data._time = now;
                 loaded = Math.floor(
-                        e.loaded / e.total * (data.chunkSize || data._progress.total)
-                        ) + (data.uploadedBytes || 0);
+                    e.loaded / e.total * (data.chunkSize || data._progress.total)
+                ) + (data.uploadedBytes || 0);
                 // Add the difference from the previously loaded state
                 // to the global loaded counter:
                 this._progress.loaded += (loaded - data._progress.loaded);
                 this._progress.bitrate = this._bitrateTimer.getBitrate(
-                        now,
-                        this._progress.loaded,
-                        data.bitrateInterval
-                        );
+                    now,
+                    this._progress.loaded,
+                    data.bitrateInterval
+                );
                 data._progress.loaded = data.loaded = loaded;
                 data._progress.bitrate = data.bitrate = data._bitrateTimer.getBitrate(
-                        now,
-                        loaded,
-                        data.bitrateInterval
-                        );
+                    now,
+                    loaded,
+                    data.bitrateInterval
+                );
                 // Trigger a custom progress event with a total data property set
                 // to the file size(s) of the current upload and a loaded data
                 // property calculated accordingly:
                 this._trigger(
-                        'progress',
-                        $.Event('progress', {delegatedEvent: e}),
-                        data
-                        );
+                    'progress',
+                    $.Event('progress', {delegatedEvent: e}),
+                    data
+                );
                 // Trigger a global progress event for all current file uploads,
                 // including ajax calls queued for sequential file uploads:
                 this._trigger(
-                        'progressall',
-                        $.Event('progressall', {delegatedEvent: e}),
-                        this._progress
-                        );
+                    'progressall',
+                    $.Event('progressall', {delegatedEvent: e}),
+                    this._progress
+                );
             }
         },
         _initProgressListener: function (options) {
             var that = this,
-                    xhr = options.xhr ? options.xhr() : $.ajaxSettings.xhr();
+                xhr = options.xhr ? options.xhr() : $.ajaxSettings.xhr();
             // Accesss to the native XHR object is required to add event listeners
             // for the upload progress event:
             if (xhr.upload) {
@@ -416,11 +416,11 @@
         },
         _initXHRData: function (options) {
             var that = this,
-                    formData,
-                    file = options.files[0],
-                    // Ignore non-multipart setting if not supported:
-                    multipart = options.multipart || !$.support.xhrFileUpload,
-                    paramName = $.type(options.paramName) === 'array' ?
+                formData,
+                file = options.files[0],
+                // Ignore non-multipart setting if not supported:
+                multipart = options.multipart || !$.support.xhrFileUpload,
+                paramName = $.type(options.paramName) === 'array' ?
                     options.paramName[0] : options.paramName;
             options.headers = $.extend({}, options.headers);
             if (options.contentRange) {
@@ -428,7 +428,7 @@
             }
             if (!multipart || options.blob || !this._isInstanceOf('File', file)) {
                 options.headers['Content-Disposition'] = 'attachment; filename="' +
-                        encodeURI(file.name) + '"';
+                    encodeURI(file.name) + '"';
             }
             if (!multipart) {
                 options.contentType = file.type || 'application/octet-stream';
@@ -449,7 +449,7 @@
                         $.each(options.files, function (index, file) {
                             formData.push({
                                 name: ($.type(options.paramName) === 'array' &&
-                                        options.paramName[index]) || paramName,
+                                    options.paramName[index]) || paramName,
                                 value: file
                             });
                         });
@@ -470,13 +470,13 @@
                             // This check allows the tests to run with
                             // dummy objects:
                             if (that._isInstanceOf('File', file) ||
-                                    that._isInstanceOf('Blob', file)) {
+                                that._isInstanceOf('Blob', file)) {
                                 formData.append(
-                                        ($.type(options.paramName) === 'array' &&
-                                                options.paramName[index]) || paramName,
-                                        file,
-                                        file.uploadName || file.name
-                                        );
+                                    ($.type(options.paramName) === 'array' &&
+                                        options.paramName[index]) || paramName,
+                                    file,
+                                    file.uploadName || file.name
+                                );
                             }
                         });
                     }
@@ -519,13 +519,13 @@
         },
         _getParamName: function (options) {
             var fileInput = $(options.fileInput),
-                    paramName = options.paramName;
+                paramName = options.paramName;
             if (!paramName) {
                 paramName = [];
                 fileInput.each(function () {
                     var input = $(this),
-                            name = input.prop('name') || 'files[]',
-                            i = (input.prop('files') || [1]).length;
+                        name = input.prop('name') || 'files[]',
+                        i = (input.prop('files') || [1]).length;
                     while (i) {
                         paramName.push(name);
                         i -= 1;
@@ -556,11 +556,11 @@
             }
             // The HTTP request method must be "POST" or "PUT":
             options.type = (options.type ||
-                    ($.type(options.form.prop('method')) === 'string' &&
-                            options.form.prop('method')) || ''
-                    ).toUpperCase();
+                ($.type(options.form.prop('method')) === 'string' &&
+                    options.form.prop('method')) || ''
+            ).toUpperCase();
             if (options.type !== 'POST' && options.type !== 'PUT' &&
-                    options.type !== 'PATCH') {
+                options.type !== 'PATCH') {
                 options.type = 'POST';
             }
             if (!options.formAcceptCharset) {
@@ -599,7 +599,7 @@
         // the jqXHR methods abort, success, error and complete:
         _getXHRPromise: function (resolveOrReject, context, args) {
             var dfd = $.Deferred(),
-                    promise = dfd.promise();
+                promise = dfd.promise();
             context = context || this.options.context || promise;
             if (resolveOrReject === true) {
                 dfd.resolveWith(context, args);
@@ -612,32 +612,32 @@
         // Adds convenience methods to the data callback argument:
         _addConvenienceMethods: function (e, data) {
             var that = this,
-                    getPromise = function (args) {
-                        return $.Deferred().resolveWith(that, args).promise();
-                    };
+                getPromise = function (args) {
+                    return $.Deferred().resolveWith(that, args).promise();
+                };
             data.process = function (resolveFunc, rejectFunc) {
                 if (resolveFunc || rejectFunc) {
                     data._processQueue = this._processQueue =
-                            (this._processQueue || getPromise([this])).pipe(
+                        (this._processQueue || getPromise([this])).pipe(
                             function () {
                                 if (data.errorThrown) {
                                     return $.Deferred()
-                                            .rejectWith(that, [data]).promise();
+                                        .rejectWith(that, [data]).promise();
                                 }
                                 return getPromise(arguments);
                             }
-                    ).pipe(resolveFunc, rejectFunc);
+                        ).pipe(resolveFunc, rejectFunc);
                 }
                 return this._processQueue || getPromise([this]);
             };
             data.submit = function () {
                 if (this.state() !== 'pending') {
                     data.jqXHR = this.jqXHR =
-                            (that._trigger(
-                                    'submit',
-                                    $.Event('submit', {delegatedEvent: e}),
-                                    this
-                                    ) !== false) && that._onSend(e, this);
+                        (that._trigger(
+                            'submit',
+                            $.Event('submit', {delegatedEvent: e}),
+                            this
+                        ) !== false) && that._onSend(e, this);
                 }
                 return this.jqXHR || that._getXHRPromise();
             };
@@ -659,7 +659,7 @@
             };
             data.processing = function () {
                 return !this.jqXHR && this._processQueue && that
-                        ._getDeferredState(this._processQueue) === 'pending';
+                    ._getDeferredState(this._processQueue) === 'pending';
             };
             data.progress = function () {
                 return this._progress;
@@ -672,8 +672,8 @@
         // and returns the uploaded bytes:
         _getUploadedBytes: function (jqXHR) {
             var range = jqXHR.getResponseHeader('Range'),
-                    parts = range && range.split('-'),
-                    upperBytesPos = parts && parts.length > 1 &&
+                parts = range && range.split('-'),
+                upperBytesPos = parts && parts.length > 1 &&
                     parseInt(parts[1], 10);
             return upperBytesPos && upperBytesPos + 1;
         },
@@ -685,17 +685,17 @@
         _chunkedUpload: function (options, testOnly) {
             options.uploadedBytes = options.uploadedBytes || 0;
             var that = this,
-                    file = options.files[0],
-                    fs = file.size,
-                    ub = options.uploadedBytes,
-                    mcs = options.maxChunkSize || fs,
-                    slice = this._blobSlice,
-                    dfd = $.Deferred(),
-                    promise = dfd.promise(),
-                    jqXHR,
-                    upload;
+                file = options.files[0],
+                fs = file.size,
+                ub = options.uploadedBytes,
+                mcs = options.maxChunkSize || fs,
+                slice = this._blobSlice,
+                dfd = $.Deferred(),
+                promise = dfd.promise(),
+                jqXHR,
+                upload;
             if (!(this._isXHRUpload(options) && slice && (ub || mcs < fs)) ||
-                    options.data) {
+                options.data) {
                 return false;
             }
             if (testOnly) {
@@ -704,75 +704,75 @@
             if (ub >= fs) {
                 file.error = options.i18n('uploadedBytes');
                 return this._getXHRPromise(
-                        false,
-                        options.context,
-                        [null, 'error', file.error]
-                        );
+                    false,
+                    options.context,
+                    [null, 'error', file.error]
+                );
             }
             // The chunk upload method:
             upload = function () {
                 // Clone the options object for each chunk upload:
                 var o = $.extend({}, options),
-                        currentLoaded = o._progress.loaded;
+                    currentLoaded = o._progress.loaded;
                 o.blob = slice.call(
-                        file,
-                        ub,
-                        ub + mcs,
-                        file.type
-                        );
+                    file,
+                    ub,
+                    ub + mcs,
+                    file.type
+                );
                 // Store the current chunk size, as the blob itself
                 // will be dereferenced after data processing:
                 o.chunkSize = o.blob.size;
                 // Expose the chunk bytes position range:
                 o.contentRange = 'bytes ' + ub + '-' +
-                        (ub + o.chunkSize - 1) + '/' + fs;
+                    (ub + o.chunkSize - 1) + '/' + fs;
                 // Process the upload data (the blob and potential form data):
                 that._initXHRData(o);
                 // Add progress listeners for this chunk upload:
                 that._initProgressListener(o);
                 jqXHR = ((that._trigger('chunksend', null, o) !== false && $.ajax(o)) ||
-                        that._getXHRPromise(false, o.context))
-                        .done(function (result, textStatus, jqXHR) {
-                            ub = that._getUploadedBytes(jqXHR) ||
-                                    (ub + o.chunkSize);
-                            // Create a progress event if no final progress event
-                            // with loaded equaling total has been triggered
-                            // for this chunk:
-                            if (currentLoaded + o.chunkSize - o._progress.loaded) {
-                                that._onProgress($.Event('progress', {
-                                    lengthComputable: true,
-                                    loaded: ub - o.uploadedBytes,
-                                    total: ub - o.uploadedBytes
-                                }), o);
-                            }
-                            options.uploadedBytes = o.uploadedBytes = ub;
-                            o.result = result;
-                            o.textStatus = textStatus;
-                            o.jqXHR = jqXHR;
-                            that._trigger('chunkdone', null, o);
-                            that._trigger('chunkalways', null, o);
-                            if (ub < fs) {
-                                // File upload not yet complete,
-                                // continue with the next chunk:
-                                upload();
-                            } else {
-                                dfd.resolveWith(
-                                        o.context,
-                                        [result, textStatus, jqXHR]
-                                        );
-                            }
-                        })
-                        .fail(function (jqXHR, textStatus, errorThrown) {
-                            o.jqXHR = jqXHR;
-                            o.textStatus = textStatus;
-                            o.errorThrown = errorThrown;
-                            that._trigger('chunkfail', null, o);
-                            that._trigger('chunkalways', null, o);
-                            dfd.rejectWith(
-                                    o.context,
-                                    [jqXHR, textStatus, errorThrown]
-                                    );
-                        });
+                    that._getXHRPromise(false, o.context))
+                    .done(function (result, textStatus, jqXHR) {
+                        ub = that._getUploadedBytes(jqXHR) ||
+                            (ub + o.chunkSize);
+                        // Create a progress event if no final progress event
+                        // with loaded equaling total has been triggered
+                        // for this chunk:
+                        if (currentLoaded + o.chunkSize - o._progress.loaded) {
+                            that._onProgress($.Event('progress', {
+                                lengthComputable: true,
+                                loaded: ub - o.uploadedBytes,
+                                total: ub - o.uploadedBytes
+                            }), o);
+                        }
+                        options.uploadedBytes = o.uploadedBytes = ub;
+                        o.result = result;
+                        o.textStatus = textStatus;
+                        o.jqXHR = jqXHR;
+                        that._trigger('chunkdone', null, o);
+                        that._trigger('chunkalways', null, o);
+                        if (ub < fs) {
+                            // File upload not yet complete,
+                            // continue with the next chunk:
+                            upload();
+                        } else {
+                            dfd.resolveWith(
+                                o.context,
+                                [result, textStatus, jqXHR]
+                            );
+                        }
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        o.jqXHR = jqXHR;
+                        o.textStatus = textStatus;
+                        o.errorThrown = errorThrown;
+                        that._trigger('chunkfail', null, o);
+                        that._trigger('chunkalways', null, o);
+                        dfd.rejectWith(
+                            o.context,
+                            [jqXHR, textStatus, errorThrown]
+                        );
+                    });
             };
             this._enhancePromise(promise);
             promise.abort = function () {
@@ -808,7 +808,7 @@
         },
         _onDone: function (result, textStatus, jqXHR, options) {
             var total = options._progress.total,
-                    response = options._response;
+                response = options._response;
             if (options._progress.loaded < total) {
                 // Create a progress event if no final progress event
                 // with loaded equaling total has been triggered:
@@ -846,61 +846,61 @@
                 this._addConvenienceMethods(e, data);
             }
             var that = this,
-                    jqXHR,
-                    aborted,
-                    slot,
-                    pipe,
-                    options = that._getAJAXSettings(data),
-                    send = function () {
-                        that._sending += 1;
-                        // Set timer for bitrate progress calculation:
-                        options._bitrateTimer = new that._BitrateTimer();
-                        jqXHR = jqXHR || (
-                                ((aborted || that._trigger(
-                                        'send',
-                                        $.Event('send', {delegatedEvent: e}),
-                                        options
-                                        ) === false) &&
-                                        that._getXHRPromise(false, options.context, aborted)) ||
-                                that._chunkedUpload(options) || $.ajax(options)
-                                ).done(function (result, textStatus, jqXHR) {
-                            that._onDone(result, textStatus, jqXHR, options);
-                        }).fail(function (jqXHR, textStatus, errorThrown) {
-                            that._onFail(jqXHR, textStatus, errorThrown, options);
-                        }).always(function (jqXHRorResult, textStatus, jqXHRorError) {
-                            that._onAlways(
-                                    jqXHRorResult,
-                                    textStatus,
-                                    jqXHRorError,
-                                    options
-                                    );
-                            that._sending -= 1;
-                            that._active -= 1;
-                            if (options.limitConcurrentUploads &&
-                                    options.limitConcurrentUploads > that._sending) {
-                                // Start the next queued upload,
-                                // that has not been aborted:
-                                var nextSlot = that._slots.shift();
-                                while (nextSlot) {
-                                    if (that._getDeferredState(nextSlot) === 'pending') {
-                                        nextSlot.resolve();
-                                        break;
-                                    }
-                                    nextSlot = that._slots.shift();
+                jqXHR,
+                aborted,
+                slot,
+                pipe,
+                options = that._getAJAXSettings(data),
+                send = function () {
+                    that._sending += 1;
+                    // Set timer for bitrate progress calculation:
+                    options._bitrateTimer = new that._BitrateTimer();
+                    jqXHR = jqXHR || (
+                        ((aborted || that._trigger(
+                            'send',
+                            $.Event('send', {delegatedEvent: e}),
+                            options
+                            ) === false) &&
+                            that._getXHRPromise(false, options.context, aborted)) ||
+                        that._chunkedUpload(options) || $.ajax(options)
+                    ).done(function (result, textStatus, jqXHR) {
+                        that._onDone(result, textStatus, jqXHR, options);
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        that._onFail(jqXHR, textStatus, errorThrown, options);
+                    }).always(function (jqXHRorResult, textStatus, jqXHRorError) {
+                        that._onAlways(
+                            jqXHRorResult,
+                            textStatus,
+                            jqXHRorError,
+                            options
+                        );
+                        that._sending -= 1;
+                        that._active -= 1;
+                        if (options.limitConcurrentUploads &&
+                            options.limitConcurrentUploads > that._sending) {
+                            // Start the next queued upload,
+                            // that has not been aborted:
+                            var nextSlot = that._slots.shift();
+                            while (nextSlot) {
+                                if (that._getDeferredState(nextSlot) === 'pending') {
+                                    nextSlot.resolve();
+                                    break;
                                 }
+                                nextSlot = that._slots.shift();
                             }
-                            if (that._active === 0) {
-                                // The stop callback is triggered when all uploads have
-                                // been completed, equivalent to the global ajaxStop event:
-                                that._trigger('stop');
-                            }
-                        });
-                        return jqXHR;
-                    };
+                        }
+                        if (that._active === 0) {
+                            // The stop callback is triggered when all uploads have
+                            // been completed, equivalent to the global ajaxStop event:
+                            that._trigger('stop');
+                        }
+                    });
+                    return jqXHR;
+                };
             this._beforeSend(e, options);
             if (this.options.sequentialUploads ||
-                    (this.options.limitConcurrentUploads &&
-                            this.options.limitConcurrentUploads <= this._sending)) {
+                (this.options.limitConcurrentUploads &&
+                    this.options.limitConcurrentUploads <= this._sending)) {
                 if (this.options.limitConcurrentUploads > 1) {
                     slot = $.Deferred();
                     this._slots.push(slot);
@@ -928,25 +928,25 @@
         },
         _onAdd: function (e, data) {
             var that = this,
-                    result = true,
-                    options = $.extend({}, this.options, data),
-                    files = data.files,
-                    filesLength = files.length,
-                    limit = options.limitMultiFileUploads,
-                    limitSize = options.limitMultiFileUploadSize,
-                    overhead = options.limitMultiFileUploadSizeOverhead,
-                    batchSize = 0,
-                    paramName = this._getParamName(options),
-                    paramNameSet,
-                    paramNameSlice,
-                    fileSet,
-                    i,
-                    j = 0;
+                result = true,
+                options = $.extend({}, this.options, data),
+                files = data.files,
+                filesLength = files.length,
+                limit = options.limitMultiFileUploads,
+                limitSize = options.limitMultiFileUploadSize,
+                overhead = options.limitMultiFileUploadSizeOverhead,
+                batchSize = 0,
+                paramName = this._getParamName(options),
+                paramNameSet,
+                paramNameSlice,
+                fileSet,
+                i,
+                j = 0;
             if (limitSize && (!filesLength || files[0].size === undefined)) {
                 limitSize = undefined;
             }
             if (!(options.singleFileUploads || limit || limitSize) ||
-                    !this._isXHRUpload(options)) {
+                !this._isXHRUpload(options)) {
                 fileSet = [files];
                 paramNameSet = [paramName];
             } else if (!(options.singleFileUploads || limitSize) && limit) {
@@ -966,8 +966,8 @@
                 for (i = 0; i < filesLength; i = i + 1) {
                     batchSize += files[i].size + overhead;
                     if (i + 1 === filesLength ||
-                            ((batchSize + files[i + 1].size + overhead) > limitSize) ||
-                            (limit && i + 1 - j >= limit)) {
+                        ((batchSize + files[i + 1].size + overhead) > limitSize) ||
+                        (limit && i + 1 - j >= limit)) {
                         fileSet.push(files.slice(j, i + 1));
                         paramNameSlice = paramName.slice(j, i + 1);
                         if (!paramNameSlice.length) {
@@ -990,17 +990,17 @@
                 that._initProgressObject(newData);
                 that._addConvenienceMethods(e, newData);
                 result = that._trigger(
-                        'add',
-                        $.Event('add', {delegatedEvent: e}),
-                        newData
-                        );
+                    'add',
+                    $.Event('add', {delegatedEvent: e}),
+                    newData
+                );
                 return result;
             });
             return result;
         },
         _replaceFileInput: function (data) {
             var input = data.fileInput,
-                    inputClone = input.clone(true);
+                inputClone = input.clone(true);
             // Add a reference for the new cloned file input to the data argument:
             data.fileInputClone = inputClone;
             $('<form></form>').append(inputClone)[0].reset();
@@ -1026,36 +1026,36 @@
         },
         _handleFileTreeEntry: function (entry, path) {
             var that = this,
-                    dfd = $.Deferred(),
-                    errorHandler = function (e) {
-                        if (e && !e.entry) {
-                            e.entry = entry;
+                dfd = $.Deferred(),
+                errorHandler = function (e) {
+                    if (e && !e.entry) {
+                        e.entry = entry;
+                    }
+                    // Since $.when returns immediately if one
+                    // Deferred is rejected, we use resolve instead.
+                    // This allows valid files and invalid items
+                    // to be returned together in one set:
+                    dfd.resolve([e]);
+                },
+                successHandler = function (entries) {
+                    that._handleFileTreeEntries(
+                        entries,
+                        path + entry.name + '/'
+                    ).done(function (files) {
+                        dfd.resolve(files);
+                    }).fail(errorHandler);
+                },
+                readEntries = function () {
+                    dirReader.readEntries(function (results) {
+                        if (!results.length) {
+                            successHandler(entries);
+                        } else {
+                            entries = entries.concat(results);
+                            readEntries();
                         }
-                        // Since $.when returns immediately if one
-                        // Deferred is rejected, we use resolve instead.
-                        // This allows valid files and invalid items
-                        // to be returned together in one set:
-                        dfd.resolve([e]);
-                    },
-                    successHandler = function (entries) {
-                        that._handleFileTreeEntries(
-                                entries,
-                                path + entry.name + '/'
-                                ).done(function (files) {
-                            dfd.resolve(files);
-                        }).fail(errorHandler);
-                    },
-                    readEntries = function () {
-                        dirReader.readEntries(function (results) {
-                            if (!results.length) {
-                                successHandler(entries);
-                            } else {
-                                entries = entries.concat(results);
-                                readEntries();
-                            }
-                        }, errorHandler);
-                    },
-                    dirReader, entries = [];
+                    }, errorHandler);
+                },
+                dirReader, entries = [];
             path = path || '';
             if (entry.isFile) {
                 if (entry._file) {
@@ -1081,15 +1081,15 @@
         _handleFileTreeEntries: function (entries, path) {
             var that = this;
             return $.when.apply(
-                    $,
-                    $.map(entries, function (entry) {
-                        return that._handleFileTreeEntry(entry, path);
-                    })
-                    ).pipe(function () {
+                $,
+                $.map(entries, function (entry) {
+                    return that._handleFileTreeEntry(entry, path);
+                })
+            ).pipe(function () {
                 return Array.prototype.concat.apply(
-                        [],
-                        arguments
-                        );
+                    [],
+                    arguments
+                );
             });
         },
         _getDroppedFiles: function (dataTransfer) {
@@ -1098,30 +1098,30 @@
             if (items && items.length && (items[0].webkitGetAsEntry ||
                     items[0].getAsEntry)) {
                 return this._handleFileTreeEntries(
-                        $.map(items, function (item) {
-                            var entry;
-                            if (item.webkitGetAsEntry) {
-                                entry = item.webkitGetAsEntry();
-                                if (entry) {
-                                    // Workaround for Chrome bug #149735:
-                                    entry._file = item.getAsFile();
-                                }
-                                return entry;
+                    $.map(items, function (item) {
+                        var entry;
+                        if (item.webkitGetAsEntry) {
+                            entry = item.webkitGetAsEntry();
+                            if (entry) {
+                                // Workaround for Chrome bug #149735:
+                                entry._file = item.getAsFile();
                             }
-                            return item.getAsEntry();
-                        })
-                        );
+                            return entry;
+                        }
+                        return item.getAsEntry();
+                    })
+                );
             }
             return $.Deferred().resolve(
-                    $.makeArray(dataTransfer.files)
-                    ).promise();
+                $.makeArray(dataTransfer.files)
+            ).promise();
         },
         _getSingleFileInputFiles: function (fileInput) {
             fileInput = $(fileInput);
             var entries = fileInput.prop('webkitEntries') ||
-                    fileInput.prop('entries'),
-                    files,
-                    value;
+                fileInput.prop('entries'),
+                files,
+                value;
             if (entries && entries.length) {
                 return this._handleFileTreeEntries(entries);
             }
@@ -1149,21 +1149,21 @@
                 return this._getSingleFileInputFiles(fileInput);
             }
             return $.when.apply(
-                    $,
-                    $.map(fileInput, this._getSingleFileInputFiles)
-                    ).pipe(function () {
+                $,
+                $.map(fileInput, this._getSingleFileInputFiles)
+            ).pipe(function () {
                 return Array.prototype.concat.apply(
-                        [],
-                        arguments
-                        );
+                    [],
+                    arguments
+                );
             });
         },
         _onChange: function (e) {
             var that = this,
-                    data = {
-                        fileInput: $(e.target),
-                        form: $(e.target.form)
-                    };
+                data = {
+                    fileInput: $(e.target),
+                    form: $(e.target.form)
+                };
             this._getFileInputFiles(data.fileInput).always(function (files) {
                 data.files = files;
                 if (that.options.replaceFileInput) {
@@ -1173,15 +1173,15 @@
                         'change',
                         $.Event('change', {delegatedEvent: e}),
                         data
-                        ) !== false) {
+                    ) !== false) {
                     that._onAdd(e, data);
                 }
             });
         },
         _onPaste: function (e) {
             var items = e.originalEvent && e.originalEvent.clipboardData &&
-                    e.originalEvent.clipboardData.items,
-                    data = {files: []};
+                e.originalEvent.clipboardData.items,
+                data = {files: []};
             if (items && items.length) {
                 $.each(items, function (index, item) {
                     var file = item.getAsFile && item.getAsFile();
@@ -1193,7 +1193,7 @@
                         'paste',
                         $.Event('paste', {delegatedEvent: e}),
                         data
-                        ) !== false) {
+                    ) !== false) {
                     this._onAdd(e, data);
                 }
             }
@@ -1201,8 +1201,8 @@
         _onDrop: function (e) {
             e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
             var that = this,
-                    dataTransfer = e.dataTransfer,
-                    data = {};
+                dataTransfer = e.dataTransfer,
+                data = {};
             if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
                 e.preventDefault();
                 this._getDroppedFiles(dataTransfer).always(function (files) {
@@ -1211,7 +1211,7 @@
                             'drop',
                             $.Event('drop', {delegatedEvent: e}),
                             data
-                            ) !== false) {
+                        ) !== false) {
                         that._onAdd(e, data);
                     }
                 });
@@ -1222,8 +1222,8 @@
         _onDragLeave: getDragHandler('dragleave'),
         _initEventHandlers: function () {
             if (this._isXHRUpload(this.options)) {
-                
-                for(var i=0; i<= this.options.dropZone.length; i++){
+
+                for (var i = 0; i <= this.options.dropZone.length; i++) {
                     this._on(this.options.dropZone[i], {
                         dragover: this._onDragOver,
                         drop: this._onDrop,
@@ -1233,7 +1233,7 @@
                         dragleave: this._onDragLeave
                     });
                 }
-                
+
                 this._on(this.options.pasteZone, {
                     paste: this._onPaste
                 });
@@ -1264,7 +1264,7 @@
             var options = this.options;
             if (options.fileInput === undefined) {
                 options.fileInput = this.element.is('input[type="file"]') ?
-                        this.element : this.element.find('input[type="file"]');
+                    this.element : this.element.find('input[type="file"]');
             } else if (!(options.fileInput instanceof $)) {
                 options.fileInput = $(options.fileInput);
             }
@@ -1277,32 +1277,32 @@
         },
         _getRegExp: function (str) {
             var parts = str.split('/'),
-                    modifiers = parts.pop();
+                modifiers = parts.pop();
             parts.shift();
             return new RegExp(parts.join('/'), modifiers);
         },
         _isRegExpOption: function (key, value) {
             return key !== 'url' && $.type(value) === 'string' &&
-                    /^\/.*\/[igm]{0,3}$/.test(value);
+                /^\/.*\/[igm]{0,3}$/.test(value);
         },
         _initDataAttributes: function () {
             var that = this,
-                    options = this.options,
-                    clone = $(this.element[0].cloneNode(false));
+                options = this.options,
+                clone = $(this.element[0].cloneNode(false));
             // Initialize options set via HTML5 data-attributes:
             $.each(
-                    clone.data(),
-                    function (key, value) {
-                        var dataAttributeName = 'data-' +
-                                // Convert camelCase to hyphen-ated key:
-                                key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-                        if (clone.attr(dataAttributeName)) {
-                            if (that._isRegExpOption(key, value)) {
-                                value = that._getRegExp(value);
-                            }
-                            options[key] = value;
+                clone.data(),
+                function (key, value) {
+                    var dataAttributeName = 'data-' +
+                        // Convert camelCase to hyphen-ated key:
+                        key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+                    if (clone.attr(dataAttributeName)) {
+                        if (that._isRegExpOption(key, value)) {
+                            value = that._getRegExp(value);
                         }
+                        options[key] = value;
                     }
+                }
             );
         },
         _create: function () {
@@ -1354,10 +1354,10 @@
             if (data && !this.options.disabled) {
                 if (data.fileInput && !data.files) {
                     var that = this,
-                            dfd = $.Deferred(),
-                            promise = dfd.promise(),
-                            jqXHR,
-                            aborted;
+                        dfd = $.Deferred(),
+                        promise = dfd.promise(),
+                        jqXHR,
+                        aborted;
                     promise.abort = function () {
                         aborted = true;
                         if (jqXHR) {
@@ -1367,25 +1367,25 @@
                         return promise;
                     };
                     this._getFileInputFiles(data.fileInput).always(
-                            function (files) {
-                                if (aborted) {
-                                    return;
-                                }
-                                if (!files.length) {
-                                    dfd.reject();
-                                    return;
-                                }
-                                data.files = files;
-                                jqXHR = that._onSend(null, data);
-                                jqXHR.then(
-                                        function (result, textStatus, jqXHR) {
-                                            dfd.resolve(result, textStatus, jqXHR);
-                                        },
-                                        function (jqXHR, textStatus, errorThrown) {
-                                            dfd.reject(jqXHR, textStatus, errorThrown);
-                                        }
-                                );
+                        function (files) {
+                            if (aborted) {
+                                return;
                             }
+                            if (!files.length) {
+                                dfd.reject();
+                                return;
+                            }
+                            data.files = files;
+                            jqXHR = that._onSend(null, data);
+                            jqXHR.then(
+                                function (result, textStatus, jqXHR) {
+                                    dfd.resolve(result, textStatus, jqXHR);
+                                },
+                                function (jqXHR, textStatus, errorThrown) {
+                                    dfd.reject(jqXHR, textStatus, errorThrown);
+                                }
+                            );
+                        }
                     );
                     return this._enhancePromise(promise);
                 }

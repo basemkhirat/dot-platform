@@ -32,6 +32,19 @@ class DotInstallCommand extends Command
         $this->isInstalled = $this->isInstalled();
     }
 
+    protected function isInstalled()
+    {
+
+        try {
+
+            return Schema::hasTable("options");
+
+        } catch (QueryException $exception) {
+            return false;
+        }
+
+    }
+
     /**
      * @return bool
      */
@@ -77,12 +90,28 @@ class DotInstallCommand extends Command
             $server_errors[] = "You must have laravel $minimum_laravel or higher." . " Current is " . $laravel_version;
         }
 
-        // Check mcrypt is installed
+        // Check CURL extension is installed
+
+        if (function_exists('curl_init')) {
+            $server_messages[] = "PHP CURL extension is installed.";
+        } else {
+            $server_errors[] = "PHP CURL extension is not installed.";
+        }
+
+        // Check PHP mcrypt extension is installed
 
         if (!function_exists("mcrypt_encrypt")) {
-            $server_errors[] = "PHP mcrypt is not installed.";
+            $server_errors[] = "PHP mcrypt extension is not installed.";
         } else {
-            $server_messages[] = "PHP mcrypt is installed.";
+            $server_messages[] = "PHP mcrypt extension is installed.";
+        }
+
+        // Check GD library is installed
+
+        if (extension_loaded('gd') && function_exists('gd_info')) {
+            $server_messages[] = "PHP GD library is installed.";
+        } else {
+            $server_errors[] = "PHP GD library is not installed.";
         }
 
         // Check storage is writable
@@ -129,7 +158,7 @@ class DotInstallCommand extends Command
 
         $this->info("\r");
 
-        $this->line("<fg=black;bg=green>Installing system </>");
+        $this->line("<fg=black;bg=green> Installing system </>");
 
         $this->info("\r");
 
@@ -182,7 +211,6 @@ class DotInstallCommand extends Command
         }
     }
 
-
     /**
      * @param $path
      * @param $permission
@@ -190,19 +218,6 @@ class DotInstallCommand extends Command
     function setPermission($path, $permission)
     {
         @chmod($path, $permission);
-    }
-
-    protected function isInstalled()
-    {
-
-        try {
-
-            return Schema::hasTable("options");
-
-        } catch (QueryException $exception) {
-            return false;
-        }
-
     }
 
 }

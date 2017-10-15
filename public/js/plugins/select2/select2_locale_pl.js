@@ -6,26 +6,26 @@
  * @author  Michał Połtyn <mike@poltyn.com>
  * @author  Damian Zajkowski <damian.zajkowski@gmail.com>
  */
-(function($) {
+(function ($) {
     "use strict";
 
     $.fn.select2.locales['pl'] = {
-        formatNoMatches: function() {
+        formatNoMatches: function () {
             return "Brak wyników";
         },
-        formatInputTooShort: function(input, min) {
+        formatInputTooShort: function (input, min) {
             return "Wpisz co najmniej" + character(min - input.length, "znak", "i");
         },
-        formatInputTooLong: function(input, max) {
+        formatInputTooLong: function (input, max) {
             return "Wpisana fraza jest za długa o" + character(input.length - max, "znak", "i");
         },
-        formatSelectionTooBig: function(limit) {
+        formatSelectionTooBig: function (limit) {
             return "Możesz zaznaczyć najwyżej" + character(limit, "element", "y");
         },
-        formatLoadMore: function(pageNumber) {
+        formatLoadMore: function (pageNumber) {
             return "Ładowanie wyników…";
         },
-        formatSearching: function() {
+        formatSearching: function () {
             return "Szukanie…";
         }
     };
