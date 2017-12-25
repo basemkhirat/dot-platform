@@ -282,7 +282,7 @@ class Plugin extends ServiceProvider
      */
     public function getRecursiveDependencies()
     {
-        return array_merge($this->getDependencies(), $this->getRecursive($this));
+        return array_merge($this->getDependencies(), PluginFacade::getRecursive($this));
     }
 
     /**
@@ -291,6 +291,7 @@ class Plugin extends ServiceProvider
      */
     public function getDependencies()
     {
+
         $dependencies = [];
 
         foreach ($this->dependencies as $key => $class) {
@@ -298,26 +299,6 @@ class Plugin extends ServiceProvider
         }
 
         return $dependencies;
-    }
-
-    /**
-     * Recursive plugins fetch
-     * @param $plugin
-     * @param array $plugins
-     * @return array
-     */
-    private function getRecursive($plugin, $plugins = [])
-    {
-
-        foreach ($plugin->getDependencies() as $key => $plugin) {
-
-            $plugins[$key] = $plugin;
-
-            return $this->getRecursive($plugin, $plugins);
-
-        }
-
-        return $plugins;
     }
 
     /**

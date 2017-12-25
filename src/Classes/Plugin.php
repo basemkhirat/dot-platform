@@ -86,4 +86,26 @@ class Plugin
             return $plugin;
         }
     }
+
+    /**
+     * Recursive plugins fetch
+     * @param $plugin
+     * @param array $plugins
+     * @return array
+     */
+    public function getRecursive($plugin, $plugins = [])
+    {
+
+        foreach ($plugin->getDependencies() as $key => $plugin) {
+
+            $plugins[$key] = $plugin;
+
+            if (count($plugin->getDependencies())) {
+                return $this->getRecursive($plugin, $plugins);
+            }
+        }
+
+        return $plugins;
+    }
+
 }

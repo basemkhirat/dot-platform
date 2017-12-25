@@ -21,8 +21,6 @@ class System extends Plugin
     protected $dependencies = [
         "options" => \Dot\Options\Options::class,
         "auth" => \Dot\Auth\Auth::class,
-        "users" => \Dot\Users\Users::class,
-        "roles" => \Dot\Roles\Roles::class,
         "media" => \Dot\Media\Media::class,
         "galleries" => \Dot\Galleries\Galleries::class,
         "dashboard" => \Dot\Dashboard\Dashboard::class,
