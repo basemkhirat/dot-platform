@@ -38,6 +38,5 @@
                 "Dot\\Platform\\ServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
