@@ -98,10 +98,13 @@ class Plugin
 
         foreach ($plugin->getDependencies() as $key => $plugin) {
 
-            $plugins[$key] = $plugin;
+            if ($plugin) {
 
-            if (count($plugin->getDependencies())) {
-                return $this->getRecursive($plugin, $plugins);
+                $plugins[$key] = $plugin;
+
+                if (count($plugin->getDependencies())) {
+                    return $this->getRecursive($plugin, $plugins);
+                }
             }
         }
 
