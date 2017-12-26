@@ -54,7 +54,7 @@ class DotUserCommand extends Command
             }
 
             if (count($user->errors()->all())) {
-                $this->handle();
+                return $this->handle();
             }
         }
 
