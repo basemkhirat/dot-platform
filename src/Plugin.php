@@ -8,55 +8,63 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
-/**
+/*
  * Plugin Super class
  * @package Dot\Platform
  */
+
 class Plugin extends ServiceProvider
 {
 
-    /**
-     * Plugin composer files
-     * @var array
-     */
-    private static $composers = [];
-    /**
+    /*
      * Plugin dependencies
      * @var array
      */
     protected $dependencies = [];
-    /**
+
+    /*
      * Plugin service providers
      * @var array
      */
     protected $providers = [];
-    /**
+
+    /*
      * Plugin aliases
      * @var array
      */
     protected $aliases = [];
-    /**
+
+    /*
      * Plugin commands
      * @var array
      */
     protected $commands = [];
-    /**
+
+    /*
      * Plugin middlewares
      * @var array
      */
     protected $middlewares = [];
-    /**
+
+    /*
      * Plugin route middlewares
      * @var array
      */
     protected $route_middlewares = [];
-    /**
+
+    /*
      * Plugin permissions
      * @var array
      */
     protected $permissions = [];
 
-    /**
+    /*
+     * Plugin composer files
+     * @var array
+     */
+    private static $composers = [];
+
+    /*
      * Plugin constructor.
      */
     public function __construct($app)
@@ -66,7 +74,7 @@ class Plugin extends ServiceProvider
         $this->gate = $app->make(GateContract::class);
     }
 
-    /**
+    /*
      * Plugin bootstrap
      * Called in system boot
      */
@@ -107,10 +115,12 @@ class Plugin extends ServiceProvider
             ], $this->getKey() . ".views");
         }
 
-        $this->loadRoutesFrom($this->getPath("routes.php"));
+        if (file_exists($routes = $this->getPath("routes.php"))) {
+            require $routes;
+        }
     }
 
-    /**
+    /*
      * Get plugin middlewares
      * @return mixed
      */
@@ -119,7 +129,7 @@ class Plugin extends ServiceProvider
         return $this->middlewares;
     }
 
-    /**
+    /*
      * Get plugin route middlewares
      * @return mixed
      */
@@ -128,7 +138,7 @@ class Plugin extends ServiceProvider
         return $this->route_middlewares;
     }
 
-    /**
+    /*
      * Get plugin commands
      * @return mixed
      */
@@ -137,7 +147,7 @@ class Plugin extends ServiceProvider
         return $this->commands;
     }
 
-    /**
+    /*
      * Get plugin absolute path
      * @param string $path
      * @return string
@@ -147,7 +157,7 @@ class Plugin extends ServiceProvider
         return $path ? $this->path . DIRECTORY_SEPARATOR . $path : $this->path;
     }
 
-    /**
+    /*
      * Get plugin key
      * @return mixed
      */
@@ -156,7 +166,7 @@ class Plugin extends ServiceProvider
         return $this->key;
     }
 
-    /**
+    /*
      * Get plugin absolute root path
      * @param string $path
      * @return string
@@ -166,7 +176,7 @@ class Plugin extends ServiceProvider
         return $path ? dirname($this->path) . DIRECTORY_SEPARATOR . $path : dirname($this->path);
     }
 
-    /**
+    /*
      * Plugin registration
      * Extending core classes
      */
@@ -188,7 +198,7 @@ class Plugin extends ServiceProvider
         }
     }
 
-    /**
+    /*
      * Get plugin providers
      * @return mixed
      */
@@ -197,7 +207,7 @@ class Plugin extends ServiceProvider
         return $this->providers;
     }
 
-    /**
+    /*
      * Get plugin aliases
      * @return mixed
      */
@@ -206,7 +216,7 @@ class Plugin extends ServiceProvider
         return $this->aliases;
     }
 
-    /**
+    /*
      * Plugin install hook
      * Running plugin migrations and default options
      * @param $command
@@ -228,7 +238,7 @@ class Plugin extends ServiceProvider
         ]);
     }
 
-    /**
+    /*
      * Plugin uninstall hook
      * Rollback plugin installation
      * @param $command
@@ -238,7 +248,7 @@ class Plugin extends ServiceProvider
         // do any thing
     }
 
-    /**
+    /*
      * Get plugin relative path
      * @param string $path
      * @return string
@@ -248,7 +258,7 @@ class Plugin extends ServiceProvider
         return str_replace(base_path(), "", $this->getPath($path));
     }
 
-    /**
+    /*
      * Get plugin relative root path
      * @param string $path
      * @return string
@@ -258,7 +268,7 @@ class Plugin extends ServiceProvider
         return str_replace(base_path(), "", $this->getRootPath($path));
     }
 
-    /**
+    /*
      * Get plugin key
      * @return mixed
      */
@@ -267,7 +277,7 @@ class Plugin extends ServiceProvider
         return $this->class;
     }
 
-    /**
+    /*
      * Get plugin key
      * @return mixed
      */
@@ -276,7 +286,7 @@ class Plugin extends ServiceProvider
         return $this->class_file_name;
     }
 
-    /**
+    /*
      * Get recursive plugin dependencies
      * @return array
      */
@@ -285,7 +295,7 @@ class Plugin extends ServiceProvider
         return array_merge($this->getDependencies(), PluginFacade::getRecursive($this));
     }
 
-    /**
+    /*
      * Get plugin dependencies
      * @return mixed
      */
@@ -301,7 +311,7 @@ class Plugin extends ServiceProvider
         return $dependencies;
     }
 
-    /**
+    /*
      * Get plugin permissions
      * @return mixed
      */
@@ -310,7 +320,7 @@ class Plugin extends ServiceProvider
         return $this->permissions;
     }
 
-    /**
+    /*
      * Get plugin description
      * @return mixed
      */
@@ -319,21 +329,23 @@ class Plugin extends ServiceProvider
         return $this->composer()->description ?? NULL;
     }
 
-    /**
+    /*
      * Get decoded plugin composer file
      * @return mixed
      */
     private function composer()
     {
 
-        if (!array_key_exists($this->getKey(), self::$composers)) {
+        if (!array_key_exists($this->getKey(), self::$composers) and file_exists(dirname($this->getPath()) . "/composer.json")) {
             self::$composers[$this->getKey()] = json_decode(file_get_contents(dirname($this->getPath()) . "/composer.json"));
+        }else{
+            self::$composers[$this->getKey()] = new \stdClass();
         }
 
         return self::$composers[$this->getKey()];
     }
 
-    /**
+    /*
      * Get plugin version
      * @return mixed
      */
@@ -358,7 +370,7 @@ class Plugin extends ServiceProvider
         return "dev-master";
     }
 
-    /**
+    /*
      * Get plugin commands
      * @return mixed
      */
@@ -367,7 +379,7 @@ class Plugin extends ServiceProvider
         return $this->composer()->name ?? NULL;
     }
 
-    /**
+    /*
      * Get plugin license
      * @return mixed
      */

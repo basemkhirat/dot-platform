@@ -206,9 +206,7 @@ function arabic_date($target_date = '', $type = '')
     return $arabic_date;
 }
 
-/**
- * @return string
- */
+
 function denied()
 {
     return response(view("admin::errors.denied")->render(), 403);
