@@ -52,7 +52,7 @@ class DotInstallCommand extends Command
     public function handle()
     {
 
-        @exec("composer install");
+        @exec("composer update");
 
         $this->line("\r");
         $this->line('<fg=black;bg=green> Dot Platform Installation </>');
