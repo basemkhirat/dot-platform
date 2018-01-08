@@ -54,8 +54,8 @@ class DotInstallCommand extends Command
 
         $this->line("\r");
 
-        //$this->line('<fg=black;bg=green> Installing required packages </>');
-        //@exec("composer update -q");
+        $this->info('Generating optimized autoload files');
+        @exec("composer dump-autoload -q");
 
         $this->line("\r");
         $this->line('<fg=black;bg=green> Dot Platform Installation </>');
