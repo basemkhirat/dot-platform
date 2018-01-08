@@ -31,7 +31,7 @@ class PluginPublishCommand extends Command
         $plugin = Plugin::get($this->argument('plugin'));
 
         if (!$plugin) {
-            return $this->error("Plugin " . $this->argument('plugin') . " not found");
+            return $this->error("Plugin " . $this->argument('plugin') . " not found or invalid");
         }
 
         Artisan::call("vendor:publish", [

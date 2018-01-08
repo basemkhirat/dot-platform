@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Class DotInstallCommand
+ *
  * @package Dot\Platform\Commands
  */
 class DotInstallCommand extends Command
@@ -50,6 +51,8 @@ class DotInstallCommand extends Command
      */
     public function handle()
     {
+
+        @exec("composer install");
 
         $this->line("\r");
         $this->line('<fg=black;bg=green> Dot Platform Installation </>');
@@ -181,17 +184,19 @@ class DotInstallCommand extends Command
 
             $plugin = Plugin::get($key);
 
-            $plugins = array_merge($plugin->getRecursiveDependencies(), [$plugin]);
+            if ($plugin) {
 
-            foreach ($plugins as $plugin) {
+                $plugins = array_merge($plugin->getRecursiveDependencies(), [$plugin]);
 
-                $this->line("<fg=yellow>Installing: </>" . $plugin->getName());
+                foreach ($plugins as $plugin) {
 
-                $plugin->install($this);
+                    $this->line("<fg=yellow>Installing: </>" . $plugin);
 
-                $this->line("<fg=green>Installed: </>" . $plugin->getName());
-                $this->info("\r");
+                    $plugin->install($this);
 
+                    $this->line("<fg=green>Installed: </>" . $plugin);
+                    $this->info("\r");
+                }
             }
         }
 

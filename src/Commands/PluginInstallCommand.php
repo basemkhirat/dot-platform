@@ -32,7 +32,7 @@ class PluginInstallCommand extends Command
         $plugin = Plugin::get($this->argument('plugin'));
 
         if (!$plugin) {
-            return $this->error("Plugin " . $this->argument('plugin') . " not found");
+            return $this->error("Plugin " . $this->argument('plugin') . " is not found or invalid");
         }
 
         $plugins = array_merge($plugin->getRecursiveDependencies(), [$plugin]);

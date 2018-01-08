@@ -338,7 +338,7 @@ class Plugin extends ServiceProvider
 
         if (!array_key_exists($this->getKey(), self::$composers) and file_exists(dirname($this->getPath()) . "/composer.json")) {
             self::$composers[$this->getKey()] = json_decode(file_get_contents(dirname($this->getPath()) . "/composer.json"));
-        }else{
+        } else {
             self::$composers[$this->getKey()] = new \stdClass();
         }
 
@@ -386,6 +386,15 @@ class Plugin extends ServiceProvider
     public function getLicense()
     {
         return $this->composer()->license ?? NULL;
+    }
+
+    /**
+     * Convert class into string
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getKey();
     }
 
 }
