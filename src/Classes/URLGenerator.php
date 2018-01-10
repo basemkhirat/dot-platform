@@ -7,7 +7,7 @@ use Illuminate\Routing\UrlGenerator;
 class DotUrlGenerator extends UrlGenerator
 {
 
-    /**
+    /*
      * Generate an absolute URL to the given path.
      *
      * @param  string $path

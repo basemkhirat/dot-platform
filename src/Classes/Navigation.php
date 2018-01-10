@@ -7,51 +7,51 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request;
 use View;
 
-/**
+/*
  * Class Navigation
  * @package Dot\Platform\Classes
  */
 class Navigation
 {
 
-    /**
+    /*
      * @var bool
      */
     protected static $menu = false;
-    /**
+    /*
      * @var array
      */
     protected static $lists = [];
-    /**
+    /*
      * @var string
      */
     protected static $template = "";
-    /**
+    /*
      * @var array
      */
     protected static $langs = [];
-    /**
+    /*
      * @var
      */
     protected $items;
-    /**
+    /*
      * @var array
      */
     protected $waiting_items = [];
-    /**
+    /*
      * @var
      */
     protected $current;
-    /**
+    /*
      * @var
      */
     protected $currentKey;
-    /**
+    /*
      * @var bool
      */
     protected $current_key = false;
 
-    /**
+    /*
      * Menu constructor.
      */
     public function __construct()
@@ -67,7 +67,7 @@ class Navigation
      * @return object
      */
 
-    /**
+    /*
      * @param $menu_name
      * @return Menu
      */
@@ -142,7 +142,7 @@ class Navigation
         }
     }
 
-    /**
+    /*
      * @param bool $view
      * @param array $data
      */
@@ -168,7 +168,7 @@ class Navigation
      * @return $this
      */
 
-    /**
+    /*
      * @param $name
      * @param $value
      * @return $this|array
@@ -224,7 +224,7 @@ class Navigation
         return $this;
     }
 
-    /**
+    /*
      * @param int $order
      * @return $this
      */
@@ -241,7 +241,7 @@ class Navigation
         return $this;
     }
 
-    /**
+    /*
      * @param null $icon
      * @return $this
      */
@@ -258,7 +258,7 @@ class Navigation
         return $this;
     }
 
-    /**
+    /*
      * @return mixed
      */
     public function items()
@@ -393,7 +393,7 @@ class Navigation
      * @return array|mixed
      */
 
-    /**
+    /*
      * @param $key
      * @return string
      */

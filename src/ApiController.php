@@ -8,30 +8,30 @@ use Illuminate\Routing\Controller as LaravelController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/**
+/*
  * Class ApiController
  * @package Dot\Platform
  */
 class ApiController extends LaravelController
 {
 
-    /**
+    /*
      * @var Request
      */
     public $request;
 
-    /**
+    /*
      * @var \DotResponse
      */
     public $response;
 
-    /**
+    /*
      * The current user
      * @var
      */
     public $user;
 
-    /**
+    /*
      * ApiController constructor.
      */
     function __construct(Request $request)
@@ -45,7 +45,7 @@ class ApiController extends LaravelController
         }
     }
 
-    /**
+    /*
      * @param null $error
      * @return \Illuminate\Http\JsonResponse
      */
@@ -54,7 +54,7 @@ class ApiController extends LaravelController
         return $this->response([], $error, $code);
     }
 
-    /**
+    /*
      * @param array $data
      * @param null $error
      * @param int $code
@@ -65,7 +65,7 @@ class ApiController extends LaravelController
         return $this->response->json($data, $error, $code);
     }
 
-    /**
+    /*
      * Call internal API using GET
      * @param null $path
      * @param array $params
@@ -76,7 +76,7 @@ class ApiController extends LaravelController
         return $this->call($path, "GET", $params);
     }
 
-    /**
+    /*
      * Call internal API
      * @param $path
      * @param string $method
@@ -100,7 +100,7 @@ class ApiController extends LaravelController
 
     }
 
-    /**
+    /*
      * Call internal API using POST
      * @param null $path
      * @param array $params

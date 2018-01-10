@@ -2,7 +2,7 @@
 
 namespace Dot\Platform\Classes;
 
-/**
+/*
  * Class Dot
  * Dot super class
  * @package Dot\Platform
@@ -10,19 +10,19 @@ namespace Dot\Platform\Classes;
 class Dot
 {
 
-    /**
+    /*
      *  Dot platform version
      */
     const VERSION = '0.3.4';
 
-    /**
+    /*
      * The current globally available container.
      *
      * @var static
      */
     protected static $instance;
 
-    /**
+    /*
      * Default system bindings
      * @var array
      */
@@ -30,13 +30,13 @@ class Dot
 
     ];
 
-    /**
+    /*
      * Default instances
      * @var array
      */
     public $instances = [];
 
-    /**
+    /*
      * DotPlatform constructor.
      */
     function __construct()
@@ -44,7 +44,7 @@ class Dot
         $this->app = app();
     }
 
-    /**
+    /*
      * Class Factory
      */
     function loadDotBindings()
@@ -56,7 +56,7 @@ class Dot
         }
     }
 
-    /**
+    /*
      * @param $name
      * @param $callback
      */
@@ -65,7 +65,7 @@ class Dot
         self::getInstance()->instances[$name] = $callback($this);
     }
 
-    /**
+    /*
      * Set the globally available instance of the container.
      *
      * @return static
@@ -79,7 +79,7 @@ class Dot
         return static::$instance;
     }
 
-    /**
+    /*
      * get all system locales
      * @return array
      */
@@ -97,7 +97,7 @@ class Dot
         return $locales;
     }
 
-    /**
+    /*
      * @return string
      */
     public function version()
@@ -105,7 +105,7 @@ class Dot
         return $this::VERSION;
     }
 
-    /**
+    /*
      * @param $path
      * @return string
      */
@@ -114,7 +114,7 @@ class Dot
         return "Plugin";
     }
 
-    /**
+    /*
      *
      */
     function forbidden()
@@ -123,7 +123,7 @@ class Dot
         exit();
     }
 
-    /**
+    /*
      * @param $name
      * @param $arguments
      * @return null
@@ -133,7 +133,7 @@ class Dot
         return self::getInstance()->get($name);
     }
 
-    /**
+    /*
      * @param $name
      * @return null
      */
@@ -142,7 +142,7 @@ class Dot
         return $this->has($name) ? self::getInstance()->instances[$name] : NULL;
     }
 
-    /**
+    /*
      * @param $name
      * @return null
      */

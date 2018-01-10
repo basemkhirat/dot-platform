@@ -141,7 +141,7 @@
 
 <script>
 
-    /**
+    /*
      * check cms is loaded in iframe.
      */
     $(document).ready(function () {

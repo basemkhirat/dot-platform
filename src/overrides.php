@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 
 Str::macro(
 
-/**
+/*
  * Extended method from laravel Str class to create slug from unicoded characters
  * @param $title
  * @param string $separator

@@ -9,17 +9,17 @@ use Symfony\Component\Console\Input\InputOption;
 class DotUpdateCommand extends Command
 {
 
-    /**
+    /*
      * @var string
      */
     protected $name = 'dot:update';
 
-    /**
+    /*
      * @var string
      */
     protected $description = "Updating files";
 
-    /**
+    /*
      * @return bool
      */
     public function handle()
@@ -38,7 +38,7 @@ class DotUpdateCommand extends Command
 
     }
 
-    /**
+    /*
      * Get the console command options.
      *
      * @return array

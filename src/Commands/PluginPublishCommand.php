@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-/**
+/*
  * Class PluginPublishCommand
  */
 class PluginPublishCommand extends Command
 {
 
-    /**
+    /*
      * @var string
      */
     protected $name = 'plugin:publish';
 
-    /**
+    /*
      * @var string
      */
     protected $description = "Publishing plugin public and config files";
@@ -41,7 +41,7 @@ class PluginPublishCommand extends Command
 
     }
 
-    /**
+    /*
      * Get the console command arguments.
      *
      * @return array
@@ -53,7 +53,7 @@ class PluginPublishCommand extends Command
         ];
     }
 
-    /**
+    /*
      * Get the console command options.
      *
      * @return array

@@ -4,14 +4,14 @@ namespace Dot\Platform\Classes;
 
 use Illuminate\Console\Scheduling\Schedule as Schedular;
 
-/**
+/*
  * Class DotSchedule
  * @package Dot\Platform
  */
 class Schedule
 {
 
-    /**
+    /*
      * @param bool $callback
      */
     public static function run($callback = false)

@@ -5,24 +5,24 @@ namespace Dot\Platform\Classes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 
-/**
+/*
  * Class DotWidget
  * @package Dot\Platform
  */
 class Widget
 {
 
-    /**
+    /*
      * @var array
      */
     public static $widgets = [];
 
-    /**
+    /*
      * @var
      */
     public static $widget;
 
-    /**
+    /*
      * @param $sidebar
      * @return string
      * Render sidebar widgets
@@ -46,7 +46,7 @@ class Widget
 
     }
 
-    /**
+    /*
      * @param $sidebar
      * @return array
      * get ordered widgets of a given sidebar
@@ -71,7 +71,7 @@ class Widget
 
     }
 
-    /**
+    /*
      * @return array
      * return all widgets of all sidebars
      */
@@ -80,7 +80,7 @@ class Widget
         return self::$widgets;
     }
 
-    /**
+    /*
      * @param $sidebar
      * @param bool $callback
      * @return Widget
@@ -112,7 +112,7 @@ class Widget
 
     }
 
-    /**
+    /*
      * @param string $name
      * @return mixed
      * set name of widget if wanted
@@ -124,7 +124,7 @@ class Widget
 
     }
 
-    /**
+    /*
      * @param int $order
      * @return mixed
      * set order of widget if wanted
@@ -136,7 +136,7 @@ class Widget
     }
 
 
-    /**
+    /*
      * @param $callback
      * @return mixed
      * set output of widget (required)

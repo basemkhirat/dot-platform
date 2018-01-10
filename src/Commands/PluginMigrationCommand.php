@@ -8,7 +8,7 @@ use Dot\Platform\Facades\Plugin;
 class PluginMigrationCommand extends Command
 {
 
-    /**
+    /*
      * The console command signature.
      *
      * @var string
@@ -18,7 +18,7 @@ class PluginMigrationCommand extends Command
         {--create= : The table to be created.}
         {--table= : The table to migrate.}';
 
-    /**
+    /*
      * The console command description.
      *
      * @var string
@@ -26,7 +26,7 @@ class PluginMigrationCommand extends Command
     protected $description = 'Create a new plugin migration file';
 
 
-    /**
+    /*
      * Execute the console command.
      *
      * @return void

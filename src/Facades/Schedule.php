@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 class Schedule extends Facade
 {
 
-    /**
+    /*
      * Get the registered name of the component.
      *
      * @return string

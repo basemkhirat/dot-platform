@@ -5,7 +5,7 @@ namespace Dot\Platform\Controllers;
 use Dot\Platform\Controller;
 use Illuminate\Support\Facades\Request;
 
-/**
+/*
  * Description of SidebarController
  *
  * @author basem
@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Request;
 class SidebarController extends Controller
 {
 
-    /**
+    /*
      * @var array
      */
     public $data = [];
 
-    /**
+    /*
      * @param $items
      * @return array
      */
@@ -42,7 +42,7 @@ class SidebarController extends Controller
     }
 
 
-    /**
+    /*
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     function index()

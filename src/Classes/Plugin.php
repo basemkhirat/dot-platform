@@ -4,25 +4,25 @@ namespace Dot\Platform\Classes;
 
 use ReflectionClass;
 
-/**
+/*
  * Class Plugin
  * @package Dot\Platform\Classes
  */
 class Plugin
 {
 
-    /**
+    /*
      * Loaded plugins
      * @var array
      */
     protected static $plugins = [];
 
-    /**
+    /*
      * @var array|\Illuminate\Config\Repository|mixed
      */
     protected $config = [];
 
-    /**
+    /*
      * Plugin constructor.
      */
     function __construct($app)
@@ -31,7 +31,7 @@ class Plugin
         $this->config = $app->config["admin"]["plugins"];
     }
 
-    /**
+    /*
      * Get all plugins
      * @return array
      */
@@ -55,7 +55,7 @@ class Plugin
         return self::$plugins;
     }
 
-    /**
+    /*
      * get plugin details
      * @param $key
      * @param $class
@@ -87,7 +87,7 @@ class Plugin
         }
     }
 
-    /**
+    /*
      * Recursive plugins fetch
      * @param $plugin
      * @param array $plugins

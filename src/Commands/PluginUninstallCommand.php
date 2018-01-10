@@ -6,18 +6,18 @@ use Dot\Platform\Command;
 use Dot\Platform\Facades\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
 
-/**
+/*
  * Class MigrateCommand
  */
 class PluginUninstallCommand extends Command
 {
 
-    /**
+    /*
      * @var string
      */
     protected $name = 'plugin:uninstall';
 
-    /**
+    /*
      * @var string
      */
     protected $description = "Uninstall plugin by name";
@@ -49,7 +49,7 @@ class PluginUninstallCommand extends Command
 
     }
 
-    /**
+    /*
      * Get the console command arguments.
      *
      * @return array

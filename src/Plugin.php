@@ -388,7 +388,7 @@ class Plugin extends ServiceProvider
         return $this->composer()->license ?? NULL;
     }
 
-    /**
+    /*
      * Convert class into string
      * @return string
      */

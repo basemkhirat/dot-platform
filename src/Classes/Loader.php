@@ -5,12 +5,12 @@ namespace Dot\Platform\Classes;
 class Loader
 {
 
-    /**
+    /*
      * @var array
      */
     protected static $directories = [];
 
-    /**
+    /*
      * @param $directories
      * Fetching directories
      */
@@ -24,7 +24,7 @@ class Loader
     }
 
 
-    /**
+    /*
      * Fetching directories files
      */
     public static function register()

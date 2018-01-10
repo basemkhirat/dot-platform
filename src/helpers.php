@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * @return Dot instance
  */
 function dot($make = NULL)
@@ -13,7 +13,7 @@ function dot($make = NULL)
     return Dot::getInstance()->get($make);
 }
 
-/**
+/*
  * @return float
  * return current cms version
  */
@@ -22,7 +22,7 @@ function cms_version()
     return CMS_VERSION;
 }
 
-/**
+/*
  * @param string $file
  * @return mixed
  */
@@ -31,7 +31,7 @@ function admin_url($file = "")
     return URL::to(ADMIN . "/" . $file);
 }
 
-/**
+/*
  * @param string $path
  * @return string
  */
@@ -46,7 +46,7 @@ function assets($path = "")
     return asset($path);
 }
 
-/**
+/*
  * @param $title
  * @param string $separator
  * @return mixed
@@ -56,7 +56,7 @@ function str_slug_utf8($title, $separator = '-')
     return Str::slug_utf8($title, $separator);
 }
 
-/**
+/*
  * @return mixed
  */
 function get_locales()
@@ -64,7 +64,7 @@ function get_locales()
     return Config::get("admin.locales");
 }
 
-/**
+/*
  * Since Post Date
  *
  * @return Response
@@ -112,7 +112,7 @@ function time_ago($date, $granularity = 2)
 
 }
 
-/**
+/*
  * @param $date
  * @return mixed|string
  */
@@ -125,7 +125,7 @@ function date_view($date)
     }
 }
 
-/**
+/*
  * @param string $target_date
  * @param string $type
  * @return mixed

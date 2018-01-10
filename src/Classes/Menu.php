@@ -6,23 +6,23 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request;
 
-/**
+/*
  * Class Menu
  */
 class Menu
 {
 
-    /**
+    /*
      * @var array
      */
     public static $menus = [];
 
-    /**
+    /*
      * @var
      */
     public static $menu;
 
-    /**
+    /*
      * @var
      */
     public $current;
@@ -32,7 +32,7 @@ class Menu
         $this->current = Request::url();
     }
 
-    /**
+    /*
      * @param $sidebar
      * @return string
      * Render sidebar menus
@@ -90,7 +90,7 @@ class Menu
         return $menu;
     }
 
-    /**
+    /*
      * @param $sidebar
      * @return array
      * get ordered menus of a given sidebar
@@ -173,7 +173,7 @@ class Menu
         return $output;
     }
 
-    /**
+    /*
      * @param $key
      * @return string
      */
@@ -182,7 +182,7 @@ class Menu
         return isset(self::$langs[$key]) ? self::$langs[$key] : "-";
     }
 
-    /**
+    /*
      * @return array
      * return all menus of all sidebars
      */
@@ -191,7 +191,7 @@ class Menu
         return self::$menus;
     }
 
-    /**
+    /*
      * @param $sidebar
      * @param bool $callback
      * @return Menu
@@ -229,7 +229,7 @@ class Menu
         }
     }
 
-    /**
+    /*
      * @param string $name
      * @return mixed
      * set name of menu if wanted
@@ -242,7 +242,7 @@ class Menu
         return self::$menu;
     }
 
-    /**
+    /*
      * @param string $name
      * @return mixed
      * set name of menu if wanted
@@ -254,7 +254,7 @@ class Menu
         return self::$menu;
     }
 
-    /**
+    /*
      * @param string $name
      * @return mixed
      * set parent of item if wanted
@@ -266,7 +266,7 @@ class Menu
 
     }
 
-    /**
+    /*
      * @param string $title
      * @return mixed
      * set title of item if wanted
@@ -277,7 +277,7 @@ class Menu
         return self::$menu;
     }
 
-    /**
+    /*
      * @param string $icon
      * @return mixed
      * set icon of item if wanted
@@ -288,7 +288,7 @@ class Menu
         return self::$menu;
     }
 
-    /**
+    /*
      * @param int $order
      * @return mixed
      * set order of menu if wanted
@@ -299,7 +299,7 @@ class Menu
         return self::$menu;
     }
 
-    /**
+    /*
      * @param array []
      * @return mixed
      * set children items of item if wanted
@@ -311,7 +311,7 @@ class Menu
     }
 
 
-    /**
+    /*
      * @param $callback
      * @return mixed
      * set output of menu (required)

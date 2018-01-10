@@ -8,51 +8,51 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 
-/**
+/*
  * Trait ModelTraits
  * @package Dot\Platform
  */
 trait ModelTraits
 {
 
-    /**
+    /*
      * @var array
      */
     protected $errors;
 
-    /**
+    /*
      * Validation rules
      *
      * @var Array
      */
     protected $creatingRules = [];
-    /**
+    /*
      * @var array
      */
     protected $updatingRules = [];
-    /**
+    /*
      * @var array
      */
     protected $searchable = [];
 
-    /**
+    /*
      * @var array
      */
     protected $sluggable = [];
-    /**
+    /*
      * @var array
      */
     protected $params = [];
-    /**
+    /*
      * @var array
      */
     private $pendingMessages = [];
-    /**
+    /*
      * @var array
      */
     private $pendingAttributes = [];
 
-    /**
+    /*
      * ModelTraits constructor.
      * @param array $attributes
      */
@@ -63,7 +63,7 @@ trait ModelTraits
 
     }
 
-    /**
+    /*
      * @param bool $callback
      */
     public static function validating($callback = false)
@@ -73,7 +73,7 @@ trait ModelTraits
         }
     }
 
-    /**
+    /*
      * @param $query
      * @param $q
      */
@@ -92,7 +92,7 @@ trait ModelTraits
         });
     }
 
-    /**
+    /*
      * @param array $options
      * @return mixed
      */
@@ -128,7 +128,7 @@ trait ModelTraits
         return parent::save($options);
     }
 
-    /**
+    /*
      * @param $slug
      * @param $to
      * @param int $index
@@ -151,7 +151,7 @@ trait ModelTraits
         return $sluggy;
     }
 
-    /**
+    /*
      * @param $key
      * @param $value
      */
@@ -161,7 +161,7 @@ trait ModelTraits
         parent::setAttribute($key, $value);
     }
 
-    /**
+    /*
      * @param array $attributes
      */
     public function fill(array $attributes)
@@ -170,7 +170,7 @@ trait ModelTraits
         parent::fill($attributes);
     }
 
-    /**
+    /*
      * @param array $rules
      * @param array $messages
      * @param array $attributes
@@ -192,7 +192,7 @@ trait ModelTraits
         $this->pendingAttributes = array_merge($this->pendingAttributes, $attributes);
     }
 
-    /**
+    /*
      * Validates current attributes against rules
      */
     public function validate()
@@ -246,7 +246,7 @@ trait ModelTraits
         return false;
     }
 
-    /**
+    /*
      * @return array
      */
     protected function setValidationMessages()
@@ -254,7 +254,7 @@ trait ModelTraits
         return (array)trans('admin::validation');
     }
 
-    /**
+    /*
      * @return array
      */
     protected function setValidationAttributes()
@@ -262,7 +262,7 @@ trait ModelTraits
         return (array)trans($this->module . '::' . $this->module . ".attributes");
     }
 
-    /**
+    /*
      * Set error message bag
      *
      * @var Illuminate\Support\MessageBag
@@ -272,7 +272,7 @@ trait ModelTraits
         $this->errors = $errors;
     }
 
-    /**
+    /*
      * Retrieve error message bag
      * @return array
      */
@@ -281,7 +281,7 @@ trait ModelTraits
         return $this->errors;
     }
 
-    /**
+    /*
      * Check if has errors
      * @return bool
      */
@@ -290,7 +290,7 @@ trait ModelTraits
         return !empty($this->errors);
     }
 
-    /**
+    /*
      * @param $query
      * @param array $options
      * @return string
@@ -411,7 +411,7 @@ trait ModelTraits
         return $template;
     }
 
-    /**
+    /*
      * Return a timestamp as DateTime object.
      *
      * @param  mixed $value
@@ -457,7 +457,7 @@ trait ModelTraits
     }
 }
 
-/**
+/*
  * Class Model
  * @package Dot\Platform
  */

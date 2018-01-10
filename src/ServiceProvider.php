@@ -5,7 +5,7 @@ namespace Dot\Platform;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
-/**
+/*
  * Class ServiceProvider
  * @package Dot\Platform
  */
@@ -19,7 +19,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     protected $defer = false;
 
-    /**
+    /*
      * Default bindings
      * @var array
      */
@@ -32,7 +32,7 @@ class ServiceProvider extends LaravelServiceProvider
         "schedule" => \Dot\Platform\Classes\Schedule::class
     ];
 
-    /**
+    /*
      * Platform plugins
      * @var array
      */
@@ -50,7 +50,7 @@ class ServiceProvider extends LaravelServiceProvider
         }
     }
 
-    /**
+    /*
      * Booting plugins
      */
     function boot()

@@ -5,14 +5,14 @@ namespace Dot\Platform\Controllers;
 use Dot\Platform\Controller;
 use Illuminate\Support\Facades\Request;
 
-/**
+/*
  * Class LocalesController
  * @package Dot\Platform\Controllers
  */
 class LocalesController extends Controller
 {
 
-    /**
+    /*
      * Switch between system locales
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -21,7 +21,7 @@ class LocalesController extends Controller
 
         $lang = Request::get("lang");
 
-        /**
+        /*
          * Check if localized url is enabled.
          */
 

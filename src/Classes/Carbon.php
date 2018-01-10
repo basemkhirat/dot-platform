@@ -2,14 +2,14 @@
 
 namespace Dot\Platform\Classes;
 
-/**
+/*
  * Class Carbon
  * @package Dot\Platform\Classes
  */
 class Carbon extends \Carbon\Carbon
 {
 
-    /**
+    /*
      * Generate date string
      * @return false|\Response|string
      */
@@ -32,7 +32,7 @@ class Carbon extends \Carbon\Carbon
 
     }
 
-    /**
+    /*
      * Generate relative time
      * @return \Response
      */

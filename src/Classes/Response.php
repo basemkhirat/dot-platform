@@ -2,39 +2,39 @@
 
 namespace Dot\Platform\Classes;
 
-/**
+/*
  * Class DotResponse
  * Create the API Response output
  */
 class Response
 {
 
-    /**
+    /*
      * @var string
      */
     public $responseBody = "response";
-    /**
+    /*
      * @var string
      */
     public $errorBody = "error";
-    /**
+    /*
      * @var string
      */
     public $messageBody = "message";
-    /**
+    /*
      * @var string
      */
     public $statusBody = "status";
-    /**
+    /*
      * @var string
      */
     public $codeBody = "code";
-    /**
+    /*
      * @var Response
      */
     private $response;
 
-    /**
+    /*
      * DotResponse constructor.
      */
     function __construct()
@@ -42,7 +42,7 @@ class Response
         $this->response = response();
     }
 
-    /**
+    /*
      * @return mixed
      */
     public function getContent()
@@ -50,7 +50,7 @@ class Response
         return $this->{$this->responseBody};
     }
 
-    /**
+    /*
      * @return mixed
      */
     public function getError()
@@ -58,7 +58,7 @@ class Response
         return $this->{$this->errorBody};
     }
 
-    /**
+    /*
      * @return mixed
      */
     public function getCode()
@@ -66,7 +66,7 @@ class Response
         return $this->{$this->codeBody};
     }
 
-    /**
+    /*
      * @param $data
      * @param $error
      * @param int $code

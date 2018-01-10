@@ -7,23 +7,23 @@ use Dot\Platform\Facades\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
 
 
-/**
+/*
  * Class MigrateCommand
  */
 class PluginInstallCommand extends Command
 {
 
-    /**
+    /*
      * @var string
      */
     protected $name = 'plugin:install';
 
-    /**
+    /*
      * @var string
      */
     protected $description = "Install plugin by name";
 
-    /**
+    /*
      *
      */
     public function handle()
@@ -52,7 +52,7 @@ class PluginInstallCommand extends Command
 
     }
 
-    /**
+    /*
      * Get the console command arguments.
      *
      * @return array

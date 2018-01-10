@@ -15,14 +15,14 @@ use stdClass;
 use View;
 
 
-/**
+/*
  * Class OptionsController
  * @package Dot\Platform\Controllers
  */
 class OptionsController extends Controller
 {
 
-    /**
+    /*
      * Check for update
      * @return mixed
      */
@@ -45,7 +45,7 @@ class OptionsController extends Controller
     }
 
 
-    /**
+    /*
      * Calling bitbucket API service
      * @return mixed
      */

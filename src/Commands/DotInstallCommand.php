@@ -8,7 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 
-/**
+/*
  * Class DotInstallCommand
  *
  * @package Dot\Platform\Commands
@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Schema;
 class DotInstallCommand extends Command
 {
 
-    /**
+    /*
      * @var string
      */
     protected $name = 'dot:install';
 
-    /**
+    /*
      * @var string
      */
     protected $description = "Installing system";
@@ -46,7 +46,7 @@ class DotInstallCommand extends Command
 
     }
 
-    /**
+    /*
      * @return bool
      */
     public function handle()
@@ -219,7 +219,7 @@ class DotInstallCommand extends Command
         }
     }
 
-    /**
+    /*
      * @param $path
      * @param $permission
      */

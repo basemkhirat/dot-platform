@@ -6,14 +6,14 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\View\View;
 
 
-/**
+/*
  * Class DotAction
  * @package Dot\Platform
  */
 class Action extends Dispatcher
 {
 
-    /**
+    /*
      * @param $event
      * @param array $payload
      * @param bool $halt

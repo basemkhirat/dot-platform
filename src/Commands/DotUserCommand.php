@@ -6,24 +6,24 @@ use Dot\Platform\Command;
 use Dot\Roles\Models\Role;
 use Dot\Users\Models\User;
 
-/**
+/*
  * Class DotUserCommand
  */
 class DotUserCommand extends Command
 {
 
-    /**
+    /*
      * @var string
      */
     protected $name = 'dot:user';
 
-    /**
+    /*
      * @var string
      */
     protected $description = "Create a new user";
 
 
-    /**
+    /*
      * @return bool
      */
     public function handle()

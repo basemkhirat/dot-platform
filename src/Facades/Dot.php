@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Facade;
 class Dot extends Facade
 {
 
-    /**
+    /*
      * Get the registered name of the component.
      *
      * @return string

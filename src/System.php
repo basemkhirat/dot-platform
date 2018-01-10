@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
-/**
+/*
  * Class System
  * System Core class
  * @package Dot\Platform
@@ -26,18 +26,18 @@ class System extends Plugin
         "dashboard" => \Dot\Dashboard\Dashboard::class,
     ];
 
-    /**
+    /*
      * System providers
      * @var array
      */
     protected $aliases = [
 
-        /**
+        /*
          * Laravel aliases
          */
         'Str' => \Illuminate\Support\Str::class,
 
-        /**
+        /*
          * Dot aliases
          */
         'Dot' => \Dot\Platform\Facades\Dot::class,
@@ -48,7 +48,7 @@ class System extends Plugin
         'Schedule' => \Dot\Platform\Facades\Schedule::class,
     ];
 
-    /**
+    /*
      * System commands
      * @var array
      */
@@ -70,7 +70,7 @@ class System extends Plugin
 
     ];
 
-    /**
+    /*
      * System middlewares
      * @var array
      */
@@ -78,7 +78,7 @@ class System extends Plugin
         \Dot\Platform\Middlewares\PlatformMiddleware::class
     ];
 
-    /**
+    /*
      * system bootstrap
      * Called in system boot
      */
@@ -167,7 +167,7 @@ class System extends Plugin
         parent::boot();
     }
 
-    /**
+    /*
      *  Registering services
      */
     function register()

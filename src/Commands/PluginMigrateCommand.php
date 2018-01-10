@@ -5,13 +5,13 @@ namespace Dot\Platform\Commands;
 use Dot\Platform\Command;
 use Dot\Platform\Facades\Plugin;
 
-/**
+/*
  * Class MigrateCommand
  */
 class PluginMigrateCommand extends Command
 {
 
-    /**
+    /*
      * The name and signature of the console command.
      *
      * @var string
@@ -23,7 +23,7 @@ class PluginMigrateCommand extends Command
                 {--seed : Indicates if the seed task should be re-run.}
                 {--step : Force the migrations to be run so they can be rolled back individually.}';
 
-    /**
+    /*
      * @var string
      */
     protected $description = "Migrate plugin migration files";
