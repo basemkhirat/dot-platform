@@ -28,34 +28,6 @@ return [
     'api' => env("API_PREFIX", "api"),
 
     /*
-     * All system Locales
-     *
-     * @var array
-     */
-
-    'locales' => [
-
-        'ar' => [
-            "title" => "العربية",
-            "direction" => "rtl"
-        ],
-
-        'en' => [
-            "title" => "English",
-            "direction" => "ltr"
-        ]
-
-    ],
-
-    /*
-     * The place where system stores the current locale.
-     * Available Settings: "session" and "url"
-     * @var string
-     */
-
-    'locale_driver' => env("LOCALE_DRIVER", "session"),
-
-    /*
      * Dot plugins
      *
      * @var array

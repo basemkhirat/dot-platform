@@ -1,14 +1,6 @@
 <?php
 
 Route::group([
-    "middleware" => ["web"],
-    "namespace" => "Dot\\Platform\\Controllers"
-], function ($route) {
-    $route->get('{lang}/locale', ['uses' => 'LocalesController@index', 'as' => 'admin.languages']);
-    $route->get('locale', ['uses' => 'LocalesController@index', 'as' => 'admin.languages']);
-});
-
-Route::group([
     "prefix" => ADMIN,
     "middleware" => ["web", "auth:backend"],
     "namespace" => "Dot\\Platform\\Controllers"

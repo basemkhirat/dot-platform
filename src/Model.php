@@ -455,6 +455,78 @@ trait ModelTraits
         // that is returned back out to the developers after we convert it here.
         return Carbon::createFromFormat($this->getDateFormat(), $value);
     }
+
+    /**
+     * Returns a model attribute.
+     *
+     * @param $key
+     * @return string
+     */
+    public function getAttribute($key)
+    {
+
+        if (isset($this->translatable) && in_array($key, $this->translatable)) {
+            return $this->getTranslatedAttribute($key);
+        }
+
+        return parent::getAttribute($key);
+    }
+
+    /**
+     * Returns a translatable model attribute based on the application's locale settings.
+     *
+     * @param $key
+     * @return string
+     */
+    protected function getTranslatedAttribute($key)
+    {
+        $values = $this->getAttributeValue($key);
+
+        if (!$values) {
+            return null;
+        }
+
+        $ob = new Translatable();
+
+        $ob->fill($values);
+
+        return $ob;
+    }
+
+    /**
+     * Determine whether the provided attribute should be casted as JSON when it is being set.
+     * If it is a translatable field, it should be casted to JSON.
+     *
+     * @param $key
+     * @return bool
+     */
+    protected function isJsonCastable($key)
+    {
+        if (isset($this->translatable) && in_array($key, $this->translatable)) {
+            return true;
+        }
+
+        return parent::isJsonCastable($key);
+    }
+}
+
+
+class Translatable {
+
+    public function fill($attributes = []){
+        foreach ($attributes as $key => $value){
+            $this->$key = $value;
+        }
+    }
+
+    public function __get($name) {
+        return isset($this->$name) ? $this->$name : null;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->{app()->getLocale()};
+    }
 }
 
 /*

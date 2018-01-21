@@ -3,7 +3,6 @@
 namespace Dot\Platform;
 
 use Dot\Options\Facades\Option;
-use Dot\Platform\Classes\DotUrlGenerator;
 use Dot\Platform\Facades\Dot;
 use Dot\Platform\Facades\Navigation;
 use Illuminate\Support\Facades\Config;
@@ -84,42 +83,9 @@ class System extends Plugin
      */
     public function boot()
     {
-
-        if (config("admin.locale_driver") == "url") {
-
-            $request = $this->app->make('request');
-
-            /* Redirect backend urls have no locale code */
-
-            if ($request->is(config('admin.prefix') . "/*")) {
-
-                $url = implode('/', array_prepend($request->segments(), $this->app->getLocale()));
-
-                if ($request->getQueryString()) {
-                    $url .= "?" . $request->getQueryString();
-                }
-
-                redirect($url)->send();
-            }
-
-            Config::set("admin.prefix", $request->segment(1) . "/" . config("admin.prefix"));
-
-            app()->bind('url', function () {
-                return new DotUrlGenerator(
-                    app()->make('router')->getRoutes(),
-                    app()->make('request')
-                );
-            });
-
-        }
-
         define("DOT_VERSION", Dot::version());
         define("ADMIN", config("admin.prefix"));
         define("API", config("admin.api"));
-
-        Navigation::menu("topnav", function ($menu) {
-            $menu->make("options::locales");
-        });
 
         /*
          * Auto detecting website domain.
