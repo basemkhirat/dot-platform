@@ -82,7 +82,7 @@
                 for="app_locale">{{ trans("admin::options.attributes.locale") }}</label>
             <select id="app_locale" class="form-control chosen-select chosen-rtl"
                     name="option[site_locale]">
-                @foreach (config("admin.locales") as $code => $lang)
+                @foreach (config("i18n.locales") as $code => $lang)
                     <option value="{{ $code }}"
                             @if (option("site_locale") == $code) {
                             selected="selected" @endif>{{ $lang["title"] }}</option>
