@@ -7,7 +7,8 @@
     <title>{{ option("site_name") }} - {{ trans("admin::common.cms") }}</title>
     <link rel="icon" type="image/png" href="{{ assets("admin::favicon.png") }}"/>
     <link href="{{ assets("admin::css/app.css") }}" rel="stylesheet"/>
-    @if (DIRECTION == "rtl")
+
+    @if (defined("DIRECTION") && DIRECTION == "rtl")
         <link href="{{ assets("admin::css/app.rtl.css") }}" rel="stylesheet"/>
     @endif
 
@@ -27,7 +28,7 @@
 </head>
 
 <body
-    class="@if(Auth::user()->color == "blue") dark-theme @endif @if (DIRECTION == "rtl") rtls @endif @if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") mini-navbar @endif">
+    class="@if(Auth::user()->color == "blue") dark-theme @endif @if (defined("DIRECTION") && DIRECTION == "rtl") rtls @endif @if (isset($_COOKIE["mini_nav"]) and $_COOKIE["mini_nav"] == "1") mini-navbar @endif">
 
 <div class="loadingWrapper">
     <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
@@ -150,8 +151,6 @@
             $("#page-wrapper nav").remove();
             $("#wrapper .main-nav").remove();
             $(".btn-main").remove();
-
-
         }
     });
 
