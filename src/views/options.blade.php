@@ -77,18 +77,20 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label
-                for="app_locale">{{ trans("admin::options.attributes.locale") }}</label>
-            <select id="app_locale" class="form-control chosen-select chosen-rtl"
-                    name="option[site_locale]">
-                @foreach (config("i18n.locales") as $code => $lang)
-                    <option value="{{ $code }}"
-                            @if (option("site_locale") == $code) {
-                            selected="selected" @endif>{{ $lang["title"] }}</option>
-                @endforeach
-            </select>
-        </div>
+        @if(config("i18n.locales"))
+            <div class="form-group">
+                <label
+                    for="app_locale">{{ trans("admin::options.attributes.locale") }}</label>
+                <select id="app_locale" class="form-control chosen-select chosen-rtl"
+                        name="option[site_locale]">
+                    @foreach (config("i18n.locales") as $code => $lang)
+                        <option value="{{ $code }}"
+                                @if (option("site_locale") == $code) {
+                                selected="selected" @endif>{{ $lang["title"] }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
 
         <fieldset>
             <legend>{{ trans("admin::options.attributes.site_status") }}</legend>
