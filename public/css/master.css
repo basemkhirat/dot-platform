@@ -774,6 +774,14 @@ LG
     font-size: 13px;
 }
 
+.badge{
+    font-size: 11px !important;
+}
+
+label{
+    font-size: 12px !important;
+}
+
 .page-heading.fixed-heading {
     position: fixed;
     top: 0px;
