@@ -527,6 +527,10 @@ class Translatable {
     {
         return (string) $this->{app()->getLocale()};
     }
+
+    public function toArray(){
+        return get_object_vars($this);
+    }
 }
 
 /*
