@@ -307,7 +307,7 @@ class Navigation
 
                 $classes[] = "lev-" . $level;
 
-                $menu .= '<li' . ' class = "' . implode(' ', $classes) . ' ">';
+                $menu .= '<li' . ' class = "' . $item["key"]."-menu-item " . implode(' ', $classes) . ' ">';
 
                 $menu .= $this->createAnchor($item, $level, $has_children);
 
