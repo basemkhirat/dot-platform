@@ -13,8 +13,8 @@
     @endif
 
     <script>
-        base_url = "{{ url(ADMIN) }}";
-        baseURL = "{{ url(ADMIN) }}";
+        base_url = "{{ url(ADMIN) }}/";
+        baseURL = "{{ url(ADMIN) }}/";
     </script>
 
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
