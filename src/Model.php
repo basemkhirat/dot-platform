@@ -93,36 +93,60 @@ trait ModelTraits
     }
 
     /*
-     * @param array $options
-     * @return mixed
-     */
+    * @param array $options
+    * @return mixed
+    */
     public function save(array $options = array())
     {
 
         if (count($this->sluggable)) {
+
             if (!$this->exists) {
-                // on create we will create slug
-                foreach ($this->sluggable as $to => $from) {
 
-                    if (array_key_exists($to, $this->attributes) and $this->attributes[$to] != "") {
-                        $unique_slug = $this->attributes[$to];
-                    } else if (array_key_exists($from, $this->attributes)) {
-                        // create unique slug from a given field value
-                        $slug = str_slug_utf8($this->attributes[$from]);
-                        $unique_slug = $this->slugify($slug, $to);
-                    }
+                foreach ($this->sluggable as $slug_field => $source_field) {
 
-                    $this->attributes[$to] = $unique_slug;
-                }
-            } else {
-                // on update
-                foreach ($this->sluggable as $to => $from) {
-                    if (array_key_exists($to, $this->attributes)) {
-                        //$this->attributes[$to] = $this->attributes;
-                        //unset($this->attributes[$to]);
+                    if (!array_key_exists($slug_field, array_filter($this->attributes))) {
+
+                        if (array_key_exists($slug_field, $this->casts) and $this->casts[$slug_field] == "json") {
+
+                            if (array_key_exists($source_field, $this->casts) and $this->casts[$slug_field] == "json") {
+
+                                $unique_slug = [];
+
+                                foreach (json_decode($this->attributes[$source_field]) as $key => $value) {
+
+                                    $value = str_slug_utf8($value);
+
+                                    $unique_slug[$key] = $this->slugify($value, $slug_field);
+                                }
+
+                                $unique_slug = json_encode($unique_slug);
+
+                            } else {
+
+                                $value = str_slug_utf8($this->attributes[$source_field]);
+
+                                $unique_slug = $this->slugify($value, $slug_field);
+                            }
+
+                            $this->attributes[$slug_field] = $unique_slug;
+
+                        } else {
+
+                            // create unique slug from a given field value
+
+                            $slug = str_slug_utf8($this->attributes[$source_field]);
+
+                            $unique_slug = $this->slugify($slug, $slug_field);
+
+                            $this->attributes[$slug_field] = $unique_slug;
+                        }
+
                     }
                 }
+
             }
+
         }
 
         return parent::save($options);
