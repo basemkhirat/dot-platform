@@ -13,7 +13,6 @@
     "type": "package",
     "require": {
         "php": ">=7.0",
-        "ext-mcrypt": "*",
         "ext-gd": "*",
         "ext-curl": "*",
         "laravel/framework": ">=5.5",
