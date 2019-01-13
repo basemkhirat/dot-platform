@@ -104,14 +104,6 @@ class DotInstallCommand extends Command
             $server_errors[] = "PHP CURL extension is not installed.";
         }
 
-        // Check PHP mcrypt extension is installed
-
-        if (!function_exists("mcrypt_encrypt")) {
-            $server_errors[] = "PHP mcrypt extension is not installed.";
-        } else {
-            $server_messages[] = "PHP mcrypt extension is installed.";
-        }
-
         // Check GD library is installed
 
         if (extension_loaded('gd') && function_exists('gd_info')) {
