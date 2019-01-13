@@ -18,6 +18,8 @@ To be able to run Dotcms you have to meet the following requirements:
 - MySql 5.5
 
 
+
+
 ### Installing DotCms:
 
 It's very easy, you can choose one of three installation methods:
