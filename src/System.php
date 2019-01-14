@@ -19,6 +19,7 @@ class System extends Plugin
 
     protected $dependencies = [
         "options" => \Dot\Options\Options::class,
+        "users" => \Dot\Users\Users::class,
         "auth" => \Dot\Auth\Auth::class,
         "media" => \Dot\Media\Media::class,
         "galleries" => \Dot\Galleries\Galleries::class,
