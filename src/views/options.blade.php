@@ -13,7 +13,7 @@
         <div class="form-group">
             <label
                 for="site_slogan">{{ trans("admin::options.attributes.site_slogan") }}</label>
-            <input name="option[site_slogan]" type="text" required="required"
+            <input name="option[site_slogan]" type="text"
                    value="{{ @Request::old("option.site_slogan", option("site_slogan")) }}"
                    class="form-control" id="site_slogan"
                    placeholder="{{ trans("admin::options.attributes.site_slogan") }}">
@@ -31,7 +31,7 @@
         <div class="form-group">
             <label
                 for="site_copyrights">{{ trans("admin::options.attributes.site_copyrights") }}</label>
-            <input name="option[site_copyrights]" type="text" required="required"
+            <input name="option[site_copyrights]" type="text"
                    value="{{ @Request::old("option.site_copyrights", option("site_copyrights")) }}"
                    class="form-control" id="site_copyrights"
                    placeholder="{{ trans("admin::options.attributes.site_copyrights") }}">

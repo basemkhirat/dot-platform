@@ -12,7 +12,7 @@
     "license": "MIT",
     "type": "package",
     "require": {
-        "php": ">=7.0",
+        "php": "7.1.0",
         "ext-gd": "*",
         "ext-curl": "*",
         "laravel/framework": ">=5.5",
