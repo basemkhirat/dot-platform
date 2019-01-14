@@ -185,11 +185,10 @@ class DotInstallCommand extends Command
 
                 foreach ($plugins as $plugin) {
 
-                    $this->line("<fg=yellow>Installing: </>" . $plugin);
+                    $this->line("<fg=yellow>Installing: </>" . $plugin->getName());
 
                     $plugin->install($this);
 
-                    $this->line("<fg=green>Installed: </>" . $plugin);
                     $this->info("\r");
                 }
             }

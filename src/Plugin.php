@@ -95,6 +95,7 @@ class Plugin extends ServiceProvider
 
         $this->loadViewsFrom($this->getPath('views'), $this->getKey());
         $this->loadTranslationsFrom($this->getPath('lang'), $this->getKey());
+
         $this->loadMigrationsFrom($this->getRootPath('database/migrations'));
 
         if (file_exists($this->getRootPath('public'))) {

@@ -45,8 +45,6 @@ class PluginInstallCommand extends Command
 
             $plugin->install($this);
 
-            $this->line("<fg=green>Installed: </>" . $plugin->getName());
-
             $this->info("\r");
         }
 
