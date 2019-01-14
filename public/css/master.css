@@ -804,3 +804,9 @@ body.fixed-heading .wrapper-content {
     margin-top: 100px;
 }
 
+.gallery_btns button {
+    height: 26px;
+    margin: 4px 0;
+    line-height: 10px;
+}
+
