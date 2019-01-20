@@ -53,14 +53,19 @@ class DotInstallCommand extends Command
     {
 
         $this->line("\r");
-
-        $this->info('Generating optimized autoload files');
-        @exec("composer dump-autoload -q");
-
-        $this->line("\r");
         $this->line('<fg=black;bg=green> Dot Platform Installation </>');
         $this->line("\r");
 
+        if(empty(config("app.key"))){
+            $this->info('Generating application key');
+            $this->call("key:generate");
+        }
+
+        $this->info('Generating optimized autoload files');
+
+        @exec("composer dump-autoload -q");
+
+        $this->line("\r");
         $this->line('<fg=black;bg=green> Checking system requirements </>');
         $this->line("\r");
 

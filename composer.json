@@ -12,9 +12,10 @@
     "license": "MIT",
     "type": "package",
     "require": {
-        "php": "7.1.0",
+        "php": ">=7.1.0",
         "ext-gd": "*",
         "ext-curl": "*",
+        "ext-bcmath": "*",
         "laravel/framework": ">=5.5",
         "barryvdh/laravel-debugbar": "2.*",
         "doctrine/dbal": "^2.5",
