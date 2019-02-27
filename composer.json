@@ -16,7 +16,7 @@
         "ext-gd": "*",
         "ext-curl": "*",
         "ext-bcmath": "*",
-        "laravel/framework": ">=5.5",
+        "laravel/framework": ">=5.*",
         "barryvdh/laravel-debugbar": "2.*",
         "doctrine/dbal": "^2.5",
         "dot/auth": "*",
