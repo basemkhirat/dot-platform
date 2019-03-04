@@ -17,7 +17,7 @@
         "ext-curl": "*",
         "ext-bcmath": "*",
         "laravel/framework": "5.*",
-        "barryvdh/laravel-debugbar": "2.*",
+        "barryvdh/laravel-debugbar": "*",
         "doctrine/dbal": "^2.5",
         "dot/auth": "*",
         "dot/roles": "*",
