@@ -36,10 +36,8 @@ class Carbon extends \Carbon\Carbon
      * Generate relative time
      * @return \Response
      */
-    function ago()
+    public function ago($absolute = null, $short = false, $parts = 1)
     {
         return time_ago($this->toDateTimeString());
     }
-
-
 }
