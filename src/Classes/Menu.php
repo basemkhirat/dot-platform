@@ -99,7 +99,7 @@ class Menu
     {
 
         if ($calls == 0) {
-            Event::fire($sidebar . ".menu");
+            Event::dispatch($sidebar . ".menu");
             $calls++;
         }
 

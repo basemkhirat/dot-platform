@@ -15,7 +15,6 @@ class Carbon extends \Carbon\Carbon
      */
     function render()
     {
-
         $date_format = option("site_date_format", "relative");
 
         if ($date_format == "relative") {
@@ -29,15 +28,5 @@ class Carbon extends \Carbon\Carbon
         } else {
             return date($date_format, strtotime($this->toDateTimeString()));
         }
-
-    }
-
-    /*
-     * Generate relative time
-     * @return \Response
-     */
-    public function ago($absolute = null, $short = false, $parts = 1)
-    {
-        return time_ago($this->toDateTimeString());
     }
 }

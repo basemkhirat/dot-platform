@@ -75,7 +75,7 @@ class Navigation
     {
         $menu = new self();
         self::$menu = $menu_name;
-        Event::fire($menu_name . '.build', $menu);
+        Event::dispatch($menu_name . '.build', $menu);
         if ($menu_name == "sidebar") {
             $menu->sortItems();
         } else {

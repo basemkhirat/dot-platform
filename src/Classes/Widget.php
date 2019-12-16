@@ -54,7 +54,7 @@ class Widget
     public static function get($sidebar, $args)
     {
 
-        Event::fire($sidebar . ".widget", $args);
+        Event::dispatch($sidebar . ".widget", $args);
 
         $return = [];
 

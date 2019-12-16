@@ -23,7 +23,7 @@ class ServiceProvider extends LaravelServiceProvider
      * Default bindings
      * @var array
      */
-    protected $bindings = [
+    protected $helpers = [
         "dot" => \Dot\Platform\Classes\Dot::class,
         "plugin" => \Dot\Platform\Classes\Plugin::class,
         "widget" => \Dot\Platform\Classes\Widget::class,
@@ -42,8 +42,7 @@ class ServiceProvider extends LaravelServiceProvider
     function __construct(Application $app)
     {
         parent::__construct($app);
-
-        foreach ($this->bindings as $abstract => $class) {
+        foreach ($this->helpers as $abstract => $class) {
             $app->bind($abstract, function () use ($class, $app) {
                 return new $class($app);
             });
