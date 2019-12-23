@@ -8,6 +8,7 @@ use ReflectionClass;
  * Class Plugin
  * @package Dot\Platform\Classes
  */
+
 class Plugin
 {
 
@@ -44,15 +45,31 @@ class Plugin
 
             if ($plugin) {
 
-                self::$plugins[$key] = $plugin;
+                $this->add($key, $plugin);
 
                 foreach ($plugin->getRecursiveDependencies() as $key => $plugin) {
-                    self::$plugins[$key] = $plugin;
+                    $this->add($key, $plugin);
                 }
             }
         }
 
         return self::$plugins;
+    }
+
+    /**
+     * Add plugin
+     * @param $key
+     * @param $plugin
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    function add($key, $plugin)
+    {
+
+        if (!$plugin) {
+            return response("Invalid plugin $key.")->send();
+        }
+
+        self::$plugins[$key] = $plugin;
     }
 
     /*
