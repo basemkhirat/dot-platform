@@ -150,13 +150,7 @@
 
         <br/> <br/>
 
-        <div class="update-status">
-
-            @if(version_compare(option("last_platform_version_check"), plugin("admin")->getVersion() , ">"))
-                @include("admin::update", ["version" => option("last_platform_version_check")])
-            @endif
-
-        </div>
+        <div class="update-status"></div>
 
     </div>
 </div>
