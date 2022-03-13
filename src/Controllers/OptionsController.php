@@ -2,18 +2,10 @@
 
 namespace Dot\Platform\Controllers;
 
-use Dot;
 use Dot\Options\Facades\Option;
 use Dot\Platform\Controller;
 use Dot\Platform\Facades\Plugin;
-use File;
-use Gate;
-use Redirect;
-use Request;
-use Session;
 use stdClass;
-use View;
-
 
 /*
  * Class OptionsController
@@ -31,8 +23,14 @@ class OptionsController extends Controller
 
         $current_version = Plugin::get("admin")->getVersion();
 
-        $last_version = $this->get_latest_version()->version;
 
+        $check = $this->get_latest_version();
+
+        if(!$check) {
+            return;
+        }
+
+        $last_version = $check->version;
 
         if (version_compare($last_version, $current_version, ">")) {
             Option::set("last_platform_version_check", $last_version);
@@ -41,7 +39,7 @@ class OptionsController extends Controller
             $this->data["version"] = false;
         }
 
-        return View::make("admin::update", $this->data);
+        return view()->make("admin::update", $this->data);
     }
 
 
@@ -54,7 +52,7 @@ class OptionsController extends Controller
 
         $objCurl = curl_init();
 
-        curl_setopt($objCurl, CURLOPT_URL, "https://api.bitbucket.org/1.0/repositories/basemkhirat/dot-platform/tags");
+        curl_setopt($objCurl, CURLOPT_URL, "https://api.bitbucket.org/2.0/repositories/basemkhirat/dot-platform/refs/tags");
         curl_setopt($objCurl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($objCurl, CURLOPT_RETURNTRANSFER, true);
 
@@ -62,10 +60,10 @@ class OptionsController extends Controller
 
         $versions = [];
 
-        foreach (json_decode($response, true) as $version => $data) {
-            $versions[strtotime($data["utctimestamp"])] = [
-                "version" => $version,
-                "message" => $data["message"]
+        foreach (json_decode($response, true)["values"] as $tag) {
+            $versions[strtotime($tag["date"])] = [
+                "version" => $tag["name"],
+                "message" => $tag["message"]
             ];
         }
 

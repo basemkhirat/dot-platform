@@ -25,7 +25,7 @@
 
         <ul class="todo-list m-t small-list">
             <li>
-                <span class="m-l-xs"> <strong>$</strong> php artisan dot:update [--force]</span>
+                <span class="m-l-xs"> <strong>$</strong> php artisan dot:install</span>
             </li>
         </ul>
     </div>
