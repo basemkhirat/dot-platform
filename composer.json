@@ -1,0 +1,42 @@
+{
+    "name": "dot/platform",
+    "description": "Just a laravel plugins platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot"
+    ],
+    "license": "MIT",
+    "type": "package",
+    "require": {
+        "php": ">=7.1.0",
+        "ext-gd": "*",
+        "ext-curl": "*",
+        "ext-bcmath": "*",
+        "laravel/framework": "*",
+        "barryvdh/laravel-debugbar": "^3.2",
+        "doctrine/dbal": "^2.10",
+        "laravel/helpers": "^1.1",
+        "dot/auth": "*",
+        "dot/roles": "*",
+        "dot/users": "*",
+        "dot/options": "*",
+        "dot/media": "*",
+        "dot/dashboard": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Platform\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dot\\Platform\\ServiceProvider"
+            ]
+        }
+    }
+}
