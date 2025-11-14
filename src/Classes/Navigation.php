@@ -5,7 +5,7 @@ namespace Dot\Platform\Classes;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request;
-use View;
+use Illuminate\Support\Facades\View;
 
 /*
  * Class Navigation
